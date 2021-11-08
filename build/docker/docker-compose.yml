@@ -1,0 +1,52 @@
+version: '2.2'
+services:
+  bzfx_db:
+    image: bzfx:latest
+    mem_limit: 500m
+    container_name: bzfx_db
+    ports:
+      - "33060:3306"
+    restart: always
+    working_dir: /root/
+    environment:
+      - MYSQL_ROOT_PASSWORD=Bzfx@2021
+    networks:
+      bzfx-net:
+        ipv4_address: 172.16.1.3
+    volumes:
+      - /home/ubuntu/bzfx/db/data:/var/lib/mysql
+  bzfx:
+    image: bzfx:latest
+    mem_limit: 1024m
+    mem_reservation: 500m
+    container_name: bzfx
+    ports:
+      - "8088:8080"
+    restart: unless-stopped
+    working_dir: /root
+    networks:
+      bzfx-net:
+        ipv4_address: 172.16.1.5
+    links:
+      - bzfx_db
+    depends_on:
+      - bzfx_db
+#    environment:
+#      - DB_IP=bzfxt_db
+#      - DB_PORT=3306
+#      - LOG_LEVEL=INFO
+    volumes:
+      - /home/ubuntu/bzfx/data:/opt/cardinal/data
+
+
+
+networks:
+  bzfx-net:
+    driver: bridge
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+        -
+          subnet: 172.16.1.0/24
+          gateway: 172.16.1.1

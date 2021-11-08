@@ -1,0 +1,49 @@
+server:
+  port: 8088
+  error:
+    whitelabel:
+      enabled: false
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+  http2:
+    enabled: true
+spring:
+  profiles:
+    active: decrypt
+  application:
+    name: bzms
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+springdoc:
+  version: '@app.version@'
+  api-docs:
+    groups:
+      enabled: true
+    path: /${springdoc.version}/api
+  swagger-ui:
+    path: /api.html
+    display-request-duration: true
+    tags-sorter: alpha
+logging:
+  config: classpath:logback.xml
+  level:
+    web: info
+ignore:
+  urls:
+    - /admin/login
+    - /bzms-api.html
+    - /swagger-ui/**
+    - /${springdoc.version}/**
+    - /${springdoc.version}/api/**
+  authenticates:
+    - /**
+banner: classpath:banner.txt
+
+
