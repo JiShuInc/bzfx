@@ -1,6 +1,6 @@
 package com.cardinal.tech.bzfx.dao;
 
-import com.cardinal.tech.bzfx.bean.dbo.User;
+import com.cardinal.tech.bzfx.entity.User;
 import com.cardinal.tech.bzfx.bean.dbo.page.PageQuery;
 import org.apache.ibatis.annotations.Param;
 

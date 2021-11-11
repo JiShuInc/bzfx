@@ -8,7 +8,7 @@ import com.cardinal.tech.bzfx.util.DateUtil;
 import com.cardinal.tech.bzfx.util.JwtTokenUtil;
 import com.cardinal.tech.bzfx.util.ReflectUtil;
 import com.cardinal.tech.bzfx.util.UserPasswordEncoder;
-import com.cardinal.tech.bzfx.bean.dbo.User;
+import com.cardinal.tech.bzfx.entity.User;
 import com.cardinal.tech.bzfx.bean.dbo.page.PageQuery;
 import com.cardinal.tech.bzfx.dao.UserMapper;
 import com.cardinal.tech.bzfx.exceptions.BaseErrException;

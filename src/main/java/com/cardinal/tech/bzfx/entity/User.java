@@ -1,4 +1,4 @@
-package com.cardinal.tech.bzfx.bean.dbo;
+package com.cardinal.tech.bzfx.entity;
 
 import java.util.Date;
 

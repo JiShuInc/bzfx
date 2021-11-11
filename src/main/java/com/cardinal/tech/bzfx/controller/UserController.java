@@ -5,9 +5,10 @@ import com.cardinal.tech.bzfx.service.UserService;
 import com.cardinal.tech.bzfx.api.BackUserApi;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 public class UserController extends BaseController implements BackUserApi {
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService, UserService userService1) {
         super(userService);

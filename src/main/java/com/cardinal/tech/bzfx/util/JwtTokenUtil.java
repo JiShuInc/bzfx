@@ -3,7 +3,7 @@ package com.cardinal.tech.bzfx.util;
 
 import com.cardinal.tech.bzfx.bean.ao.JwtUserAO;
 import com.cardinal.tech.bzfx.bean.bo.TokenBO;
-import com.cardinal.tech.bzfx.bean.dbo.User;
+import com.cardinal.tech.bzfx.entity.User;
 import com.cardinal.tech.bzfx.dao.UserMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

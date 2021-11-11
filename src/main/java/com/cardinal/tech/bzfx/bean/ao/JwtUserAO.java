@@ -1,6 +1,6 @@
 package com.cardinal.tech.bzfx.bean.ao;
 
-import com.cardinal.tech.bzfx.bean.dbo.User;
+import com.cardinal.tech.bzfx.entity.User;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

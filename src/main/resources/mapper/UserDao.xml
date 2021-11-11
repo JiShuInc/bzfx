@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cardinal.tech.bzfx.dao.UserMapper">
-    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.bean.dbo.User">
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.User">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
@@ -18,13 +18,13 @@
         from user
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <select id="findByUsername" resultType="com.cardinal.tech.bzfx.bean.dbo.User">
+    <select id="findByUsername" resultType="com.cardinal.tech.bzfx.entity.User">
         select
         <include refid="Base_Column_List"/>
         from user
         where username = #{username,jdbcType=VARCHAR}
     </select>
-    <select id="queryPageUserList" resultType="com.cardinal.tech.bzfx.bean.dbo.User">
+    <select id="queryPageUserList" resultType="com.cardinal.tech.bzfx.entity.User">
         select
         <include refid="Base_Column_List"/>
         from user
@@ -42,13 +42,13 @@
         from user
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.cardinal.tech.bzfx.bean.dbo.User">
+    <insert id="insert" parameterType="com.cardinal.tech.bzfx.entity.User">
         insert into user (id, username, password,
                           role_id, c_time, m_time)
         values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
                 #{role_id,jdbcType=INTEGER}, #{c_time,jdbcType=TIMESTAMP}, #{m_time,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" parameterType="com.cardinal.tech.bzfx.bean.dbo.User">
+    <insert id="insertSelective" parameterType="com.cardinal.tech.bzfx.entity.User">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -91,7 +91,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.cardinal.tech.bzfx.bean.dbo.User">
+    <update id="updateByPrimaryKeySelective" parameterType="com.cardinal.tech.bzfx.entity.User">
         update user
         <set>
             <if test="username != null">
@@ -112,7 +112,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.cardinal.tech.bzfx.bean.dbo.User">
+    <update id="updateByPrimaryKey" parameterType="com.cardinal.tech.bzfx.entity.User">
         update user
         set username = #{username,jdbcType=VARCHAR},
             password = #{password,jdbcType=VARCHAR},

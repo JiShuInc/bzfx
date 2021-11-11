@@ -3,7 +3,7 @@ package com.cardinal.tech.bzfx.service.impl;
 
 import com.cardinal.tech.bzfx.enums.biz.RoleEnum;
 import com.cardinal.tech.bzfx.bean.ao.JwtUserAO;
-import com.cardinal.tech.bzfx.bean.dbo.User;
+import com.cardinal.tech.bzfx.entity.User;
 import com.cardinal.tech.bzfx.dao.UserMapper;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.GrantedAuthority;
