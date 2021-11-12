@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.GgLogsDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.GgLogs">
+        <!--@Table gg_logs-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="module" column="module" jdbcType="INTEGER"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, module, type, content, creat_at
+        from bzfx.gg_logs
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, module, type, content, creat_at
+        from bzfx.gg_logs
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, module, type, content, creat_at
+        from bzfx.gg_logs
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="module != null">
+                and module = #{module}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+            <if test="creatAt != null">
+                and creat_at = #{creatAt}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.gg_logs(module, type, content, creat_at)
+        values (#{module}, #{type}, #{content}, #{creatAt})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.gg_logs
+        <set>
+            <if test="module != null">
+                module = #{module},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="creatAt != null">
+                creat_at = #{creatAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.gg_logs where id = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.gg_logs
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageGgLogsList" resultMap="BaseResultMap">
+            select
+                id, module, type, content, creat_at            
+            from bzfx.gg_logs
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null">
+                        and id = #{obj.id}
+                   </if>
+                               <if test="obj.module != null">
+                        and module = #{obj.module}
+                   </if>
+                               <if test="obj.type != null">
+                        and type = #{obj.type}
+                   </if>
+                               <if test="obj.content != null and obj.content != ''">
+                        and content = #{obj.content}
+                   </if>
+                               <if test="obj.creatAt != null">
+                        and creat_at = #{obj.creatAt}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

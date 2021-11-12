@@ -89,4 +89,39 @@
         delete from bzfx.rh_task_db where id = #{id}
     </delete>
 
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.rh_task_db
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageRhTaskDbList" resultMap="BaseResultMap">
+            select
+                id, task_id, db_host, db_name, db_passwd, creat_at            
+            from bzfx.rh_task_db
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null">
+                        and id = #{obj.id}
+                   </if>
+                               <if test="obj.taskId != null">
+                        and task_id = #{obj.taskId}
+                   </if>
+                               <if test="obj.dbHost != null and obj.dbHost != ''">
+                        and db_host = #{obj.dbHost}
+                   </if>
+                               <if test="obj.dbName != null and obj.dbName != ''">
+                        and db_name = #{obj.dbName}
+                   </if>
+                               <if test="obj.dbPasswd != null and obj.dbPasswd != ''">
+                        and db_passwd = #{obj.dbPasswd}
+                   </if>
+                               <if test="obj.creatAt != null">
+                        and creat_at = #{obj.creatAt}
+                   </if>
+                        </trim>
+    </select>
+
 </mapper>

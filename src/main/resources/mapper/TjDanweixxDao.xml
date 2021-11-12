@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.TjDanweixxDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.TjDanweixx">
+        <!--@Table tj_danweixx-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="did" column="did" jdbcType="VARCHAR"/>
+        <result property="danweibm" column="danweibm" jdbcType="VARCHAR"/>
+        <result property="mingcheng" column="mingcheng" jdbcType="VARCHAR"/>
+        <result property="miaoshu" column="miaoshu" jdbcType="VARCHAR"/>
+        <result property="jingdu" column="jingdu" jdbcType="VARCHAR"/>
+        <result property="weidu" column="weidu" jdbcType="VARCHAR"/>
+        <result property="danweixz" column="danweixz" jdbcType="INTEGER"/>
+        <result property="danweigygx" column="danweigygx" jdbcType="INTEGER"/>
+        <result property="danweibzyy" column="danweibzyy" jdbcType="INTEGER"/>
+        <result property="danweibzllid" column="danweibzllid" jdbcType="VARCHAR"/>
+        <result property="zhudi" column="zhudi" jdbcType="INTEGER"/>
+        <result property="ganburs" column="ganburs" jdbcType="INTEGER"/>
+        <result property="zhanshirs" column="zhanshirs" jdbcType="INTEGER"/>
+        <result property="caiwubzrs" column="caiwubzrs" jdbcType="INTEGER"/>
+        <result property="beizhuangbzrs" column="beizhuangbzrs" jdbcType="INTEGER"/>
+        <result property="zhufangsl" column="zhufangsl" jdbcType="INTEGER"/>
+        <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, did, danweibm, mingcheng, miaoshu, jingdu, weidu, danweixz, danweigygx, danweibzyy, danweibzllid, zhudi, ganburs, zhanshirs, caiwubzrs, beizhuangbzrs, zhufangsl, creat_at
+        from bzfx.tj_danweixx
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, did, danweibm, mingcheng, miaoshu, jingdu, weidu, danweixz, danweigygx, danweibzyy, danweibzllid, zhudi, ganburs, zhanshirs, caiwubzrs, beizhuangbzrs, zhufangsl, creat_at
+        from bzfx.tj_danweixx
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, did, danweibm, mingcheng, miaoshu, jingdu, weidu, danweixz, danweigygx, danweibzyy, danweibzllid, zhudi, ganburs, zhanshirs, caiwubzrs, beizhuangbzrs, zhufangsl, creat_at
+        from bzfx.tj_danweixx
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="did != null and did != ''">
+                and did = #{did}
+            </if>
+            <if test="danweibm != null and danweibm != ''">
+                and danweibm = #{danweibm}
+            </if>
+            <if test="mingcheng != null and mingcheng != ''">
+                and mingcheng = #{mingcheng}
+            </if>
+            <if test="miaoshu != null and miaoshu != ''">
+                and miaoshu = #{miaoshu}
+            </if>
+            <if test="jingdu != null and jingdu != ''">
+                and jingdu = #{jingdu}
+            </if>
+            <if test="weidu != null and weidu != ''">
+                and weidu = #{weidu}
+            </if>
+            <if test="danweixz != null">
+                and danweixz = #{danweixz}
+            </if>
+            <if test="danweigygx != null">
+                and danweigygx = #{danweigygx}
+            </if>
+            <if test="danweibzyy != null">
+                and danweibzyy = #{danweibzyy}
+            </if>
+            <if test="danweibzllid != null and danweibzllid != ''">
+                and danweibzllid = #{danweibzllid}
+            </if>
+            <if test="zhudi != null">
+                and zhudi = #{zhudi}
+            </if>
+            <if test="ganburs != null">
+                and ganburs = #{ganburs}
+            </if>
+            <if test="zhanshirs != null">
+                and zhanshirs = #{zhanshirs}
+            </if>
+            <if test="caiwubzrs != null">
+                and caiwubzrs = #{caiwubzrs}
+            </if>
+            <if test="beizhuangbzrs != null">
+                and beizhuangbzrs = #{beizhuangbzrs}
+            </if>
+            <if test="zhufangsl != null">
+                and zhufangsl = #{zhufangsl}
+            </if>
+            <if test="creatAt != null">
+                and creat_at = #{creatAt}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.tj_danweixx(did, danweibm, mingcheng, miaoshu, jingdu, weidu, danweixz, danweigygx, danweibzyy, danweibzllid, zhudi, ganburs, zhanshirs, caiwubzrs, beizhuangbzrs, zhufangsl, creat_at)
+        values (#{did}, #{danweibm}, #{mingcheng}, #{miaoshu}, #{jingdu}, #{weidu}, #{danweixz}, #{danweigygx}, #{danweibzyy}, #{danweibzllid}, #{zhudi}, #{ganburs}, #{zhanshirs}, #{caiwubzrs}, #{beizhuangbzrs}, #{zhufangsl}, #{creatAt})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.tj_danweixx
+        <set>
+            <if test="did != null and did != ''">
+                did = #{did},
+            </if>
+            <if test="danweibm != null and danweibm != ''">
+                danweibm = #{danweibm},
+            </if>
+            <if test="mingcheng != null and mingcheng != ''">
+                mingcheng = #{mingcheng},
+            </if>
+            <if test="miaoshu != null and miaoshu != ''">
+                miaoshu = #{miaoshu},
+            </if>
+            <if test="jingdu != null and jingdu != ''">
+                jingdu = #{jingdu},
+            </if>
+            <if test="weidu != null and weidu != ''">
+                weidu = #{weidu},
+            </if>
+            <if test="danweixz != null">
+                danweixz = #{danweixz},
+            </if>
+            <if test="danweigygx != null">
+                danweigygx = #{danweigygx},
+            </if>
+            <if test="danweibzyy != null">
+                danweibzyy = #{danweibzyy},
+            </if>
+            <if test="danweibzllid != null and danweibzllid != ''">
+                danweibzllid = #{danweibzllid},
+            </if>
+            <if test="zhudi != null">
+                zhudi = #{zhudi},
+            </if>
+            <if test="ganburs != null">
+                ganburs = #{ganburs},
+            </if>
+            <if test="zhanshirs != null">
+                zhanshirs = #{zhanshirs},
+            </if>
+            <if test="caiwubzrs != null">
+                caiwubzrs = #{caiwubzrs},
+            </if>
+            <if test="beizhuangbzrs != null">
+                beizhuangbzrs = #{beizhuangbzrs},
+            </if>
+            <if test="zhufangsl != null">
+                zhufangsl = #{zhufangsl},
+            </if>
+            <if test="creatAt != null">
+                creat_at = #{creatAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.tj_danweixx where id = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.tj_danweixx
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageTjDanweixxList" resultMap="BaseResultMap">
+            select
+                id, did, danweibm, mingcheng, miaoshu, jingdu, weidu, danweixz, danweigygx, danweibzyy, danweibzllid, zhudi, ganburs, zhanshirs, caiwubzrs, beizhuangbzrs, zhufangsl, creat_at            
+            from bzfx.tj_danweixx
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null">
+                        and id = #{obj.id}
+                   </if>
+                               <if test="obj.did != null and obj.did != ''">
+                        and did = #{obj.did}
+                   </if>
+                               <if test="obj.danweibm != null and obj.danweibm != ''">
+                        and danweibm = #{obj.danweibm}
+                   </if>
+                               <if test="obj.mingcheng != null and obj.mingcheng != ''">
+                        and mingcheng = #{obj.mingcheng}
+                   </if>
+                               <if test="obj.miaoshu != null and obj.miaoshu != ''">
+                        and miaoshu = #{obj.miaoshu}
+                   </if>
+                               <if test="obj.jingdu != null and obj.jingdu != ''">
+                        and jingdu = #{obj.jingdu}
+                   </if>
+                               <if test="obj.weidu != null and obj.weidu != ''">
+                        and weidu = #{obj.weidu}
+                   </if>
+                               <if test="obj.danweixz != null">
+                        and danweixz = #{obj.danweixz}
+                   </if>
+                               <if test="obj.danweigygx != null">
+                        and danweigygx = #{obj.danweigygx}
+                   </if>
+                               <if test="obj.danweibzyy != null">
+                        and danweibzyy = #{obj.danweibzyy}
+                   </if>
+                               <if test="obj.danweibzllid != null and obj.danweibzllid != ''">
+                        and danweibzllid = #{obj.danweibzllid}
+                   </if>
+                               <if test="obj.zhudi != null">
+                        and zhudi = #{obj.zhudi}
+                   </if>
+                               <if test="obj.ganburs != null">
+                        and ganburs = #{obj.ganburs}
+                   </if>
+                               <if test="obj.zhanshirs != null">
+                        and zhanshirs = #{obj.zhanshirs}
+                   </if>
+                               <if test="obj.caiwubzrs != null">
+                        and caiwubzrs = #{obj.caiwubzrs}
+                   </if>
+                               <if test="obj.beizhuangbzrs != null">
+                        and beizhuangbzrs = #{obj.beizhuangbzrs}
+                   </if>
+                               <if test="obj.zhufangsl != null">
+                        and zhufangsl = #{obj.zhufangsl}
+                   </if>
+                               <if test="obj.creatAt != null">
+                        and creat_at = #{obj.creatAt}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

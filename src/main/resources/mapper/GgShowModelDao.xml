@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.GgShowModelDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.GgShowModel">
+        <!--@Table gg_show_model-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="table" column="table" jdbcType="VARCHAR"/>
+        <result property="field" column="field" jdbcType="VARCHAR"/>
+        <result property="method" column="method" jdbcType="INTEGER"/>
+        <result property="module" column="module" jdbcType="INTEGER"/>
+        <result property="category" column="category" jdbcType="INTEGER"/>
+        <result property="editable" column="editable" jdbcType="INTEGER"/>
+        <result property="dictionaries" column="dictionaries" jdbcType="VARCHAR"/>
+        <result property="style" column="style" jdbcType="INTEGER"/>
+        <result property="order" column="order" jdbcType="INTEGER"/>
+        <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, name, description, table, field, method, module, category, editable, dictionaries, style, order, creat_at
+        from bzfx.gg_show_model
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, name, description, table, field, method, module, category, editable, dictionaries, style, order, creat_at
+        from bzfx.gg_show_model
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, name, description, table, field, method, module, category, editable, dictionaries, style, order, creat_at
+        from bzfx.gg_show_model
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="table != null and table != ''">
+                and table = #{table}
+            </if>
+            <if test="field != null and field != ''">
+                and field = #{field}
+            </if>
+            <if test="method != null">
+                and method = #{method}
+            </if>
+            <if test="module != null">
+                and module = #{module}
+            </if>
+            <if test="category != null">
+                and category = #{category}
+            </if>
+            <if test="editable != null">
+                and editable = #{editable}
+            </if>
+            <if test="dictionaries != null and dictionaries != ''">
+                and dictionaries = #{dictionaries}
+            </if>
+            <if test="style != null">
+                and style = #{style}
+            </if>
+            <if test="order != null">
+                and order = #{order}
+            </if>
+            <if test="creatAt != null">
+                and creat_at = #{creatAt}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.gg_show_model(name, table, field, method, module, category, dictionaries, style, order, creat_at)
+        values (#{name}, #{table}, #{field}, #{method}, #{module}, #{category}, #{dictionaries}, #{style}, #{order}, #{creatAt})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.gg_show_model
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="table != null and table != ''">
+                table = #{table},
+            </if>
+            <if test="field != null and field != ''">
+                field = #{field},
+            </if>
+            <if test="method != null">
+                method = #{method},
+            </if>
+            <if test="module != null">
+                module = #{module},
+            </if>
+            <if test="category != null">
+                category = #{category},
+            </if>
+            <if test="dictionaries != null and dictionaries != ''">
+                dictionaries = #{dictionaries},
+            </if>
+            <if test="style != null">
+                style = #{style},
+            </if>
+            <if test="order != null">
+                order = #{order},
+            </if>
+            <if test="creatAt != null">
+                creat_at = #{creatAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.gg_show_model where id = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.gg_show_model
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageGgShowModelList" resultMap="BaseResultMap">
+            select
+                id, name, description, table, field, method, module, category, editable, dictionaries, style, order, creat_at            
+            from bzfx.gg_show_model
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null">
+                        and id = #{obj.id}
+                   </if>
+                               <if test="obj.name != null and obj.name != ''">
+                        and name = #{obj.name}
+                   </if>
+                               <if test="obj.description != null and obj.description != ''">
+                        and description = #{obj.description}
+                   </if>
+                               <if test="obj.table != null and obj.table != ''">
+                        and table = #{obj.table}
+                   </if>
+                               <if test="obj.field != null and obj.field != ''">
+                        and field = #{obj.field}
+                   </if>
+                               <if test="obj.method != null">
+                        and method = #{obj.method}
+                   </if>
+                               <if test="obj.module != null">
+                        and module = #{obj.module}
+                   </if>
+                               <if test="obj.category != null">
+                        and category = #{obj.category}
+                   </if>
+                               <if test="obj.editable != null">
+                        and editable = #{obj.editable}
+                   </if>
+                               <if test="obj.dictionaries != null and obj.dictionaries != ''">
+                        and dictionaries = #{obj.dictionaries}
+                   </if>
+                               <if test="obj.style != null">
+                        and style = #{obj.style}
+                   </if>
+                               <if test="obj.order != null">
+                        and order = #{obj.order}
+                   </if>
+                               <if test="obj.creatAt != null">
+                        and creat_at = #{obj.creatAt}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

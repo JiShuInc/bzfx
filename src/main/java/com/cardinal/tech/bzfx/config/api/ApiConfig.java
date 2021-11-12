@@ -18,7 +18,7 @@ public class ApiConfig {
 
     @Bean
     public static GroupedOpenApi managerOpenApi() {
-        String[] paths = {ADMIN_API + "/**"};
+        String[] paths = {"/**"};
         return GroupedOpenApi.builder().group("Admin").pathsToMatch(paths).build();
     }
 

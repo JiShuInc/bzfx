@@ -3,7 +3,6 @@ package com.cardinal.tech.bzfx.api;
 import com.cardinal.tech.bzfx.bean.bo.*;
 import com.cardinal.tech.bzfx.entity.RhTaskDb;
 import com.cardinal.tech.bzfx.service.RhTaskDbService;
-import com.cardinal.tech.bzfx.config.api.ApiConfig;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,14 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 任务数据-数据库(RhTaskDb)表服务api接口
  *
  * @author cadinal.tech
- * @since 2021-11-11 20:18:33
+ * @since 2021-11-13 01:33:38
  */
-@Tag(name="RhTaskDb")
+@Tag(name="任务数据-数据库")
 @RequestMapping("/rhTaskDb")
 public interface RhTaskDbApi {
 
@@ -60,5 +60,19 @@ public interface RhTaskDbApi {
         @GetMapping("/delete")
        default Response<Boolean> deleteById(@RequestParam Long id){
             return new Response(getService().deleteById(id));
+        }
+
+        @PreAuthorize("hasRole('admin')")
+        @Operation(description = " group by field name")
+        @GetMapping("/group")
+       default Response<List<Map<String,Integer>>> deleteById(@RequestParam String field){
+            return new Response(getService().groupBy(field));
+        }
+
+        @PreAuthorize("hasRole('admin')")
+        @Operation(description = " page list")
+        @PostMapping("/page")
+        default Response<Page<RhTaskDb>> page(@RequestBody PageForm<RhTaskDb> userQueryForm) {
+           return new Response(getService().page(userQueryForm));
         }
 }

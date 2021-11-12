@@ -15,7 +15,7 @@ spring:
   profiles:
     active: decrypt
   application:
-    name: bzms
+    name: bzfx
   servlet:
     multipart:
       enabled: true
@@ -38,7 +38,7 @@ logging:
 ignore:
   urls:
     - /admin/login
-    - /bzms-api.html
+    - /api.html
     - /swagger-ui/**
     - /${springdoc.version}/**
     - /${springdoc.version}/api/**

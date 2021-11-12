@@ -2,15 +2,17 @@ package com.cardinal.tech.bzfx.entity;
 
 import java.util.Date;
 import java.io.Serializable;
+import lombok.Data;
 
+@Data
 /**
  * 任务数据-数据库(RhTaskDb)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-11 20:18:33
+ * @since 2021-11-13 01:33:38
  */
 public class RhTaskDb implements Serializable {
-    private static final long serialVersionUID = 115668392040270847L;
+    private static final long serialVersionUID = -91321721995545039L;
     /**
     * id
     */
@@ -35,54 +37,5 @@ public class RhTaskDb implements Serializable {
     * 数据创建时间
     */
     private Date creatAt;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(Long taskId) {
-        this.taskId = taskId;
-    }
-
-    public String getDbHost() {
-        return dbHost;
-    }
-
-    public void setDbHost(String dbHost) {
-        this.dbHost = dbHost;
-    }
-
-    public String getDbName() {
-        return dbName;
-    }
-
-    public void setDbName(String dbName) {
-        this.dbName = dbName;
-    }
-
-    public String getDbPasswd() {
-        return dbPasswd;
-    }
-
-    public void setDbPasswd(String dbPasswd) {
-        this.dbPasswd = dbPasswd;
-    }
-
-    public Date getCreatAt() {
-        return creatAt;
-    }
-
-    public void setCreatAt(Date creatAt) {
-        this.creatAt = creatAt;
-    }
 
 }

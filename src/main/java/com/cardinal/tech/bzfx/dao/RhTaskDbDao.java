@@ -1,14 +1,16 @@
 package com.cardinal.tech.bzfx.dao;
 
 import com.cardinal.tech.bzfx.entity.RhTaskDb;
+import com.cardinal.tech.bzfx.bean.dbo.page.*;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 任务数据-数据库(RhTaskDb)表数据库访问层
  *
  * @author cadinal.tech
- * @since 2021-11-11 20:18:33
+ * @since 2021-11-13 01:33:38
  */
 public interface RhTaskDbDao {
 
@@ -62,4 +64,13 @@ public interface RhTaskDbDao {
      */
     int deleteById(Long id);
 
+    /**
+     * 通过字段进行分组统计
+     *
+     * @param field 主键
+     * @return 统计详情
+     */
+    List<Map<String,Integer>> groupBy(String field);
+
+     List<RhTaskDb> queryPageRhTaskDbList(PageQuery pq);
 }

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.TjBeizhuangffDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.TjBeizhuangff">
+        <!--@Table tj_beizhuangff-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="did" column="did" jdbcType="VARCHAR"/>
+        <result property="ryid" column="ryid" jdbcType="INTEGER"/>
+        <result property="dwid" column="dwid" jdbcType="INTEGER"/>
+        <result property="xinghao" column="xinghao" jdbcType="VARCHAR"/>
+        <result property="shengao" column="shengao" jdbcType="INTEGER"/>
+        <result property="xiongwei" column="xiongwei" jdbcType="INTEGER"/>
+        <result property="yaowei" column="yaowei" jdbcType="INTEGER"/>
+        <result property="touwei" column="touwei" jdbcType="INTEGER"/>
+        <result property="tizhong" column="tizhong" jdbcType="INTEGER"/>
+        <result property="tunwei" column="tunwei" jdbcType="INTEGER"/>
+        <result property="jiaochang" column="jiaochang" jdbcType="INTEGER"/>
+        <result property="tuowei" column="tuowei" jdbcType="INTEGER"/>
+        <result property="qihouqu" column="qihouqu" jdbcType="INTEGER"/>
+        <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, did, ryid, dwid, xinghao, shengao, xiongwei, yaowei, touwei, tizhong, tunwei, jiaochang, tuowei, qihouqu, creat_at
+        from bzfx.tj_beizhuangff
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, did, ryid, dwid, xinghao, shengao, xiongwei, yaowei, touwei, tizhong, tunwei, jiaochang, tuowei, qihouqu, creat_at
+        from bzfx.tj_beizhuangff
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, did, ryid, dwid, xinghao, shengao, xiongwei, yaowei, touwei, tizhong, tunwei, jiaochang, tuowei, qihouqu, creat_at
+        from bzfx.tj_beizhuangff
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="did != null and did != ''">
+                and did = #{did}
+            </if>
+            <if test="ryid != null">
+                and ryid = #{ryid}
+            </if>
+            <if test="dwid != null">
+                and dwid = #{dwid}
+            </if>
+            <if test="xinghao != null and xinghao != ''">
+                and xinghao = #{xinghao}
+            </if>
+            <if test="shengao != null">
+                and shengao = #{shengao}
+            </if>
+            <if test="xiongwei != null">
+                and xiongwei = #{xiongwei}
+            </if>
+            <if test="yaowei != null">
+                and yaowei = #{yaowei}
+            </if>
+            <if test="touwei != null">
+                and touwei = #{touwei}
+            </if>
+            <if test="tizhong != null">
+                and tizhong = #{tizhong}
+            </if>
+            <if test="tunwei != null">
+                and tunwei = #{tunwei}
+            </if>
+            <if test="jiaochang != null">
+                and jiaochang = #{jiaochang}
+            </if>
+            <if test="tuowei != null">
+                and tuowei = #{tuowei}
+            </if>
+            <if test="qihouqu != null">
+                and qihouqu = #{qihouqu}
+            </if>
+            <if test="creatAt != null">
+                and creat_at = #{creatAt}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.tj_beizhuangff(did, ryid, dwid, xinghao, shengao, xiongwei, yaowei, touwei, tizhong, tunwei, jiaochang, tuowei, qihouqu, creat_at)
+        values (#{did}, #{ryid}, #{dwid}, #{xinghao}, #{shengao}, #{xiongwei}, #{yaowei}, #{touwei}, #{tizhong}, #{tunwei}, #{jiaochang}, #{tuowei}, #{qihouqu}, #{creatAt})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.tj_beizhuangff
+        <set>
+            <if test="did != null and did != ''">
+                did = #{did},
+            </if>
+            <if test="ryid != null">
+                ryid = #{ryid},
+            </if>
+            <if test="dwid != null">
+                dwid = #{dwid},
+            </if>
+            <if test="xinghao != null and xinghao != ''">
+                xinghao = #{xinghao},
+            </if>
+            <if test="shengao != null">
+                shengao = #{shengao},
+            </if>
+            <if test="xiongwei != null">
+                xiongwei = #{xiongwei},
+            </if>
+            <if test="yaowei != null">
+                yaowei = #{yaowei},
+            </if>
+            <if test="touwei != null">
+                touwei = #{touwei},
+            </if>
+            <if test="tizhong != null">
+                tizhong = #{tizhong},
+            </if>
+            <if test="tunwei != null">
+                tunwei = #{tunwei},
+            </if>
+            <if test="jiaochang != null">
+                jiaochang = #{jiaochang},
+            </if>
+            <if test="tuowei != null">
+                tuowei = #{tuowei},
+            </if>
+            <if test="qihouqu != null">
+                qihouqu = #{qihouqu},
+            </if>
+            <if test="creatAt != null">
+                creat_at = #{creatAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.tj_beizhuangff where id = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.tj_beizhuangff
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageTjBeizhuangffList" resultMap="BaseResultMap">
+            select
+                id, did, ryid, dwid, xinghao, shengao, xiongwei, yaowei, touwei, tizhong, tunwei, jiaochang, tuowei, qihouqu, creat_at            
+            from bzfx.tj_beizhuangff
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null">
+                        and id = #{obj.id}
+                   </if>
+                               <if test="obj.did != null and obj.did != ''">
+                        and did = #{obj.did}
+                   </if>
+                               <if test="obj.ryid != null">
+                        and ryid = #{obj.ryid}
+                   </if>
+                               <if test="obj.dwid != null">
+                        and dwid = #{obj.dwid}
+                   </if>
+                               <if test="obj.xinghao != null and obj.xinghao != ''">
+                        and xinghao = #{obj.xinghao}
+                   </if>
+                               <if test="obj.shengao != null">
+                        and shengao = #{obj.shengao}
+                   </if>
+                               <if test="obj.xiongwei != null">
+                        and xiongwei = #{obj.xiongwei}
+                   </if>
+                               <if test="obj.yaowei != null">
+                        and yaowei = #{obj.yaowei}
+                   </if>
+                               <if test="obj.touwei != null">
+                        and touwei = #{obj.touwei}
+                   </if>
+                               <if test="obj.tizhong != null">
+                        and tizhong = #{obj.tizhong}
+                   </if>
+                               <if test="obj.tunwei != null">
+                        and tunwei = #{obj.tunwei}
+                   </if>
+                               <if test="obj.jiaochang != null">
+                        and jiaochang = #{obj.jiaochang}
+                   </if>
+                               <if test="obj.tuowei != null">
+                        and tuowei = #{obj.tuowei}
+                   </if>
+                               <if test="obj.qihouqu != null">
+                        and qihouqu = #{obj.qihouqu}
+                   </if>
+                               <if test="obj.creatAt != null">
+                        and creat_at = #{obj.creatAt}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

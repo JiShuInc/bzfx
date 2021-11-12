@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.SlSyncLogsDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.SlSyncLogs">
+        <!--@Table sl_sync_logs-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="dbHost" column="db_host" jdbcType="VARCHAR"/>
+        <result property="syncAt" column="sync_at" jdbcType="TIMESTAMP"/>
+        <result property="syncEnd" column="sync_end" jdbcType="TIMESTAMP"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+        <result property="result" column="result" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="dataTotal" column="data_total" jdbcType="INTEGER"/>
+        <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, db_host, sync_at, sync_end, state, result, remark, data_total, creat_at
+        from bzfx.sl_sync_logs
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, db_host, sync_at, sync_end, state, result, remark, data_total, creat_at
+        from bzfx.sl_sync_logs
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, db_host, sync_at, sync_end, state, result, remark, data_total, creat_at
+        from bzfx.sl_sync_logs
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="dbHost != null and dbHost != ''">
+                and db_host = #{dbHost}
+            </if>
+            <if test="syncAt != null">
+                and sync_at = #{syncAt}
+            </if>
+            <if test="syncEnd != null">
+                and sync_end = #{syncEnd}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+            <if test="result != null">
+                and result = #{result}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="dataTotal != null">
+                and data_total = #{dataTotal}
+            </if>
+            <if test="creatAt != null">
+                and creat_at = #{creatAt}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.sl_sync_logs(db_host, sync_at, sync_end, state, result, remark, data_total, creat_at)
+        values (#{dbHost}, #{syncAt}, #{syncEnd}, #{state}, #{result}, #{remark}, #{dataTotal}, #{creatAt})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.sl_sync_logs
+        <set>
+            <if test="dbHost != null and dbHost != ''">
+                db_host = #{dbHost},
+            </if>
+            <if test="syncAt != null">
+                sync_at = #{syncAt},
+            </if>
+            <if test="syncEnd != null">
+                sync_end = #{syncEnd},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+            <if test="result != null">
+                result = #{result},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="dataTotal != null">
+                data_total = #{dataTotal},
+            </if>
+            <if test="creatAt != null">
+                creat_at = #{creatAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.sl_sync_logs where id = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.sl_sync_logs
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageSlSyncLogsList" resultMap="BaseResultMap">
+            select
+                id, db_host, sync_at, sync_end, state, result, remark, data_total, creat_at            
+            from bzfx.sl_sync_logs
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null">
+                        and id = #{obj.id}
+                   </if>
+                               <if test="obj.dbHost != null and obj.dbHost != ''">
+                        and db_host = #{obj.dbHost}
+                   </if>
+                               <if test="obj.syncAt != null">
+                        and sync_at = #{obj.syncAt}
+                   </if>
+                               <if test="obj.syncEnd != null">
+                        and sync_end = #{obj.syncEnd}
+                   </if>
+                               <if test="obj.state != null">
+                        and state = #{obj.state}
+                   </if>
+                               <if test="obj.result != null">
+                        and result = #{obj.result}
+                   </if>
+                               <if test="obj.remark != null and obj.remark != ''">
+                        and remark = #{obj.remark}
+                   </if>
+                               <if test="obj.dataTotal != null">
+                        and data_total = #{obj.dataTotal}
+                   </if>
+                               <if test="obj.creatAt != null">
+                        and creat_at = #{obj.creatAt}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

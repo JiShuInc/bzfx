@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.TjGongziffDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.TjGongziff">
+        <!--@Table tj_gongziff-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="did" column="did" jdbcType="VARCHAR"/>
+        <result property="ryid" column="ryid" jdbcType="INTEGER"/>
+        <result property="dwid" column="dwid" jdbcType="INTEGER"/>
+        <result property="gongzi" column="gongzi" jdbcType="OTHER"/>
+        <result property="baoxiankc" column="baoxiankc" jdbcType="OTHER"/>
+        <result property="zhufangzj" column="zhufangzj" jdbcType="OTHER"/>
+        <result property="fafangyh" column="fafangyh" jdbcType="VARCHAR"/>
+        <result property="fafangsj" column="fafangsj" jdbcType="TIMESTAMP"/>
+        <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, did, ryid, dwid, gongzi, baoxiankc, zhufangzj, fafangyh, fafangsj, creat_at
+        from bzfx.tj_gongziff
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, did, ryid, dwid, gongzi, baoxiankc, zhufangzj, fafangyh, fafangsj, creat_at
+        from bzfx.tj_gongziff
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, did, ryid, dwid, gongzi, baoxiankc, zhufangzj, fafangyh, fafangsj, creat_at
+        from bzfx.tj_gongziff
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="did != null and did != ''">
+                and did = #{did}
+            </if>
+            <if test="ryid != null">
+                and ryid = #{ryid}
+            </if>
+            <if test="dwid != null">
+                and dwid = #{dwid}
+            </if>
+            <if test="gongzi != null">
+                and gongzi = #{gongzi}
+            </if>
+            <if test="baoxiankc != null">
+                and baoxiankc = #{baoxiankc}
+            </if>
+            <if test="zhufangzj != null">
+                and zhufangzj = #{zhufangzj}
+            </if>
+            <if test="fafangyh != null and fafangyh != ''">
+                and fafangyh = #{fafangyh}
+            </if>
+            <if test="fafangsj != null">
+                and fafangsj = #{fafangsj}
+            </if>
+            <if test="creatAt != null">
+                and creat_at = #{creatAt}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.tj_gongziff(did, ryid, dwid, gongzi, baoxiankc, zhufangzj, fafangyh, fafangsj, creat_at)
+        values (#{did}, #{ryid}, #{dwid}, #{gongzi}, #{baoxiankc}, #{zhufangzj}, #{fafangyh}, #{fafangsj}, #{creatAt})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.tj_gongziff
+        <set>
+            <if test="did != null and did != ''">
+                did = #{did},
+            </if>
+            <if test="ryid != null">
+                ryid = #{ryid},
+            </if>
+            <if test="dwid != null">
+                dwid = #{dwid},
+            </if>
+            <if test="gongzi != null">
+                gongzi = #{gongzi},
+            </if>
+            <if test="baoxiankc != null">
+                baoxiankc = #{baoxiankc},
+            </if>
+            <if test="zhufangzj != null">
+                zhufangzj = #{zhufangzj},
+            </if>
+            <if test="fafangyh != null and fafangyh != ''">
+                fafangyh = #{fafangyh},
+            </if>
+            <if test="fafangsj != null">
+                fafangsj = #{fafangsj},
+            </if>
+            <if test="creatAt != null">
+                creat_at = #{creatAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.tj_gongziff where id = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.tj_gongziff
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageTjGongziffList" resultMap="BaseResultMap">
+            select
+                id, did, ryid, dwid, gongzi, baoxiankc, zhufangzj, fafangyh, fafangsj, creat_at            
+            from bzfx.tj_gongziff
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null">
+                        and id = #{obj.id}
+                   </if>
+                               <if test="obj.did != null and obj.did != ''">
+                        and did = #{obj.did}
+                   </if>
+                               <if test="obj.ryid != null">
+                        and ryid = #{obj.ryid}
+                   </if>
+                               <if test="obj.dwid != null">
+                        and dwid = #{obj.dwid}
+                   </if>
+                               <if test="obj.gongzi != null">
+                        and gongzi = #{obj.gongzi}
+                   </if>
+                               <if test="obj.baoxiankc != null">
+                        and baoxiankc = #{obj.baoxiankc}
+                   </if>
+                               <if test="obj.zhufangzj != null">
+                        and zhufangzj = #{obj.zhufangzj}
+                   </if>
+                               <if test="obj.fafangyh != null and obj.fafangyh != ''">
+                        and fafangyh = #{obj.fafangyh}
+                   </if>
+                               <if test="obj.fafangsj != null">
+                        and fafangsj = #{obj.fafangsj}
+                   </if>
+                               <if test="obj.creatAt != null">
+                        and creat_at = #{obj.creatAt}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>
