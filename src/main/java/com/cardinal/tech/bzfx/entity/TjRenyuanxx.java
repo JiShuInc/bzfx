@@ -9,10 +9,10 @@ import lombok.Data;
  * 人员表(TjRenyuanxx)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:38
  */
 public class TjRenyuanxx implements Serializable {
-    private static final long serialVersionUID = 592538861529559635L;
+    private static final long serialVersionUID = 653266726724471194L;
     /**
     * id
     */
@@ -25,6 +25,10 @@ public class TjRenyuanxx implements Serializable {
     * 所属单位
     */
     private Long dwid;
+    /**
+    * 单位名称
+    */
+    private String dwmc;
     /**
     * 保障卡号
     */

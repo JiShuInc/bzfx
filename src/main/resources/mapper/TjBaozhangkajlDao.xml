@@ -8,6 +8,8 @@
         <result property="did" column="did" jdbcType="VARCHAR"/>
         <result property="ryid" column="ryid" jdbcType="INTEGER"/>
         <result property="dwid" column="dwid" jdbcType="INTEGER"/>
+        <result property="rymc" column="rymc" jdbcType="VARCHAR"/>
+        <result property="dwmc" column="dwmc" jdbcType="VARCHAR"/>
         <result property="zhikayy" column="zhikayy" jdbcType="INTEGER"/>
         <result property="zhikasj" column="zhikasj" jdbcType="TIMESTAMP"/>
         <result property="baozhangkh" column="baozhangkh" jdbcType="VARCHAR"/>
@@ -17,7 +19,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          id, did, ryid, dwid, zhikayy, zhikasj, baozhangkh, creat_at
+          id, did, ryid, dwid, rymc, dwmc, zhikayy, zhikasj, baozhangkh, creat_at
         from bzfx.tj_baozhangkajl
         where id = #{id}
     </select>
@@ -25,7 +27,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          id, did, ryid, dwid, zhikayy, zhikasj, baozhangkh, creat_at
+          id, did, ryid, dwid, rymc, dwmc, zhikayy, zhikasj, baozhangkh, creat_at
         from bzfx.tj_baozhangkajl
         limit #{offset}, #{limit}
     </select>
@@ -33,7 +35,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, did, ryid, dwid, zhikayy, zhikasj, baozhangkh, creat_at
+          id, did, ryid, dwid, rymc, dwmc, zhikayy, zhikasj, baozhangkh, creat_at
         from bzfx.tj_baozhangkajl
         <where>
             <if test="id != null">
@@ -47,6 +49,12 @@
             </if>
             <if test="dwid != null">
                 and dwid = #{dwid}
+            </if>
+            <if test="rymc != null and rymc != ''">
+                and rymc = #{rymc}
+            </if>
+            <if test="dwmc != null and dwmc != ''">
+                and dwmc = #{dwmc}
             </if>
             <if test="zhikayy != null">
                 and zhikayy = #{zhikayy}
@@ -114,7 +122,7 @@
     <!-- 分页查询 -->
     <select id="queryPageTjBaozhangkajlList" resultMap="BaseResultMap">
             select
-                id, did, ryid, dwid, zhikayy, zhikasj, baozhangkh, creat_at            
+                id, did, ryid, dwid, rymc, dwmc, zhikayy, zhikasj, baozhangkh, creat_at            
             from bzfx.tj_baozhangkajl
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null">
@@ -128,6 +136,12 @@
                    </if>
                                <if test="obj.dwid != null">
                         and dwid = #{obj.dwid}
+                   </if>
+                               <if test="obj.rymc != null and obj.rymc != ''">
+                        and rymc = #{obj.rymc}
+                   </if>
+                               <if test="obj.dwmc != null and obj.dwmc != ''">
+                        and dwmc = #{obj.dwmc}
                    </if>
                                <if test="obj.zhikayy != null">
                         and zhikayy = #{obj.zhikayy}

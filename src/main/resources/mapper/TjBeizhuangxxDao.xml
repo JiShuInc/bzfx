@@ -8,6 +8,8 @@
         <result property="did" column="did" jdbcType="VARCHAR"/>
         <result property="ryid" column="ryid" jdbcType="INTEGER"/>
         <result property="dwid" column="dwid" jdbcType="INTEGER"/>
+        <result property="rymc" column="rymc" jdbcType="VARCHAR"/>
+        <result property="dwmc" column="dwmc" jdbcType="VARCHAR"/>
         <result property="xinghao" column="xinghao" jdbcType="VARCHAR"/>
         <result property="shengao" column="shengao" jdbcType="INTEGER"/>
         <result property="xiongwei" column="xiongwei" jdbcType="INTEGER"/>
@@ -24,7 +26,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          id, did, ryid, dwid, xinghao, shengao, xiongwei, yaowei, touwei, tizhong, tunwei, jiaochang, tuowei, qihouqu, creat_at
+          id, did, ryid, dwid, rymc, dwmc, xinghao, shengao, xiongwei, yaowei, touwei, tizhong, tunwei, jiaochang, tuowei, qihouqu, creat_at
         from bzfx.tj_beizhuangxx
         where id = #{id}
     </select>
@@ -32,7 +34,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          id, did, ryid, dwid, xinghao, shengao, xiongwei, yaowei, touwei, tizhong, tunwei, jiaochang, tuowei, qihouqu, creat_at
+          id, did, ryid, dwid, rymc, dwmc, xinghao, shengao, xiongwei, yaowei, touwei, tizhong, tunwei, jiaochang, tuowei, qihouqu, creat_at
         from bzfx.tj_beizhuangxx
         limit #{offset}, #{limit}
     </select>
@@ -40,7 +42,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, did, ryid, dwid, xinghao, shengao, xiongwei, yaowei, touwei, tizhong, tunwei, jiaochang, tuowei, qihouqu, creat_at
+          id, did, ryid, dwid, rymc, dwmc, xinghao, shengao, xiongwei, yaowei, touwei, tizhong, tunwei, jiaochang, tuowei, qihouqu, creat_at
         from bzfx.tj_beizhuangxx
         <where>
             <if test="id != null">
@@ -54,6 +56,12 @@
             </if>
             <if test="dwid != null">
                 and dwid = #{dwid}
+            </if>
+            <if test="rymc != null and rymc != ''">
+                and rymc = #{rymc}
+            </if>
+            <if test="dwmc != null and dwmc != ''">
+                and dwmc = #{dwmc}
             </if>
             <if test="xinghao != null and xinghao != ''">
                 and xinghao = #{xinghao}
@@ -163,7 +171,7 @@
     <!-- 分页查询 -->
     <select id="queryPageTjBeizhuangxxList" resultMap="BaseResultMap">
             select
-                id, did, ryid, dwid, xinghao, shengao, xiongwei, yaowei, touwei, tizhong, tunwei, jiaochang, tuowei, qihouqu, creat_at            
+                id, did, ryid, dwid, rymc, dwmc, xinghao, shengao, xiongwei, yaowei, touwei, tizhong, tunwei, jiaochang, tuowei, qihouqu, creat_at            
             from bzfx.tj_beizhuangxx
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null">
@@ -177,6 +185,12 @@
                    </if>
                                <if test="obj.dwid != null">
                         and dwid = #{obj.dwid}
+                   </if>
+                               <if test="obj.rymc != null and obj.rymc != ''">
+                        and rymc = #{obj.rymc}
+                   </if>
+                               <if test="obj.dwmc != null and obj.dwmc != ''">
+                        and dwmc = #{obj.dwmc}
                    </if>
                                <if test="obj.xinghao != null and obj.xinghao != ''">
                         and xinghao = #{obj.xinghao}

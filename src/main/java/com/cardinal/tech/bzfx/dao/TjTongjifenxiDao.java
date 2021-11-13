@@ -10,7 +10,7 @@ import java.util.Map;
  * 统计分析表(TjTongjifenxi)表数据库访问层
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:38
  */
 public interface TjTongjifenxiDao {
 

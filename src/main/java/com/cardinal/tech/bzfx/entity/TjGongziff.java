@@ -9,10 +9,10 @@ import lombok.Data;
  * 工资发放表(TjGongziff)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:38
  */
 public class TjGongziff implements Serializable {
-    private static final long serialVersionUID = -19876529423093823L;
+    private static final long serialVersionUID = 245420237975746973L;
     /**
     * id
     */
@@ -29,6 +29,14 @@ public class TjGongziff implements Serializable {
     * 所属单位
     */
     private Long dwid;
+    /**
+    * 人员名称
+    */
+    private String rymc;
+    /**
+    * 单位名称
+    */
+    private String dwmc;
     /**
     * 工资
     */

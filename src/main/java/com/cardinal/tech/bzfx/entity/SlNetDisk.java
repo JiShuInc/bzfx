@@ -9,10 +9,10 @@ import lombok.Data;
  * 文档资料(SlNetDisk)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:37
  */
 public class SlNetDisk implements Serializable {
-    private static final long serialVersionUID = -99987877424146810L;
+    private static final long serialVersionUID = -90011144021864196L;
     /**
     * id
     */

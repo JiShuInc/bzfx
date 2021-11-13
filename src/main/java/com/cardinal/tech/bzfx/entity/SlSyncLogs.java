@@ -9,10 +9,10 @@ import lombok.Data;
  * 数据同步日志(SlSyncLogs)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:37
  */
 public class SlSyncLogs implements Serializable {
-    private static final long serialVersionUID = 237086296144928118L;
+    private static final long serialVersionUID = 433278840465484753L;
     /**
     * id
     */

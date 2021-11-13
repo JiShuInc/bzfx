@@ -19,7 +19,7 @@ import java.util.Map;
  * 工资发放表(TjGongziff)表服务api接口
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:38
  */
 @Tag(name="工资发放表")
 @RequestMapping("/tjGongziff")

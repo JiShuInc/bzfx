@@ -9,10 +9,10 @@ import lombok.Data;
  * 被装发放记录(TjBeizhuangxx)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:38
  */
 public class TjBeizhuangxx implements Serializable {
-    private static final long serialVersionUID = -49159316913283664L;
+    private static final long serialVersionUID = -69777459817258538L;
     /**
     * id
     */
@@ -29,6 +29,14 @@ public class TjBeizhuangxx implements Serializable {
     * 所属单位
     */
     private Long dwid;
+    /**
+    * 人员名称
+    */
+    private String rymc;
+    /**
+    * 单位名称
+    */
+    private String dwmc;
     /**
     * 着装型号信息
     */

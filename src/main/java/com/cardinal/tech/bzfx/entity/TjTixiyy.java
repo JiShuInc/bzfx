@@ -9,10 +9,10 @@ import lombok.Data;
  * 体系医院标准编码(TjTixiyy)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:38
  */
 public class TjTixiyy implements Serializable {
-    private static final long serialVersionUID = 130161501789105966L;
+    private static final long serialVersionUID = 177639838779540182L;
     /**
     * id
     */
@@ -25,6 +25,10 @@ public class TjTixiyy implements Serializable {
     * 所属单位
     */
     private Long dwid;
+    /**
+    * 单位名称
+    */
+    private String dwmc;
     /**
     * 医疗单位代码
     */

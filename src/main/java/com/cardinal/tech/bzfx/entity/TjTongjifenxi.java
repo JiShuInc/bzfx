@@ -9,10 +9,10 @@ import lombok.Data;
  * 统计分析表(TjTongjifenxi)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:38
  */
 public class TjTongjifenxi implements Serializable {
-    private static final long serialVersionUID = 424084253204005883L;
+    private static final long serialVersionUID = 247737248644610154L;
     /**
     * id
     */

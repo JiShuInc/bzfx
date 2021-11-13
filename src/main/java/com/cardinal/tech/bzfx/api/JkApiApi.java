@@ -19,7 +19,7 @@ import java.util.Map;
  * 接口(JkApi)表服务api接口
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:46
+ * @since 2021-11-13 20:00:37
  */
 @Tag(name="接口")
 @RequestMapping("/jkApi")

@@ -6,6 +6,7 @@
         <!--@Table tj_danweixx-->
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="did" column="did" jdbcType="VARCHAR"/>
+        <result property="danweijb" column="danweijb" jdbcType="INTEGER"/>
         <result property="danweibm" column="danweibm" jdbcType="VARCHAR"/>
         <result property="mingcheng" column="mingcheng" jdbcType="VARCHAR"/>
         <result property="miaoshu" column="miaoshu" jdbcType="VARCHAR"/>
@@ -27,7 +28,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          id, did, danweibm, mingcheng, miaoshu, jingdu, weidu, danweixz, danweigygx, danweibzyy, danweibzllid, zhudi, ganburs, zhanshirs, caiwubzrs, beizhuangbzrs, zhufangsl, creat_at
+          id, did, danweijb, danweibm, mingcheng, miaoshu, jingdu, weidu, danweixz, danweigygx, danweibzyy, danweibzllid, zhudi, ganburs, zhanshirs, caiwubzrs, beizhuangbzrs, zhufangsl, creat_at
         from bzfx.tj_danweixx
         where id = #{id}
     </select>
@@ -35,7 +36,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          id, did, danweibm, mingcheng, miaoshu, jingdu, weidu, danweixz, danweigygx, danweibzyy, danweibzllid, zhudi, ganburs, zhanshirs, caiwubzrs, beizhuangbzrs, zhufangsl, creat_at
+          id, did, danweijb, danweibm, mingcheng, miaoshu, jingdu, weidu, danweixz, danweigygx, danweibzyy, danweibzllid, zhudi, ganburs, zhanshirs, caiwubzrs, beizhuangbzrs, zhufangsl, creat_at
         from bzfx.tj_danweixx
         limit #{offset}, #{limit}
     </select>
@@ -43,7 +44,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, did, danweibm, mingcheng, miaoshu, jingdu, weidu, danweixz, danweigygx, danweibzyy, danweibzllid, zhudi, ganburs, zhanshirs, caiwubzrs, beizhuangbzrs, zhufangsl, creat_at
+          id, did, danweijb, danweibm, mingcheng, miaoshu, jingdu, weidu, danweixz, danweigygx, danweibzyy, danweibzllid, zhudi, ganburs, zhanshirs, caiwubzrs, beizhuangbzrs, zhufangsl, creat_at
         from bzfx.tj_danweixx
         <where>
             <if test="id != null">
@@ -51,6 +52,9 @@
             </if>
             <if test="did != null and did != ''">
                 and did = #{did}
+            </if>
+            <if test="danweijb != null">
+                and danweijb = #{danweijb}
             </if>
             <if test="danweibm != null and danweibm != ''">
                 and danweibm = #{danweibm}
@@ -184,7 +188,7 @@
     <!-- 分页查询 -->
     <select id="queryPageTjDanweixxList" resultMap="BaseResultMap">
             select
-                id, did, danweibm, mingcheng, miaoshu, jingdu, weidu, danweixz, danweigygx, danweibzyy, danweibzllid, zhudi, ganburs, zhanshirs, caiwubzrs, beizhuangbzrs, zhufangsl, creat_at            
+                id, did, danweijb, danweibm, mingcheng, miaoshu, jingdu, weidu, danweixz, danweigygx, danweibzyy, danweibzllid, zhudi, ganburs, zhanshirs, caiwubzrs, beizhuangbzrs, zhufangsl, creat_at            
             from bzfx.tj_danweixx
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null">
@@ -192,6 +196,9 @@
                    </if>
                                <if test="obj.did != null and obj.did != ''">
                         and did = #{obj.did}
+                   </if>
+                               <if test="obj.danweijb != null">
+                        and danweijb = #{obj.danweijb}
                    </if>
                                <if test="obj.danweibm != null and obj.danweibm != ''">
                         and danweibm = #{obj.danweibm}

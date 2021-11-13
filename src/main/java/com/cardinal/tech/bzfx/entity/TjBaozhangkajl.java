@@ -9,10 +9,10 @@ import lombok.Data;
  * 保障卡卡记录表(TjBaozhangkajl)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:37
  */
 public class TjBaozhangkajl implements Serializable {
-    private static final long serialVersionUID = -76476520857131759L;
+    private static final long serialVersionUID = 246031807208577290L;
     /**
     * id
     */
@@ -29,6 +29,14 @@ public class TjBaozhangkajl implements Serializable {
     * 所属单位
     */
     private Long dwid;
+    /**
+    * 人员名称
+    */
+    private String rymc;
+    /**
+    * 单位名称
+    */
+    private String dwmc;
     /**
     * 制卡原因，0制卡，1补卡
     */

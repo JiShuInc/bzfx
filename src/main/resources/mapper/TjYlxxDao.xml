@@ -10,6 +10,9 @@
         <result property="dwid" column="dwid" jdbcType="INTEGER"/>
         <result property="yyid" column="yyid" jdbcType="INTEGER"/>
         <result property="yiliaogx" column="yiliaogx" jdbcType="INTEGER"/>
+        <result property="rymc" column="rymc" jdbcType="VARCHAR"/>
+        <result property="dwmc" column="dwmc" jdbcType="VARCHAR"/>
+        <result property="yymc" column="yymc" jdbcType="VARCHAR"/>
         <result property="xuexing" column="xuexing" jdbcType="INTEGER"/>
         <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -17,7 +20,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          id, did, ryid, dwid, yyid, yiliaogx, xuexing, creat_at
+          id, did, ryid, dwid, yyid, yiliaogx, rymc, dwmc, yymc, xuexing, creat_at
         from bzfx.tj_ylxx
         where id = #{id}
     </select>
@@ -25,7 +28,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          id, did, ryid, dwid, yyid, yiliaogx, xuexing, creat_at
+          id, did, ryid, dwid, yyid, yiliaogx, rymc, dwmc, yymc, xuexing, creat_at
         from bzfx.tj_ylxx
         limit #{offset}, #{limit}
     </select>
@@ -33,7 +36,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, did, ryid, dwid, yyid, yiliaogx, xuexing, creat_at
+          id, did, ryid, dwid, yyid, yiliaogx, rymc, dwmc, yymc, xuexing, creat_at
         from bzfx.tj_ylxx
         <where>
             <if test="id != null">
@@ -53,6 +56,15 @@
             </if>
             <if test="yiliaogx != null">
                 and yiliaogx = #{yiliaogx}
+            </if>
+            <if test="rymc != null and rymc != ''">
+                and rymc = #{rymc}
+            </if>
+            <if test="dwmc != null and dwmc != ''">
+                and dwmc = #{dwmc}
+            </if>
+            <if test="yymc != null and yymc != ''">
+                and yymc = #{yymc}
             </if>
             <if test="xuexing != null">
                 and xuexing = #{xuexing}
@@ -111,7 +123,7 @@
     <!-- 分页查询 -->
     <select id="queryPageTjYlxxList" resultMap="BaseResultMap">
             select
-                id, did, ryid, dwid, yyid, yiliaogx, xuexing, creat_at            
+                id, did, ryid, dwid, yyid, yiliaogx, rymc, dwmc, yymc, xuexing, creat_at            
             from bzfx.tj_ylxx
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null">
@@ -131,6 +143,15 @@
                    </if>
                                <if test="obj.yiliaogx != null">
                         and yiliaogx = #{obj.yiliaogx}
+                   </if>
+                               <if test="obj.rymc != null and obj.rymc != ''">
+                        and rymc = #{obj.rymc}
+                   </if>
+                               <if test="obj.dwmc != null and obj.dwmc != ''">
+                        and dwmc = #{obj.dwmc}
+                   </if>
+                               <if test="obj.yymc != null and obj.yymc != ''">
+                        and yymc = #{obj.yymc}
                    </if>
                                <if test="obj.xuexing != null">
                         and xuexing = #{obj.xuexing}

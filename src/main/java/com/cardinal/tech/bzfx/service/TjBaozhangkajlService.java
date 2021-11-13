@@ -9,7 +9,7 @@ import java.util.Map;
  * 保障卡卡记录表(TjBaozhangkajl)表服务接口
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:37
  */
 public interface TjBaozhangkajlService {
 

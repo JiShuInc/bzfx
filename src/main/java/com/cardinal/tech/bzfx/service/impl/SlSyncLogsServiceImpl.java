@@ -16,7 +16,7 @@ import java.util.Map;
  * 数据同步日志(SlSyncLogs)表服务实现类
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:37
  */
 @RequiredArgsConstructor
 @Service("slSyncLogsService")

@@ -9,10 +9,10 @@ import lombok.Data;
  * 日志(GgLogs)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:46
+ * @since 2021-11-13 20:00:37
  */
 public class GgLogs implements Serializable {
-    private static final long serialVersionUID = -87552770755214113L;
+    private static final long serialVersionUID = 133590925749246956L;
     /**
     * id
     */

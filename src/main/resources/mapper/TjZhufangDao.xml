@@ -8,6 +8,8 @@
         <result property="did" column="did" jdbcType="VARCHAR"/>
         <result property="ryid" column="ryid" jdbcType="INTEGER"/>
         <result property="dwid" column="dwid" jdbcType="INTEGER"/>
+        <result property="rymc" column="rymc" jdbcType="VARCHAR"/>
+        <result property="dwmc" column="dwmc" jdbcType="VARCHAR"/>
         <result property="zhufangsx" column="zhufangsx" jdbcType="INTEGER"/>
         <result property="jinzhusj" column="jinzhusj" jdbcType="TIMESTAMP"/>
         <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
@@ -16,7 +18,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          id, did, ryid, dwid, zhufangsx, jinzhusj, creat_at
+          id, did, ryid, dwid, rymc, dwmc, zhufangsx, jinzhusj, creat_at
         from bzfx.tj_zhufang
         where id = #{id}
     </select>
@@ -24,7 +26,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          id, did, ryid, dwid, zhufangsx, jinzhusj, creat_at
+          id, did, ryid, dwid, rymc, dwmc, zhufangsx, jinzhusj, creat_at
         from bzfx.tj_zhufang
         limit #{offset}, #{limit}
     </select>
@@ -32,7 +34,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, did, ryid, dwid, zhufangsx, jinzhusj, creat_at
+          id, did, ryid, dwid, rymc, dwmc, zhufangsx, jinzhusj, creat_at
         from bzfx.tj_zhufang
         <where>
             <if test="id != null">
@@ -46,6 +48,12 @@
             </if>
             <if test="dwid != null">
                 and dwid = #{dwid}
+            </if>
+            <if test="rymc != null and rymc != ''">
+                and rymc = #{rymc}
+            </if>
+            <if test="dwmc != null and dwmc != ''">
+                and dwmc = #{dwmc}
             </if>
             <if test="zhufangsx != null">
                 and zhufangsx = #{zhufangsx}
@@ -107,7 +115,7 @@
     <!-- 分页查询 -->
     <select id="queryPageTjZhufangList" resultMap="BaseResultMap">
             select
-                id, did, ryid, dwid, zhufangsx, jinzhusj, creat_at            
+                id, did, ryid, dwid, rymc, dwmc, zhufangsx, jinzhusj, creat_at            
             from bzfx.tj_zhufang
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null">
@@ -121,6 +129,12 @@
                    </if>
                                <if test="obj.dwid != null">
                         and dwid = #{obj.dwid}
+                   </if>
+                               <if test="obj.rymc != null and obj.rymc != ''">
+                        and rymc = #{obj.rymc}
+                   </if>
+                               <if test="obj.dwmc != null and obj.dwmc != ''">
+                        and dwmc = #{obj.dwmc}
                    </if>
                                <if test="obj.zhufangsx != null">
                         and zhufangsx = #{obj.zhufangsx}

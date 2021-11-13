@@ -10,7 +10,7 @@ import java.util.Map;
  * 文档资料(SlNetDisk)表数据库访问层
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:37
  */
 public interface SlNetDiskDao {
 

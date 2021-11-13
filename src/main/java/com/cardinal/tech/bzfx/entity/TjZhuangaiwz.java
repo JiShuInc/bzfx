@@ -9,10 +9,10 @@ import lombok.Data;
  * 军官和文职干部互改记录表(TjZhuangaiwz)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:38
  */
 public class TjZhuangaiwz implements Serializable {
-    private static final long serialVersionUID = 830914791080480181L;
+    private static final long serialVersionUID = 845829357819670122L;
     /**
     * id
     */
@@ -29,6 +29,14 @@ public class TjZhuangaiwz implements Serializable {
     * 所属单位
     */
     private Long dwid;
+    /**
+    * 人员名称
+    */
+    private String rymc;
+    /**
+    * 单位名称
+    */
+    private String dwmc;
     /**
     * 转改时间
     */

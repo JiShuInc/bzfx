@@ -9,10 +9,10 @@ import lombok.Data;
  * 人员住房情况(TjZhufang)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:47
+ * @since 2021-11-13 20:00:38
  */
 public class TjZhufang implements Serializable {
-    private static final long serialVersionUID = 132662646326040046L;
+    private static final long serialVersionUID = -99704867411539917L;
     /**
     * id
     */
@@ -29,6 +29,14 @@ public class TjZhufang implements Serializable {
     * 所属单位
     */
     private Long dwid;
+    /**
+    * 人员名称
+    */
+    private String rymc;
+    /**
+    * 单位名称
+    */
+    private String dwmc;
     /**
     * 住房属性
     */

@@ -7,6 +7,7 @@
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="did" column="did" jdbcType="VARCHAR"/>
         <result property="dwid" column="dwid" jdbcType="INTEGER"/>
+        <result property="dwmc" column="dwmc" jdbcType="VARCHAR"/>
         <result property="yiliaodwdm" column="yiliaodwdm" jdbcType="INTEGER"/>
         <result property="yiliaodwmc" column="yiliaodwmc" jdbcType="VARCHAR"/>
         <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
@@ -15,7 +16,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          id, did, dwid, yiliaodwdm, yiliaodwmc, creat_at
+          id, did, dwid, dwmc, yiliaodwdm, yiliaodwmc, creat_at
         from bzfx.tj_tixiyy
         where id = #{id}
     </select>
@@ -23,7 +24,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          id, did, dwid, yiliaodwdm, yiliaodwmc, creat_at
+          id, did, dwid, dwmc, yiliaodwdm, yiliaodwmc, creat_at
         from bzfx.tj_tixiyy
         limit #{offset}, #{limit}
     </select>
@@ -31,7 +32,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, did, dwid, yiliaodwdm, yiliaodwmc, creat_at
+          id, did, dwid, dwmc, yiliaodwdm, yiliaodwmc, creat_at
         from bzfx.tj_tixiyy
         <where>
             <if test="id != null">
@@ -42,6 +43,9 @@
             </if>
             <if test="dwid != null">
                 and dwid = #{dwid}
+            </if>
+            <if test="dwmc != null and dwmc != ''">
+                and dwmc = #{dwmc}
             </if>
             <if test="yiliaodwdm != null">
                 and yiliaodwdm = #{yiliaodwdm}
@@ -100,7 +104,7 @@
     <!-- 分页查询 -->
     <select id="queryPageTjTixiyyList" resultMap="BaseResultMap">
             select
-                id, did, dwid, yiliaodwdm, yiliaodwmc, creat_at            
+                id, did, dwid, dwmc, yiliaodwdm, yiliaodwmc, creat_at            
             from bzfx.tj_tixiyy
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null">
@@ -111,6 +115,9 @@
                    </if>
                                <if test="obj.dwid != null">
                         and dwid = #{obj.dwid}
+                   </if>
+                               <if test="obj.dwmc != null and obj.dwmc != ''">
+                        and dwmc = #{obj.dwmc}
                    </if>
                                <if test="obj.yiliaodwdm != null">
                         and yiliaodwdm = #{obj.yiliaodwdm}

@@ -9,10 +9,10 @@ import lombok.Data;
  * 接口(JkApi)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:46
+ * @since 2021-11-13 20:00:37
  */
 public class JkApi implements Serializable {
-    private static final long serialVersionUID = 352012866417489936L;
+    private static final long serialVersionUID = -50271807612605209L;
     /**
     * id
     */
