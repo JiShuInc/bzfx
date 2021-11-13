@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -21,58 +24,49 @@ import java.util.Map;
  * @author cadinal.tech
  * @since 2021-11-13 21:10:08
  */
-@Tag(name="上传文件表")
+@Tag(name = "上传文件表")
 @RequestMapping("/tjWenjian")
 public interface TjWenjianApi {
 
-        TjWenjianService getService();
+    TjWenjianService getService();
 
-        @PreAuthorize("hasRole('admin')")
-        @Operation(description = " get by id")
-        @GetMapping("/{id}")
-        default Response<TjWenjian> queryById(@PathVariable("id") Long id){
-            return new Response(getService().queryById(id));
-        }
 
-        @PreAuthorize("hasRole('admin')")
-        @Operation(description = " get list")
-        @GetMapping("/list")
-       default Response<List<TjWenjian>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit){
-            return new Response(getService().queryAllByLimit(offset,limit));
-       }
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = " get list")
+    @GetMapping("/list")
+    default Response<List<TjWenjian>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit) {
+        return new Response(getService().queryAllByLimit(offset, limit));
+    }
 
-        @PreAuthorize("hasRole('admin')")
-        @Operation(description = " add")
-        @PostMapping("/add")
-        default Response<TjWenjian> insert(@RequestBody TjWenjian tjWenjian){
-            return new Response(getService().insert(tjWenjian));
-        }
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = " delete by pk")
+    @GetMapping("/delete")
+    default Response<Boolean> deleteById(@RequestParam Long id) {
+        return new Response(getService().deleteById(id));
+    }
 
-         @PreAuthorize("hasRole('admin')")
-         @Operation(description = " update")
-         @PostMapping("/update")
-        default Response<TjWenjian> update(@RequestBody TjWenjian tjWenjian){
-             return new Response(getService().update(tjWenjian));
-        }
 
-        @PreAuthorize("hasRole('admin')")
-        @Operation(description = " delete by pk")
-        @GetMapping("/delete")
-       default Response<Boolean> deleteById(@RequestParam Long id){
-            return new Response(getService().deleteById(id));
-        }
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = " page list")
+    @PostMapping("/page")
+    default Response<Page<TjWenjian>> page(@RequestBody PageForm<TjWenjian> userQueryForm) {
+        return new Response(getService().page(userQueryForm));
+    }
 
-        @PreAuthorize("hasRole('admin')")
-        @Operation(description = " group by field name")
-        @GetMapping("/group")
-       default Response<List<Map<String,Integer>>> deleteById(@RequestParam String field){
-            return new Response(getService().groupBy(field));
-        }
 
-        @PreAuthorize("hasRole('admin')")
-        @Operation(description = " page list")
-        @PostMapping("/page")
-        default Response<Page<TjWenjian>> page(@RequestBody PageForm<TjWenjian> userQueryForm) {
-           return new Response(getService().page(userQueryForm));
-        }
+
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = " upload file")
+    @PostMapping("/upload")
+    default Response<TjWenjian> upload(@RequestParam MultipartFile file) {
+        return new Response(getService().upload(file));
+    }
+
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = "download file")
+    @GetMapping("/{id}")
+    default void download(@PathVariable("id") Long id, HttpServletResponse response) {
+        getService().download(id, response);
+    }
+
 }

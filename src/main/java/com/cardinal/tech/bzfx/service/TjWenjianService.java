@@ -2,6 +2,9 @@ package com.cardinal.tech.bzfx.service;
 
 import com.cardinal.tech.bzfx.bean.bo.*;
 import com.cardinal.tech.bzfx.entity.TjWenjian;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +23,11 @@ public interface TjWenjianService {
          * @return 实例对象
          */
         TjWenjian queryById(Long id);
+        /**
+         * 下载文件
+         *
+         */
+        Void download(Long id, HttpServletResponse response);
 
         /**
          * 查询多条数据
@@ -37,6 +45,12 @@ public interface TjWenjianService {
          * @return 实例对象
          */
         TjWenjian insert(TjWenjian tjWenjian);
+
+        /**
+         * 上传文件
+         *
+         */
+        TjWenjian upload(MultipartFile file);
 
         /**
          * 修改数据

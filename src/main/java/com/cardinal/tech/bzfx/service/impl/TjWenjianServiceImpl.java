@@ -5,10 +5,17 @@ import com.cardinal.tech.bzfx.bean.dbo.page.PageQuery;
 import com.cardinal.tech.bzfx.entity.TjWenjian;
 import com.cardinal.tech.bzfx.dao.TjWenjianDao;
 import com.cardinal.tech.bzfx.service.TjWenjianService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
+import java.net.http.HttpHeaders;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -106,5 +113,74 @@ public class TjWenjianServiceImpl implements TjWenjianService {
         Page<TjWenjian> p = new Page<>(pq.getTotalCount(), pq.getMax(), pq.getCurrentPage());
         p.setData(entityList);
         return p;
+    }
+
+
+    @Override
+    public TjWenjian upload(MultipartFile file) {
+        TjWenjian wenjian = new TjWenjian();
+        wenjian.setName(file.getOriginalFilename());
+        wenjian.setCreatAt(new Date());
+        wenjian.setPath("");
+        this.tjWenjianDao.insert(wenjian);
+
+        try {
+            wenjian.setPath(savefile(file,wenjian.getId().toString()));
+            tjWenjianDao.update(wenjian);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return wenjian;
+    }
+
+
+
+    @Override
+    public Void download(Long id, HttpServletResponse response) {
+        InputStream stream = null;
+        try {
+            TjWenjian wenjian = this.tjWenjianDao.queryById(id);
+            File file = new File(wenjian.getPath());
+            if (null == file || !file.exists()) {
+                throw new IllegalArgumentException("文件不存在");
+            } else {
+                stream = new FileInputStream(file);
+//                response.addHeader("Content-Type", "application/octet-stream");
+//                response.addHeader("Content-Disposition", "attachment;filename=" + wenjian.getName());
+                response.setContentType("application/force-download");
+                response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(wenjian.getName(), "UTF-8"));
+
+                response.setContentLength((int) file.length());
+                IOUtils.copy(stream, response.getOutputStream());
+                response.flushBuffer();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw new IllegalArgumentException("文件不存在");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new IllegalArgumentException("文件处理异常");
+        } finally {
+            if (null != stream) {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+    private String savefile(MultipartFile file,String fileName) throws IOException {
+
+         String filePath = this.getClass().getClassLoader().getResource("").getPath() +"/temp/" + fileName;
+         File desFile = new File(filePath);
+        if(!desFile.getParentFile().exists()){
+            desFile.mkdirs();
+        }
+        file.transferTo(desFile);
+        return desFile.getCanonicalPath();
     }
 }
