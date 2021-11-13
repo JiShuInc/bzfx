@@ -1,7 +1,7 @@
-package .service;
+package com.cardinal.tech.bzfx.service;
 
-import .bean.bo.*;
-import .entity.TjWenjian;
+import com.cardinal.tech.bzfx.bean.bo.*;
+import com.cardinal.tech.bzfx.entity.TjWenjian;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +9,7 @@ import java.util.Map;
  * 上传文件表(TjWenjian)表服务接口
  *
  * @author cadinal.tech
- * @since 2021-11-13 21:01:51
+ * @since 2021-11-13 21:10:08
  */
 public interface TjWenjianService {
 

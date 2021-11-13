@@ -1,7 +1,7 @@
-package .controller;
+package com.cardinal.tech.bzfx.controller;
 
-import .service.TjWenjianService;
-import .api.TjWenjianApi;
+import com.cardinal.tech.bzfx.service.TjWenjianService;
+import com.cardinal.tech.bzfx.api.TjWenjianApi;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 
@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
  * 上传文件表(TjWenjian)表控制层
  *
  * @author cadinal.tech
- * @since 2021-11-13 21:01:51
+ * @since 2021-11-13 21:10:08
  */
 @RequiredArgsConstructor
 @RestController

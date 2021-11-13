@@ -1,8 +1,8 @@
-package .api;
+package com.cardinal.tech.bzfx.api;
 
-import .bean.bo.*;
-import .entity.TjWenjian;
-import .service.TjWenjianService;
+import com.cardinal.tech.bzfx.bean.bo.*;
+import com.cardinal.tech.bzfx.entity.TjWenjian;
+import com.cardinal.tech.bzfx.service.TjWenjianService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,7 +19,7 @@ import java.util.Map;
  * 上传文件表(TjWenjian)表服务api接口
  *
  * @author cadinal.tech
- * @since 2021-11-13 21:01:51
+ * @since 2021-11-13 21:10:08
  */
 @Tag(name="上传文件表")
 @RequestMapping("/tjWenjian")

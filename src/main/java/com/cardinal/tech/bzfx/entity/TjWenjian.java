@@ -1,4 +1,4 @@
-package entity;
+package com.cardinal.tech.bzfx.entity;
 
 import java.util.Date;
 import java.io.Serializable;
@@ -9,10 +9,10 @@ import lombok.Data;
  * 上传文件表(TjWenjian)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 21:01:51
+ * @since 2021-11-13 21:10:08
  */
 public class TjWenjian implements Serializable {
-    private static final long serialVersionUID = -48541464515903412L;
+    private static final long serialVersionUID = -51046582748746946L;
     /**
     * id
     */

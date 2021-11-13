@@ -1,7 +1,7 @@
-package .dao;
+package com.cardinal.tech.bzfx.dao;
 
-import .entity.TjWenjian;
-import .bean.dbo.page.*;
+import com.cardinal.tech.bzfx.entity.TjWenjian;
+import com.cardinal.tech.bzfx.bean.dbo.page.*;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +10,7 @@ import java.util.Map;
  * 上传文件表(TjWenjian)表数据库访问层
  *
  * @author cadinal.tech
- * @since 2021-11-13 21:01:51
+ * @since 2021-11-13 21:10:08
  */
 public interface TjWenjianDao {
 

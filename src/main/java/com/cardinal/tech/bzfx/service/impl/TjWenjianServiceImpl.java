@@ -1,10 +1,10 @@
-package .service.impl;
+package com.cardinal.tech.bzfx.service.impl;
 
-import .bean.bo.*;
-import .bean.dbo.page.PageQuery;
-import .entity.TjWenjian;
-import .dao.TjWenjianDao;
-import .service.TjWenjianService;
+import com.cardinal.tech.bzfx.bean.bo.*;
+import com.cardinal.tech.bzfx.bean.dbo.page.PageQuery;
+import com.cardinal.tech.bzfx.entity.TjWenjian;
+import com.cardinal.tech.bzfx.dao.TjWenjianDao;
+import com.cardinal.tech.bzfx.service.TjWenjianService;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +16,7 @@ import java.util.Map;
  * 上传文件表(TjWenjian)表服务实现类
  *
  * @author cadinal.tech
- * @since 2021-11-13 21:01:51
+ * @since 2021-11-13 21:10:08
  */
 @RequiredArgsConstructor
 @Service("tjWenjianService")
