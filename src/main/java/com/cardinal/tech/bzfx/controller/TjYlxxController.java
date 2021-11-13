@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
  * 医疗信息(TjYlxx)表控制层
  *
  * @author cadinal.tech
- * @since 2021-11-13 01:33:38
+ * @since 2021-11-13 19:28:47
  */
 @RequiredArgsConstructor
 @RestController

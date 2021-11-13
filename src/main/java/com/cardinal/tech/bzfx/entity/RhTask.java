@@ -9,10 +9,10 @@ import lombok.Data;
  * 任务(RhTask)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 01:33:38
+ * @since 2021-11-13 19:28:46
  */
 public class RhTask implements Serializable {
-    private static final long serialVersionUID = 732441023033134245L;
+    private static final long serialVersionUID = 605923104334844562L;
     /**
     * id
     */

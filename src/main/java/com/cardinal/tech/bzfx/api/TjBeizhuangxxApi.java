@@ -1,8 +1,8 @@
 package com.cardinal.tech.bzfx.api;
 
 import com.cardinal.tech.bzfx.bean.bo.*;
-import com.cardinal.tech.bzfx.entity.TjZhuangaiwz;
-import com.cardinal.tech.bzfx.service.TjZhuangaiwzService;
+import com.cardinal.tech.bzfx.entity.TjBeizhuangxx;
+import com.cardinal.tech.bzfx.service.TjBeizhuangxxService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,43 +16,43 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 军官和文职干部互改记录表(TjZhuangaiwz)表服务api接口
+ * 被装发放记录(TjBeizhuangxx)表服务api接口
  *
  * @author cadinal.tech
  * @since 2021-11-13 19:28:47
  */
-@Tag(name="军官和文职干部互改记录表")
-@RequestMapping("/tjZhuangaiwz")
-public interface TjZhuangaiwzApi {
+@Tag(name="被装发放记录")
+@RequestMapping("/tjBeizhuangxx")
+public interface TjBeizhuangxxApi {
 
-        TjZhuangaiwzService getService();
+        TjBeizhuangxxService getService();
 
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " get by id")
         @GetMapping("/{id}")
-        default Response<TjZhuangaiwz> queryById(@PathVariable("id") Long id){
+        default Response<TjBeizhuangxx> queryById(@PathVariable("id") Long id){
             return new Response(getService().queryById(id));
         }
 
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " get list")
         @GetMapping("/list")
-       default Response<List<TjZhuangaiwz>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit){
+       default Response<List<TjBeizhuangxx>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit){
             return new Response(getService().queryAllByLimit(offset,limit));
        }
 
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " add")
         @PostMapping("/add")
-        default Response<TjZhuangaiwz> insert(@RequestBody TjZhuangaiwz tjZhuangaiwz){
-            return new Response(getService().insert(tjZhuangaiwz));
+        default Response<TjBeizhuangxx> insert(@RequestBody TjBeizhuangxx tjBeizhuangxx){
+            return new Response(getService().insert(tjBeizhuangxx));
         }
 
          @PreAuthorize("hasRole('admin')")
          @Operation(description = " update")
          @PostMapping("/update")
-        default Response<TjZhuangaiwz> update(@RequestBody TjZhuangaiwz tjZhuangaiwz){
-             return new Response(getService().update(tjZhuangaiwz));
+        default Response<TjBeizhuangxx> update(@RequestBody TjBeizhuangxx tjBeizhuangxx){
+             return new Response(getService().update(tjBeizhuangxx));
         }
 
         @PreAuthorize("hasRole('admin')")
@@ -72,7 +72,7 @@ public interface TjZhuangaiwzApi {
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " page list")
         @PostMapping("/page")
-        default Response<Page<TjZhuangaiwz>> page(@RequestBody PageForm<TjZhuangaiwz> userQueryForm) {
+        default Response<Page<TjBeizhuangxx>> page(@RequestBody PageForm<TjBeizhuangxx> userQueryForm) {
            return new Response(getService().page(userQueryForm));
         }
 }

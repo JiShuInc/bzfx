@@ -9,10 +9,10 @@ import lombok.Data;
  * 被装发放记录(TjBeizhuangff)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 01:33:38
+ * @since 2021-11-13 19:28:47
  */
 public class TjBeizhuangff implements Serializable {
-    private static final long serialVersionUID = 285305533918961027L;
+    private static final long serialVersionUID = 769410223100917147L;
     /**
     * id
     */
@@ -30,45 +30,25 @@ public class TjBeizhuangff implements Serializable {
     */
     private Long dwid;
     /**
-    * 着装型号信息
+    * 品名
+    */
+    private String pinming;
+    /**
+    * 型号
     */
     private String xinghao;
     /**
-    * 身高
+    * 单位
     */
-    private Integer shengao;
+    private String danwei;
     /**
-    * 胸围
+    * 数量
     */
-    private Integer xiongwei;
+    private Integer shuliang;
     /**
-    * 腰围
+    * 时间
     */
-    private Integer yaowei;
-    /**
-    * 头围
-    */
-    private Integer touwei;
-    /**
-    * 体重
-    */
-    private Integer tizhong;
-    /**
-    * 臀围
-    */
-    private Integer tunwei;
-    /**
-    * 脚长
-    */
-    private Integer jiaochang;
-    /**
-    * 跖围
-    */
-    private Integer tuowei;
-    /**
-    * 气候区
-    */
-    private Integer qihouqu;
+    private Date shijian;
     /**
     * 数据创建时间
     */

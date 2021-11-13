@@ -9,10 +9,10 @@ import lombok.Data;
  * 专项任务人员(JcSpecialRy)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 01:33:38
+ * @since 2021-11-13 19:28:46
  */
 public class JcSpecialRy implements Serializable {
-    private static final long serialVersionUID = 292956131242746577L;
+    private static final long serialVersionUID = -88981280180463812L;
     /**
     * id
     */

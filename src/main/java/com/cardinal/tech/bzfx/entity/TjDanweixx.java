@@ -9,10 +9,10 @@ import lombok.Data;
  * 单位信息表(TjDanweixx)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 01:33:38
+ * @since 2021-11-13 19:28:47
  */
 public class TjDanweixx implements Serializable {
-    private static final long serialVersionUID = 452042097282918081L;
+    private static final long serialVersionUID = 928201572947139119L;
     /**
     * id
     */

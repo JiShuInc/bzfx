@@ -2,9 +2,9 @@ package com.cardinal.tech.bzfx.service.impl;
 
 import com.cardinal.tech.bzfx.bean.bo.*;
 import com.cardinal.tech.bzfx.bean.dbo.page.PageQuery;
-import com.cardinal.tech.bzfx.entity.GgShowModel;
-import com.cardinal.tech.bzfx.dao.GgShowModelDao;
-import com.cardinal.tech.bzfx.service.GgShowModelService;
+import com.cardinal.tech.bzfx.entity.TjBeizhuangxx;
+import com.cardinal.tech.bzfx.dao.TjBeizhuangxxDao;
+import com.cardinal.tech.bzfx.service.TjBeizhuangxxService;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -13,16 +13,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 可视化模型(GgShowModel)表服务实现类
+ * 被装发放记录(TjBeizhuangxx)表服务实现类
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:46
+ * @since 2021-11-13 19:28:47
  */
 @RequiredArgsConstructor
-@Service("ggShowModelService")
-public class GgShowModelServiceImpl implements GgShowModelService {
+@Service("tjBeizhuangxxService")
+public class TjBeizhuangxxServiceImpl implements TjBeizhuangxxService {
 
-    private final GgShowModelDao ggShowModelDao;
+    private final TjBeizhuangxxDao tjBeizhuangxxDao;
 
     /**
      * 通过ID查询单条数据
@@ -31,8 +31,8 @@ public class GgShowModelServiceImpl implements GgShowModelService {
      * @return 实例对象
      */
     @Override
-    public GgShowModel queryById(Long id) {
-        return this.ggShowModelDao.queryById(id);
+    public TjBeizhuangxx queryById(Long id) {
+        return this.tjBeizhuangxxDao.queryById(id);
     }
 
     /**
@@ -43,32 +43,32 @@ public class GgShowModelServiceImpl implements GgShowModelService {
      * @return 对象列表
      */
     @Override
-    public List<GgShowModel> queryAllByLimit(int offset, int limit) {
-        return this.ggShowModelDao.queryAllByLimit(offset, limit);
+    public List<TjBeizhuangxx> queryAllByLimit(int offset, int limit) {
+        return this.tjBeizhuangxxDao.queryAllByLimit(offset, limit);
     }
 
     /**
      * 新增数据
      *
-     * @param ggShowModel 实例对象
+     * @param tjBeizhuangxx 实例对象
      * @return 实例对象
      */
     @Override
-    public GgShowModel insert(GgShowModel ggShowModel) {
-        this.ggShowModelDao.insert(ggShowModel);
-        return ggShowModel;
+    public TjBeizhuangxx insert(TjBeizhuangxx tjBeizhuangxx) {
+        this.tjBeizhuangxxDao.insert(tjBeizhuangxx);
+        return tjBeizhuangxx;
     }
 
     /**
      * 修改数据
      *
-     * @param ggShowModel 实例对象
+     * @param tjBeizhuangxx 实例对象
      * @return 实例对象
      */
     @Override
-    public GgShowModel update(GgShowModel ggShowModel) {
-        this.ggShowModelDao.update(ggShowModel);
-        return this.queryById(ggShowModel.getId());
+    public TjBeizhuangxx update(TjBeizhuangxx tjBeizhuangxx) {
+        this.tjBeizhuangxxDao.update(tjBeizhuangxx);
+        return this.queryById(tjBeizhuangxx.getId());
     }
 
     /**
@@ -79,7 +79,7 @@ public class GgShowModelServiceImpl implements GgShowModelService {
      */
     @Override
     public boolean deleteById(Long id) {
-        return this.ggShowModelDao.deleteById(id) > 0;
+        return this.tjBeizhuangxxDao.deleteById(id) > 0;
     }
 
     /**
@@ -90,7 +90,7 @@ public class GgShowModelServiceImpl implements GgShowModelService {
      */
     @Override
     public List<Map<String,Integer>> groupBy(String field) {
-        return this.ggShowModelDao.groupBy(field);
+        return this.tjBeizhuangxxDao.groupBy(field);
     }
 
     /**
@@ -100,10 +100,10 @@ public class GgShowModelServiceImpl implements GgShowModelService {
      * @return 分页结果
      */
      @Override
-     public Page<GgShowModel> page(PageForm<GgShowModel> userQueryForm){
+     public Page<TjBeizhuangxx> page(PageForm<TjBeizhuangxx> userQueryForm){
         var pq = new PageQuery<>(userQueryForm);
-        List<GgShowModel> entityList = this.ggShowModelDao.queryPageGgShowModelList(pq);
-        Page<GgShowModel> p = new Page<>(pq.getTotalCount(), pq.getMax(), pq.getCurrentPage());
+        List<TjBeizhuangxx> entityList = this.tjBeizhuangxxDao.queryPageTjBeizhuangxxList(pq);
+        Page<TjBeizhuangxx> p = new Page<>(pq.getTotalCount(), pq.getMax(), pq.getCurrentPage());
         p.setData(entityList);
         return p;
     }

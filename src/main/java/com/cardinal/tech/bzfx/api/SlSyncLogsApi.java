@@ -19,7 +19,7 @@ import java.util.Map;
  * 数据同步日志(SlSyncLogs)表服务api接口
  *
  * @author cadinal.tech
- * @since 2021-11-13 01:33:38
+ * @since 2021-11-13 19:28:47
  */
 @Tag(name="数据同步日志")
 @RequestMapping("/slSyncLogs")

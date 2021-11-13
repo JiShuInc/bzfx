@@ -9,15 +9,17 @@ import lombok.Data;
  * 工资发放表(TjGongziff)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 01:33:38
+ * @since 2021-11-13 19:28:47
  */
 public class TjGongziff implements Serializable {
-    private static final long serialVersionUID = -29027121482028787L;
+    private static final long serialVersionUID = -19876529423093823L;
     /**
     * id
     */
     private Long id;
-    
+    /**
+    * 原始id
+    */
     private String did;
     /**
     * 人员id
@@ -39,9 +41,13 @@ public class TjGongziff implements Serializable {
     * 住房资金
     */
     private Object zhufangzj;
-    
+    /**
+    * 发放银行
+    */
     private String fafangyh;
-    
+    /**
+    * 发放时间
+    */
     private Date fafangsj;
     /**
     * 数据创建时间

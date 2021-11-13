@@ -9,10 +9,10 @@ import lombok.Data;
  * 医疗信息(TjYlxx)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 01:33:38
+ * @since 2021-11-13 19:28:47
  */
 public class TjYlxx implements Serializable {
-    private static final long serialVersionUID = 351846646985008335L;
+    private static final long serialVersionUID = -90459140506308715L;
     /**
     * id
     */
@@ -36,7 +36,7 @@ public class TjYlxx implements Serializable {
     /**
     * 医疗关系所在单位代码
     */
-    private Integer yiliaogx;
+    private Long yiliaogx;
     /**
     * 血型
     */

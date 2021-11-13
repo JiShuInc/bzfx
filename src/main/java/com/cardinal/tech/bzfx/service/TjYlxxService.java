@@ -9,7 +9,7 @@ import java.util.Map;
  * 医疗信息(TjYlxx)表服务接口
  *
  * @author cadinal.tech
- * @since 2021-11-13 01:33:38
+ * @since 2021-11-13 19:28:47
  */
 public interface TjYlxxService {
 

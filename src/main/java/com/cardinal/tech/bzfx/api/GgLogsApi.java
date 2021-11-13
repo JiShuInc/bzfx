@@ -19,7 +19,7 @@ import java.util.Map;
  * 日志(GgLogs)表服务api接口
  *
  * @author cadinal.tech
- * @since 2021-11-13 01:33:37
+ * @since 2021-11-13 19:28:46
  */
 @Tag(name="日志")
 @RequestMapping("/ggLogs")

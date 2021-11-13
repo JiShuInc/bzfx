@@ -1,18 +1,18 @@
 package com.cardinal.tech.bzfx.dao;
 
-import com.cardinal.tech.bzfx.entity.TjRenyuanxx;
+import com.cardinal.tech.bzfx.entity.TjBeizhuangxx;
 import com.cardinal.tech.bzfx.bean.dbo.page.*;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Map;
 
 /**
- * 人员表(TjRenyuanxx)表数据库访问层
+ * 被装发放记录(TjBeizhuangxx)表数据库访问层
  *
  * @author cadinal.tech
  * @since 2021-11-13 19:28:47
  */
-public interface TjRenyuanxxDao {
+public interface TjBeizhuangxxDao {
 
     /**
      * 通过ID查询单条数据
@@ -20,7 +20,7 @@ public interface TjRenyuanxxDao {
      * @param id 主键
      * @return 实例对象
      */
-    TjRenyuanxx queryById(Long id);
+    TjBeizhuangxx queryById(Long id);
 
     /**
      * 查询指定行数据
@@ -29,32 +29,32 @@ public interface TjRenyuanxxDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<TjRenyuanxx> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<TjBeizhuangxx> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param tjRenyuanxx 实例对象
+     * @param tjBeizhuangxx 实例对象
      * @return 对象列表
      */
-    List<TjRenyuanxx> queryAll(TjRenyuanxx tjRenyuanxx);
+    List<TjBeizhuangxx> queryAll(TjBeizhuangxx tjBeizhuangxx);
 
     /**
      * 新增数据
      *
-     * @param tjRenyuanxx 实例对象
+     * @param tjBeizhuangxx 实例对象
      * @return 影响行数
      */
-    int insert(TjRenyuanxx tjRenyuanxx);
+    int insert(TjBeizhuangxx tjBeizhuangxx);
 
     /**
      * 修改数据
      *
-     * @param tjRenyuanxx 实例对象
+     * @param tjBeizhuangxx 实例对象
      * @return 影响行数
      */
-    int update(TjRenyuanxx tjRenyuanxx);
+    int update(TjBeizhuangxx tjBeizhuangxx);
 
     /**
      * 通过主键删除数据
@@ -72,5 +72,5 @@ public interface TjRenyuanxxDao {
      */
     List<Map<String,Integer>> groupBy(String field);
 
-     List<TjRenyuanxx> queryPageTjRenyuanxxList(PageQuery pq);
+     List<TjBeizhuangxx> queryPageTjBeizhuangxxList(PageQuery pq);
 }

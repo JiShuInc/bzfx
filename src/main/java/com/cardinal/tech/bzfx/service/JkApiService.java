@@ -9,7 +9,7 @@ import java.util.Map;
  * 接口(JkApi)表服务接口
  *
  * @author cadinal.tech
- * @since 2021-11-13 01:33:38
+ * @since 2021-11-13 19:28:46
  */
 public interface JkApiService {
 

@@ -14,6 +14,7 @@
         <result property="leibie" column="leibie" jdbcType="INTEGER"/>
         <result property="minzu" column="minzu" jdbcType="INTEGER"/>
         <result property="chushengdi" column="chushengdi" jdbcType="VARCHAR"/>
+        <result property="xingming" column="xingming" jdbcType="VARCHAR"/>
         <result property="chushengriqi" column="chushengriqi" jdbcType="TIMESTAMP"/>
         <result property="wenhua" column="wenhua" jdbcType="INTEGER"/>
         <result property="xuewei" column="xuewei" jdbcType="INTEGER"/>
@@ -52,7 +53,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          id, did, dwid, baozhangkh, shenfenzheng, xingbie, zhuangtai, leibie, minzu, chushengdi, chushengriqi, wenhua, xuewei, zhengzhimm, hunyin, ganbujxjb, shibingjxjb, wenzhijb, jiashusl, yanxiyw, zhiliury, zaizhiqk, jiashulb, ruwushijian, likaishijian, diaorushijian, diaochushijian, jiashusj, jiguan, diaodongqk, zhuanyejndj, zhigongsflb, zhigonggwdj, zhigongnx, teshury, zhuanyegb, fuyuangb, tuixiugb, zhuanyesg, buxiangshouyl, laogaifuxing, zhiliubudui, creat_at
+          id, did, dwid, baozhangkh, shenfenzheng, xingbie, zhuangtai, leibie, minzu, chushengdi, xingming, chushengriqi, wenhua, xuewei, zhengzhimm, hunyin, ganbujxjb, shibingjxjb, wenzhijb, jiashusl, yanxiyw, zhiliury, zaizhiqk, jiashulb, ruwushijian, likaishijian, diaorushijian, diaochushijian, jiashusj, jiguan, diaodongqk, zhuanyejndj, zhigongsflb, zhigonggwdj, zhigongnx, teshury, zhuanyegb, fuyuangb, tuixiugb, zhuanyesg, buxiangshouyl, laogaifuxing, zhiliubudui, creat_at
         from bzfx.tj_renyuanxx
         where id = #{id}
     </select>
@@ -60,7 +61,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          id, did, dwid, baozhangkh, shenfenzheng, xingbie, zhuangtai, leibie, minzu, chushengdi, chushengriqi, wenhua, xuewei, zhengzhimm, hunyin, ganbujxjb, shibingjxjb, wenzhijb, jiashusl, yanxiyw, zhiliury, zaizhiqk, jiashulb, ruwushijian, likaishijian, diaorushijian, diaochushijian, jiashusj, jiguan, diaodongqk, zhuanyejndj, zhigongsflb, zhigonggwdj, zhigongnx, teshury, zhuanyegb, fuyuangb, tuixiugb, zhuanyesg, buxiangshouyl, laogaifuxing, zhiliubudui, creat_at
+          id, did, dwid, baozhangkh, shenfenzheng, xingbie, zhuangtai, leibie, minzu, chushengdi, xingming, chushengriqi, wenhua, xuewei, zhengzhimm, hunyin, ganbujxjb, shibingjxjb, wenzhijb, jiashusl, yanxiyw, zhiliury, zaizhiqk, jiashulb, ruwushijian, likaishijian, diaorushijian, diaochushijian, jiashusj, jiguan, diaodongqk, zhuanyejndj, zhigongsflb, zhigonggwdj, zhigongnx, teshury, zhuanyegb, fuyuangb, tuixiugb, zhuanyesg, buxiangshouyl, laogaifuxing, zhiliubudui, creat_at
         from bzfx.tj_renyuanxx
         limit #{offset}, #{limit}
     </select>
@@ -68,7 +69,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, did, dwid, baozhangkh, shenfenzheng, xingbie, zhuangtai, leibie, minzu, chushengdi, chushengriqi, wenhua, xuewei, zhengzhimm, hunyin, ganbujxjb, shibingjxjb, wenzhijb, jiashusl, yanxiyw, zhiliury, zaizhiqk, jiashulb, ruwushijian, likaishijian, diaorushijian, diaochushijian, jiashusj, jiguan, diaodongqk, zhuanyejndj, zhigongsflb, zhigonggwdj, zhigongnx, teshury, zhuanyegb, fuyuangb, tuixiugb, zhuanyesg, buxiangshouyl, laogaifuxing, zhiliubudui, creat_at
+          id, did, dwid, baozhangkh, shenfenzheng, xingbie, zhuangtai, leibie, minzu, chushengdi, xingming, chushengriqi, wenhua, xuewei, zhengzhimm, hunyin, ganbujxjb, shibingjxjb, wenzhijb, jiashusl, yanxiyw, zhiliury, zaizhiqk, jiashulb, ruwushijian, likaishijian, diaorushijian, diaochushijian, jiashusj, jiguan, diaodongqk, zhuanyejndj, zhigongsflb, zhigonggwdj, zhigongnx, teshury, zhuanyegb, fuyuangb, tuixiugb, zhuanyesg, buxiangshouyl, laogaifuxing, zhiliubudui, creat_at
         from bzfx.tj_renyuanxx
         <where>
             <if test="id != null">
@@ -100,6 +101,9 @@
             </if>
             <if test="chushengdi != null and chushengdi != ''">
                 and chushengdi = #{chushengdi}
+            </if>
+            <if test="xingming != null and xingming != ''">
+                and xingming = #{xingming}
             </if>
             <if test="chushengriqi != null">
                 and chushengriqi = #{chushengriqi}
@@ -356,7 +360,7 @@
     <!-- 分页查询 -->
     <select id="queryPageTjRenyuanxxList" resultMap="BaseResultMap">
             select
-                id, did, dwid, baozhangkh, shenfenzheng, xingbie, zhuangtai, leibie, minzu, chushengdi, chushengriqi, wenhua, xuewei, zhengzhimm, hunyin, ganbujxjb, shibingjxjb, wenzhijb, jiashusl, yanxiyw, zhiliury, zaizhiqk, jiashulb, ruwushijian, likaishijian, diaorushijian, diaochushijian, jiashusj, jiguan, diaodongqk, zhuanyejndj, zhigongsflb, zhigonggwdj, zhigongnx, teshury, zhuanyegb, fuyuangb, tuixiugb, zhuanyesg, buxiangshouyl, laogaifuxing, zhiliubudui, creat_at            
+                id, did, dwid, baozhangkh, shenfenzheng, xingbie, zhuangtai, leibie, minzu, chushengdi, xingming, chushengriqi, wenhua, xuewei, zhengzhimm, hunyin, ganbujxjb, shibingjxjb, wenzhijb, jiashusl, yanxiyw, zhiliury, zaizhiqk, jiashulb, ruwushijian, likaishijian, diaorushijian, diaochushijian, jiashusj, jiguan, diaodongqk, zhuanyejndj, zhigongsflb, zhigonggwdj, zhigongnx, teshury, zhuanyegb, fuyuangb, tuixiugb, zhuanyesg, buxiangshouyl, laogaifuxing, zhiliubudui, creat_at            
             from bzfx.tj_renyuanxx
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null">
@@ -388,6 +392,9 @@
                    </if>
                                <if test="obj.chushengdi != null and obj.chushengdi != ''">
                         and chushengdi = #{obj.chushengdi}
+                   </if>
+                               <if test="obj.xingming != null and obj.xingming != ''">
+                        and xingming = #{obj.xingming}
                    </if>
                                <if test="obj.chushengriqi != null">
                         and chushengriqi = #{obj.chushengriqi}

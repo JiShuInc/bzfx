@@ -1,17 +1,17 @@
 package com.cardinal.tech.bzfx.service;
 
 import com.cardinal.tech.bzfx.bean.bo.*;
-import com.cardinal.tech.bzfx.entity.RhTask;
+import com.cardinal.tech.bzfx.entity.TjBeizhuangxx;
 import java.util.List;
 import java.util.Map;
 
 /**
- * 任务(RhTask)表服务接口
+ * 被装发放记录(TjBeizhuangxx)表服务接口
  *
  * @author cadinal.tech
- * @since 2021-11-13 19:28:46
+ * @since 2021-11-13 19:28:47
  */
-public interface RhTaskService {
+public interface TjBeizhuangxxService {
 
         /**
          * 通过ID查询单条数据
@@ -19,7 +19,7 @@ public interface RhTaskService {
          * @param id 主键
          * @return 实例对象
          */
-        RhTask queryById(Long id);
+        TjBeizhuangxx queryById(Long id);
 
         /**
          * 查询多条数据
@@ -28,23 +28,23 @@ public interface RhTaskService {
          * @param limit 查询条数
          * @return 对象列表
          */
-        List<RhTask> queryAllByLimit(int offset, int limit);
+        List<TjBeizhuangxx> queryAllByLimit(int offset, int limit);
 
         /**
          * 新增数据
          *
-         * @param rhTask 实例对象
+         * @param tjBeizhuangxx 实例对象
          * @return 实例对象
          */
-        RhTask insert(RhTask rhTask);
+        TjBeizhuangxx insert(TjBeizhuangxx tjBeizhuangxx);
 
         /**
          * 修改数据
          *
-         * @param rhTask 实例对象
+         * @param tjBeizhuangxx 实例对象
          * @return 实例对象
          */
-        RhTask update(RhTask rhTask);
+        TjBeizhuangxx update(TjBeizhuangxx tjBeizhuangxx);
 
         /**
          * 通过主键删除数据
@@ -68,6 +68,6 @@ public interface RhTaskService {
          * @param userQueryForm 查询对象
          * @return 分页结果
          */
-        Page<RhTask> page(PageForm<RhTask> userQueryForm);
+        Page<TjBeizhuangxx> page(PageForm<TjBeizhuangxx> userQueryForm);
 
 }
