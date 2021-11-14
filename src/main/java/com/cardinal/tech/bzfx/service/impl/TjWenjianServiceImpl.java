@@ -6,6 +6,7 @@ import com.cardinal.tech.bzfx.entity.TjWenjian;
 import com.cardinal.tech.bzfx.dao.TjWenjianDao;
 import com.cardinal.tech.bzfx.service.TjWenjianService;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +31,9 @@ import java.util.Map;
 public class TjWenjianServiceImpl implements TjWenjianService {
 
     private final TjWenjianDao tjWenjianDao;
+
+    @Value("${uploadfilepath}")
+    private String path = "/opt/cardinal/data/temp";
 
     /**
      * 通过ID查询单条数据
@@ -175,7 +179,7 @@ public class TjWenjianServiceImpl implements TjWenjianService {
 
     private String savefile(MultipartFile file,String fileName) throws IOException {
 
-         String filePath = this.getClass().getClassLoader().getResource("").getPath() +"/temp/" + fileName;
+         String filePath = path + fileName;
          File desFile = new File(filePath);
         if(!desFile.getParentFile().exists()){
             desFile.mkdirs();

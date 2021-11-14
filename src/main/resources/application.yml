@@ -45,5 +45,6 @@ ignore:
   authenticates:
     - /**
 banner: classpath:banner.txt
+uploadfilepath: /opt/cardinal/data/wenjian/
 
 
