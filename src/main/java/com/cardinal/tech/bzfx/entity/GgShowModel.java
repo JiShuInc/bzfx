@@ -9,10 +9,10 @@ import lombok.Data;
  * 可视化模型(GgShowModel)实体类
  *
  * @author cadinal.tech
- * @since 2021-11-13 20:00:37
+ * @since 2021-11-14 14:09:12
  */
 public class GgShowModel implements Serializable {
-    private static final long serialVersionUID = -25544798758147858L;
+    private static final long serialVersionUID = -81187462455348263L;
     /**
     * id
     */
@@ -28,11 +28,11 @@ public class GgShowModel implements Serializable {
     /**
     * 表
     */
-    private String table;
+    private String tableName;
     /**
     * 字段
     */
-    private String field;
+    private String fieldName;
     /**
     * 统计方法0-按照分类汇总
     */

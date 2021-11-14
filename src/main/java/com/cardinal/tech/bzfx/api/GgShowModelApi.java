@@ -19,7 +19,7 @@ import java.util.Map;
  * 可视化模型(GgShowModel)表服务api接口
  *
  * @author cadinal.tech
- * @since 2021-11-13 20:00:37
+ * @since 2021-11-14 14:09:12
  */
 @Tag(name="可视化模型")
 @RequestMapping("/ggShowModel")
