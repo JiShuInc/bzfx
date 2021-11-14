@@ -7,13 +7,14 @@
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="sid" column="sid" jdbcType="INTEGER"/>
         <result property="rid" column="rid" jdbcType="INTEGER"/>
+        <result property="rymc" column="rymc" jdbcType="VARCHAR"/>
         <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          id, sid, rid, creat_at
+          id, sid, rid, rymc, creat_at
         from bzfx.jc_special_ry
         where id = #{id}
     </select>
@@ -21,7 +22,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          id, sid, rid, creat_at
+          id, sid, rid, rymc, creat_at
         from bzfx.jc_special_ry
         limit #{offset}, #{limit}
     </select>
@@ -29,7 +30,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, sid, rid, creat_at
+          id, sid, rid, rymc, creat_at
         from bzfx.jc_special_ry
         <where>
             <if test="id != null">
@@ -41,6 +42,9 @@
             <if test="rid != null">
                 and rid = #{rid}
             </if>
+            <if test="rymc != null and rymc != ''">
+                and rymc = #{rymc}
+            </if>
             <if test="creatAt != null">
                 and creat_at = #{creatAt}
             </if>
@@ -49,8 +53,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into bzfx.jc_special_ry(sid, rid, creat_at)
-        values (#{sid}, #{rid}, #{creatAt})
+        insert into bzfx.jc_special_ry(sid, rid, rymc, creat_at)
+        values (#{sid}, #{rid}, #{rymc}, #{creatAt})
     </insert>
 
     <!--通过主键修改数据-->
@@ -62,6 +66,9 @@
             </if>
             <if test="rid != null">
                 rid = #{rid},
+            </if>
+            <if test="rymc != null and rymc != ''">
+                rymc = #{rymc},
             </if>
             <if test="creatAt != null">
                 creat_at = #{creatAt},
@@ -86,7 +93,7 @@
     <!-- 分页查询 -->
     <select id="queryPageJcSpecialRyList" resultMap="BaseResultMap">
             select
-                id, sid, rid, creat_at            
+                id, sid, rid, rymc, creat_at            
             from bzfx.jc_special_ry
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null">
@@ -97,6 +104,9 @@
                    </if>
                                <if test="obj.rid != null">
                         and rid = #{obj.rid}
+                   </if>
+                               <if test="obj.rymc != null and obj.rymc != ''">
+                        and rymc = #{obj.rymc}
                    </if>
                                <if test="obj.creatAt != null">
                         and creat_at = #{obj.creatAt}

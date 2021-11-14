@@ -10,7 +10,7 @@ import java.util.Map;
  * 专项任务人员(JcSpecialRy)表数据库访问层
  *
  * @author cadinal.tech
- * @since 2021-11-13 20:00:37
+ * @since 2021-11-14 14:17:25
  */
 public interface JcSpecialRyDao {
 
