@@ -15,14 +15,14 @@
         <result property="editable" column="editable" jdbcType="INTEGER"/>
         <result property="dictionaries" column="dictionaries" jdbcType="VARCHAR"/>
         <result property="style" column="style" jdbcType="INTEGER"/>
-        <result property="order" column="order" jdbcType="INTEGER"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
         <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          id, name, description, table_name, field_name, method, module, category, editable, dictionaries, style, order, creat_at
+          id, name, description, table_name, field_name, method, module, category, editable, dictionaries, style, sort, creat_at
         from bzfx.gg_show_model
         where id = #{id}
     </select>
@@ -30,7 +30,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          id, name, description, table_name, field_name, method, module, category, editable, dictionaries, style, order, creat_at
+          id, name, description, table_name, field_name, method, module, category, editable, dictionaries, style, sort, creat_at
         from bzfx.gg_show_model
         limit #{offset}, #{limit}
     </select>
@@ -38,7 +38,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, name, description, table_name, field_name, method, module, category, editable, dictionaries, style, order, creat_at
+          id, name, description, table_name, field_name, method, module, category, editable, dictionaries, style, sort, creat_at
         from bzfx.gg_show_model
         <where>
             <if test="id != null">
@@ -74,8 +74,8 @@
             <if test="style != null">
                 and style = #{style}
             </if>
-            <if test="order != null">
-                and order = #{order}
+            <if test="sort != null">
+                and sort = #{sort}
             </if>
             <if test="creatAt != null">
                 and creat_at = #{creatAt}
@@ -85,8 +85,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into bzfx.gg_show_model(name, description, table_name, field_name, method, module, category, editable, dictionaries, style, order, creat_at)
-        values (#{name}, #{description}, #{tableName}, #{fieldName}, #{method}, #{module}, #{category}, #{editable}, #{dictionaries}, #{style}, #{order}, #{creatAt})
+        insert into bzfx.gg_show_model(name, description, table_name, field_name, method, module, category, editable, dictionaries, style, sort, creat_at)
+        values (#{name}, #{description}, #{tableName}, #{fieldName}, #{method}, #{module}, #{category}, #{editable}, #{dictionaries}, #{style}, #{sort}, #{creatAt})
     </insert>
 
     <!--通过主键修改数据-->
@@ -123,8 +123,8 @@
             <if test="style != null">
                 style = #{style},
             </if>
-            <if test="order != null">
-                order = #{order},
+            <if test="sort != null">
+                sort = #{sort},
             </if>
             <if test="creatAt != null">
                 creat_at = #{creatAt},
@@ -149,7 +149,7 @@
     <!-- 分页查询 -->
     <select id="queryPageGgShowModelList" resultMap="BaseResultMap">
             select
-                id, name, description, table_name, field_name, method, module, category, editable, dictionaries, style, order, creat_at            
+                id, name, description, table_name, field_name, method, module, category, editable, dictionaries, style, sort, creat_at            
             from bzfx.gg_show_model
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null">
@@ -185,8 +185,8 @@
                                <if test="obj.style != null">
                         and style = #{obj.style}
                    </if>
-                               <if test="obj.order != null">
-                        and order = #{obj.order}
+                               <if test="obj.sort != null">
+                        and sort = #{obj.sort}
                    </if>
                                <if test="obj.creatAt != null">
                         and creat_at = #{obj.creatAt}

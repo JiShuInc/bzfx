@@ -8,11 +8,11 @@ import lombok.Data;
 /**
  * 可视化模型(GgShowModel)实体类
  *
- * @author cadinal.tech
- * @since 2021-11-14 14:09:12
+ * @author makejava
+ * @since 2021-11-14 21:30:16
  */
 public class GgShowModel implements Serializable {
-    private static final long serialVersionUID = -81187462455348263L;
+    private static final long serialVersionUID = -49726180029646110L;
     /**
     * id
     */
@@ -60,7 +60,7 @@ public class GgShowModel implements Serializable {
     /**
     * 在视图上的排序顺序(可重复)
     */
-    private Integer order;
+    private Integer sort;
     /**
     * 数据创建时间
     */
