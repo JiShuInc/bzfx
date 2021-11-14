@@ -8,13 +8,14 @@
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="doc" column="doc" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
         <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          id, name, description, doc, creat_at
+          id, name, description, doc, state, creat_at
         from bzfx.jk_api
         where id = #{id}
     </select>
@@ -22,7 +23,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          id, name, description, doc, creat_at
+          id, name, description, doc, state, creat_at
         from bzfx.jk_api
         limit #{offset}, #{limit}
     </select>
@@ -30,7 +31,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, name, description, doc, creat_at
+          id, name, description, doc, state, creat_at
         from bzfx.jk_api
         <where>
             <if test="id != null">
@@ -44,6 +45,9 @@
             </if>
             <if test="doc != null and doc != ''">
                 and doc = #{doc}
+            </if>
+            <if test="state != null">
+                and state = #{state}
             </if>
             <if test="creatAt != null">
                 and creat_at = #{creatAt}
@@ -90,7 +94,7 @@
     <!-- 分页查询 -->
     <select id="queryPageJkApiList" resultMap="BaseResultMap">
             select
-                id, name, description, doc, creat_at            
+                id, name, description, doc, state, creat_at            
             from bzfx.jk_api
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null">
@@ -104,6 +108,9 @@
                    </if>
                                <if test="obj.doc != null and obj.doc != ''">
                         and doc = #{obj.doc}
+                   </if>
+                               <if test="obj.state != null">
+                        and state = #{obj.state}
                    </if>
                                <if test="obj.creatAt != null">
                         and creat_at = #{obj.creatAt}
