@@ -9,10 +9,10 @@ import lombok.Data;
  * 可视化模型(GgShowModel)实体类
  *
  * @author makejava
- * @since 2021-11-14 21:30:16
+ * @since 2021-11-15 15:00:47
  */
 public class GgShowModel implements Serializable {
-    private static final long serialVersionUID = -49726180029646110L;
+    private static final long serialVersionUID = -50772161873905505L;
     /**
     * id
     */
