@@ -8,7 +8,6 @@ import com.cardinal.tech.bzfx.service.JcSpecialRyService;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +30,7 @@ public class JcSpecialRyServiceImpl implements JcSpecialRyService {
      * @return 实例对象
      */
     @Override
-    public JcSpecialRy queryById(Long id) {
+    public List<JcSpecialRyBO> queryById(Long id) {
         return this.jcSpecialRyDao.queryById(id);
     }
 
@@ -39,11 +38,11 @@ public class JcSpecialRyServiceImpl implements JcSpecialRyService {
      * 查询多条数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     @Override
-    public List<JcSpecialRy> queryAllByLimit(int offset, int limit) {
+    public List<JcSpecialRyBO> queryAllByLimit(int offset, int limit) {
         return this.jcSpecialRyDao.queryAllByLimit(offset, limit);
     }
 
@@ -54,9 +53,9 @@ public class JcSpecialRyServiceImpl implements JcSpecialRyService {
      * @return 实例对象
      */
     @Override
-    public JcSpecialRy insert(JcSpecialRy jcSpecialRy) {
-        this.jcSpecialRyDao.insert(jcSpecialRy);
-        return jcSpecialRy;
+    public List<JcSpecialRyBO> insert(JcSpecialRyForm jcSpecialRy) {
+        this.jcSpecialRyDao.batchInsert(jcSpecialRy.getSid(),jcSpecialRy.getQuery());
+        return jcSpecialRyDao.getBySid(jcSpecialRy.getSid());
     }
 
     /**
@@ -66,7 +65,7 @@ public class JcSpecialRyServiceImpl implements JcSpecialRyService {
      * @return 实例对象
      */
     @Override
-    public JcSpecialRy update(JcSpecialRy jcSpecialRy) {
+    public List<JcSpecialRyBO> update(JcSpecialRy jcSpecialRy) {
         this.jcSpecialRyDao.update(jcSpecialRy);
         return this.queryById(jcSpecialRy.getId());
     }
@@ -89,21 +88,21 @@ public class JcSpecialRyServiceImpl implements JcSpecialRyService {
      * @return 统计结果
      */
     @Override
-    public List<Map<String,Integer>> groupBy(String field) {
+    public List<Map<String, Integer>> groupBy(String field) {
         return this.jcSpecialRyDao.groupBy(field);
     }
 
     /**
-     *  分页查询
+     * 分页查询
      *
      * @param userQueryForm 查询对象
      * @return 分页结果
      */
-     @Override
-     public Page<JcSpecialRy> page(PageForm<JcSpecialRy> userQueryForm){
+    @Override
+    public Page<JcSpecialRyBO> page(PageForm<JcSpecialRy> userQueryForm) {
         var pq = new PageQuery<>(userQueryForm);
-        List<JcSpecialRy> entityList = this.jcSpecialRyDao.queryPageJcSpecialRyList(pq);
-        Page<JcSpecialRy> p = new Page<>(pq.getTotalCount(), pq.getMax(), pq.getCurrentPage());
+        List<JcSpecialRyBO> entityList = this.jcSpecialRyDao.queryPageJcSpecialRyList(pq);
+        Page<JcSpecialRyBO> p = new Page<>(pq.getTotalCount(), pq.getMax(), pq.getCurrentPage());
         p.setData(entityList);
         return p;
     }

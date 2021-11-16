@@ -141,7 +141,9 @@ public class ReflectUtil {
         for (Field f : fs) {
             Method m;
             try {
-                m = clazz.getMethod("get" + getMethodName(f.getName()));
+                final var fieldName = getMethodName(f.getName());
+                if(fieldName.equalsIgnoreCase("serialVersionUID"))continue;
+                m = clazz.getMethod("get" + fieldName);
                 params.put(f.getName(), m.invoke(t));
             } catch (Exception e) {
                 e.printStackTrace();

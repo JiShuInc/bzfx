@@ -1,5 +1,7 @@
 package com.cardinal.tech.bzfx.dao;
 
+import com.cardinal.tech.bzfx.bean.bo.JcSpecialRyBO;
+import com.cardinal.tech.bzfx.bean.bo.RYQuery;
 import com.cardinal.tech.bzfx.entity.JcSpecialRy;
 import com.cardinal.tech.bzfx.bean.dbo.page.*;
 import org.apache.ibatis.annotations.Param;
@@ -20,7 +22,7 @@ public interface JcSpecialRyDao {
      * @param id 主键
      * @return 实例对象
      */
-    JcSpecialRy queryById(Long id);
+    List<JcSpecialRyBO> queryById(Long id);
 
     /**
      * 查询指定行数据
@@ -29,7 +31,7 @@ public interface JcSpecialRyDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<JcSpecialRy> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<JcSpecialRyBO> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
@@ -72,5 +74,9 @@ public interface JcSpecialRyDao {
      */
     List<Map<String,Integer>> groupBy(String field);
 
-     List<JcSpecialRy> queryPageJcSpecialRyList(PageQuery pq);
+     List<JcSpecialRyBO> queryPageJcSpecialRyList(PageQuery pq);
+
+    int batchInsert(@Param("sid") Long sid, @Param("query") RYQuery query);
+
+    List<JcSpecialRyBO> getBySid(@Param("sid") Long sid);
 }

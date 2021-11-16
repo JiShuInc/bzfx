@@ -12,17 +12,20 @@
     </resultMap>
 
     <!--查询单个-->
-    <select id="queryById" resultMap="BaseResultMap">
-        select
-          id, sid, rid, rymc, creat_at
-        from bzfx.jc_special_ry
-        where id = #{id}
+    <select id="queryById" resultType="com.cardinal.tech.bzfx.bean.bo.JcSpecialRyBO">
+        select  jc_ry.id jcRyId,tr.*
+        from bzfx.jc_special_ry jc_ry
+                 left join bzfx.tj_renyuanxx tr on jc_ry.rid = tr.id
+        where jc_ry.id = #{id}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
-        select
-          id, sid, rid, rymc, creat_at
+        select id,
+               sid,
+               rid,
+               rymc,
+               creat_at
         from bzfx.jc_special_ry
         limit #{offset}, #{limit}
     </select>
@@ -30,7 +33,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, sid, rid, rymc, creat_at
+        id, sid, rid, rymc, creat_at
         from bzfx.jc_special_ry
         <where>
             <if test="id != null">
@@ -56,6 +59,19 @@
         insert into bzfx.jc_special_ry(sid, rid, rymc, creat_at)
         values (#{sid}, #{rid}, #{rymc}, #{creatAt})
     </insert>
+    <insert id="batchInsert">
+        insert into bzfx.jc_special_ry(sid,rid,rymc)
+        select #{sid,jdbcType=BIGINT}, ry.id,ry.xingming
+        from bzfx.tj_renyuanxx ry
+        <if test="query!=null">
+            <trim prefix="where" prefixOverrides="and|or">
+                <if test="query.xingbie!=null">
+                    and ry.xingbie=#{query.xingbie,jdbcType=INTEGER}
+                </if>
+            </trim>
+        </if>
+
+    </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
@@ -79,39 +95,47 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from bzfx.jc_special_ry where id = #{id}
+        delete
+        from bzfx.jc_special_ry
+        where id = #{id}
     </delete>
 
     <!--查询指定行数据-->
     <select id="groupBy" resultType="map">
-           select
-              ${field},count(1) c
-            from bzfx.jc_special_ry
-            group by ${field}
+        select ${field},
+               count(1) c
+        from bzfx.jc_special_ry
+        group by ${field}
     </select>
 
     <!-- 分页查询 -->
-    <select id="queryPageJcSpecialRyList" resultMap="BaseResultMap">
-            select
-                id, sid, rid, rymc, creat_at            
-            from bzfx.jc_special_ry
-            <trim prefix="where" prefixOverrides="and|or">
-                               <if test="obj.id != null">
-                        and id = #{obj.id}
-                   </if>
-                               <if test="obj.sid != null">
-                        and sid = #{obj.sid}
-                   </if>
-                               <if test="obj.rid != null">
-                        and rid = #{obj.rid}
-                   </if>
-                               <if test="obj.rymc != null and obj.rymc != ''">
-                        and rymc = #{obj.rymc}
-                   </if>
-                               <if test="obj.creatAt != null">
-                        and creat_at = #{obj.creatAt}
-                   </if>
-                        </trim>
+    <select id="queryPageJcSpecialRyList" resultType="com.cardinal.tech.bzfx.bean.bo.JcSpecialRyBO">
+        select jc_ry.id jcRyId,
+        tr.*
+        from bzfx.jc_special_ry jc_ry left join bzfx.tj_renyuanxx tr on jc_ry.rid = tr.id
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="obj.id != null">
+                and id = #{obj.id}
+            </if>
+            <if test="obj.sid != null">
+                and sid = #{obj.sid}
+            </if>
+            <if test="obj.rid != null">
+                and rid = #{obj.rid}
+            </if>
+            <if test="obj.rymc != null and obj.rymc != ''">
+                and rymc = #{obj.rymc}
+            </if>
+            <if test="obj.creatAt != null">
+                and creat_at = #{obj.creatAt}
+            </if>
+        </trim>
+    </select>
+    <select id="getBySid" resultType="com.cardinal.tech.bzfx.bean.bo.JcSpecialRyBO">
+        select jc_ry.id jcRyId,tr.*
+        from bzfx.jc_special_ry jc_ry
+                 left join bzfx.tj_renyuanxx tr on jc_ry.rid = tr.id
+        where jc_ry.sid = #{sid,jdbcType=BIGINT}
     </select>
 
 </mapper>

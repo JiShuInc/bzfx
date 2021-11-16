@@ -30,28 +30,28 @@ public interface JcSpecialRyApi {
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " get by id")
         @GetMapping("/{id}")
-        default Response<JcSpecialRy> queryById(@PathVariable("id") Long id){
+        default Response<List<JcSpecialRyBO>> queryById(@PathVariable("id") Long id){
             return new Response(getService().queryById(id));
         }
 
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " get list")
         @GetMapping("/list")
-       default Response<List<JcSpecialRy>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit){
+       default Response<List<JcSpecialRyBO>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit){
             return new Response(getService().queryAllByLimit(offset,limit));
        }
 
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " add")
         @PostMapping("/add")
-        default Response<JcSpecialRy> insert(@RequestBody JcSpecialRy jcSpecialRy){
+        default Response<List<JcSpecialRyBO>> insert(@RequestBody JcSpecialRyForm jcSpecialRy){
             return new Response(getService().insert(jcSpecialRy));
         }
 
          @PreAuthorize("hasRole('admin')")
          @Operation(description = " update")
          @PostMapping("/update")
-        default Response<JcSpecialRy> update(@RequestBody JcSpecialRy jcSpecialRy){
+        default Response<List<JcSpecialRyBO>> update(@RequestBody JcSpecialRy jcSpecialRy){
              return new Response(getService().update(jcSpecialRy));
         }
 
@@ -72,7 +72,7 @@ public interface JcSpecialRyApi {
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " page list")
         @PostMapping("/page")
-        default Response<Page<JcSpecialRy>> page(@RequestBody PageForm<JcSpecialRy> userQueryForm) {
+        default Response<Page<JcSpecialRyBO>> page(@RequestBody PageForm<JcSpecialRy> userQueryForm) {
            return new Response(getService().page(userQueryForm));
         }
 }
