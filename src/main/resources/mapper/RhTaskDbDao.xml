@@ -9,13 +9,17 @@
         <result property="dbHost" column="db_host" jdbcType="VARCHAR"/>
         <result property="dbName" column="db_name" jdbcType="VARCHAR"/>
         <result property="dbPasswd" column="db_passwd" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+        <result property="result" column="result" jdbcType="INTEGER"/>
+        <result property="syncAt" column="sync_at" jdbcType="VARCHAR"/>
+        <result property="syncEnd" column="sync_end" jdbcType="VARCHAR"/>
         <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          id, task_id, db_host, db_name, db_passwd, creat_at
+          id, task_id, db_host, db_name, db_passwd, state, result, sync_at, sync_end, creat_at
         from bzfx.rh_task_db
         where id = #{id}
     </select>
@@ -23,7 +27,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          id, task_id, db_host, db_name, db_passwd, creat_at
+          id, task_id, db_host, db_name, db_passwd, state, result, sync_at, sync_end, creat_at
         from bzfx.rh_task_db
         limit #{offset}, #{limit}
     </select>
@@ -31,7 +35,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, task_id, db_host, db_name, db_passwd, creat_at
+          id, task_id, db_host, db_name, db_passwd, state, result, sync_at, sync_end, creat_at
         from bzfx.rh_task_db
         <where>
             <if test="id != null">
@@ -49,6 +53,18 @@
             <if test="dbPasswd != null and dbPasswd != ''">
                 and db_passwd = #{dbPasswd}
             </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+            <if test="result != null">
+                and result = #{result}
+            </if>
+            <if test="syncAt != null and syncAt != ''">
+                and sync_at = #{syncAt}
+            </if>
+            <if test="syncEnd != null and syncEnd != ''">
+                and sync_end = #{syncEnd}
+            </if>
             <if test="creatAt != null">
                 and creat_at = #{creatAt}
             </if>
@@ -57,8 +73,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into bzfx.rh_task_db(task_id, db_host, db_name, db_passwd, creat_at)
-        values (#{taskId}, #{dbHost}, #{dbName}, #{dbPasswd}, #{creatAt})
+        insert into bzfx.rh_task_db(task_id, db_host, db_name, db_passwd, state, result, sync_at, sync_end, creat_at)
+        values (#{taskId}, #{dbHost}, #{dbName}, #{dbPasswd}, #{state}, #{result}, #{syncAt}, #{syncEnd}, #{creatAt})
     </insert>
 
     <!--通过主键修改数据-->
@@ -76,6 +92,18 @@
             </if>
             <if test="dbPasswd != null and dbPasswd != ''">
                 db_passwd = #{dbPasswd},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+            <if test="result != null">
+                result = #{result},
+            </if>
+            <if test="syncAt != null and syncAt != ''">
+                sync_at = #{syncAt},
+            </if>
+            <if test="syncEnd != null and syncEnd != ''">
+                sync_end = #{syncEnd},
             </if>
             <if test="creatAt != null">
                 creat_at = #{creatAt},
@@ -100,7 +128,7 @@
     <!-- 分页查询 -->
     <select id="queryPageRhTaskDbList" resultMap="BaseResultMap">
             select
-                id, task_id, db_host, db_name, db_passwd, creat_at            
+                id, task_id, db_host, db_name, db_passwd, state, result, sync_at, sync_end, creat_at            
             from bzfx.rh_task_db
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null">
@@ -117,6 +145,18 @@
                    </if>
                                <if test="obj.dbPasswd != null and obj.dbPasswd != ''">
                         and db_passwd = #{obj.dbPasswd}
+                   </if>
+                               <if test="obj.state != null">
+                        and state = #{obj.state}
+                   </if>
+                               <if test="obj.result != null">
+                        and result = #{obj.result}
+                   </if>
+                               <if test="obj.syncAt != null and obj.syncAt != ''">
+                        and sync_at = #{obj.syncAt}
+                   </if>
+                               <if test="obj.syncEnd != null and obj.syncEnd != ''">
+                        and sync_end = #{obj.syncEnd}
                    </if>
                                <if test="obj.creatAt != null">
                         and creat_at = #{obj.creatAt}

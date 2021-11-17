@@ -8,11 +8,11 @@ import lombok.Data;
 /**
  * 任务数据-数据库(RhTaskDb)实体类
  *
- * @author cadinal.tech
- * @since 2021-11-13 20:00:37
+ * @author makejava
+ * @since 2021-11-17 19:31:39
  */
 public class RhTaskDb implements Serializable {
-    private static final long serialVersionUID = 674040052150249967L;
+    private static final long serialVersionUID = 592224870919213884L;
     /**
     * id
     */
@@ -33,6 +33,22 @@ public class RhTaskDb implements Serializable {
     * 密码
     */
     private String dbPasswd;
+    /**
+    * 同步状态0-未同步，1-同步中，2-已同步
+    */
+    private Integer state;
+    /**
+    * 同步结果0-成功，1-错误
+    */
+    private Integer result;
+    /**
+    * 同步开始时间
+    */
+    private String syncAt;
+    /**
+    * 同步结束时间
+    */
+    private String syncEnd;
     /**
     * 数据创建时间
     */

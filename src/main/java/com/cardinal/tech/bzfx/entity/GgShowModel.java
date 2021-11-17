@@ -9,10 +9,10 @@ import lombok.Data;
  * 可视化模型(GgShowModel)实体类
  *
  * @author makejava
- * @since 2021-11-15 15:00:47
+ * @since 2021-11-17 19:31:16
  */
 public class GgShowModel implements Serializable {
-    private static final long serialVersionUID = -50772161873905505L;
+    private static final long serialVersionUID = 832164368801659313L;
     /**
     * id
     */
@@ -41,6 +41,10 @@ public class GgShowModel implements Serializable {
     * 所属业务模块0-未知，1-融合展示，2-保障现状分析
     */
     private Integer module;
+    /**
+    * 所属任务
+    */
+    private Integer taskId;
     /**
     * 分类[0-未分类，1-基本，2-财务，3-被装，4-医疗，5-营房]
     */

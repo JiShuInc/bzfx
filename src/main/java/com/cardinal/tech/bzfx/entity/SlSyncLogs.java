@@ -8,15 +8,19 @@ import lombok.Data;
 /**
  * 数据同步日志(SlSyncLogs)实体类
  *
- * @author cadinal.tech
- * @since 2021-11-13 20:00:37
+ * @author makejava
+ * @since 2021-11-17 19:31:56
  */
 public class SlSyncLogs implements Serializable {
-    private static final long serialVersionUID = 433278840465484753L;
+    private static final long serialVersionUID = 302300437664835384L;
     /**
     * id
     */
     private Long id;
+    /**
+    * 数据库记录id
+    */
+    private Integer taskDbId;
     /**
     * 主机
     */
@@ -29,10 +33,6 @@ public class SlSyncLogs implements Serializable {
     * 同步结束时间
     */
     private Date syncEnd;
-    /**
-    * 同步状态0-未同步，1-同步中，2-已同步
-    */
-    private Integer state;
     /**
     * 同步结果0-成功，1-错误
     */
