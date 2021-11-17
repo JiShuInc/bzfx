@@ -36,7 +36,7 @@ public interface BackUserApi extends BaseApi {
     @PreAuthorize("hasRole('admin')")
     @Operation(description = " add user")
     @PostMapping("/user-add")
-    default Response<Void> addUser(@RequestParam(required = false) @RequestBody @Valid UserAddForm addForm) {
+    default Response<Void> addUser(@RequestBody @Valid UserAddForm addForm) {
         return getUserService().addUser(addForm);
     }
 
