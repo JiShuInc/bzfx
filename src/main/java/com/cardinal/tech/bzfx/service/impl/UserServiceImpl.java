@@ -15,6 +15,7 @@ import com.cardinal.tech.bzfx.exceptions.BaseErrException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +40,7 @@ public class UserServiceImpl implements UserService {
         if (user == null || !user.getPassword().equals(new UserPasswordEncoder().encode(signIn.getPassword()))) {
             throw new BaseErrException(UserErrEnum.USERNAME_OR_PASSWORD_ERROR, username);
         }
+
         return new Response<>(jwtTokenUtil.getToken(user));
     }
 
@@ -65,7 +67,7 @@ public class UserServiceImpl implements UserService {
         }
         user = ReflectUtil.toBO(addForm, User.class);
         user.setPassword(userPasswordEncoder.encode(addForm.getPassword()));
-        user.setRole_id(RoleEnum.ADMIN.id());
+        user.setRole_id(RoleEnum.ACCESS_API.id());
         user.setC_time(DateUtil.now());
         userMapper.insertSelective(user);
         return new Response<>();
@@ -99,6 +101,20 @@ public class UserServiceImpl implements UserService {
             throw new BaseErrException(UserErrEnum.ADMIN_NOT_DELETE, "不能删除超级管理员");
         }
         userMapper.deleteByPrimaryKey(id);
+        return new Response<>();
+    }
+
+    @Transactional
+    @Override
+    public Response<Void> addRole(RoleAddForm addForm) {
+        final var id = addForm.getUserId();
+        if (id == 1) {
+            throw new BaseErrException(UserErrEnum.ADMIN_NOT_UPDATE, "不能修改超级管理员权限");
+        }
+        final var user = userMapper.selectByPrimaryKey(id);
+        user.setRole_id(addForm.getRoleId());
+        user.setM_time(now());
+        userMapper.updateByPrimaryKeySelective(user);
         return new Response<>();
     }
 }

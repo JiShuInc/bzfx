@@ -93,7 +93,7 @@ public class JwtTokenUtil {
      */
     public TokenBO getToken(User user) {
         var token = generateToken(user);
-        return TokenBO.builder().token(token).expireTime(getExpirationDateFromToken(token)).build();
+        return TokenBO.builder().token(token).role(user.getRole_id()).expireTime(getExpirationDateFromToken(token)).build();
     }
 
     // 登陆校验成功后调用这个接口生成token下发

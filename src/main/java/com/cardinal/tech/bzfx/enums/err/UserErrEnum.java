@@ -14,6 +14,7 @@ public enum UserErrEnum implements ErrEnumInterface {
     USER_OLDPASS_ERR(205, "原密码错误"),
     USER_EXIST_ERR(206, "用户已经存在"),
     ADMIN_NOT_DELETE(207, "超级管理员不能被删除"),
+    ADMIN_NOT_UPDATE(208, "超级管理员权限不能修改"),
     ;
 
 

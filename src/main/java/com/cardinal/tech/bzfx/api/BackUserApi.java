@@ -19,14 +19,14 @@ public interface BackUserApi extends BaseApi {
         return getUserService().signIn(signIn);
     }
 
-    @PreAuthorize("hasAnyRole('admin','guest')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " reset password")
     @PostMapping("/password-reset")
     default Response<Void> resetPassword(@RequestBody @Valid ResetPasswordForm resetForm) {
         return getUserService().resetPassword(resetForm, getUserId());
     }
 
-    @PreAuthorize("hasAnyRole('admin','guest')")
+    @PreAuthorize("hasAnyRole('admin')")
     @Operation(description = " reset user's  password")
     @PostMapping("/user-password-reset")
     default Response<Void> resetUserPassword(@RequestBody @Valid ResetUserPasswordForm resetForm) {
@@ -38,6 +38,12 @@ public interface BackUserApi extends BaseApi {
     @PostMapping("/user-add")
     default Response<Void> addUser(@RequestBody @Valid UserAddForm addForm) {
         return getUserService().addUser(addForm);
+    }
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = " add role")
+    @PostMapping("/role-add")
+    default Response<Void> addRole(@RequestBody @Valid RoleAddForm addForm) {
+        return getUserService().addRole(addForm);
     }
 
     @PreAuthorize("hasRole('admin')")

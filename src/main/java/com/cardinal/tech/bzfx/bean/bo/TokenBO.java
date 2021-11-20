@@ -10,4 +10,5 @@ import java.util.Date;
 public class TokenBO {
     private String token;
     private Date expireTime;
+    private Integer role;
 }

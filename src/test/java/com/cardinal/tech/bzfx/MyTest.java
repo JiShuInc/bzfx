@@ -1,8 +1,11 @@
 package com.cardinal.tech.bzfx;
 
 import com.alibaba.druid.filter.config.ConfigTools;
+import com.cardinal.tech.bzfx.enums.biz.RoleEnum;
 import com.cardinal.tech.bzfx.util.UserPasswordEncoder;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 public class MyTest {
     @Test
@@ -18,4 +21,9 @@ public class MyTest {
         System.out.println(encode);
     }
 
+    @Test
+    public void testRoleEnum(){
+        final var roles = RoleEnum.getRolesById(12345);
+        roles.forEach(r-> System.out.println(r.code()));
+    }
 }

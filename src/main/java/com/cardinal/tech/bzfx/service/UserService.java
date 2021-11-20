@@ -25,4 +25,6 @@ public interface UserService {
     Response<Void> resetUserPassword(ResetUserPasswordForm resetForm);
 
     Response<Void> deleteUser(Integer id);
+
+    Response<Void> addRole(RoleAddForm addForm);
 }

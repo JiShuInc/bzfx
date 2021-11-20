@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Primary
 @Service
@@ -35,10 +37,11 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     private UserDetails create(User user) {
         JwtUserAO jwtUser = JwtUserAO.builder().user(user).build();
-        var role = RoleEnum.getById(user.getRole_id());
+        var roles = RoleEnum.getRolesById(user.getRole_id());
         // 选取菜单permission作为权限标识
         //        roleCodeList.addAll(user.getPermissionList().stream().filter(Strings::isEmpty).collect(Collectors.toSet()));
-        Collection<? extends GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(role.code());
+        final List<String> collect = roles.parallelStream().map(r -> r.code()).collect(Collectors.toList());
+        Collection<? extends GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(collect.toArray(new String[]{}));
         jwtUser.setAuthorities(authorities);
         return jwtUser;
 
