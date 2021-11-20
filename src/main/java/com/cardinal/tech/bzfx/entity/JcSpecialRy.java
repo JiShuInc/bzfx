@@ -8,11 +8,11 @@ import lombok.Data;
 /**
  * 专项任务人员(JcSpecialRy)实体类
  *
- * @author cadinal.tech
- * @since 2021-11-14 14:17:25
+ * @author makejava
+ * @since 2021-11-20 16:56:41
  */
 public class JcSpecialRy implements Serializable {
-    private static final long serialVersionUID = -79951730688746247L;
+    private static final long serialVersionUID = 312858772792222441L;
     /**
     * id
     */
@@ -24,11 +24,7 @@ public class JcSpecialRy implements Serializable {
     /**
     * 人员id
     */
-    private Long rid;
-    /**
-    * 人员名称
-    */
-    private String rymc;
+    private String rid;
     /**
     * 数据创建时间
     */
