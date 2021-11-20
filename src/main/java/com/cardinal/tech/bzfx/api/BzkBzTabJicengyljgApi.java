@@ -2,9 +2,11 @@ package com.cardinal.tech.bzfx.api;
 
 import com.cardinal.tech.bzfx.bean.bo.*;
 import com.cardinal.tech.bzfx.entity.BzkBzTabJicengyljg;
+import com.cardinal.tech.bzfx.entity.BzkSlgxBzBzdaxx;
 import com.cardinal.tech.bzfx.service.BzkBzTabJicengyljgService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -74,5 +76,12 @@ public interface BzkBzTabJicengyljgApi {
         @PostMapping("/page")
         default Response<Page<BzkBzTabJicengyljg>> page(@RequestBody PageForm<BzkBzTabJicengyljg> userQueryForm) {
            return new Response(getService().page(userQueryForm));
+        }
+
+        @PreAuthorize("hasRole('access_api')")
+        @Operation(description = " page list")
+        @PostMapping("/pageList")
+        default Response<Page<BzkBzTabJicengyljg>> pageList(@RequestBody PageForm<BzkBzTabJicengyljg> userQueryForm) {
+            return new Response(getService().page(userQueryForm));
         }
 }
