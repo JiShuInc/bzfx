@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.BzkSlgxBzBzffjlDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.BzkSlgxBzBzffjl">
+        <!--@Table BZK_SLGX_BZ_BZFFJL-->
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="fafangsj" column="FAFANGSJ" jdbcType="VARCHAR"/>
+        <result property="xingming" column="XINGMING" jdbcType="VARCHAR"/>
+        <result property="junrenbzh" column="JUNRENBZH" jdbcType="VARCHAR"/>
+        <result property="pinzhongm" column="PINZHONGM" jdbcType="VARCHAR"/>
+        <result property="zhuozhuanghxm" column="ZHUOZHUANGHXM" jdbcType="VARCHAR"/>
+        <result property="jiliangdw" column="JILIANGDW" jdbcType="VARCHAR"/>
+        <result property="shuliang" column="SHULIANG" jdbcType="NUMERIC"/>
+        <result property="qisuannd" column="QISUANND" jdbcType="VARCHAR"/>
+        <result property="shujuszdw" column="SHUJUSZDW" jdbcType="VARCHAR"/>
+        <result property="shangbaobz" column="SHANGBAOBZ" jdbcType="NUMERIC"/>
+        <result property="danweidm" column="DANWEIDM" jdbcType="VARCHAR"/>
+        <result property="daorusj" column="DAORUSJ" jdbcType="VARCHAR"/>
+        <result property="pinzhong" column="PINZHONG" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          ID, FAFANGSJ, XINGMING, JUNRENBZH, PINZHONGM, ZHUOZHUANGHXM, JILIANGDW, SHULIANG, QISUANND, SHUJUSZDW, SHANGBAOBZ, DANWEIDM, DAORUSJ, PINZHONG
+        from bzfx.BZK_SLGX_BZ_BZFFJL
+        where ID = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          ID, FAFANGSJ, XINGMING, JUNRENBZH, PINZHONGM, ZHUOZHUANGHXM, JILIANGDW, SHULIANG, QISUANND, SHUJUSZDW, SHANGBAOBZ, DANWEIDM, DAORUSJ, PINZHONG
+        from bzfx.BZK_SLGX_BZ_BZFFJL
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          ID, FAFANGSJ, XINGMING, JUNRENBZH, PINZHONGM, ZHUOZHUANGHXM, JILIANGDW, SHULIANG, QISUANND, SHUJUSZDW, SHANGBAOBZ, DANWEIDM, DAORUSJ, PINZHONG
+        from bzfx.BZK_SLGX_BZ_BZFFJL
+        <where>
+            <if test="id != null and id != ''">
+                and ID = #{id}
+            </if>
+            <if test="fafangsj != null and fafangsj != ''">
+                and FAFANGSJ = #{fafangsj}
+            </if>
+            <if test="xingming != null and xingming != ''">
+                and XINGMING = #{xingming}
+            </if>
+            <if test="junrenbzh != null and junrenbzh != ''">
+                and JUNRENBZH = #{junrenbzh}
+            </if>
+            <if test="pinzhongm != null and pinzhongm != ''">
+                and PINZHONGM = #{pinzhongm}
+            </if>
+            <if test="zhuozhuanghxm != null and zhuozhuanghxm != ''">
+                and ZHUOZHUANGHXM = #{zhuozhuanghxm}
+            </if>
+            <if test="jiliangdw != null and jiliangdw != ''">
+                and JILIANGDW = #{jiliangdw}
+            </if>
+            <if test="shuliang != null">
+                and SHULIANG = #{shuliang}
+            </if>
+            <if test="qisuannd != null and qisuannd != ''">
+                and QISUANND = #{qisuannd}
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                and SHUJUSZDW = #{shujuszdw}
+            </if>
+            <if test="shangbaobz != null">
+                and SHANGBAOBZ = #{shangbaobz}
+            </if>
+            <if test="danweidm != null and danweidm != ''">
+                and DANWEIDM = #{danweidm}
+            </if>
+            <if test="daorusj != null and daorusj != ''">
+                and DAORUSJ = #{daorusj}
+            </if>
+            <if test="pinzhong != null and pinzhong != ''">
+                and PINZHONG = #{pinzhong}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.BZK_SLGX_BZ_BZFFJL(FAFANGSJ, XINGMING, JUNRENBZH, PINZHONGM, ZHUOZHUANGHXM, JILIANGDW, SHULIANG, QISUANND, SHUJUSZDW, SHANGBAOBZ, DANWEIDM, DAORUSJ, PINZHONG)
+        values (#{fafangsj}, #{xingming}, #{junrenbzh}, #{pinzhongm}, #{zhuozhuanghxm}, #{jiliangdw}, #{shuliang}, #{qisuannd}, #{shujuszdw}, #{shangbaobz}, #{danweidm}, #{daorusj}, #{pinzhong})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.BZK_SLGX_BZ_BZFFJL
+        <set>
+            <if test="fafangsj != null and fafangsj != ''">
+                FAFANGSJ = #{fafangsj},
+            </if>
+            <if test="xingming != null and xingming != ''">
+                XINGMING = #{xingming},
+            </if>
+            <if test="junrenbzh != null and junrenbzh != ''">
+                JUNRENBZH = #{junrenbzh},
+            </if>
+            <if test="pinzhongm != null and pinzhongm != ''">
+                PINZHONGM = #{pinzhongm},
+            </if>
+            <if test="zhuozhuanghxm != null and zhuozhuanghxm != ''">
+                ZHUOZHUANGHXM = #{zhuozhuanghxm},
+            </if>
+            <if test="jiliangdw != null and jiliangdw != ''">
+                JILIANGDW = #{jiliangdw},
+            </if>
+            <if test="shuliang != null">
+                SHULIANG = #{shuliang},
+            </if>
+            <if test="qisuannd != null and qisuannd != ''">
+                QISUANND = #{qisuannd},
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                SHUJUSZDW = #{shujuszdw},
+            </if>
+            <if test="shangbaobz != null">
+                SHANGBAOBZ = #{shangbaobz},
+            </if>
+            <if test="danweidm != null and danweidm != ''">
+                DANWEIDM = #{danweidm},
+            </if>
+            <if test="daorusj != null and daorusj != ''">
+                DAORUSJ = #{daorusj},
+            </if>
+            <if test="pinzhong != null and pinzhong != ''">
+                PINZHONG = #{pinzhong},
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.BZK_SLGX_BZ_BZFFJL where ID = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.BZK_SLGX_BZ_BZFFJL
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageBzkSlgxBzBzffjlList" resultMap="BaseResultMap">
+            select
+                ID, FAFANGSJ, XINGMING, JUNRENBZH, PINZHONGM, ZHUOZHUANGHXM, JILIANGDW, SHULIANG, QISUANND, SHUJUSZDW, SHANGBAOBZ, DANWEIDM, DAORUSJ, PINZHONG            
+            from bzfx.BZK_SLGX_BZ_BZFFJL
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null and obj.id != ''">
+                        and ID = #{obj.id}
+                   </if>
+                               <if test="obj.fafangsj != null and obj.fafangsj != ''">
+                        and FAFANGSJ = #{obj.fafangsj}
+                   </if>
+                               <if test="obj.xingming != null and obj.xingming != ''">
+                        and XINGMING = #{obj.xingming}
+                   </if>
+                               <if test="obj.junrenbzh != null and obj.junrenbzh != ''">
+                        and JUNRENBZH = #{obj.junrenbzh}
+                   </if>
+                               <if test="obj.pinzhongm != null and obj.pinzhongm != ''">
+                        and PINZHONGM = #{obj.pinzhongm}
+                   </if>
+                               <if test="obj.zhuozhuanghxm != null and obj.zhuozhuanghxm != ''">
+                        and ZHUOZHUANGHXM = #{obj.zhuozhuanghxm}
+                   </if>
+                               <if test="obj.jiliangdw != null and obj.jiliangdw != ''">
+                        and JILIANGDW = #{obj.jiliangdw}
+                   </if>
+                               <if test="obj.shuliang != null">
+                        and SHULIANG = #{obj.shuliang}
+                   </if>
+                               <if test="obj.qisuannd != null and obj.qisuannd != ''">
+                        and QISUANND = #{obj.qisuannd}
+                   </if>
+                               <if test="obj.shujuszdw != null and obj.shujuszdw != ''">
+                        and SHUJUSZDW = #{obj.shujuszdw}
+                   </if>
+                               <if test="obj.shangbaobz != null">
+                        and SHANGBAOBZ = #{obj.shangbaobz}
+                   </if>
+                               <if test="obj.danweidm != null and obj.danweidm != ''">
+                        and DANWEIDM = #{obj.danweidm}
+                   </if>
+                               <if test="obj.daorusj != null and obj.daorusj != ''">
+                        and DAORUSJ = #{obj.daorusj}
+                   </if>
+                               <if test="obj.pinzhong != null and obj.pinzhong != ''">
+                        and PINZHONG = #{obj.pinzhong}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

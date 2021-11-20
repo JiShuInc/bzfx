@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.BzkSlgxCwCwbzsjDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.BzkSlgxCwCwbzsj">
+        <!--@Table BZK_SLGX_CW_CWBZSJ-->
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="fafangsj" column="FAFANGSJ" jdbcType="TIMESTAMP"/>
+        <result property="xingming" column="XINGMING" jdbcType="VARCHAR"/>
+        <result property="junrenbzh" column="JUNRENBZH" jdbcType="VARCHAR"/>
+        <result property="zhiwugz" column="ZHIWUGZ" jdbcType="NUMERIC"/>
+        <result property="junxiangz" column="JUNXIANGZ" jdbcType="NUMERIC"/>
+        <result property="junlinggz" column="JUNLINGGZ" jdbcType="NUMERIC"/>
+        <result property="zhiwubt" column="ZHIWUBT" jdbcType="NUMERIC"/>
+        <result property="qitagz" column="QITAGZ" jdbcType="NUMERIC"/>
+        <result property="yingfagz" column="YINGFAGZ" jdbcType="NUMERIC"/>
+        <result property="shifagz" column="SHIFAGZ" jdbcType="NUMERIC"/>
+        <result property="shangwangbxye" column="SHANGWANGBXYE" jdbcType="NUMERIC"/>
+        <result property="tuiyiylbxye" column="TUIYIYLBXYE" jdbcType="NUMERIC"/>
+        <result property="zhufangbtye" column="ZHUFANGBTYE" jdbcType="NUMERIC"/>
+        <result property="zhufanggjjye" column="ZHUFANGGJJYE" jdbcType="NUMERIC"/>
+        <result property="shujuszdw" column="SHUJUSZDW" jdbcType="VARCHAR"/>
+        <result property="shangbaobz" column="SHANGBAOBZ" jdbcType="NUMERIC"/>
+        <result property="danweidm" column="DANWEIDM" jdbcType="VARCHAR"/>
+        <result property="daorusj" column="DAORUSJ" jdbcType="VARCHAR"/>
+        <result property="gongzuojt" column="GONGZUOJT" jdbcType="NUMERIC"/>
+        <result property="shenghuojt" column="SHENGHUOJT" jdbcType="NUMERIC"/>
+        <result property="kouyb" column="KOUYB" jdbcType="NUMERIC"/>
+        <result property="kousb" column="KOUSB" jdbcType="NUMERIC"/>
+        <result property="qitakf" column="QITAKF" jdbcType="NUMERIC"/>
+        <result property="dyzhufangbt" column="DYZHUFANGBT" jdbcType="NUMERIC"/>
+        <result property="dyzhufanggjj" column="DYZHUFANGGJJ" jdbcType="NUMERIC"/>
+        <result property="koufaxj" column="KOUFAXJ" jdbcType="NUMERIC"/>
+        <result property="huobibcljye" column="HUOBIBCLJYE" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          ID, FAFANGSJ, XINGMING, JUNRENBZH, ZHIWUGZ, JUNXIANGZ, JUNLINGGZ, ZHIWUBT, QITAGZ, YINGFAGZ, SHIFAGZ, SHANGWANGBXYE, TUIYIYLBXYE, ZHUFANGBTYE, ZHUFANGGJJYE, SHUJUSZDW, SHANGBAOBZ, DANWEIDM, DAORUSJ, GONGZUOJT, SHENGHUOJT, KOUYB, KOUSB, QITAKF, DYZHUFANGBT, DYZHUFANGGJJ, KOUFAXJ, HUOBIBCLJYE
+        from bzfx.BZK_SLGX_CW_CWBZSJ
+        where ID = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          ID, FAFANGSJ, XINGMING, JUNRENBZH, ZHIWUGZ, JUNXIANGZ, JUNLINGGZ, ZHIWUBT, QITAGZ, YINGFAGZ, SHIFAGZ, SHANGWANGBXYE, TUIYIYLBXYE, ZHUFANGBTYE, ZHUFANGGJJYE, SHUJUSZDW, SHANGBAOBZ, DANWEIDM, DAORUSJ, GONGZUOJT, SHENGHUOJT, KOUYB, KOUSB, QITAKF, DYZHUFANGBT, DYZHUFANGGJJ, KOUFAXJ, HUOBIBCLJYE
+        from bzfx.BZK_SLGX_CW_CWBZSJ
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          ID, FAFANGSJ, XINGMING, JUNRENBZH, ZHIWUGZ, JUNXIANGZ, JUNLINGGZ, ZHIWUBT, QITAGZ, YINGFAGZ, SHIFAGZ, SHANGWANGBXYE, TUIYIYLBXYE, ZHUFANGBTYE, ZHUFANGGJJYE, SHUJUSZDW, SHANGBAOBZ, DANWEIDM, DAORUSJ, GONGZUOJT, SHENGHUOJT, KOUYB, KOUSB, QITAKF, DYZHUFANGBT, DYZHUFANGGJJ, KOUFAXJ, HUOBIBCLJYE
+        from bzfx.BZK_SLGX_CW_CWBZSJ
+        <where>
+            <if test="id != null and id != ''">
+                and ID = #{id}
+            </if>
+            <if test="fafangsj != null">
+                and FAFANGSJ = #{fafangsj}
+            </if>
+            <if test="xingming != null and xingming != ''">
+                and XINGMING = #{xingming}
+            </if>
+            <if test="junrenbzh != null and junrenbzh != ''">
+                and JUNRENBZH = #{junrenbzh}
+            </if>
+            <if test="zhiwugz != null">
+                and ZHIWUGZ = #{zhiwugz}
+            </if>
+            <if test="junxiangz != null">
+                and JUNXIANGZ = #{junxiangz}
+            </if>
+            <if test="junlinggz != null">
+                and JUNLINGGZ = #{junlinggz}
+            </if>
+            <if test="zhiwubt != null">
+                and ZHIWUBT = #{zhiwubt}
+            </if>
+            <if test="qitagz != null">
+                and QITAGZ = #{qitagz}
+            </if>
+            <if test="yingfagz != null">
+                and YINGFAGZ = #{yingfagz}
+            </if>
+            <if test="shifagz != null">
+                and SHIFAGZ = #{shifagz}
+            </if>
+            <if test="shangwangbxye != null">
+                and SHANGWANGBXYE = #{shangwangbxye}
+            </if>
+            <if test="tuiyiylbxye != null">
+                and TUIYIYLBXYE = #{tuiyiylbxye}
+            </if>
+            <if test="zhufangbtye != null">
+                and ZHUFANGBTYE = #{zhufangbtye}
+            </if>
+            <if test="zhufanggjjye != null">
+                and ZHUFANGGJJYE = #{zhufanggjjye}
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                and SHUJUSZDW = #{shujuszdw}
+            </if>
+            <if test="shangbaobz != null">
+                and SHANGBAOBZ = #{shangbaobz}
+            </if>
+            <if test="danweidm != null and danweidm != ''">
+                and DANWEIDM = #{danweidm}
+            </if>
+            <if test="daorusj != null and daorusj != ''">
+                and DAORUSJ = #{daorusj}
+            </if>
+            <if test="gongzuojt != null">
+                and GONGZUOJT = #{gongzuojt}
+            </if>
+            <if test="shenghuojt != null">
+                and SHENGHUOJT = #{shenghuojt}
+            </if>
+            <if test="kouyb != null">
+                and KOUYB = #{kouyb}
+            </if>
+            <if test="kousb != null">
+                and KOUSB = #{kousb}
+            </if>
+            <if test="qitakf != null">
+                and QITAKF = #{qitakf}
+            </if>
+            <if test="dyzhufangbt != null">
+                and DYZHUFANGBT = #{dyzhufangbt}
+            </if>
+            <if test="dyzhufanggjj != null">
+                and DYZHUFANGGJJ = #{dyzhufanggjj}
+            </if>
+            <if test="koufaxj != null">
+                and KOUFAXJ = #{koufaxj}
+            </if>
+            <if test="huobibcljye != null">
+                and HUOBIBCLJYE = #{huobibcljye}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.BZK_SLGX_CW_CWBZSJ(FAFANGSJ, XINGMING, JUNRENBZH, ZHIWUGZ, JUNXIANGZ, JUNLINGGZ, ZHIWUBT, QITAGZ, YINGFAGZ, SHIFAGZ, SHANGWANGBXYE, TUIYIYLBXYE, ZHUFANGBTYE, ZHUFANGGJJYE, SHUJUSZDW, SHANGBAOBZ, DANWEIDM, DAORUSJ, GONGZUOJT, SHENGHUOJT, KOUYB, KOUSB, QITAKF, DYZHUFANGBT, DYZHUFANGGJJ, KOUFAXJ, HUOBIBCLJYE)
+        values (#{fafangsj}, #{xingming}, #{junrenbzh}, #{zhiwugz}, #{junxiangz}, #{junlinggz}, #{zhiwubt}, #{qitagz}, #{yingfagz}, #{shifagz}, #{shangwangbxye}, #{tuiyiylbxye}, #{zhufangbtye}, #{zhufanggjjye}, #{shujuszdw}, #{shangbaobz}, #{danweidm}, #{daorusj}, #{gongzuojt}, #{shenghuojt}, #{kouyb}, #{kousb}, #{qitakf}, #{dyzhufangbt}, #{dyzhufanggjj}, #{koufaxj}, #{huobibcljye})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.BZK_SLGX_CW_CWBZSJ
+        <set>
+            <if test="fafangsj != null">
+                FAFANGSJ = #{fafangsj},
+            </if>
+            <if test="xingming != null and xingming != ''">
+                XINGMING = #{xingming},
+            </if>
+            <if test="junrenbzh != null and junrenbzh != ''">
+                JUNRENBZH = #{junrenbzh},
+            </if>
+            <if test="zhiwugz != null">
+                ZHIWUGZ = #{zhiwugz},
+            </if>
+            <if test="junxiangz != null">
+                JUNXIANGZ = #{junxiangz},
+            </if>
+            <if test="junlinggz != null">
+                JUNLINGGZ = #{junlinggz},
+            </if>
+            <if test="zhiwubt != null">
+                ZHIWUBT = #{zhiwubt},
+            </if>
+            <if test="qitagz != null">
+                QITAGZ = #{qitagz},
+            </if>
+            <if test="yingfagz != null">
+                YINGFAGZ = #{yingfagz},
+            </if>
+            <if test="shifagz != null">
+                SHIFAGZ = #{shifagz},
+            </if>
+            <if test="shangwangbxye != null">
+                SHANGWANGBXYE = #{shangwangbxye},
+            </if>
+            <if test="tuiyiylbxye != null">
+                TUIYIYLBXYE = #{tuiyiylbxye},
+            </if>
+            <if test="zhufangbtye != null">
+                ZHUFANGBTYE = #{zhufangbtye},
+            </if>
+            <if test="zhufanggjjye != null">
+                ZHUFANGGJJYE = #{zhufanggjjye},
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                SHUJUSZDW = #{shujuszdw},
+            </if>
+            <if test="shangbaobz != null">
+                SHANGBAOBZ = #{shangbaobz},
+            </if>
+            <if test="danweidm != null and danweidm != ''">
+                DANWEIDM = #{danweidm},
+            </if>
+            <if test="daorusj != null and daorusj != ''">
+                DAORUSJ = #{daorusj},
+            </if>
+            <if test="gongzuojt != null">
+                GONGZUOJT = #{gongzuojt},
+            </if>
+            <if test="shenghuojt != null">
+                SHENGHUOJT = #{shenghuojt},
+            </if>
+            <if test="kouyb != null">
+                KOUYB = #{kouyb},
+            </if>
+            <if test="kousb != null">
+                KOUSB = #{kousb},
+            </if>
+            <if test="qitakf != null">
+                QITAKF = #{qitakf},
+            </if>
+            <if test="dyzhufangbt != null">
+                DYZHUFANGBT = #{dyzhufangbt},
+            </if>
+            <if test="dyzhufanggjj != null">
+                DYZHUFANGGJJ = #{dyzhufanggjj},
+            </if>
+            <if test="koufaxj != null">
+                KOUFAXJ = #{koufaxj},
+            </if>
+            <if test="huobibcljye != null">
+                HUOBIBCLJYE = #{huobibcljye},
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.BZK_SLGX_CW_CWBZSJ where ID = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.BZK_SLGX_CW_CWBZSJ
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageBzkSlgxCwCwbzsjList" resultMap="BaseResultMap">
+            select
+                ID, FAFANGSJ, XINGMING, JUNRENBZH, ZHIWUGZ, JUNXIANGZ, JUNLINGGZ, ZHIWUBT, QITAGZ, YINGFAGZ, SHIFAGZ, SHANGWANGBXYE, TUIYIYLBXYE, ZHUFANGBTYE, ZHUFANGGJJYE, SHUJUSZDW, SHANGBAOBZ, DANWEIDM, DAORUSJ, GONGZUOJT, SHENGHUOJT, KOUYB, KOUSB, QITAKF, DYZHUFANGBT, DYZHUFANGGJJ, KOUFAXJ, HUOBIBCLJYE            
+            from bzfx.BZK_SLGX_CW_CWBZSJ
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null and obj.id != ''">
+                        and ID = #{obj.id}
+                   </if>
+                               <if test="obj.fafangsj != null">
+                        and FAFANGSJ = #{obj.fafangsj}
+                   </if>
+                               <if test="obj.xingming != null and obj.xingming != ''">
+                        and XINGMING = #{obj.xingming}
+                   </if>
+                               <if test="obj.junrenbzh != null and obj.junrenbzh != ''">
+                        and JUNRENBZH = #{obj.junrenbzh}
+                   </if>
+                               <if test="obj.zhiwugz != null">
+                        and ZHIWUGZ = #{obj.zhiwugz}
+                   </if>
+                               <if test="obj.junxiangz != null">
+                        and JUNXIANGZ = #{obj.junxiangz}
+                   </if>
+                               <if test="obj.junlinggz != null">
+                        and JUNLINGGZ = #{obj.junlinggz}
+                   </if>
+                               <if test="obj.zhiwubt != null">
+                        and ZHIWUBT = #{obj.zhiwubt}
+                   </if>
+                               <if test="obj.qitagz != null">
+                        and QITAGZ = #{obj.qitagz}
+                   </if>
+                               <if test="obj.yingfagz != null">
+                        and YINGFAGZ = #{obj.yingfagz}
+                   </if>
+                               <if test="obj.shifagz != null">
+                        and SHIFAGZ = #{obj.shifagz}
+                   </if>
+                               <if test="obj.shangwangbxye != null">
+                        and SHANGWANGBXYE = #{obj.shangwangbxye}
+                   </if>
+                               <if test="obj.tuiyiylbxye != null">
+                        and TUIYIYLBXYE = #{obj.tuiyiylbxye}
+                   </if>
+                               <if test="obj.zhufangbtye != null">
+                        and ZHUFANGBTYE = #{obj.zhufangbtye}
+                   </if>
+                               <if test="obj.zhufanggjjye != null">
+                        and ZHUFANGGJJYE = #{obj.zhufanggjjye}
+                   </if>
+                               <if test="obj.shujuszdw != null and obj.shujuszdw != ''">
+                        and SHUJUSZDW = #{obj.shujuszdw}
+                   </if>
+                               <if test="obj.shangbaobz != null">
+                        and SHANGBAOBZ = #{obj.shangbaobz}
+                   </if>
+                               <if test="obj.danweidm != null and obj.danweidm != ''">
+                        and DANWEIDM = #{obj.danweidm}
+                   </if>
+                               <if test="obj.daorusj != null and obj.daorusj != ''">
+                        and DAORUSJ = #{obj.daorusj}
+                   </if>
+                               <if test="obj.gongzuojt != null">
+                        and GONGZUOJT = #{obj.gongzuojt}
+                   </if>
+                               <if test="obj.shenghuojt != null">
+                        and SHENGHUOJT = #{obj.shenghuojt}
+                   </if>
+                               <if test="obj.kouyb != null">
+                        and KOUYB = #{obj.kouyb}
+                   </if>
+                               <if test="obj.kousb != null">
+                        and KOUSB = #{obj.kousb}
+                   </if>
+                               <if test="obj.qitakf != null">
+                        and QITAKF = #{obj.qitakf}
+                   </if>
+                               <if test="obj.dyzhufangbt != null">
+                        and DYZHUFANGBT = #{obj.dyzhufangbt}
+                   </if>
+                               <if test="obj.dyzhufanggjj != null">
+                        and DYZHUFANGGJJ = #{obj.dyzhufanggjj}
+                   </if>
+                               <if test="obj.koufaxj != null">
+                        and KOUFAXJ = #{obj.koufaxj}
+                   </if>
+                               <if test="obj.huobibcljye != null">
+                        and HUOBIBCLJYE = #{obj.huobibcljye}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>
