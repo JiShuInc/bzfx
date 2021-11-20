@@ -8,11 +8,11 @@ import lombok.Data;
 /**
  * 专项任务(JcSpecial)实体类
  *
- * @author cadinal.tech
- * @since 2021-11-13 20:00:37
+ * @author makejava
+ * @since 2021-11-20 18:42:52
  */
 public class JcSpecial implements Serializable {
-    private static final long serialVersionUID = -85774344340371428L;
+    private static final long serialVersionUID = 529801541387953123L;
     /**
     * id
     */

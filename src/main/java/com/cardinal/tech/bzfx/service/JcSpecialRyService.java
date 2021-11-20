@@ -1,17 +1,17 @@
 package com.cardinal.tech.bzfx.service;
 
 import com.cardinal.tech.bzfx.bean.bo.*;
-import com.cardinal.tech.bzfx.entity.JcSpecial;
+import com.cardinal.tech.bzfx.entity.JcSpecialRy;
 import java.util.List;
 import java.util.Map;
 
 /**
- * 专项任务(JcSpecial)表服务接口
+ * 专项任务人员(JcSpecialRy)表服务接口
  *
  * @author makejava
  * @since 2021-11-20 18:42:52
  */
-public interface JcSpecialService {
+public interface JcSpecialRyService {
 
         /**
          * 通过ID查询单条数据
@@ -19,7 +19,7 @@ public interface JcSpecialService {
          * @param id 主键
          * @return 实例对象
          */
-        JcSpecial queryById(Long id);
+        JcSpecialRy queryById(Long id);
 
         /**
          * 查询多条数据
@@ -28,23 +28,23 @@ public interface JcSpecialService {
          * @param limit 查询条数
          * @return 对象列表
          */
-        List<JcSpecial> queryAllByLimit(int offset, int limit);
+        List<JcSpecialRy> queryAllByLimit(int offset, int limit);
 
         /**
          * 新增数据
          *
-         * @param jcSpecial 实例对象
+         * @param jcSpecialRy 实例对象
          * @return 实例对象
          */
-        JcSpecial insert(JcSpecial jcSpecial);
+        JcSpecialRy insert(JcSpecialRy jcSpecialRy);
 
         /**
          * 修改数据
          *
-         * @param jcSpecial 实例对象
+         * @param jcSpecialRy 实例对象
          * @return 实例对象
          */
-        JcSpecial update(JcSpecial jcSpecial);
+        JcSpecialRy update(JcSpecialRy jcSpecialRy);
 
         /**
          * 通过主键删除数据
@@ -68,6 +68,6 @@ public interface JcSpecialService {
          * @param userQueryForm 查询对象
          * @return 分页结果
          */
-        Page<JcSpecial> page(PageForm<JcSpecial> userQueryForm);
+        Page<JcSpecialRy> page(PageForm<JcSpecialRy> userQueryForm);
 
 }

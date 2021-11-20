@@ -2,9 +2,9 @@ package com.cardinal.tech.bzfx.service.impl;
 
 import com.cardinal.tech.bzfx.bean.bo.*;
 import com.cardinal.tech.bzfx.bean.dbo.page.PageQuery;
-import com.cardinal.tech.bzfx.entity.JcSpecial;
-import com.cardinal.tech.bzfx.dao.JcSpecialDao;
-import com.cardinal.tech.bzfx.service.JcSpecialService;
+import com.cardinal.tech.bzfx.entity.JcSpecialRy;
+import com.cardinal.tech.bzfx.dao.JcSpecialRyDao;
+import com.cardinal.tech.bzfx.service.JcSpecialRyService;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -13,16 +13,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 专项任务(JcSpecial)表服务实现类
+ * 专项任务人员(JcSpecialRy)表服务实现类
  *
  * @author makejava
  * @since 2021-11-20 18:42:52
  */
 @RequiredArgsConstructor
-@Service("jcSpecialService")
-public class JcSpecialServiceImpl implements JcSpecialService {
+@Service("jcSpecialRyService")
+public class JcSpecialRyServiceImpl implements JcSpecialRyService {
 
-    private final JcSpecialDao jcSpecialDao;
+    private final JcSpecialRyDao jcSpecialRyDao;
 
     /**
      * 通过ID查询单条数据
@@ -31,8 +31,8 @@ public class JcSpecialServiceImpl implements JcSpecialService {
      * @return 实例对象
      */
     @Override
-    public JcSpecial queryById(Long id) {
-        return this.jcSpecialDao.queryById(id);
+    public JcSpecialRy queryById(Long id) {
+        return this.jcSpecialRyDao.queryById(id);
     }
 
     /**
@@ -43,32 +43,32 @@ public class JcSpecialServiceImpl implements JcSpecialService {
      * @return 对象列表
      */
     @Override
-    public List<JcSpecial> queryAllByLimit(int offset, int limit) {
-        return this.jcSpecialDao.queryAllByLimit(offset, limit);
+    public List<JcSpecialRy> queryAllByLimit(int offset, int limit) {
+        return this.jcSpecialRyDao.queryAllByLimit(offset, limit);
     }
 
     /**
      * 新增数据
      *
-     * @param jcSpecial 实例对象
+     * @param jcSpecialRy 实例对象
      * @return 实例对象
      */
     @Override
-    public JcSpecial insert(JcSpecial jcSpecial) {
-        this.jcSpecialDao.insert(jcSpecial);
-        return jcSpecial;
+    public JcSpecialRy insert(JcSpecialRy jcSpecialRy) {
+        this.jcSpecialRyDao.insert(jcSpecialRy);
+        return jcSpecialRy;
     }
 
     /**
      * 修改数据
      *
-     * @param jcSpecial 实例对象
+     * @param jcSpecialRy 实例对象
      * @return 实例对象
      */
     @Override
-    public JcSpecial update(JcSpecial jcSpecial) {
-        this.jcSpecialDao.update(jcSpecial);
-        return this.queryById(jcSpecial.getId());
+    public JcSpecialRy update(JcSpecialRy jcSpecialRy) {
+        this.jcSpecialRyDao.update(jcSpecialRy);
+        return this.queryById(jcSpecialRy.getId());
     }
 
     /**
@@ -79,7 +79,7 @@ public class JcSpecialServiceImpl implements JcSpecialService {
      */
     @Override
     public boolean deleteById(Long id) {
-        return this.jcSpecialDao.deleteById(id) > 0;
+        return this.jcSpecialRyDao.deleteById(id) > 0;
     }
 
     /**
@@ -90,7 +90,7 @@ public class JcSpecialServiceImpl implements JcSpecialService {
      */
     @Override
     public List<Map<String,Integer>> groupBy(String field) {
-        return this.jcSpecialDao.groupBy(field);
+        return this.jcSpecialRyDao.groupBy(field);
     }
 
     /**
@@ -100,10 +100,10 @@ public class JcSpecialServiceImpl implements JcSpecialService {
      * @return 分页结果
      */
      @Override
-     public Page<JcSpecial> page(PageForm<JcSpecial> userQueryForm){
+     public Page<JcSpecialRy> page(PageForm<JcSpecialRy> userQueryForm){
         var pq = new PageQuery<>(userQueryForm);
-        List<JcSpecial> entityList = this.jcSpecialDao.queryPageJcSpecialList(pq);
-        Page<JcSpecial> p = new Page<>(pq.getTotalCount(), pq.getMax(), pq.getCurrentPage());
+        List<JcSpecialRy> entityList = this.jcSpecialRyDao.queryPageJcSpecialRyList(pq);
+        Page<JcSpecialRy> p = new Page<>(pq.getTotalCount(), pq.getMax(), pq.getCurrentPage());
         p.setData(entityList);
         return p;
     }
