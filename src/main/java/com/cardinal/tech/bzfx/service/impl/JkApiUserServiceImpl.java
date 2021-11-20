@@ -39,7 +39,7 @@ public class JkApiUserServiceImpl implements JkApiUserService {
      * 查询多条数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     @Override
@@ -89,22 +89,28 @@ public class JkApiUserServiceImpl implements JkApiUserService {
      * @return 统计结果
      */
     @Override
-    public List<Map<String,Integer>> groupBy(String field) {
+    public List<Map<String, Integer>> groupBy(String field) {
         return this.jkApiUserDao.groupBy(field);
     }
 
     /**
-     *  分页查询
+     * 分页查询
      *
      * @param userQueryForm 查询对象
      * @return 分页结果
      */
-     @Override
-     public Page<JkApiUser> page(PageForm<JkApiUser> userQueryForm){
+    @Override
+    public Page<JkApiUser> page(PageForm<JkApiUser> userQueryForm) {
         var pq = new PageQuery<>(userQueryForm);
         List<JkApiUser> entityList = this.jkApiUserDao.queryPageJkApiUserList(pq);
         Page<JkApiUser> p = new Page<>(pq.getTotalCount(), pq.getMax(), pq.getCurrentPage());
         p.setData(entityList);
         return p;
+    }
+
+    @Override
+    public boolean checkApiAccess(Integer userId, Integer apiId) {
+        JkApiUser au = this.jkApiUserDao.getByUserIdApiId(userId, apiId);
+        return au != null;
     }
 }

@@ -1,5 +1,6 @@
 package com.cardinal.tech.bzfx.config.controller;
 
+import com.cardinal.tech.bzfx.service.JkApiUserService;
 import com.cardinal.tech.bzfx.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,9 +16,11 @@ public abstract class BaseController {
     protected HttpServletResponse response;
 
     private final UserService userService;
+    private final JkApiUserService apiUserService;
 
-    protected BaseController(UserService userService) {
+    protected BaseController(UserService userService, JkApiUserService apiUserService) {
         this.userService = userService;
+        this.apiUserService = apiUserService;
     }
 
     public Integer getUserId() {
@@ -27,5 +30,9 @@ public abstract class BaseController {
 
     public UserService getUserService() {
         return this.userService;
+    }
+
+    public boolean checkApiAccess(Integer apiId){
+        return this.apiUserService.checkApiAccess(getUserId(),apiId);
     }
 }

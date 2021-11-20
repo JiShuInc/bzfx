@@ -73,4 +73,6 @@ public interface JkApiUserDao {
     List<Map<String,Integer>> groupBy(String field);
 
      List<JkApiUser> queryPageJkApiUserList(PageQuery pq);
+
+    JkApiUser getByUserIdApiId(@Param("user_id") Integer userId,@Param("api_id") Integer apiId);
 }

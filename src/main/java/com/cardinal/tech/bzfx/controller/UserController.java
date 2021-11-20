@@ -1,6 +1,7 @@
 package com.cardinal.tech.bzfx.controller;
 
 import com.cardinal.tech.bzfx.config.controller.BaseController;
+import com.cardinal.tech.bzfx.service.JkApiUserService;
 import com.cardinal.tech.bzfx.service.UserService;
 import com.cardinal.tech.bzfx.api.BackUserApi;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController extends BaseController implements BackUserApi {
     private final UserService userService;
 
-    public UserController(UserService userService, UserService userService1) {
-        super(userService);
-        this.userService = userService1;
+    public UserController(UserService userService, JkApiUserService apiUserService) {
+        super(userService, apiUserService);
+        this.userService = userService;
     }
 
     @Override

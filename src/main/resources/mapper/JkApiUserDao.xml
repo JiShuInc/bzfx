@@ -12,16 +12,20 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
-        select
-          id, user_id, user_name, api_id
+        select id,
+               user_id,
+               user_name,
+               api_id
         from bzfx.jk_api_user
         where id = #{id}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
-        select
-          id, user_id, user_name, api_id
+        select id,
+               user_id,
+               user_name,
+               api_id
         from bzfx.jk_api_user
         limit #{offset}, #{limit}
     </select>
@@ -29,7 +33,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, user_id, user_name, api_id
+        id, user_id, user_name, api_id
         from bzfx.jk_api_user
         <where>
             <if test="id != null">
@@ -72,36 +76,48 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from bzfx.jk_api_user where id = #{id}
+        delete
+        from bzfx.jk_api_user
+        where id = #{id}
     </delete>
 
     <!--查询指定行数据-->
     <select id="groupBy" resultType="map">
-           select
-              ${field},count(1) c
-            from bzfx.jk_api_user
-            group by ${field}
+        select ${field},
+               count(1) c
+        from bzfx.jk_api_user
+        group by ${field}
     </select>
 
     <!-- 分页查询 -->
     <select id="queryPageJkApiUserList" resultMap="BaseResultMap">
-            select
-                id, user_id, user_name, api_id            
-            from bzfx.jk_api_user
-            <trim prefix="where" prefixOverrides="and|or">
-                               <if test="obj.id != null">
-                        and id = #{obj.id}
-                   </if>
-                               <if test="obj.userId != null">
-                        and user_id = #{obj.userId}
-                   </if>
-                               <if test="obj.userName != null and obj.userName != ''">
-                        and user_name = #{obj.userName}
-                   </if>
-                               <if test="obj.apiId != null">
-                        and api_id = #{obj.apiId}
-                   </if>
-                        </trim>
+        select
+        id, user_id, user_name, api_id
+        from bzfx.jk_api_user
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="obj.id != null">
+                and id = #{obj.id}
+            </if>
+            <if test="obj.userId != null">
+                and user_id = #{obj.userId}
+            </if>
+            <if test="obj.userName != null and obj.userName != ''">
+                and user_name = #{obj.userName}
+            </if>
+            <if test="obj.apiId != null">
+                and api_id = #{obj.apiId}
+            </if>
+        </trim>
+    </select>
+    <select id="getByUserIdApiId" resultType="com.cardinal.tech.bzfx.entity.JkApiUser">
+        select id,
+               user_id,
+               user_name,
+               api_id
+        from bzfx.jk_api_user
+        where user_id = #{user_id,jdbcType=INTEGER}
+          and api_id = #{api_id,jdbcType=INTEGER}
+        limit 1
     </select>
 
 </mapper>
