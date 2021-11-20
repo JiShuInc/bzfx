@@ -5,6 +5,7 @@ import com.cardinal.tech.bzfx.entity.BzkTabDanweibclrxx;
 import com.cardinal.tech.bzfx.service.BzkTabDanweibclrxxService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Map;
 
@@ -21,58 +23,69 @@ import java.util.Map;
  * @author makejava
  * @since 2021-11-20 16:06:13
  */
-@Tag(name="单位补充录入信息")
+@Tag(name = "单位补充录入信息")
 @RequestMapping("/bzkTabDanweibclrxx")
-public interface BzkTabDanweibclrxxApi {
+public interface BzkTabDanweibclrxxApi extends BaseApi {
 
-        BzkTabDanweibclrxxService getService();
+    BzkTabDanweibclrxxService getService();
 
-        @PreAuthorize("hasRole('admin')")
-        @Operation(description = " get by id")
-        @GetMapping("/{id}")
-        default Response<BzkTabDanweibclrxx> queryById(@PathVariable("id") String id){
-            return new Response(getService().queryById(id));
+    int API_ID = 6;
+
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = " get by id")
+    @GetMapping("/{id}")
+    default Response<BzkTabDanweibclrxx> queryById(@PathVariable("id") String id) {
+        return new Response(getService().queryById(id));
+    }
+
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = " get list")
+    @GetMapping("/list")
+    default Response<List<BzkTabDanweibclrxx>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit) {
+        return new Response(getService().queryAllByLimit(offset, limit));
+    }
+
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = " add")
+    @PostMapping("/add")
+    default Response<BzkTabDanweibclrxx> insert(@RequestBody BzkTabDanweibclrxx bzkTabDanweibclrxx) {
+        return new Response(getService().insert(bzkTabDanweibclrxx));
+    }
+
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = " update")
+    @PostMapping("/update")
+    default Response<BzkTabDanweibclrxx> update(@RequestBody BzkTabDanweibclrxx bzkTabDanweibclrxx) {
+        return new Response(getService().update(bzkTabDanweibclrxx));
+    }
+
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = " delete by pk")
+    @GetMapping("/delete")
+    default Response<Boolean> deleteById(@RequestParam String id) {
+        return new Response(getService().deleteById(id));
+    }
+
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = " group by field name")
+    @GetMapping("/group")
+    default Response<List<Map<String, Integer>>> groupById(@RequestParam String field) {
+        return new Response(getService().groupBy(field));
+    }
+
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = " page list")
+    @PostMapping("/page")
+    default Response<Page<BzkTabDanweibclrxx>> page(@RequestBody PageForm<BzkTabDanweibclrxx> userQueryForm) {
+        return new Response(getService().page(userQueryForm));
+    }
+    @PreAuthorize("hasRole('api_access')")
+    @Operation(description = " page list")
+    @PostMapping("/pageList")
+    default Response<Page<BzkTabDanweibclrxx>> pageList(@RequestBody PageForm<BzkTabDanweibclrxx> userQueryForm) {
+        if (!checkApiAccess(API_ID)) {
+            throw new AccessDeniedException("不允许访问");
         }
-
-        @PreAuthorize("hasRole('admin')")
-        @Operation(description = " get list")
-        @GetMapping("/list")
-       default Response<List<BzkTabDanweibclrxx>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit){
-            return new Response(getService().queryAllByLimit(offset,limit));
-       }
-
-        @PreAuthorize("hasRole('admin')")
-        @Operation(description = " add")
-        @PostMapping("/add")
-        default Response<BzkTabDanweibclrxx> insert(@RequestBody BzkTabDanweibclrxx bzkTabDanweibclrxx){
-            return new Response(getService().insert(bzkTabDanweibclrxx));
-        }
-
-         @PreAuthorize("hasRole('admin')")
-         @Operation(description = " update")
-         @PostMapping("/update")
-        default Response<BzkTabDanweibclrxx> update(@RequestBody BzkTabDanweibclrxx bzkTabDanweibclrxx){
-             return new Response(getService().update(bzkTabDanweibclrxx));
-        }
-
-        @PreAuthorize("hasRole('admin')")
-        @Operation(description = " delete by pk")
-        @GetMapping("/delete")
-       default Response<Boolean> deleteById(@RequestParam String id){
-            return new Response(getService().deleteById(id));
-        }
-
-        @PreAuthorize("hasRole('admin')")
-        @Operation(description = " group by field name")
-        @GetMapping("/group")
-       default Response<List<Map<String,Integer>>> groupById(@RequestParam String field){
-            return new Response(getService().groupBy(field));
-        }
-
-        @PreAuthorize("hasRole('admin')")
-        @Operation(description = " page list")
-        @PostMapping("/page")
-        default Response<Page<BzkTabDanweibclrxx>> page(@RequestBody PageForm<BzkTabDanweibclrxx> userQueryForm) {
-           return new Response(getService().page(userQueryForm));
-        }
+        return new Response(getService().page(userQueryForm));
+    }
 }
