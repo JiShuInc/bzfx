@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.JkApiUserDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.JkApiUser">
+        <!--@Table jk_api_user-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="apiId" column="api_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, user_id, user_name, api_id
+        from bzfx.jk_api_user
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, user_id, user_name, api_id
+        from bzfx.jk_api_user
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, user_id, user_name, api_id
+        from bzfx.jk_api_user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="apiId != null">
+                and api_id = #{apiId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.jk_api_user(user_id, user_name, api_id)
+        values (#{userId}, #{userName}, #{apiId})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.jk_api_user
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName},
+            </if>
+            <if test="apiId != null">
+                api_id = #{apiId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.jk_api_user where id = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.jk_api_user
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageJkApiUserList" resultMap="BaseResultMap">
+            select
+                id, user_id, user_name, api_id            
+            from bzfx.jk_api_user
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null">
+                        and id = #{obj.id}
+                   </if>
+                               <if test="obj.userId != null">
+                        and user_id = #{obj.userId}
+                   </if>
+                               <if test="obj.userName != null and obj.userName != ''">
+                        and user_name = #{obj.userName}
+                   </if>
+                               <if test="obj.apiId != null">
+                        and api_id = #{obj.apiId}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>
