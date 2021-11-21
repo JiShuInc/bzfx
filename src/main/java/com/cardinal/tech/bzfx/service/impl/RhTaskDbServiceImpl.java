@@ -8,14 +8,12 @@ import com.cardinal.tech.bzfx.dao.RhTaskDbDao;
 import com.cardinal.tech.bzfx.entity.SlSyncLogs;
 import com.cardinal.tech.bzfx.enums.biz.SyncResultEnum;
 import com.cardinal.tech.bzfx.enums.biz.SyncStateEnum;
-import com.cardinal.tech.bzfx.etl.EtlUtil;
+import com.cardinal.tech.bzfx.etl.EtlDbUtil;
 import com.cardinal.tech.bzfx.service.RhTaskDbService;
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +31,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
 
     private final RhTaskDbDao rhTaskDbDao;
     private final SlSyncLogsDao slSyncLogsDao;
-    private final EtlUtil etlUtil;
+    private final EtlDbUtil etlUtil;
 
     /**
      * 通过ID查询单条数据
