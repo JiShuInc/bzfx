@@ -146,13 +146,13 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
             String remark = SyncResultEnum.SYNC_SUCCESS.desc();
             try {
                 db.setState(SyncStateEnum.SYNC_PROGRESS.value());
-                db.setSyncAt(DateFormatUtils.format(syncAt,"yyyy-MM-dd HH:mm:ss"));
+                db.setSyncAt(syncAt);
                 this.rhTaskDbDao.update(db);
                 count = etlUtil.syncData(db.getDbHost(),db.getDbName(),db.getDbPasswd());
                 db.setState(SyncStateEnum.SYNC_FINISHED.value());
                 db.setResult(result);
                 syncEnd = new Date();
-                db.setSyncEnd(DateFormatUtils.format(syncEnd,"yyyy-MM-dd HH:mm:ss"));
+                db.setSyncEnd(syncEnd);
                 this.rhTaskDbDao.update(db);
             }catch (Exception e){
                 e.printStackTrace();
@@ -161,7 +161,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
                 result = SyncResultEnum.SYNC_FAIL.value();
                 db.setResult(result);
                 syncEnd = new Date();
-                db.setSyncEnd(DateFormatUtils.format(syncEnd,"yyyy-MM-dd HH:mm:ss"));
+                db.setSyncEnd(syncEnd);
                 this.rhTaskDbDao.update(db);
             }finally {
                 SlSyncLogs slSyncLogs = new SlSyncLogs();
