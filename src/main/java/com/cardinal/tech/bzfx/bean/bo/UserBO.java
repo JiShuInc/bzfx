@@ -10,6 +10,7 @@ import java.util.Date;
 public class UserBO {
     private Integer id;
     private String username;
+    private Integer role_id;
     private Date creat_time;
     private Date edit_time;
 }
