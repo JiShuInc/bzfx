@@ -1,5 +1,6 @@
 package com.cardinal.tech.bzfx.controller;
 
+import com.cardinal.tech.bzfx.bean.bo.Response;
 import com.cardinal.tech.bzfx.service.RhTaskDbService;
 import com.cardinal.tech.bzfx.api.RhTaskDbApi;
 import org.springframework.web.bind.annotation.*;
@@ -21,4 +22,10 @@ public class RhTaskDbController implements RhTaskDbApi{
     public RhTaskDbService getService(){
         return rhTaskDbService;
      }
+
+
+    @Override
+    public Response<Boolean> syncData(Long taskId) {
+        return new Response<>(rhTaskDbService.syncData(taskId));
+    }
 }

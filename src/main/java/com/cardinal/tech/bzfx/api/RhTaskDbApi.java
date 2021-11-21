@@ -75,4 +75,12 @@ public interface RhTaskDbApi {
         default Response<Page<RhTaskDb>> page(@RequestBody PageForm<RhTaskDb> userQueryForm) {
            return new Response(getService().page(userQueryForm));
         }
+
+
+        @PreAuthorize("hasRole('admin')")
+        @Operation(description = " sync data")
+        @PostMapping("/task/sync_db")
+        default Response<Boolean> syncData(@RequestParam("id") Long taskId){
+            return new Response(getService().syncData(taskId));
+        }
 }

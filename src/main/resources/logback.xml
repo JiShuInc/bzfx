@@ -6,25 +6,25 @@
             <pattern>%date [%level] [%thread] %logger{80} [%file : %line] %msg%n</pattern>
         </encoder>
     </appender>
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <encoder>
-            <pattern>%date [%level] [%thread] %logger{80} [%file : %line] %msg%n</pattern>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-<!--                        			<fileNamePattern>/Users/zhangbaowen/Documents/xc-workspace/bzms/bzms_logs/bzms_%d{yyyy-MM-dd}.log</fileNamePattern>-->
-            <!--            <fileNamePattern>/var/lib/tomcat8/bzms_logs/bzms_%d{yyyy-MM-dd}.log</fileNamePattern>-->
-            <fileNamePattern>/opt/cardinal/data/bzfx_logs/bzfx_%d{yyyy-MM-dd}.log</fileNamePattern>
-<!--                        			<fileNamePattern>C:/bzms_logs/bzms_%d{yyyy-MM-dd}.log</fileNamePattern>-->
-            <!-- 保留 30天数据，默认无限-->
-            <MaxHistory>30</MaxHistory>
-        </rollingPolicy>
-    </appender>
+<!--    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <encoder>-->
+<!--            <pattern>%date [%level] [%thread] %logger{80} [%file : %line] %msg%n</pattern>-->
+<!--        </encoder>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--&lt;!&ndash;                        			<fileNamePattern>/Users/zhangbaowen/Documents/xc-workspace/bzms/bzms_logs/bzms_%d{yyyy-MM-dd}.log</fileNamePattern>&ndash;&gt;-->
+<!--            &lt;!&ndash;            <fileNamePattern>/var/lib/tomcat8/bzms_logs/bzms_%d{yyyy-MM-dd}.log</fileNamePattern>&ndash;&gt;-->
+<!--            <fileNamePattern>/User/hua/test/bzfx_logs/bzfx_%d{yyyy-MM-dd}.log</fileNamePattern>-->
+<!--&lt;!&ndash;                        			<fileNamePattern>C:/bzms_logs/bzms_%d{yyyy-MM-dd}.log</fileNamePattern>&ndash;&gt;-->
+<!--            &lt;!&ndash; 保留 30天数据，默认无限&ndash;&gt;-->
+<!--            <MaxHistory>30</MaxHistory>-->
+<!--        </rollingPolicy>-->
+<!--    </appender>-->
     <logger name="org.springframework" level="INFO"/>
     <logger name="org.apache" level="INFO"/>
     <logger name="com.alibaba" level="WARN"/>
     <logger name="com.cardinal" level="INFO"/>
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="FILE"/>
+<!--        <appender-ref ref="FILE"/>-->
     </root>
 </configuration>

@@ -4,8 +4,8 @@ spring:
     username: root
     password: Eh3LG5cv50g6FJmlymimYNKakWXkMyBB159cAdhu76glE1bxSIErD6wyDQP9Q+0Cc6oKiAA7FZKJc2MY7iJk8g==
 #    url: jdbc:mysql://127.0.0.1:3306/bzfx?useUnicode=true&allowMultiQueries=true&characterEncoding=UTF-8&useSSL= false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-#    url: jdbc:mysql://59.110.172.20:33060/bzfx?useUnicode=true&allowMultiQueries=true&characterEncoding=UTF-8&useSSL= false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-    url: jdbc:mysql://bzfx_db/bzfx?useUnicode=true&allowMultiQueries=true&characterEncoding=UTF-8&useSSL= false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://59.110.172.20:33060/bzfx?useUnicode=true&allowMultiQueries=true&characterEncoding=UTF-8&useSSL= false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+#    url: jdbc:mysql://bzfx_db/bzfx?useUnicode=true&allowMultiQueries=true&characterEncoding=UTF-8&useSSL= false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
       filter:
