@@ -8,11 +8,11 @@ import lombok.Data;
 /**
  * 任务数据-文件(RhTaskFile)实体类
  *
- * @author cadinal.tech
- * @since 2021-11-14 19:35:46
+ * @author makejava
+ * @since 2021-11-21 18:48:45
  */
 public class RhTaskFile implements Serializable {
-    private static final long serialVersionUID = -57972191453432840L;
+    private static final long serialVersionUID = -87808097998565553L;
     /**
     * id
     */
@@ -33,6 +33,18 @@ public class RhTaskFile implements Serializable {
     * 对应表
     */
     private String tableName;
+    /**
+    * 同步状态0-未同步，1-同步中，2-已同步
+    */
+    private Integer state;
+    /**
+    * 同步结果0-成功，1-错误
+    */
+    private Integer result;
+    
+    private Date syncAt;
+    
+    private Date syncEnd;
     /**
     * 数据创建时间
     */

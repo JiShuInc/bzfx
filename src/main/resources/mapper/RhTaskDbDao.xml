@@ -11,8 +11,8 @@
         <result property="dbPasswd" column="db_passwd" jdbcType="VARCHAR"/>
         <result property="state" column="state" jdbcType="INTEGER"/>
         <result property="result" column="result" jdbcType="INTEGER"/>
-        <result property="syncAt" column="sync_at" jdbcType="VARCHAR"/>
-        <result property="syncEnd" column="sync_end" jdbcType="VARCHAR"/>
+        <result property="syncAt" column="sync_at" jdbcType="TIMESTAMP"/>
+        <result property="syncEnd" column="sync_end" jdbcType="TIMESTAMP"/>
         <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
     </resultMap>
 
@@ -59,10 +59,10 @@
             <if test="result != null">
                 and result = #{result}
             </if>
-            <if test="syncAt != null and syncAt != ''">
+            <if test="syncAt != null">
                 and sync_at = #{syncAt}
             </if>
-            <if test="syncEnd != null and syncEnd != ''">
+            <if test="syncEnd != null">
                 and sync_end = #{syncEnd}
             </if>
             <if test="creatAt != null">
@@ -99,10 +99,10 @@
             <if test="result != null">
                 result = #{result},
             </if>
-            <if test="syncAt != null and syncAt != ''">
+            <if test="syncAt != null">
                 sync_at = #{syncAt},
             </if>
-            <if test="syncEnd != null and syncEnd != ''">
+            <if test="syncEnd != null">
                 sync_end = #{syncEnd},
             </if>
             <if test="creatAt != null">
@@ -152,10 +152,10 @@
                                <if test="obj.result != null">
                         and result = #{obj.result}
                    </if>
-                               <if test="obj.syncAt != null and obj.syncAt != ''">
+                               <if test="obj.syncAt != null">
                         and sync_at = #{obj.syncAt}
                    </if>
-                               <if test="obj.syncEnd != null and obj.syncEnd != ''">
+                               <if test="obj.syncEnd != null">
                         and sync_end = #{obj.syncEnd}
                    </if>
                                <if test="obj.creatAt != null">
