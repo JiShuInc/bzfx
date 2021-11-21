@@ -27,6 +27,8 @@ import java.util.Map;
 @RequestMapping("/bzkBzTabJicengyljg")
 public interface BzkBzTabJicengyljgApi {
 
+        int API_ID = 9;
+
         BzkBzTabJicengyljgService getService();
 
         @PreAuthorize("hasRole('admin')")
