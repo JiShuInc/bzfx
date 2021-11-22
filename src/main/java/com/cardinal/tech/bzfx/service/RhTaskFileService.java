@@ -70,4 +70,10 @@ public interface RhTaskFileService {
          */
         Page<RhTaskFile> page(PageForm<RhTaskFile> userQueryForm);
 
+        /**
+         * 同步数据
+         * @param taskId
+         * @return
+         */
+        boolean syncData(Long taskId);
 }

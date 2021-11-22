@@ -1,7 +1,7 @@
 package com.cardinal.tech.bzfx;
 
 import com.alibaba.druid.filter.config.ConfigTools;
-import com.cardinal.tech.bzfx.etl.EtlDbUtil;
+import com.cardinal.tech.bzfx.etl.EtlUtil;
 import com.cardinal.tech.bzfx.enums.biz.RoleEnum;
 import com.cardinal.tech.bzfx.util.UserPasswordEncoder;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class MyTest {
 
     @Autowired
-    EtlDbUtil etlUtil;
+    EtlUtil etlUtil;
     @Test
     public void testDruidPasswordEncrypt() throws Exception {
         ConfigTools.main(new String[]{"Bzfx@2021"});

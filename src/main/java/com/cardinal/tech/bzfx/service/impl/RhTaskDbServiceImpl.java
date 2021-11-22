@@ -8,7 +8,7 @@ import com.cardinal.tech.bzfx.dao.RhTaskDbDao;
 import com.cardinal.tech.bzfx.entity.SlSyncLogs;
 import com.cardinal.tech.bzfx.enums.biz.SyncResultEnum;
 import com.cardinal.tech.bzfx.enums.biz.SyncStateEnum;
-import com.cardinal.tech.bzfx.etl.EtlDbUtil;
+import com.cardinal.tech.bzfx.etl.EtlUtil;
 import com.cardinal.tech.bzfx.service.RhTaskDbService;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
 
     private final RhTaskDbDao rhTaskDbDao;
     private final SlSyncLogsDao slSyncLogsDao;
-    private final EtlDbUtil etlUtil;
+    private final EtlUtil etlUtil;
 
     /**
      * 通过ID查询单条数据
@@ -136,6 +136,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
 
     @Async
     void syncData(List<RhTaskDb> rhTaskDbs) {
+        etlUtil.truncateTable();
         for (RhTaskDb db:rhTaskDbs){
             long count = 0;
             Date syncAt = new Date();

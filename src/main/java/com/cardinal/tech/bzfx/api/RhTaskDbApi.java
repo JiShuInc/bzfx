@@ -79,7 +79,7 @@ public interface RhTaskDbApi {
 
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " sync data")
-        @PostMapping("/task/sync_db")
+        @PostMapping("/task/sync")
         default Response<Boolean> syncData(@RequestParam("id") Long taskId){
             return new Response(getService().syncData(taskId));
         }
