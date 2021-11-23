@@ -8,6 +8,7 @@ import com.cardinal.tech.bzfx.enums.biz.SyncResultEnum;
 import com.cardinal.tech.bzfx.enums.biz.SyncStateEnum;
 import com.cardinal.tech.bzfx.etl.EtlUtil;
 import com.cardinal.tech.bzfx.service.RhTaskFileService;
+import com.opencsv.bean.CsvToBean;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,10 +17,7 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 import java.io.FileNotFoundException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 任务数据-文件(RhTaskFile)表服务实现类
@@ -152,7 +150,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
                 file.setState(SyncStateEnum.SYNC_PROGRESS.value());
                 file.setSyncAt(syncAt);
                 this.rhTaskFileDao.update(file);
-                count = this.batchProcessing(file);
+                count += this.batchProcessing(file);
                 file.setState(SyncStateEnum.SYNC_FINISHED.value());
                 file.setResult(result);
                 syncEnd = new Date();
@@ -186,65 +184,105 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
     private long batchProcessing(RhTaskFile file) throws FileNotFoundException {
         String filePath = String.format("%s%s%s",file.getUrl(),"/",file.getFilename());
         long count = 0;
+        int batchCount = 10000;
         SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH,false);
         if (file.getTableName().equals("BZK_TAB_DANWEIJBXX")){
-            List<BzkTabDanweijbxx> list = etlUtil.parseCsvToBean(BzkTabDanweijbxx.class,filePath,',',1);
+            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkTabDanweijbxx.class,filePath,',',1);
+            Iterator iterator = csvToBean.iterator();
             BzkTabDanweijbxxDao bzkTabDanweijbxxDao = sqlSession.getMapper(BzkTabDanweijbxxDao.class);
-            list.forEach(e->{
-                bzkTabDanweijbxxDao.insert(e);
-            });
-            count = list.size();
+            while (iterator.hasNext()){
+                BzkTabDanweijbxx bzkTabDanweijbxx = (BzkTabDanweijbxx) iterator.next();
+                bzkTabDanweijbxxDao.insert(bzkTabDanweijbxx);
+                if ((count % batchCount) == 0) {
+                    sqlSession.commit();
+                }
+                count++;
+            }
         }else if (file.getTableName().equals("BZK_SLGX_BZ_BZDAXX")){
-            List<BzkSlgxBzBzdaxx> list = etlUtil.parseCsvToBean(BzkSlgxBzBzdaxx.class,filePath,',',1);
+            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkSlgxBzBzdaxx.class,filePath,',',1);
+            Iterator iterator = csvToBean.iterator();
             BzkSlgxBzBzdaxxDao bzkSlgxBzBzdaxxDao = sqlSession.getMapper(BzkSlgxBzBzdaxxDao.class);
-            list.forEach(e->{
-                bzkSlgxBzBzdaxxDao.insert(e);
-            });
-            count = list.size();
+            while (iterator.hasNext()){
+                BzkSlgxBzBzdaxx bzkSlgxBzBzdaxx = (BzkSlgxBzBzdaxx) iterator.next();
+                bzkSlgxBzBzdaxxDao.insert(bzkSlgxBzBzdaxx);
+                if ((count % batchCount) == 0) {
+                    sqlSession.commit();
+                }
+                count++;
+            };
         }else if (file.getTableName().equals("BZK_SLGX_BZ_BZFFJL")){
-            List<BzkSlgxBzBzffjl> list = etlUtil.parseCsvToBean(BzkSlgxBzBzffjl.class,filePath,',',1);
+            CsvToBean csvToBean  = etlUtil.parseCsvToBean(BzkSlgxBzBzffjl.class,filePath,',',1);
+            Iterator iterator = csvToBean.iterator();
             BzkSlgxBzBzffjlDao bzkSlgxBzBzffjlDao = sqlSession.getMapper(BzkSlgxBzBzffjlDao.class);
-            list.forEach(e->{
-                bzkSlgxBzBzffjlDao.insert(e);
-            });
-            count = list.size();
+            while (iterator.hasNext()){
+                BzkSlgxBzBzffjl bzkSlgxBzBzffjl = (BzkSlgxBzBzffjl) iterator.next();
+                bzkSlgxBzBzffjlDao.insert(bzkSlgxBzBzffjl);
+                if ((count % batchCount) == 0) {
+                    sqlSession.commit();
+                }
+                count++;
+            };
         }else if (file.getTableName().equals("BZK_SLGX_CW_CWBZSJ")){
-            List<BzkSlgxCwCwbzsj> list = etlUtil.parseCsvToBean(BzkSlgxCwCwbzsj.class,filePath,',',1);
+            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkSlgxCwCwbzsj.class,filePath,',',1);
+            Iterator iterator = csvToBean.iterator();
             BzkSlgxCwCwbzsjDao bzkSlgxCwCwbzsjDao = sqlSession.getMapper(BzkSlgxCwCwbzsjDao.class);
-            list.forEach(e->{
-                bzkSlgxCwCwbzsjDao.insert(e);
-            });
-            count = list.size();
+            while (iterator.hasNext()){
+                BzkSlgxCwCwbzsj bzkSlgxCwCwbzsj = (BzkSlgxCwCwbzsj) iterator.next();
+                bzkSlgxCwCwbzsjDao.insert(bzkSlgxCwCwbzsj);
+                if ((count % batchCount) == 0) {
+                    sqlSession.commit();
+                }
+                count++;
+            };
         }else if (file.getTableName().equals("BZK_SLGX_YF_RYZFQK")){
-            List<BzkSlgxYfRyzfqk> list = etlUtil.parseCsvToBean(BzkSlgxYfRyzfqk.class,filePath,',',1);
+            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkSlgxYfRyzfqk.class,filePath,',',1);
+            Iterator iterator = csvToBean.iterator();
             BzkSlgxYfRyzfqkDao bzkSlgxYfRyzfqkDao = sqlSession.getMapper(BzkSlgxYfRyzfqkDao.class);
-            list.forEach(e->{
-                bzkSlgxYfRyzfqkDao.insert(e);
-            });
-            count = list.size();
+            while (iterator.hasNext()){
+                BzkSlgxYfRyzfqk bzkSlgxYfRyzfqk = (BzkSlgxYfRyzfqk) iterator.next();
+                bzkSlgxYfRyzfqkDao.insert(bzkSlgxYfRyzfqk);
+                if ((count % batchCount) == 0) {
+                    sqlSession.commit();
+                }
+                count++;
+            };
         }else if (file.getTableName().equals("BZK_TAB_DANWEIBCLRXX")){
-            List<BzkTabDanweibclrxx> list = etlUtil.parseCsvToBean(BzkTabDanweibclrxx.class,filePath,',',1);
+            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkTabDanweibclrxx.class,filePath,',',1);
+            Iterator iterator = csvToBean.iterator();
             BzkTabDanweibclrxxDao bzkTabDanweibclrxxDao = sqlSession.getMapper(BzkTabDanweibclrxxDao.class);
-            list.forEach(e->{
-                bzkTabDanweibclrxxDao.insert(e);
-            });
-            count = list.size();
+            while (iterator.hasNext()){
+                BzkTabDanweibclrxx bzkTabDanweibclrxx = (BzkTabDanweibclrxx) iterator.next();
+                bzkTabDanweibclrxxDao.insert(bzkTabDanweibclrxx);
+                if ((count % batchCount) == 0) {
+                    sqlSession.commit();
+                }
+                count++;
+            };
         }else if (file.getTableName().equals("BZK_TAB_RENYUANJBXX")){
-            List<BzkTabRenyuanjbxx> list = etlUtil.parseCsvToBean(BzkTabRenyuanjbxx.class,filePath,',',1);
+            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkTabRenyuanjbxx.class,filePath,',',1);
+            Iterator iterator = csvToBean.iterator();
             BzkTabRenyuanjbxxDao bzkTabRenyuanjbxxDao = sqlSession.getMapper(BzkTabRenyuanjbxxDao.class);
-            list.forEach(e->{
-                bzkTabRenyuanjbxxDao.insert(e);
-            });
-            count = list.size();
+            while (iterator.hasNext()){
+                BzkTabRenyuanjbxx bzkTabRenyuanjbxx = (BzkTabRenyuanjbxx) iterator.next();
+                bzkTabRenyuanjbxxDao.insert(bzkTabRenyuanjbxx);
+                if ((count % batchCount) == 0) {
+                    sqlSession.commit();
+                }
+                count++;
+            };
         }else if (file.getTableName().equals("BZK_TAB_BAOZHANGKJBXX")){
-            List<BzkTabBaozhangkjbxx> list = etlUtil.parseCsvToBean(BzkTabBaozhangkjbxx.class,filePath,',',1);
+            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkTabBaozhangkjbxx.class,filePath,',',1);
+            Iterator iterator = csvToBean.iterator();
             BzkTabBaozhangkjbxxDao bzkTabBaozhangkjbxxDao = sqlSession.getMapper(BzkTabBaozhangkjbxxDao.class);
-            list.forEach(e->{
-                bzkTabBaozhangkjbxxDao.insert(e);
-            });
-            count = list.size();
+            while (iterator.hasNext()){
+                BzkTabBaozhangkjbxx bzkTabBaozhangkjbxx = (BzkTabBaozhangkjbxx) iterator.next();
+                bzkTabBaozhangkjbxxDao.insert(bzkTabBaozhangkjbxx);
+                if ((count % batchCount) == 0) {
+                    sqlSession.commit();
+                }
+                count++;
+            };
         }
-        sqlSession.commit();
         return count;
     }
 }

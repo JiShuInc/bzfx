@@ -1,6 +1,6 @@
 package com.cardinal.tech.bzfx.etl;
 
-import com.cardinal.tech.bzfx.entity.BzkTabDanweijbxx;
+import com.cardinal.tech.bzfx.entity.*;
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
@@ -19,6 +19,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -260,20 +261,18 @@ public class EtlUtil {
         }
     }
 
-    public <T> List<T> parseCsvToBean(Class<T> clazz, String fileName, char csvSeparator, int skipLineNum) throws FileNotFoundException {
+    public <T> CsvToBean parseCsvToBean(Class<T> clazz, String fileName, char csvSeparator, int skipLineNum) throws FileNotFoundException {
         //获取列位置数组
         //HeaderColumnNameMappingStrategy<T> mapper = new HeaderColumnNameMappingStrategy<>();
         //mapper.setType(clazz);
-        List<T> parse;
+       // List<T> parse;
         try {
             CsvToBean csvToBean = new CsvToBeanBuilder(new FileReader(fileName))
                     .withType(clazz)
                     .withSeparator(csvSeparator)
                     .withSkipLines(skipLineNum)
                     .build();
-            parse = csvToBean.parse();
-
-            return parse;
+            return csvToBean;
         } catch (FileNotFoundException e) {
             log.error("【fileName：{}地址异常！】", fileName);
             throw e;
@@ -350,14 +349,14 @@ public class EtlUtil {
 //        return null;
 //    }
 
-//    public static void main(String[] args) {
-//        EtlUtil etlUtil = new EtlUtil();
-//        try {
-//            List<BzkTabDanweijbxx> list = etlUtil.parseCsvToBean(BzkTabDanweijbxx.class,"/Users/hua/BZK_TAB_DANWEIJBXX.csv",',',1);
-//            System.out.println(list);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+    public static void main(String[] args) {
+        EtlUtil etlUtil = new EtlUtil();
+        try {
+            CsvToBean list = etlUtil.parseCsvToBean(BzkTabBaozhangkjbxx.class,"/Users/hua/BZK_TAB_BAOZHANGKJBXX.csv",',',1);
+            System.out.println(list.stream().count());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
