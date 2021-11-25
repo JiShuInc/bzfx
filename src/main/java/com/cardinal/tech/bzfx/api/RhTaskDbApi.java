@@ -18,8 +18,8 @@ import java.util.Map;
 /**
  * 任务数据-数据库(RhTaskDb)表服务api接口
  *
- * @author cadinal.tech
- * @since 2021-11-13 20:00:37
+ * @author makejava
+ * @since 2021-11-25 17:01:32
  */
 @Tag(name="任务数据-数据库")
 @RequestMapping("/rhTaskDb")
@@ -65,7 +65,7 @@ public interface RhTaskDbApi {
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " group by field name")
         @GetMapping("/group")
-       default Response<List<Map<String,Integer>>> deleteById(@RequestParam String field){
+       default Response<List<Map<String,Integer>>> groupById(@RequestParam String field){
             return new Response(getService().groupBy(field));
         }
 

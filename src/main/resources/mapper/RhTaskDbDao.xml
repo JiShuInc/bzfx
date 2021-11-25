@@ -7,6 +7,9 @@
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="taskId" column="task_id" jdbcType="INTEGER"/>
         <result property="dbHost" column="db_host" jdbcType="VARCHAR"/>
+        <result property="dbPort" column="db_port" jdbcType="INTEGER"/>
+        <result property="dbServe" column="db_serve" jdbcType="VARCHAR"/>
+        <result property="dbSpace" column="db_space" jdbcType="VARCHAR"/>
         <result property="dbName" column="db_name" jdbcType="VARCHAR"/>
         <result property="dbPasswd" column="db_passwd" jdbcType="VARCHAR"/>
         <result property="state" column="state" jdbcType="INTEGER"/>
@@ -19,7 +22,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          id, task_id, db_host, db_name, db_passwd, state, result, sync_at, sync_end, creat_at
+          id, task_id, db_host, db_port, db_serve, db_space, db_name, db_passwd, state, result, sync_at, sync_end, creat_at
         from bzfx.rh_task_db
         where id = #{id}
     </select>
@@ -27,7 +30,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          id, task_id, db_host, db_name, db_passwd, state, result, sync_at, sync_end, creat_at
+          id, task_id, db_host, db_port, db_serve, db_space, db_name, db_passwd, state, result, sync_at, sync_end, creat_at
         from bzfx.rh_task_db
         limit #{offset}, #{limit}
     </select>
@@ -35,7 +38,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, task_id, db_host, db_name, db_passwd, state, result, sync_at, sync_end, creat_at
+          id, task_id, db_host, db_port, db_serve, db_space, db_name, db_passwd, state, result, sync_at, sync_end, creat_at
         from bzfx.rh_task_db
         <where>
             <if test="id != null">
@@ -46,6 +49,15 @@
             </if>
             <if test="dbHost != null and dbHost != ''">
                 and db_host = #{dbHost}
+            </if>
+            <if test="dbPort != null">
+                and db_port = #{dbPort}
+            </if>
+            <if test="dbServe != null and dbServe != ''">
+                and db_serve = #{dbServe}
+            </if>
+            <if test="dbSpace != null and dbSpace != ''">
+                and db_space = #{dbSpace}
             </if>
             <if test="dbName != null and dbName != ''">
                 and db_name = #{dbName}
@@ -73,8 +85,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into bzfx.rh_task_db(task_id, db_host, db_name, db_passwd, state, result, sync_at, sync_end, creat_at)
-        values (#{taskId}, #{dbHost}, #{dbName}, #{dbPasswd}, #{state}, #{result}, #{syncAt}, #{syncEnd}, #{creatAt})
+        insert into bzfx.rh_task_db(task_id, db_host, db_port, db_serve, db_space, db_name, db_passwd, state, result, sync_at, sync_end, creat_at)
+        values (#{taskId}, #{dbHost}, #{dbPort}, #{dbServe}, #{dbSpace}, #{dbName}, #{dbPasswd}, #{state}, #{result}, #{syncAt}, #{syncEnd}, #{creatAt})
     </insert>
 
     <!--通过主键修改数据-->
@@ -86,6 +98,15 @@
             </if>
             <if test="dbHost != null and dbHost != ''">
                 db_host = #{dbHost},
+            </if>
+            <if test="dbPort != null">
+                db_port = #{dbPort},
+            </if>
+            <if test="dbServe != null and dbServe != ''">
+                db_serve = #{dbServe},
+            </if>
+            <if test="dbSpace != null and dbSpace != ''">
+                db_space = #{dbSpace},
             </if>
             <if test="dbName != null and dbName != ''">
                 db_name = #{dbName},
@@ -128,7 +149,7 @@
     <!-- 分页查询 -->
     <select id="queryPageRhTaskDbList" resultMap="BaseResultMap">
             select
-                id, task_id, db_host, db_name, db_passwd, state, result, sync_at, sync_end, creat_at            
+                id, task_id, db_host, db_port, db_serve, db_space, db_name, db_passwd, state, result, sync_at, sync_end, creat_at            
             from bzfx.rh_task_db
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null">
@@ -139,6 +160,15 @@
                    </if>
                                <if test="obj.dbHost != null and obj.dbHost != ''">
                         and db_host = #{obj.dbHost}
+                   </if>
+                               <if test="obj.dbPort != null">
+                        and db_port = #{obj.dbPort}
+                   </if>
+                               <if test="obj.dbServe != null and obj.dbServe != ''">
+                        and db_serve = #{obj.dbServe}
+                   </if>
+                               <if test="obj.dbSpace != null and obj.dbSpace != ''">
+                        and db_space = #{obj.dbSpace}
                    </if>
                                <if test="obj.dbName != null and obj.dbName != ''">
                         and db_name = #{obj.dbName}

@@ -9,10 +9,10 @@ import lombok.Data;
  * 任务数据-数据库(RhTaskDb)实体类
  *
  * @author makejava
- * @since 2021-11-21 18:48:45
+ * @since 2021-11-25 17:01:32
  */
 public class RhTaskDb implements Serializable {
-    private static final long serialVersionUID = 500814454955445392L;
+    private static final long serialVersionUID = 113182997546437128L;
     /**
     * id
     */
@@ -25,6 +25,18 @@ public class RhTaskDb implements Serializable {
     * 主机
     */
     private String dbHost;
+    /**
+    * 端口
+    */
+    private Integer dbPort;
+    /**
+    * 服务名
+    */
+    private String dbServe;
+    /**
+    * 表空间
+    */
+    private String dbSpace;
     /**
     * 用户名
     */
