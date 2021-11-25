@@ -16,12 +16,13 @@
         <result property="duiyingbzkdwmc" column="DUIYINGBZKDWMC" jdbcType="VARCHAR"/>
         <result property="suoshuddw" column="SUOSHUDDW" jdbcType="VARCHAR"/>
         <result property="suoshuzq" column="SUOSHUZQ" jdbcType="VARCHAR"/>
+        <result property="version" column="VERSION" jdbcType="NUMERIC"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          ID, JICENGYLJGDM, JICENGYLJGMC, WEIQINDM, WEIQINMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, DANWEIBSF, DUIYINGBZKDWMC, SUOSHUDDW, SUOSHUZQ
+          ID, JICENGYLJGDM, JICENGYLJGMC, WEIQINDM, WEIQINMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, DANWEIBSF, DUIYINGBZKDWMC, SUOSHUDDW, SUOSHUZQ, VERSION
         from bzfx.BZK_BZ_TAB_JICENGYLJG
         where ID = #{id}
     </select>
@@ -29,7 +30,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          ID, JICENGYLJGDM, JICENGYLJGMC, WEIQINDM, WEIQINMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, DANWEIBSF, DUIYINGBZKDWMC, SUOSHUDDW, SUOSHUZQ
+          ID, JICENGYLJGDM, JICENGYLJGMC, WEIQINDM, WEIQINMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, DANWEIBSF, DUIYINGBZKDWMC, SUOSHUDDW, SUOSHUZQ, VERSION
         from bzfx.BZK_BZ_TAB_JICENGYLJG
         limit #{offset}, #{limit}
     </select>
@@ -37,7 +38,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          ID, JICENGYLJGDM, JICENGYLJGMC, WEIQINDM, WEIQINMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, DANWEIBSF, DUIYINGBZKDWMC, SUOSHUDDW, SUOSHUZQ
+          ID, JICENGYLJGDM, JICENGYLJGMC, WEIQINDM, WEIQINMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, DANWEIBSF, DUIYINGBZKDWMC, SUOSHUDDW, SUOSHUZQ, VERSION
         from bzfx.BZK_BZ_TAB_JICENGYLJG
         <where>
             <if test="id != null and id != ''">
@@ -75,6 +76,9 @@
             </if>
             <if test="suoshuzq != null and suoshuzq != ''">
                 and SUOSHUZQ = #{suoshuzq}
+            </if>
+            <if test="version != null">
+                and VERSION = #{version}
             </if>
         </where>
     </select>
@@ -142,7 +146,7 @@
     <!-- 分页查询 -->
     <select id="queryPageBzkBzTabJicengyljgList" resultMap="BaseResultMap">
             select
-                ID, JICENGYLJGDM, JICENGYLJGMC, WEIQINDM, WEIQINMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, DANWEIBSF, DUIYINGBZKDWMC, SUOSHUDDW, SUOSHUZQ            
+                ID, JICENGYLJGDM, JICENGYLJGMC, WEIQINDM, WEIQINMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, DANWEIBSF, DUIYINGBZKDWMC, SUOSHUDDW, SUOSHUZQ, VERSION            
             from bzfx.BZK_BZ_TAB_JICENGYLJG
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null and obj.id != ''">
@@ -180,6 +184,9 @@
                    </if>
                                <if test="obj.suoshuzq != null and obj.suoshuzq != ''">
                         and SUOSHUZQ = #{obj.suoshuzq}
+                   </if>
+                               <if test="obj.version != null">
+                        and VERSION = #{obj.version}
                    </if>
                         </trim>
     </select>

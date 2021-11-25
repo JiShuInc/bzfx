@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.BzkBzTabXiashujcyljgDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.BzkBzTabXiashujcyljg">
+        <!--@Table BZK_BZ_TAB_XIASHUJCYLJG-->
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="jicengyljgdm" column="JICENGYLJGDM" jdbcType="VARCHAR"/>
+        <result property="jicengyljgmc" column="JICENGYLJGMC" jdbcType="VARCHAR"/>
+        <result property="shifouxs" column="SHIFOUXS" jdbcType="VARCHAR"/>
+        <result property="shujuszdw" column="SHUJUSZDW" jdbcType="VARCHAR"/>
+        <result property="zhuangtai" column="ZHUANGTAI" jdbcType="VARCHAR"/>
+        <result property="danweibsf" column="DANWEIBSF" jdbcType="VARCHAR"/>
+        <result property="duiyingbzkdwmc" column="DUIYINGBZKDWMC" jdbcType="VARCHAR"/>
+        <result property="tixiyydm" column="TIXIYYDM" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          ID, JICENGYLJGDM, JICENGYLJGMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, DANWEIBSF, DUIYINGBZKDWMC, TIXIYYDM
+        from bzfx.BZK_BZ_TAB_XIASHUJCYLJG
+        where ID = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          ID, JICENGYLJGDM, JICENGYLJGMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, DANWEIBSF, DUIYINGBZKDWMC, TIXIYYDM
+        from bzfx.BZK_BZ_TAB_XIASHUJCYLJG
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          ID, JICENGYLJGDM, JICENGYLJGMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, DANWEIBSF, DUIYINGBZKDWMC, TIXIYYDM
+        from bzfx.BZK_BZ_TAB_XIASHUJCYLJG
+        <where>
+            <if test="id != null and id != ''">
+                and ID = #{id}
+            </if>
+            <if test="jicengyljgdm != null and jicengyljgdm != ''">
+                and JICENGYLJGDM = #{jicengyljgdm}
+            </if>
+            <if test="jicengyljgmc != null and jicengyljgmc != ''">
+                and JICENGYLJGMC = #{jicengyljgmc}
+            </if>
+            <if test="shifouxs != null and shifouxs != ''">
+                and SHIFOUXS = #{shifouxs}
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                and SHUJUSZDW = #{shujuszdw}
+            </if>
+            <if test="zhuangtai != null and zhuangtai != ''">
+                and ZHUANGTAI = #{zhuangtai}
+            </if>
+            <if test="danweibsf != null and danweibsf != ''">
+                and DANWEIBSF = #{danweibsf}
+            </if>
+            <if test="duiyingbzkdwmc != null and duiyingbzkdwmc != ''">
+                and DUIYINGBZKDWMC = #{duiyingbzkdwmc}
+            </if>
+            <if test="tixiyydm != null and tixiyydm != ''">
+                and TIXIYYDM = #{tixiyydm}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.BZK_BZ_TAB_XIASHUJCYLJG(JICENGYLJGDM, JICENGYLJGMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, DANWEIBSF, DUIYINGBZKDWMC, TIXIYYDM)
+        values (#{jicengyljgdm}, #{jicengyljgmc}, #{shifouxs}, #{shujuszdw}, #{zhuangtai}, #{danweibsf}, #{duiyingbzkdwmc}, #{tixiyydm})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.BZK_BZ_TAB_XIASHUJCYLJG
+        <set>
+            <if test="jicengyljgdm != null and jicengyljgdm != ''">
+                JICENGYLJGDM = #{jicengyljgdm},
+            </if>
+            <if test="jicengyljgmc != null and jicengyljgmc != ''">
+                JICENGYLJGMC = #{jicengyljgmc},
+            </if>
+            <if test="shifouxs != null and shifouxs != ''">
+                SHIFOUXS = #{shifouxs},
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                SHUJUSZDW = #{shujuszdw},
+            </if>
+            <if test="zhuangtai != null and zhuangtai != ''">
+                ZHUANGTAI = #{zhuangtai},
+            </if>
+            <if test="danweibsf != null and danweibsf != ''">
+                DANWEIBSF = #{danweibsf},
+            </if>
+            <if test="duiyingbzkdwmc != null and duiyingbzkdwmc != ''">
+                DUIYINGBZKDWMC = #{duiyingbzkdwmc},
+            </if>
+            <if test="tixiyydm != null and tixiyydm != ''">
+                TIXIYYDM = #{tixiyydm},
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.BZK_BZ_TAB_XIASHUJCYLJG where ID = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.BZK_BZ_TAB_XIASHUJCYLJG
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageBzkBzTabXiashujcyljgList" resultMap="BaseResultMap">
+            select
+                ID, JICENGYLJGDM, JICENGYLJGMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, DANWEIBSF, DUIYINGBZKDWMC, TIXIYYDM            
+            from bzfx.BZK_BZ_TAB_XIASHUJCYLJG
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null and obj.id != ''">
+                        and ID = #{obj.id}
+                   </if>
+                               <if test="obj.jicengyljgdm != null and obj.jicengyljgdm != ''">
+                        and JICENGYLJGDM = #{obj.jicengyljgdm}
+                   </if>
+                               <if test="obj.jicengyljgmc != null and obj.jicengyljgmc != ''">
+                        and JICENGYLJGMC = #{obj.jicengyljgmc}
+                   </if>
+                               <if test="obj.shifouxs != null and obj.shifouxs != ''">
+                        and SHIFOUXS = #{obj.shifouxs}
+                   </if>
+                               <if test="obj.shujuszdw != null and obj.shujuszdw != ''">
+                        and SHUJUSZDW = #{obj.shujuszdw}
+                   </if>
+                               <if test="obj.zhuangtai != null and obj.zhuangtai != ''">
+                        and ZHUANGTAI = #{obj.zhuangtai}
+                   </if>
+                               <if test="obj.danweibsf != null and obj.danweibsf != ''">
+                        and DANWEIBSF = #{obj.danweibsf}
+                   </if>
+                               <if test="obj.duiyingbzkdwmc != null and obj.duiyingbzkdwmc != ''">
+                        and DUIYINGBZKDWMC = #{obj.duiyingbzkdwmc}
+                   </if>
+                               <if test="obj.tixiyydm != null and obj.tixiyydm != ''">
+                        and TIXIYYDM = #{obj.tixiyydm}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

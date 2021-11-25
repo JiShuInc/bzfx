@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.BzkBzTabRenyuanlbDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.BzkBzTabRenyuanlb">
+        <!--@Table BZK_BZ_TAB_RENYUANLB-->
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="renyuanlbdm" column="RENYUANLBDM" jdbcType="VARCHAR"/>
+        <result property="renyuanlb" column="RENYUANLB" jdbcType="VARCHAR"/>
+        <result property="gongxindm" column="GONGXINDM" jdbcType="VARCHAR"/>
+        <result property="gongxinmc" column="GONGXINMC" jdbcType="VARCHAR"/>
+        <result property="shifouxs" column="SHIFOUXS" jdbcType="VARCHAR"/>
+        <result property="shujuszdw" column="SHUJUSZDW" jdbcType="VARCHAR"/>
+        <result property="duiyingrylb" column="DUIYINGRYLB" jdbcType="VARCHAR"/>
+        <result property="weiqindm" column="WEIQINDM" jdbcType="VARCHAR"/>
+        <result property="weiqinmc" column="WEIQINMC" jdbcType="VARCHAR"/>
+        <result property="zhuangtai" column="ZHUANGTAI" jdbcType="VARCHAR"/>
+        <result property="kaleixing" column="KALEIXING" jdbcType="VARCHAR"/>
+        <result property="sfdczk" column="SFDCZK" jdbcType="VARCHAR"/>
+        <result property="sfdcws" column="SFDCWS" jdbcType="VARCHAR"/>
+        <result property="wsrylx" column="WSRYLX" jdbcType="VARCHAR"/>
+        <result property="wssflb" column="WSSFLB" jdbcType="VARCHAR"/>
+        <result property="wssflbmc" column="WSSFLBMC" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          ID, RENYUANLBDM, RENYUANLB, GONGXINDM, GONGXINMC, SHIFOUXS, SHUJUSZDW, DUIYINGRYLB, WEIQINDM, WEIQINMC, ZHUANGTAI, KALEIXING, SFDCZK, SFDCWS, WSRYLX, WSSFLB, WSSFLBMC
+        from bzfx.BZK_BZ_TAB_RENYUANLB
+        where ID = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          ID, RENYUANLBDM, RENYUANLB, GONGXINDM, GONGXINMC, SHIFOUXS, SHUJUSZDW, DUIYINGRYLB, WEIQINDM, WEIQINMC, ZHUANGTAI, KALEIXING, SFDCZK, SFDCWS, WSRYLX, WSSFLB, WSSFLBMC
+        from bzfx.BZK_BZ_TAB_RENYUANLB
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          ID, RENYUANLBDM, RENYUANLB, GONGXINDM, GONGXINMC, SHIFOUXS, SHUJUSZDW, DUIYINGRYLB, WEIQINDM, WEIQINMC, ZHUANGTAI, KALEIXING, SFDCZK, SFDCWS, WSRYLX, WSSFLB, WSSFLBMC
+        from bzfx.BZK_BZ_TAB_RENYUANLB
+        <where>
+            <if test="id != null and id != ''">
+                and ID = #{id}
+            </if>
+            <if test="renyuanlbdm != null and renyuanlbdm != ''">
+                and RENYUANLBDM = #{renyuanlbdm}
+            </if>
+            <if test="renyuanlb != null and renyuanlb != ''">
+                and RENYUANLB = #{renyuanlb}
+            </if>
+            <if test="gongxindm != null and gongxindm != ''">
+                and GONGXINDM = #{gongxindm}
+            </if>
+            <if test="gongxinmc != null and gongxinmc != ''">
+                and GONGXINMC = #{gongxinmc}
+            </if>
+            <if test="shifouxs != null and shifouxs != ''">
+                and SHIFOUXS = #{shifouxs}
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                and SHUJUSZDW = #{shujuszdw}
+            </if>
+            <if test="duiyingrylb != null and duiyingrylb != ''">
+                and DUIYINGRYLB = #{duiyingrylb}
+            </if>
+            <if test="weiqindm != null and weiqindm != ''">
+                and WEIQINDM = #{weiqindm}
+            </if>
+            <if test="weiqinmc != null and weiqinmc != ''">
+                and WEIQINMC = #{weiqinmc}
+            </if>
+            <if test="zhuangtai != null and zhuangtai != ''">
+                and ZHUANGTAI = #{zhuangtai}
+            </if>
+            <if test="kaleixing != null and kaleixing != ''">
+                and KALEIXING = #{kaleixing}
+            </if>
+            <if test="sfdczk != null and sfdczk != ''">
+                and SFDCZK = #{sfdczk}
+            </if>
+            <if test="sfdcws != null and sfdcws != ''">
+                and SFDCWS = #{sfdcws}
+            </if>
+            <if test="wsrylx != null and wsrylx != ''">
+                and WSRYLX = #{wsrylx}
+            </if>
+            <if test="wssflb != null and wssflb != ''">
+                and WSSFLB = #{wssflb}
+            </if>
+            <if test="wssflbmc != null and wssflbmc != ''">
+                and WSSFLBMC = #{wssflbmc}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.BZK_BZ_TAB_RENYUANLB(RENYUANLBDM, RENYUANLB, GONGXINDM, GONGXINMC, SHIFOUXS, SHUJUSZDW, DUIYINGRYLB, WEIQINDM, WEIQINMC, ZHUANGTAI, KALEIXING, SFDCZK, SFDCWS, WSRYLX, WSSFLB, WSSFLBMC)
+        values (#{renyuanlbdm}, #{renyuanlb}, #{gongxindm}, #{gongxinmc}, #{shifouxs}, #{shujuszdw}, #{duiyingrylb}, #{weiqindm}, #{weiqinmc}, #{zhuangtai}, #{kaleixing}, #{sfdczk}, #{sfdcws}, #{wsrylx}, #{wssflb}, #{wssflbmc})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.BZK_BZ_TAB_RENYUANLB
+        <set>
+            <if test="renyuanlbdm != null and renyuanlbdm != ''">
+                RENYUANLBDM = #{renyuanlbdm},
+            </if>
+            <if test="renyuanlb != null and renyuanlb != ''">
+                RENYUANLB = #{renyuanlb},
+            </if>
+            <if test="gongxindm != null and gongxindm != ''">
+                GONGXINDM = #{gongxindm},
+            </if>
+            <if test="gongxinmc != null and gongxinmc != ''">
+                GONGXINMC = #{gongxinmc},
+            </if>
+            <if test="shifouxs != null and shifouxs != ''">
+                SHIFOUXS = #{shifouxs},
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                SHUJUSZDW = #{shujuszdw},
+            </if>
+            <if test="duiyingrylb != null and duiyingrylb != ''">
+                DUIYINGRYLB = #{duiyingrylb},
+            </if>
+            <if test="weiqindm != null and weiqindm != ''">
+                WEIQINDM = #{weiqindm},
+            </if>
+            <if test="weiqinmc != null and weiqinmc != ''">
+                WEIQINMC = #{weiqinmc},
+            </if>
+            <if test="zhuangtai != null and zhuangtai != ''">
+                ZHUANGTAI = #{zhuangtai},
+            </if>
+            <if test="kaleixing != null and kaleixing != ''">
+                KALEIXING = #{kaleixing},
+            </if>
+            <if test="sfdczk != null and sfdczk != ''">
+                SFDCZK = #{sfdczk},
+            </if>
+            <if test="sfdcws != null and sfdcws != ''">
+                SFDCWS = #{sfdcws},
+            </if>
+            <if test="wsrylx != null and wsrylx != ''">
+                WSRYLX = #{wsrylx},
+            </if>
+            <if test="wssflb != null and wssflb != ''">
+                WSSFLB = #{wssflb},
+            </if>
+            <if test="wssflbmc != null and wssflbmc != ''">
+                WSSFLBMC = #{wssflbmc},
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.BZK_BZ_TAB_RENYUANLB where ID = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.BZK_BZ_TAB_RENYUANLB
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageBzkBzTabRenyuanlbList" resultMap="BaseResultMap">
+            select
+                ID, RENYUANLBDM, RENYUANLB, GONGXINDM, GONGXINMC, SHIFOUXS, SHUJUSZDW, DUIYINGRYLB, WEIQINDM, WEIQINMC, ZHUANGTAI, KALEIXING, SFDCZK, SFDCWS, WSRYLX, WSSFLB, WSSFLBMC            
+            from bzfx.BZK_BZ_TAB_RENYUANLB
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null and obj.id != ''">
+                        and ID = #{obj.id}
+                   </if>
+                               <if test="obj.renyuanlbdm != null and obj.renyuanlbdm != ''">
+                        and RENYUANLBDM = #{obj.renyuanlbdm}
+                   </if>
+                               <if test="obj.renyuanlb != null and obj.renyuanlb != ''">
+                        and RENYUANLB = #{obj.renyuanlb}
+                   </if>
+                               <if test="obj.gongxindm != null and obj.gongxindm != ''">
+                        and GONGXINDM = #{obj.gongxindm}
+                   </if>
+                               <if test="obj.gongxinmc != null and obj.gongxinmc != ''">
+                        and GONGXINMC = #{obj.gongxinmc}
+                   </if>
+                               <if test="obj.shifouxs != null and obj.shifouxs != ''">
+                        and SHIFOUXS = #{obj.shifouxs}
+                   </if>
+                               <if test="obj.shujuszdw != null and obj.shujuszdw != ''">
+                        and SHUJUSZDW = #{obj.shujuszdw}
+                   </if>
+                               <if test="obj.duiyingrylb != null and obj.duiyingrylb != ''">
+                        and DUIYINGRYLB = #{obj.duiyingrylb}
+                   </if>
+                               <if test="obj.weiqindm != null and obj.weiqindm != ''">
+                        and WEIQINDM = #{obj.weiqindm}
+                   </if>
+                               <if test="obj.weiqinmc != null and obj.weiqinmc != ''">
+                        and WEIQINMC = #{obj.weiqinmc}
+                   </if>
+                               <if test="obj.zhuangtai != null and obj.zhuangtai != ''">
+                        and ZHUANGTAI = #{obj.zhuangtai}
+                   </if>
+                               <if test="obj.kaleixing != null and obj.kaleixing != ''">
+                        and KALEIXING = #{obj.kaleixing}
+                   </if>
+                               <if test="obj.sfdczk != null and obj.sfdczk != ''">
+                        and SFDCZK = #{obj.sfdczk}
+                   </if>
+                               <if test="obj.sfdcws != null and obj.sfdcws != ''">
+                        and SFDCWS = #{obj.sfdcws}
+                   </if>
+                               <if test="obj.wsrylx != null and obj.wsrylx != ''">
+                        and WSRYLX = #{obj.wsrylx}
+                   </if>
+                               <if test="obj.wssflb != null and obj.wssflb != ''">
+                        and WSSFLB = #{obj.wssflb}
+                   </if>
+                               <if test="obj.wssflbmc != null and obj.wssflbmc != ''">
+                        and WSSFLBMC = #{obj.wssflbmc}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

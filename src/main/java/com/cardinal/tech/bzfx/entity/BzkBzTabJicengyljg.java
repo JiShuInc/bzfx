@@ -8,10 +8,10 @@ import lombok.Data;
  * 体系医院标准编码(BzkBzTabJicengyljg)实体类
  *
  * @author makejava
- * @since 2021-11-20 23:59:46
+ * @since 2021-11-25 15:22:56
  */
 public class BzkBzTabJicengyljg implements Serializable {
-    private static final long serialVersionUID = -39345110693201570L;
+    private static final long serialVersionUID = -12338267858715064L;
     /**
     * 主键ID
     */
@@ -60,5 +60,9 @@ public class BzkBzTabJicengyljg implements Serializable {
     * 所属战区
     */
     private String suoshuzq;
+    /**
+    * 版本号
+    */
+    private Double version;
 
 }

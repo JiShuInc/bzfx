@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.BzkBzTabHunyinzkDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.BzkBzTabHunyinzk">
+        <!--@Table BZK_BZ_TAB_HUNYINZK-->
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="hunyinzkdm" column="HUNYINZKDM" jdbcType="VARCHAR"/>
+        <result property="hunyinzk" column="HUNYINZK" jdbcType="VARCHAR"/>
+        <result property="shifouxs" column="SHIFOUXS" jdbcType="VARCHAR"/>
+        <result property="shujuszdw" column="SHUJUSZDW" jdbcType="VARCHAR"/>
+        <result property="zhuangtai" column="ZHUANGTAI" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          ID, HUNYINZKDM, HUNYINZK, SHIFOUXS, SHUJUSZDW, ZHUANGTAI
+        from bzfx.BZK_BZ_TAB_HUNYINZK
+        where ID = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          ID, HUNYINZKDM, HUNYINZK, SHIFOUXS, SHUJUSZDW, ZHUANGTAI
+        from bzfx.BZK_BZ_TAB_HUNYINZK
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          ID, HUNYINZKDM, HUNYINZK, SHIFOUXS, SHUJUSZDW, ZHUANGTAI
+        from bzfx.BZK_BZ_TAB_HUNYINZK
+        <where>
+            <if test="id != null and id != ''">
+                and ID = #{id}
+            </if>
+            <if test="hunyinzkdm != null and hunyinzkdm != ''">
+                and HUNYINZKDM = #{hunyinzkdm}
+            </if>
+            <if test="hunyinzk != null and hunyinzk != ''">
+                and HUNYINZK = #{hunyinzk}
+            </if>
+            <if test="shifouxs != null and shifouxs != ''">
+                and SHIFOUXS = #{shifouxs}
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                and SHUJUSZDW = #{shujuszdw}
+            </if>
+            <if test="zhuangtai != null and zhuangtai != ''">
+                and ZHUANGTAI = #{zhuangtai}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.BZK_BZ_TAB_HUNYINZK(HUNYINZKDM, HUNYINZK, SHIFOUXS, SHUJUSZDW, ZHUANGTAI)
+        values (#{hunyinzkdm}, #{hunyinzk}, #{shifouxs}, #{shujuszdw}, #{zhuangtai})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.BZK_BZ_TAB_HUNYINZK
+        <set>
+            <if test="hunyinzkdm != null and hunyinzkdm != ''">
+                HUNYINZKDM = #{hunyinzkdm},
+            </if>
+            <if test="hunyinzk != null and hunyinzk != ''">
+                HUNYINZK = #{hunyinzk},
+            </if>
+            <if test="shifouxs != null and shifouxs != ''">
+                SHIFOUXS = #{shifouxs},
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                SHUJUSZDW = #{shujuszdw},
+            </if>
+            <if test="zhuangtai != null and zhuangtai != ''">
+                ZHUANGTAI = #{zhuangtai},
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.BZK_BZ_TAB_HUNYINZK where ID = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.BZK_BZ_TAB_HUNYINZK
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageBzkBzTabHunyinzkList" resultMap="BaseResultMap">
+            select
+                ID, HUNYINZKDM, HUNYINZK, SHIFOUXS, SHUJUSZDW, ZHUANGTAI            
+            from bzfx.BZK_BZ_TAB_HUNYINZK
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null and obj.id != ''">
+                        and ID = #{obj.id}
+                   </if>
+                               <if test="obj.hunyinzkdm != null and obj.hunyinzkdm != ''">
+                        and HUNYINZKDM = #{obj.hunyinzkdm}
+                   </if>
+                               <if test="obj.hunyinzk != null and obj.hunyinzk != ''">
+                        and HUNYINZK = #{obj.hunyinzk}
+                   </if>
+                               <if test="obj.shifouxs != null and obj.shifouxs != ''">
+                        and SHIFOUXS = #{obj.shifouxs}
+                   </if>
+                               <if test="obj.shujuszdw != null and obj.shujuszdw != ''">
+                        and SHUJUSZDW = #{obj.shujuszdw}
+                   </if>
+                               <if test="obj.zhuangtai != null and obj.zhuangtai != ''">
+                        and ZHUANGTAI = #{obj.zhuangtai}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

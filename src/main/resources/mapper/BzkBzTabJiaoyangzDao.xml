@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.BzkBzTabJiaoyangzDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.BzkBzTabJiaoyangz">
+        <!--@Table BZK_BZ_TAB_JIAOYANGZ-->
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="jyxdm" column="JYXDM" jdbcType="VARCHAR"/>
+        <result property="jyxmc" column="JYXMC" jdbcType="VARCHAR"/>
+        <result property="jycd" column="JYCD" jdbcType="VARCHAR"/>
+        <result property="jiaoyangzsm" column="JIAOYANGZSM" jdbcType="VARCHAR"/>
+        <result property="xiugaiff" column="XIUGAIFF" jdbcType="VARCHAR"/>
+        <result property="duiyingrylb" column="DUIYINGRYLB" jdbcType="VARCHAR"/>
+        <result property="jiaoyanrylb" column="JIAOYANRYLB" jdbcType="VARCHAR"/>
+        <result property="ziduanmc" column="ZIDUANMC" jdbcType="VARCHAR"/>
+        <result property="jiaoyangz" column="JIAOYANGZ" jdbcType="VARCHAR"/>
+        <result property="shifousy" column="SHIFOUSY" jdbcType="VARCHAR"/>
+        <result property="jyxyj" column="JYXYJ" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          ID, JYXDM, JYXMC, JYCD, JIAOYANGZSM, XIUGAIFF, DUIYINGRYLB, JIAOYANRYLB, ZIDUANMC, JIAOYANGZ, SHIFOUSY, JYXYJ
+        from bzfx.BZK_BZ_TAB_JIAOYANGZ
+        where ID = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          ID, JYXDM, JYXMC, JYCD, JIAOYANGZSM, XIUGAIFF, DUIYINGRYLB, JIAOYANRYLB, ZIDUANMC, JIAOYANGZ, SHIFOUSY, JYXYJ
+        from bzfx.BZK_BZ_TAB_JIAOYANGZ
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          ID, JYXDM, JYXMC, JYCD, JIAOYANGZSM, XIUGAIFF, DUIYINGRYLB, JIAOYANRYLB, ZIDUANMC, JIAOYANGZ, SHIFOUSY, JYXYJ
+        from bzfx.BZK_BZ_TAB_JIAOYANGZ
+        <where>
+            <if test="id != null and id != ''">
+                and ID = #{id}
+            </if>
+            <if test="jyxdm != null and jyxdm != ''">
+                and JYXDM = #{jyxdm}
+            </if>
+            <if test="jyxmc != null and jyxmc != ''">
+                and JYXMC = #{jyxmc}
+            </if>
+            <if test="jycd != null and jycd != ''">
+                and JYCD = #{jycd}
+            </if>
+            <if test="jiaoyangzsm != null and jiaoyangzsm != ''">
+                and JIAOYANGZSM = #{jiaoyangzsm}
+            </if>
+            <if test="xiugaiff != null and xiugaiff != ''">
+                and XIUGAIFF = #{xiugaiff}
+            </if>
+            <if test="duiyingrylb != null and duiyingrylb != ''">
+                and DUIYINGRYLB = #{duiyingrylb}
+            </if>
+            <if test="jiaoyanrylb != null and jiaoyanrylb != ''">
+                and JIAOYANRYLB = #{jiaoyanrylb}
+            </if>
+            <if test="ziduanmc != null and ziduanmc != ''">
+                and ZIDUANMC = #{ziduanmc}
+            </if>
+            <if test="jiaoyangz != null and jiaoyangz != ''">
+                and JIAOYANGZ = #{jiaoyangz}
+            </if>
+            <if test="shifousy != null and shifousy != ''">
+                and SHIFOUSY = #{shifousy}
+            </if>
+            <if test="jyxyj != null and jyxyj != ''">
+                and JYXYJ = #{jyxyj}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.BZK_BZ_TAB_JIAOYANGZ(JYXDM, JYXMC, JYCD, JIAOYANGZSM, XIUGAIFF, DUIYINGRYLB, JIAOYANRYLB, ZIDUANMC, JIAOYANGZ, SHIFOUSY, JYXYJ)
+        values (#{jyxdm}, #{jyxmc}, #{jycd}, #{jiaoyangzsm}, #{xiugaiff}, #{duiyingrylb}, #{jiaoyanrylb}, #{ziduanmc}, #{jiaoyangz}, #{shifousy}, #{jyxyj})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.BZK_BZ_TAB_JIAOYANGZ
+        <set>
+            <if test="jyxdm != null and jyxdm != ''">
+                JYXDM = #{jyxdm},
+            </if>
+            <if test="jyxmc != null and jyxmc != ''">
+                JYXMC = #{jyxmc},
+            </if>
+            <if test="jycd != null and jycd != ''">
+                JYCD = #{jycd},
+            </if>
+            <if test="jiaoyangzsm != null and jiaoyangzsm != ''">
+                JIAOYANGZSM = #{jiaoyangzsm},
+            </if>
+            <if test="xiugaiff != null and xiugaiff != ''">
+                XIUGAIFF = #{xiugaiff},
+            </if>
+            <if test="duiyingrylb != null and duiyingrylb != ''">
+                DUIYINGRYLB = #{duiyingrylb},
+            </if>
+            <if test="jiaoyanrylb != null and jiaoyanrylb != ''">
+                JIAOYANRYLB = #{jiaoyanrylb},
+            </if>
+            <if test="ziduanmc != null and ziduanmc != ''">
+                ZIDUANMC = #{ziduanmc},
+            </if>
+            <if test="jiaoyangz != null and jiaoyangz != ''">
+                JIAOYANGZ = #{jiaoyangz},
+            </if>
+            <if test="shifousy != null and shifousy != ''">
+                SHIFOUSY = #{shifousy},
+            </if>
+            <if test="jyxyj != null and jyxyj != ''">
+                JYXYJ = #{jyxyj},
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.BZK_BZ_TAB_JIAOYANGZ where ID = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.BZK_BZ_TAB_JIAOYANGZ
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageBzkBzTabJiaoyangzList" resultMap="BaseResultMap">
+            select
+                ID, JYXDM, JYXMC, JYCD, JIAOYANGZSM, XIUGAIFF, DUIYINGRYLB, JIAOYANRYLB, ZIDUANMC, JIAOYANGZ, SHIFOUSY, JYXYJ            
+            from bzfx.BZK_BZ_TAB_JIAOYANGZ
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null and obj.id != ''">
+                        and ID = #{obj.id}
+                   </if>
+                               <if test="obj.jyxdm != null and obj.jyxdm != ''">
+                        and JYXDM = #{obj.jyxdm}
+                   </if>
+                               <if test="obj.jyxmc != null and obj.jyxmc != ''">
+                        and JYXMC = #{obj.jyxmc}
+                   </if>
+                               <if test="obj.jycd != null and obj.jycd != ''">
+                        and JYCD = #{obj.jycd}
+                   </if>
+                               <if test="obj.jiaoyangzsm != null and obj.jiaoyangzsm != ''">
+                        and JIAOYANGZSM = #{obj.jiaoyangzsm}
+                   </if>
+                               <if test="obj.xiugaiff != null and obj.xiugaiff != ''">
+                        and XIUGAIFF = #{obj.xiugaiff}
+                   </if>
+                               <if test="obj.duiyingrylb != null and obj.duiyingrylb != ''">
+                        and DUIYINGRYLB = #{obj.duiyingrylb}
+                   </if>
+                               <if test="obj.jiaoyanrylb != null and obj.jiaoyanrylb != ''">
+                        and JIAOYANRYLB = #{obj.jiaoyanrylb}
+                   </if>
+                               <if test="obj.ziduanmc != null and obj.ziduanmc != ''">
+                        and ZIDUANMC = #{obj.ziduanmc}
+                   </if>
+                               <if test="obj.jiaoyangz != null and obj.jiaoyangz != ''">
+                        and JIAOYANGZ = #{obj.jiaoyangz}
+                   </if>
+                               <if test="obj.shifousy != null and obj.shifousy != ''">
+                        and SHIFOUSY = #{obj.shifousy}
+                   </if>
+                               <if test="obj.jyxyj != null and obj.jyxyj != ''">
+                        and JYXYJ = #{obj.jyxyj}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

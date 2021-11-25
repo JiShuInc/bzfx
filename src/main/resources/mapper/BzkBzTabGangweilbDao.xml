@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.BzkBzTabGangweilbDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.BzkBzTabGangweilb">
+        <!--@Table BZK_BZ_TAB_GANGWEILB-->
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="gangweilbdm" column="GANGWEILBDM" jdbcType="VARCHAR"/>
+        <result property="gangweilb" column="GANGWEILB" jdbcType="VARCHAR"/>
+        <result property="duiyingrylb" column="DUIYINGRYLB" jdbcType="VARCHAR"/>
+        <result property="shifouxs" column="SHIFOUXS" jdbcType="VARCHAR"/>
+        <result property="shujuszdw" column="SHUJUSZDW" jdbcType="VARCHAR"/>
+        <result property="zhuangtai" column="ZHUANGTAI" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          ID, GANGWEILBDM, GANGWEILB, DUIYINGRYLB, SHIFOUXS, SHUJUSZDW, ZHUANGTAI
+        from bzfx.BZK_BZ_TAB_GANGWEILB
+        where ID = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          ID, GANGWEILBDM, GANGWEILB, DUIYINGRYLB, SHIFOUXS, SHUJUSZDW, ZHUANGTAI
+        from bzfx.BZK_BZ_TAB_GANGWEILB
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          ID, GANGWEILBDM, GANGWEILB, DUIYINGRYLB, SHIFOUXS, SHUJUSZDW, ZHUANGTAI
+        from bzfx.BZK_BZ_TAB_GANGWEILB
+        <where>
+            <if test="id != null and id != ''">
+                and ID = #{id}
+            </if>
+            <if test="gangweilbdm != null and gangweilbdm != ''">
+                and GANGWEILBDM = #{gangweilbdm}
+            </if>
+            <if test="gangweilb != null and gangweilb != ''">
+                and GANGWEILB = #{gangweilb}
+            </if>
+            <if test="duiyingrylb != null and duiyingrylb != ''">
+                and DUIYINGRYLB = #{duiyingrylb}
+            </if>
+            <if test="shifouxs != null and shifouxs != ''">
+                and SHIFOUXS = #{shifouxs}
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                and SHUJUSZDW = #{shujuszdw}
+            </if>
+            <if test="zhuangtai != null and zhuangtai != ''">
+                and ZHUANGTAI = #{zhuangtai}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.BZK_BZ_TAB_GANGWEILB(GANGWEILBDM, GANGWEILB, DUIYINGRYLB, SHIFOUXS, SHUJUSZDW, ZHUANGTAI)
+        values (#{gangweilbdm}, #{gangweilb}, #{duiyingrylb}, #{shifouxs}, #{shujuszdw}, #{zhuangtai})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.BZK_BZ_TAB_GANGWEILB
+        <set>
+            <if test="gangweilbdm != null and gangweilbdm != ''">
+                GANGWEILBDM = #{gangweilbdm},
+            </if>
+            <if test="gangweilb != null and gangweilb != ''">
+                GANGWEILB = #{gangweilb},
+            </if>
+            <if test="duiyingrylb != null and duiyingrylb != ''">
+                DUIYINGRYLB = #{duiyingrylb},
+            </if>
+            <if test="shifouxs != null and shifouxs != ''">
+                SHIFOUXS = #{shifouxs},
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                SHUJUSZDW = #{shujuszdw},
+            </if>
+            <if test="zhuangtai != null and zhuangtai != ''">
+                ZHUANGTAI = #{zhuangtai},
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.BZK_BZ_TAB_GANGWEILB where ID = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.BZK_BZ_TAB_GANGWEILB
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageBzkBzTabGangweilbList" resultMap="BaseResultMap">
+            select
+                ID, GANGWEILBDM, GANGWEILB, DUIYINGRYLB, SHIFOUXS, SHUJUSZDW, ZHUANGTAI            
+            from bzfx.BZK_BZ_TAB_GANGWEILB
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null and obj.id != ''">
+                        and ID = #{obj.id}
+                   </if>
+                               <if test="obj.gangweilbdm != null and obj.gangweilbdm != ''">
+                        and GANGWEILBDM = #{obj.gangweilbdm}
+                   </if>
+                               <if test="obj.gangweilb != null and obj.gangweilb != ''">
+                        and GANGWEILB = #{obj.gangweilb}
+                   </if>
+                               <if test="obj.duiyingrylb != null and obj.duiyingrylb != ''">
+                        and DUIYINGRYLB = #{obj.duiyingrylb}
+                   </if>
+                               <if test="obj.shifouxs != null and obj.shifouxs != ''">
+                        and SHIFOUXS = #{obj.shifouxs}
+                   </if>
+                               <if test="obj.shujuszdw != null and obj.shujuszdw != ''">
+                        and SHUJUSZDW = #{obj.shujuszdw}
+                   </if>
+                               <if test="obj.zhuangtai != null and obj.zhuangtai != ''">
+                        and ZHUANGTAI = #{obj.zhuangtai}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

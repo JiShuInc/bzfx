@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.BzkBzTabXzqhdzDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.BzkBzTabXzqhdz">
+        <!--@Table BZK_BZ_TAB_XZQHDZ-->
+        <result property="dimingdm" column="DIMINGDM" jdbcType="VARCHAR"/>
+        <result property="dimingqc" column="DIMINGQC" jdbcType="VARCHAR"/>
+        <result property="wsxzqhdm" column="WSXZQHDM" jdbcType="VARCHAR"/>
+        <result property="wsxzqhmc" column="WSXZQHMC" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          DIMINGDM, DIMINGQC, WSXZQHDM, WSXZQHMC
+        from bzfx.BZK_BZ_TAB_XZQHDZ
+        where DIMINGDM = #{dimingdm}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          DIMINGDM, DIMINGQC, WSXZQHDM, WSXZQHMC
+        from bzfx.BZK_BZ_TAB_XZQHDZ
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          DIMINGDM, DIMINGQC, WSXZQHDM, WSXZQHMC
+        from bzfx.BZK_BZ_TAB_XZQHDZ
+        <where>
+            <if test="dimingdm != null and dimingdm != ''">
+                and DIMINGDM = #{dimingdm}
+            </if>
+            <if test="dimingqc != null and dimingqc != ''">
+                and DIMINGQC = #{dimingqc}
+            </if>
+            <if test="wsxzqhdm != null and wsxzqhdm != ''">
+                and WSXZQHDM = #{wsxzqhdm}
+            </if>
+            <if test="wsxzqhmc != null and wsxzqhmc != ''">
+                and WSXZQHMC = #{wsxzqhmc}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="dimingdm" useGeneratedKeys="true">
+        insert into bzfx.BZK_BZ_TAB_XZQHDZ(DIMINGQC, WSXZQHDM, WSXZQHMC)
+        values (#{dimingqc}, #{wsxzqhdm}, #{wsxzqhmc})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.BZK_BZ_TAB_XZQHDZ
+        <set>
+            <if test="dimingqc != null and dimingqc != ''">
+                DIMINGQC = #{dimingqc},
+            </if>
+            <if test="wsxzqhdm != null and wsxzqhdm != ''">
+                WSXZQHDM = #{wsxzqhdm},
+            </if>
+            <if test="wsxzqhmc != null and wsxzqhmc != ''">
+                WSXZQHMC = #{wsxzqhmc},
+            </if>
+        </set>
+        where DIMINGDM = #{dimingdm}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.BZK_BZ_TAB_XZQHDZ where DIMINGDM = #{dimingdm}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.BZK_BZ_TAB_XZQHDZ
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageBzkBzTabXzqhdzList" resultMap="BaseResultMap">
+            select
+                DIMINGDM, DIMINGQC, WSXZQHDM, WSXZQHMC            
+            from bzfx.BZK_BZ_TAB_XZQHDZ
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.dimingdm != null and obj.dimingdm != ''">
+                        and DIMINGDM = #{obj.dimingdm}
+                   </if>
+                               <if test="obj.dimingqc != null and obj.dimingqc != ''">
+                        and DIMINGQC = #{obj.dimingqc}
+                   </if>
+                               <if test="obj.wsxzqhdm != null and obj.wsxzqhdm != ''">
+                        and WSXZQHDM = #{obj.wsxzqhdm}
+                   </if>
+                               <if test="obj.wsxzqhmc != null and obj.wsxzqhmc != ''">
+                        and WSXZQHMC = #{obj.wsxzqhmc}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

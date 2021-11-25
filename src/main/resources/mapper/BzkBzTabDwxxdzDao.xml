@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.BzkBzTabDwxxdzDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.BzkBzTabDwxxdz">
+        <!--@Table BZK_BZ_TAB_DWXXDZ-->
+        <result property="danweiid" column="DANWEIID" jdbcType="VARCHAR"/>
+        <result property="danweimc" column="DANWEIMC" jdbcType="VARCHAR"/>
+        <result property="wsdwdm" column="WSDWDM" jdbcType="VARCHAR"/>
+        <result property="wsdwmc" column="WSDWMC" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          DANWEIID, DANWEIMC, WSDWDM, WSDWMC
+        from bzfx.BZK_BZ_TAB_DWXXDZ
+        where DANWEIID = #{danweiid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          DANWEIID, DANWEIMC, WSDWDM, WSDWMC
+        from bzfx.BZK_BZ_TAB_DWXXDZ
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          DANWEIID, DANWEIMC, WSDWDM, WSDWMC
+        from bzfx.BZK_BZ_TAB_DWXXDZ
+        <where>
+            <if test="danweiid != null and danweiid != ''">
+                and DANWEIID = #{danweiid}
+            </if>
+            <if test="danweimc != null and danweimc != ''">
+                and DANWEIMC = #{danweimc}
+            </if>
+            <if test="wsdwdm != null and wsdwdm != ''">
+                and WSDWDM = #{wsdwdm}
+            </if>
+            <if test="wsdwmc != null and wsdwmc != ''">
+                and WSDWMC = #{wsdwmc}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="danweiid" useGeneratedKeys="true">
+        insert into bzfx.BZK_BZ_TAB_DWXXDZ(DANWEIMC, WSDWDM, WSDWMC)
+        values (#{danweimc}, #{wsdwdm}, #{wsdwmc})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.BZK_BZ_TAB_DWXXDZ
+        <set>
+            <if test="danweimc != null and danweimc != ''">
+                DANWEIMC = #{danweimc},
+            </if>
+            <if test="wsdwdm != null and wsdwdm != ''">
+                WSDWDM = #{wsdwdm},
+            </if>
+            <if test="wsdwmc != null and wsdwmc != ''">
+                WSDWMC = #{wsdwmc},
+            </if>
+        </set>
+        where DANWEIID = #{danweiid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.BZK_BZ_TAB_DWXXDZ where DANWEIID = #{danweiid}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.BZK_BZ_TAB_DWXXDZ
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageBzkBzTabDwxxdzList" resultMap="BaseResultMap">
+            select
+                DANWEIID, DANWEIMC, WSDWDM, WSDWMC            
+            from bzfx.BZK_BZ_TAB_DWXXDZ
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.danweiid != null and obj.danweiid != ''">
+                        and DANWEIID = #{obj.danweiid}
+                   </if>
+                               <if test="obj.danweimc != null and obj.danweimc != ''">
+                        and DANWEIMC = #{obj.danweimc}
+                   </if>
+                               <if test="obj.wsdwdm != null and obj.wsdwdm != ''">
+                        and WSDWDM = #{obj.wsdwdm}
+                   </if>
+                               <if test="obj.wsdwmc != null and obj.wsdwmc != ''">
+                        and WSDWMC = #{obj.wsdwmc}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

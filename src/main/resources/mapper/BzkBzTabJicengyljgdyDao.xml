@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.BzkBzTabJicengyljgdyDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.BzkBzTabJicengyljgdy">
+        <!--@Table BZK_BZ_TAB_JICENGYLJGDY-->
+        <result property="xuhao" column="XUHAO" jdbcType="NUMERIC"/>
+        <result property="jicengyljgdmls" column="JICENGYLJGDMLS" jdbcType="VARCHAR"/>
+        <result property="jicengyljgdm" column="JICENGYLJGDM" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          XUHAO, JICENGYLJGDMLS, JICENGYLJGDM
+        from bzfx.BZK_BZ_TAB_JICENGYLJGDY
+        where JICENGYLJGDMLS = #{jicengyljgdmls}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          XUHAO, JICENGYLJGDMLS, JICENGYLJGDM
+        from bzfx.BZK_BZ_TAB_JICENGYLJGDY
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          XUHAO, JICENGYLJGDMLS, JICENGYLJGDM
+        from bzfx.BZK_BZ_TAB_JICENGYLJGDY
+        <where>
+            <if test="xuhao != null">
+                and XUHAO = #{xuhao}
+            </if>
+            <if test="jicengyljgdmls != null and jicengyljgdmls != ''">
+                and JICENGYLJGDMLS = #{jicengyljgdmls}
+            </if>
+            <if test="jicengyljgdm != null and jicengyljgdm != ''">
+                and JICENGYLJGDM = #{jicengyljgdm}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="jicengyljgdmls" useGeneratedKeys="true">
+        insert into bzfx.BZK_BZ_TAB_JICENGYLJGDY(XUHAO, JICENGYLJGDM)
+        values (#{xuhao}, #{jicengyljgdm})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.BZK_BZ_TAB_JICENGYLJGDY
+        <set>
+            <if test="xuhao != null">
+                XUHAO = #{xuhao},
+            </if>
+            <if test="jicengyljgdm != null and jicengyljgdm != ''">
+                JICENGYLJGDM = #{jicengyljgdm},
+            </if>
+        </set>
+        where JICENGYLJGDMLS = #{jicengyljgdmls}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.BZK_BZ_TAB_JICENGYLJGDY where JICENGYLJGDMLS = #{jicengyljgdmls}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.BZK_BZ_TAB_JICENGYLJGDY
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageBzkBzTabJicengyljgdyList" resultMap="BaseResultMap">
+            select
+                XUHAO, JICENGYLJGDMLS, JICENGYLJGDM            
+            from bzfx.BZK_BZ_TAB_JICENGYLJGDY
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.xuhao != null">
+                        and XUHAO = #{obj.xuhao}
+                   </if>
+                               <if test="obj.jicengyljgdmls != null and obj.jicengyljgdmls != ''">
+                        and JICENGYLJGDMLS = #{obj.jicengyljgdmls}
+                   </if>
+                               <if test="obj.jicengyljgdm != null and obj.jicengyljgdm != ''">
+                        and JICENGYLJGDM = #{obj.jicengyljgdm}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

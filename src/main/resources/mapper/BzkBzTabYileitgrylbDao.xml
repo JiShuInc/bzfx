@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.BzkBzTabYileitgrylbDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.BzkBzTabYileitgrylb">
+        <!--@Table BZK_BZ_TAB_YILEITGRYLB-->
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="tegongrylbdm" column="TEGONGRYLBDM" jdbcType="VARCHAR"/>
+        <result property="tegongrylb" column="TEGONGRYLB" jdbcType="VARCHAR"/>
+        <result property="shifouxs" column="SHIFOUXS" jdbcType="VARCHAR"/>
+        <result property="shujuszdw" column="SHUJUSZDW" jdbcType="VARCHAR"/>
+        <result property="zhuangtai" column="ZHUANGTAI" jdbcType="VARCHAR"/>
+        <result property="wstzry" column="WSTZRY" jdbcType="VARCHAR"/>
+        <result property="wsfjxx" column="WSFJXX" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          ID, TEGONGRYLBDM, TEGONGRYLB, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, WSTZRY, WSFJXX
+        from bzfx.BZK_BZ_TAB_YILEITGRYLB
+        where ID = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          ID, TEGONGRYLBDM, TEGONGRYLB, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, WSTZRY, WSFJXX
+        from bzfx.BZK_BZ_TAB_YILEITGRYLB
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          ID, TEGONGRYLBDM, TEGONGRYLB, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, WSTZRY, WSFJXX
+        from bzfx.BZK_BZ_TAB_YILEITGRYLB
+        <where>
+            <if test="id != null and id != ''">
+                and ID = #{id}
+            </if>
+            <if test="tegongrylbdm != null and tegongrylbdm != ''">
+                and TEGONGRYLBDM = #{tegongrylbdm}
+            </if>
+            <if test="tegongrylb != null and tegongrylb != ''">
+                and TEGONGRYLB = #{tegongrylb}
+            </if>
+            <if test="shifouxs != null and shifouxs != ''">
+                and SHIFOUXS = #{shifouxs}
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                and SHUJUSZDW = #{shujuszdw}
+            </if>
+            <if test="zhuangtai != null and zhuangtai != ''">
+                and ZHUANGTAI = #{zhuangtai}
+            </if>
+            <if test="wstzry != null and wstzry != ''">
+                and WSTZRY = #{wstzry}
+            </if>
+            <if test="wsfjxx != null and wsfjxx != ''">
+                and WSFJXX = #{wsfjxx}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.BZK_BZ_TAB_YILEITGRYLB(TEGONGRYLBDM, TEGONGRYLB, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, WSTZRY, WSFJXX)
+        values (#{tegongrylbdm}, #{tegongrylb}, #{shifouxs}, #{shujuszdw}, #{zhuangtai}, #{wstzry}, #{wsfjxx})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.BZK_BZ_TAB_YILEITGRYLB
+        <set>
+            <if test="tegongrylbdm != null and tegongrylbdm != ''">
+                TEGONGRYLBDM = #{tegongrylbdm},
+            </if>
+            <if test="tegongrylb != null and tegongrylb != ''">
+                TEGONGRYLB = #{tegongrylb},
+            </if>
+            <if test="shifouxs != null and shifouxs != ''">
+                SHIFOUXS = #{shifouxs},
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                SHUJUSZDW = #{shujuszdw},
+            </if>
+            <if test="zhuangtai != null and zhuangtai != ''">
+                ZHUANGTAI = #{zhuangtai},
+            </if>
+            <if test="wstzry != null and wstzry != ''">
+                WSTZRY = #{wstzry},
+            </if>
+            <if test="wsfjxx != null and wsfjxx != ''">
+                WSFJXX = #{wsfjxx},
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.BZK_BZ_TAB_YILEITGRYLB where ID = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.BZK_BZ_TAB_YILEITGRYLB
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageBzkBzTabYileitgrylbList" resultMap="BaseResultMap">
+            select
+                ID, TEGONGRYLBDM, TEGONGRYLB, SHIFOUXS, SHUJUSZDW, ZHUANGTAI, WSTZRY, WSFJXX            
+            from bzfx.BZK_BZ_TAB_YILEITGRYLB
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null and obj.id != ''">
+                        and ID = #{obj.id}
+                   </if>
+                               <if test="obj.tegongrylbdm != null and obj.tegongrylbdm != ''">
+                        and TEGONGRYLBDM = #{obj.tegongrylbdm}
+                   </if>
+                               <if test="obj.tegongrylb != null and obj.tegongrylb != ''">
+                        and TEGONGRYLB = #{obj.tegongrylb}
+                   </if>
+                               <if test="obj.shifouxs != null and obj.shifouxs != ''">
+                        and SHIFOUXS = #{obj.shifouxs}
+                   </if>
+                               <if test="obj.shujuszdw != null and obj.shujuszdw != ''">
+                        and SHUJUSZDW = #{obj.shujuszdw}
+                   </if>
+                               <if test="obj.zhuangtai != null and obj.zhuangtai != ''">
+                        and ZHUANGTAI = #{obj.zhuangtai}
+                   </if>
+                               <if test="obj.wstzry != null and obj.wstzry != ''">
+                        and WSTZRY = #{obj.wstzry}
+                   </if>
+                               <if test="obj.wsfjxx != null and obj.wsfjxx != ''">
+                        and WSFJXX = #{obj.wsfjxx}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

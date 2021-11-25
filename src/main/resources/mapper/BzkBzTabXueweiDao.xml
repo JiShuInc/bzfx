@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.BzkBzTabXueweiDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.BzkBzTabXuewei">
+        <!--@Table BZK_BZ_TAB_XUEWEI-->
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="xueweidm" column="XUEWEIDM" jdbcType="VARCHAR"/>
+        <result property="xuewei" column="XUEWEI" jdbcType="VARCHAR"/>
+        <result property="renlaodm" column="RENLAODM" jdbcType="VARCHAR"/>
+        <result property="renlaomc" column="RENLAOMC" jdbcType="VARCHAR"/>
+        <result property="shifouxs" column="SHIFOUXS" jdbcType="VARCHAR"/>
+        <result property="shujuszdw" column="SHUJUSZDW" jdbcType="VARCHAR"/>
+        <result property="zhuangtai" column="ZHUANGTAI" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          ID, XUEWEIDM, XUEWEI, RENLAODM, RENLAOMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI
+        from bzfx.BZK_BZ_TAB_XUEWEI
+        where ID = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          ID, XUEWEIDM, XUEWEI, RENLAODM, RENLAOMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI
+        from bzfx.BZK_BZ_TAB_XUEWEI
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          ID, XUEWEIDM, XUEWEI, RENLAODM, RENLAOMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI
+        from bzfx.BZK_BZ_TAB_XUEWEI
+        <where>
+            <if test="id != null and id != ''">
+                and ID = #{id}
+            </if>
+            <if test="xueweidm != null and xueweidm != ''">
+                and XUEWEIDM = #{xueweidm}
+            </if>
+            <if test="xuewei != null and xuewei != ''">
+                and XUEWEI = #{xuewei}
+            </if>
+            <if test="renlaodm != null and renlaodm != ''">
+                and RENLAODM = #{renlaodm}
+            </if>
+            <if test="renlaomc != null and renlaomc != ''">
+                and RENLAOMC = #{renlaomc}
+            </if>
+            <if test="shifouxs != null and shifouxs != ''">
+                and SHIFOUXS = #{shifouxs}
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                and SHUJUSZDW = #{shujuszdw}
+            </if>
+            <if test="zhuangtai != null and zhuangtai != ''">
+                and ZHUANGTAI = #{zhuangtai}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.BZK_BZ_TAB_XUEWEI(XUEWEIDM, XUEWEI, RENLAODM, RENLAOMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI)
+        values (#{xueweidm}, #{xuewei}, #{renlaodm}, #{renlaomc}, #{shifouxs}, #{shujuszdw}, #{zhuangtai})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.BZK_BZ_TAB_XUEWEI
+        <set>
+            <if test="xueweidm != null and xueweidm != ''">
+                XUEWEIDM = #{xueweidm},
+            </if>
+            <if test="xuewei != null and xuewei != ''">
+                XUEWEI = #{xuewei},
+            </if>
+            <if test="renlaodm != null and renlaodm != ''">
+                RENLAODM = #{renlaodm},
+            </if>
+            <if test="renlaomc != null and renlaomc != ''">
+                RENLAOMC = #{renlaomc},
+            </if>
+            <if test="shifouxs != null and shifouxs != ''">
+                SHIFOUXS = #{shifouxs},
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                SHUJUSZDW = #{shujuszdw},
+            </if>
+            <if test="zhuangtai != null and zhuangtai != ''">
+                ZHUANGTAI = #{zhuangtai},
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.BZK_BZ_TAB_XUEWEI where ID = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.BZK_BZ_TAB_XUEWEI
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageBzkBzTabXueweiList" resultMap="BaseResultMap">
+            select
+                ID, XUEWEIDM, XUEWEI, RENLAODM, RENLAOMC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI            
+            from bzfx.BZK_BZ_TAB_XUEWEI
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null and obj.id != ''">
+                        and ID = #{obj.id}
+                   </if>
+                               <if test="obj.xueweidm != null and obj.xueweidm != ''">
+                        and XUEWEIDM = #{obj.xueweidm}
+                   </if>
+                               <if test="obj.xuewei != null and obj.xuewei != ''">
+                        and XUEWEI = #{obj.xuewei}
+                   </if>
+                               <if test="obj.renlaodm != null and obj.renlaodm != ''">
+                        and RENLAODM = #{obj.renlaodm}
+                   </if>
+                               <if test="obj.renlaomc != null and obj.renlaomc != ''">
+                        and RENLAOMC = #{obj.renlaomc}
+                   </if>
+                               <if test="obj.shifouxs != null and obj.shifouxs != ''">
+                        and SHIFOUXS = #{obj.shifouxs}
+                   </if>
+                               <if test="obj.shujuszdw != null and obj.shujuszdw != ''">
+                        and SHUJUSZDW = #{obj.shujuszdw}
+                   </if>
+                               <if test="obj.zhuangtai != null and obj.zhuangtai != ''">
+                        and ZHUANGTAI = #{obj.zhuangtai}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.BzkBzTabDimingOldDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.BzkBzTabDimingOld">
+        <!--@Table BZK_BZ_TAB_DIMING_OLD-->
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="dimingdm" column="DIMINGDM" jdbcType="VARCHAR"/>
+        <result property="diming" column="DIMING" jdbcType="VARCHAR"/>
+        <result property="dimingqc" column="DIMINGQC" jdbcType="VARCHAR"/>
+        <result property="shifouxs" column="SHIFOUXS" jdbcType="VARCHAR"/>
+        <result property="shujuszdw" column="SHUJUSZDW" jdbcType="VARCHAR"/>
+        <result property="zhuangtai" column="ZHUANGTAI" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          ID, DIMINGDM, DIMING, DIMINGQC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI
+        from bzfx.BZK_BZ_TAB_DIMING_OLD
+        where  = #{}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          ID, DIMINGDM, DIMING, DIMINGQC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI
+        from bzfx.BZK_BZ_TAB_DIMING_OLD
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          ID, DIMINGDM, DIMING, DIMINGQC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI
+        from bzfx.BZK_BZ_TAB_DIMING_OLD
+        <where>
+            <if test="id != null and id != ''">
+                and ID = #{id}
+            </if>
+            <if test="dimingdm != null and dimingdm != ''">
+                and DIMINGDM = #{dimingdm}
+            </if>
+            <if test="diming != null and diming != ''">
+                and DIMING = #{diming}
+            </if>
+            <if test="dimingqc != null and dimingqc != ''">
+                and DIMINGQC = #{dimingqc}
+            </if>
+            <if test="shifouxs != null and shifouxs != ''">
+                and SHIFOUXS = #{shifouxs}
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                and SHUJUSZDW = #{shujuszdw}
+            </if>
+            <if test="zhuangtai != null and zhuangtai != ''">
+                and ZHUANGTAI = #{zhuangtai}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="" useGeneratedKeys="true">
+        insert into bzfx.BZK_BZ_TAB_DIMING_OLD(ID, DIMINGDM, DIMING, DIMINGQC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI)
+        values (#{id}, #{dimingdm}, #{diming}, #{dimingqc}, #{shifouxs}, #{shujuszdw}, #{zhuangtai})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.BZK_BZ_TAB_DIMING_OLD
+        <set>
+            <if test="id != null and id != ''">
+                ID = #{id},
+            </if>
+            <if test="dimingdm != null and dimingdm != ''">
+                DIMINGDM = #{dimingdm},
+            </if>
+            <if test="diming != null and diming != ''">
+                DIMING = #{diming},
+            </if>
+            <if test="dimingqc != null and dimingqc != ''">
+                DIMINGQC = #{dimingqc},
+            </if>
+            <if test="shifouxs != null and shifouxs != ''">
+                SHIFOUXS = #{shifouxs},
+            </if>
+            <if test="shujuszdw != null and shujuszdw != ''">
+                SHUJUSZDW = #{shujuszdw},
+            </if>
+            <if test="zhuangtai != null and zhuangtai != ''">
+                ZHUANGTAI = #{zhuangtai},
+            </if>
+        </set>
+        where  = #{}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.BZK_BZ_TAB_DIMING_OLD where  = #{}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.BZK_BZ_TAB_DIMING_OLD
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageBzkBzTabDimingOldList" resultMap="BaseResultMap">
+            select
+                ID, DIMINGDM, DIMING, DIMINGQC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI            
+            from bzfx.BZK_BZ_TAB_DIMING_OLD
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null and obj.id != ''">
+                        and ID = #{obj.id}
+                   </if>
+                               <if test="obj.dimingdm != null and obj.dimingdm != ''">
+                        and DIMINGDM = #{obj.dimingdm}
+                   </if>
+                               <if test="obj.diming != null and obj.diming != ''">
+                        and DIMING = #{obj.diming}
+                   </if>
+                               <if test="obj.dimingqc != null and obj.dimingqc != ''">
+                        and DIMINGQC = #{obj.dimingqc}
+                   </if>
+                               <if test="obj.shifouxs != null and obj.shifouxs != ''">
+                        and SHIFOUXS = #{obj.shifouxs}
+                   </if>
+                               <if test="obj.shujuszdw != null and obj.shujuszdw != ''">
+                        and SHUJUSZDW = #{obj.shujuszdw}
+                   </if>
+                               <if test="obj.zhuangtai != null and obj.zhuangtai != ''">
+                        and ZHUANGTAI = #{obj.zhuangtai}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>
