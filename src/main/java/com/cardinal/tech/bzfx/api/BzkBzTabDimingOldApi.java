@@ -19,7 +19,7 @@ import java.util.Map;
  * (BzkBzTabDimingOld)表服务api接口
  *
  * @author makejava
- * @since 2021-11-25 15:22:54
+ * @since 2021-11-25 15:44:40
  */
 @Tag(name="")
 @RequestMapping("/bzkBzTabDimingOld")
@@ -30,7 +30,7 @@ public interface BzkBzTabDimingOldApi {
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " get by id")
         @GetMapping("/{id}")
-        default Response<BzkBzTabDimingOld> queryById(@PathVariable("id")  id){
+        default Response<BzkBzTabDimingOld> queryById(@PathVariable("id") String id){
             return new Response(getService().queryById(id));
         }
 
@@ -58,8 +58,8 @@ public interface BzkBzTabDimingOldApi {
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " delete by pk")
         @GetMapping("/delete")
-       default Response<Boolean> deleteById(@RequestParam  ){
-            return new Response(getService().deleteById());
+       default Response<Boolean> deleteById(@RequestParam String id){
+            return new Response(getService().deleteById(id));
         }
 
         @PreAuthorize("hasRole('admin')")

@@ -16,7 +16,7 @@ import java.util.Map;
  * (BzkBzTabDimingOld)表服务实现类
  *
  * @author makejava
- * @since 2021-11-25 15:22:54
+ * @since 2021-11-25 15:44:40
  */
 @RequiredArgsConstructor
 @Service("bzkBzTabDimingOldService")
@@ -27,12 +27,12 @@ public class BzkBzTabDimingOldServiceImpl implements BzkBzTabDimingOldService {
     /**
      * 通过ID查询单条数据
      *
-     * @param  主键
+     * @param id 主键
      * @return 实例对象
      */
     @Override
-    public BzkBzTabDimingOld queryById( ) {
-        return this.bzkBzTabDimingOldDao.queryById();
+    public BzkBzTabDimingOld queryById(String id) {
+        return this.bzkBzTabDimingOldDao.queryById(id);
     }
 
     /**
@@ -68,18 +68,18 @@ public class BzkBzTabDimingOldServiceImpl implements BzkBzTabDimingOldService {
     @Override
     public BzkBzTabDimingOld update(BzkBzTabDimingOld bzkBzTabDimingOld) {
         this.bzkBzTabDimingOldDao.update(bzkBzTabDimingOld);
-        return this.queryById(bzkBzTabDimingOld.get());
+        return this.queryById(bzkBzTabDimingOld.getId());
     }
 
     /**
      * 通过主键删除数据
      *
-     * @param  主键
+     * @param id 主键
      * @return 是否成功
      */
     @Override
-    public boolean deleteById( ) {
-        return this.bzkBzTabDimingOldDao.deleteById() > 0;
+    public boolean deleteById(String id) {
+        return this.bzkBzTabDimingOldDao.deleteById(id) > 0;
     }
 
     /**

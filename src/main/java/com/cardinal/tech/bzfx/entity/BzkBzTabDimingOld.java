@@ -8,10 +8,10 @@ import lombok.Data;
  * (BzkBzTabDimingOld)实体类
  *
  * @author makejava
- * @since 2021-11-25 15:22:54
+ * @since 2021-11-25 15:44:40
  */
 public class BzkBzTabDimingOld implements Serializable {
-    private static final long serialVersionUID = -89986718519357220L;
+    private static final long serialVersionUID = -84782910965348502L;
     
     private String id;
     

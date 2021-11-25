@@ -18,7 +18,7 @@
         select
           ID, DIMINGDM, DIMING, DIMINGQC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI
         from bzfx.BZK_BZ_TAB_DIMING_OLD
-        where  = #{}
+        where ID = #{id}
     </select>
 
     <!--查询指定行数据-->
@@ -60,18 +60,15 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="" useGeneratedKeys="true">
-        insert into bzfx.BZK_BZ_TAB_DIMING_OLD(ID, DIMINGDM, DIMING, DIMINGQC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI)
-        values (#{id}, #{dimingdm}, #{diming}, #{dimingqc}, #{shifouxs}, #{shujuszdw}, #{zhuangtai})
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.BZK_BZ_TAB_DIMING_OLD(DIMINGDM, DIMING, DIMINGQC, SHIFOUXS, SHUJUSZDW, ZHUANGTAI)
+        values (#{dimingdm}, #{diming}, #{dimingqc}, #{shifouxs}, #{shujuszdw}, #{zhuangtai})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
         update bzfx.BZK_BZ_TAB_DIMING_OLD
         <set>
-            <if test="id != null and id != ''">
-                ID = #{id},
-            </if>
             <if test="dimingdm != null and dimingdm != ''">
                 DIMINGDM = #{dimingdm},
             </if>
@@ -91,12 +88,12 @@
                 ZHUANGTAI = #{zhuangtai},
             </if>
         </set>
-        where  = #{}
+        where ID = #{id}
     </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from bzfx.BZK_BZ_TAB_DIMING_OLD where  = #{}
+        delete from bzfx.BZK_BZ_TAB_DIMING_OLD where ID = #{id}
     </delete>
 
     <!--查询指定行数据-->

@@ -10,17 +10,17 @@ import java.util.Map;
  * (BzkBzTabDimingOld)表数据库访问层
  *
  * @author makejava
- * @since 2021-11-25 15:22:54
+ * @since 2021-11-25 15:44:40
  */
 public interface BzkBzTabDimingOldDao {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param  主键
+     * @param id 主键
      * @return 实例对象
      */
-    BzkBzTabDimingOld queryById( );
+    BzkBzTabDimingOld queryById(String id);
 
     /**
      * 查询指定行数据
@@ -59,10 +59,10 @@ public interface BzkBzTabDimingOldDao {
     /**
      * 通过主键删除数据
      *
-     * @param  主键
+     * @param id 主键
      * @return 影响行数
      */
-    int deleteById( );
+    int deleteById(String id);
 
     /**
      * 通过字段进行分组统计

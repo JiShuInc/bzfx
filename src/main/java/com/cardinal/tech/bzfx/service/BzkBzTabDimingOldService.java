@@ -9,17 +9,17 @@ import java.util.Map;
  * (BzkBzTabDimingOld)表服务接口
  *
  * @author makejava
- * @since 2021-11-25 15:22:54
+ * @since 2021-11-25 15:44:40
  */
 public interface BzkBzTabDimingOldService {
 
         /**
          * 通过ID查询单条数据
          *
-         * @param  主键
+         * @param id 主键
          * @return 实例对象
          */
-        BzkBzTabDimingOld queryById( );
+        BzkBzTabDimingOld queryById(String id);
 
         /**
          * 查询多条数据
@@ -49,10 +49,10 @@ public interface BzkBzTabDimingOldService {
         /**
          * 通过主键删除数据
          *
-         * @param  主键
+         * @param id 主键
          * @return 是否成功
          */
-        boolean deleteById( );
+        boolean deleteById(String id);
 
         /**
          * 通过字段统计
