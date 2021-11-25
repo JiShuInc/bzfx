@@ -12,10 +12,10 @@ import lombok.Data;
  * 单位基本信息(BzkTabDanweijbxx)实体类
  *
  * @author makejava
- * @since 2021-11-20 16:06:13
+ * @since 2021-11-25 17:46:23
  */
 public class BzkTabDanweijbxx implements Serializable {
-    private static final long serialVersionUID = 965949159267958137L;
+    private static final long serialVersionUID = -55730321886375145L;
     /**
     * 主键ID
     */
@@ -262,5 +262,106 @@ public class BzkTabDanweijbxx implements Serializable {
     */
     @CsvBindByPosition(position = 48)
     private String xiafabz;
+    /**
+    * 创建时间
+    */
+    @CsvBindByPosition(position = 49)
+    private Date createTime;
+    /**
+    * 最后修改时间
+    */
+    @CsvBindByPosition(position = 50)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date lastModifyTime;
+    /**
+    * 单位性质：字典
+    */
+    @CsvBindByPosition(position = 51)
+    private String danweixz;
+    /**
+    * 是否有异地下属部门：是，否
+    */
+    @CsvBindByPosition(position = 52)
+    private String shifouyydxsbm;
+    /**
+    * 艰苦地区分类：字典
+    */
+    @CsvBindByPosition(position = 53)
+    private String jiankudqfl;
+    /**
+    * 取暖类区：字典
+    */
+    @CsvBindByPosition(position = 54)
+    private String qunuanlq;
+    /**
+    * 机构番号
+    */
+    @CsvBindByPosition(position = 55)
+    private String jigoufh;
+    /**
+    * 机构简称
+    */
+    @CsvBindByPosition(position = 56)
+    private String jigoujc;
+    /**
+    * 建制名称
+    */
+    @CsvBindByPosition(position = 57)
+    private String jianzhimc;
+    /**
+    * 任务类型：字典
+    */
+    @CsvBindByPosition(position = 58)
+    private String renwulx;
+    /**
+    * 特殊地区：字典
+    */
+    @CsvBindByPosition(position = 59)
+    private String teshudq;
+    /**
+    * 机要地址
+    */
+    @CsvBindByPosition(position = 60)
+    private String jiyaodz;
+    /**
+    * 地方号码
+    */
+    @CsvBindByPosition(position = 61)
+    private String difanghm;
+    /**
+    * 给养供应关系
+    */
+    @CsvBindByPosition(position = 62)
+    private String jiyanggygx;
+    /**
+    * 统一社会信用代码
+    */
+    @CsvBindByPosition(position = 63)
+    private String tongyishxydm;
+    /**
+    * 基层医疗机构ID
+    */
+    @CsvBindByPosition(position = 64)
+    private String jicengyljgid;
+    /**
+    * 基层医疗机构名称
+    */
+    @CsvBindByPosition(position = 65)
+    private String jicengyljgmc;
+    /**
+    * 军事设施保障
+    */
+    @CsvBindByPosition(position = 66)
+    private String junshissbz;
+    /**
+    * 是否艰苦边远地区：是，否
+    */
+    @CsvBindByPosition(position = 67)
+    private String shifoujkbydq;
+    /**
+    * 是否离线终端 0：否，1：是
+    */
+    @CsvBindByPosition(position = 68)
+    private String shifoulxzd;
 
 }

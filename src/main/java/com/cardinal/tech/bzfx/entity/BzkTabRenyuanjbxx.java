@@ -12,10 +12,10 @@ import lombok.Data;
  * 人员基本信息(BzkTabRenyuanjbxx)实体类
  *
  * @author makejava
- * @since 2021-11-20 16:06:13
+ * @since 2021-11-25 17:46:23
  */
 public class BzkTabRenyuanjbxx implements Serializable {
-    private static final long serialVersionUID = -73635027440680121L;
+    private static final long serialVersionUID = 145733933610880577L;
     /**
     * 主键ID
     */
@@ -640,5 +640,320 @@ public class BzkTabRenyuanjbxx implements Serializable {
     */
     @CsvBindByPosition(position = 122)
     private String shifouxysjpobx;
+    /**
+    * 待遇级别；代码
+    */
+    @CsvBindByPosition(position = 123)
+    private String daiyujb;
+    /**
+    * 待遇级别日期
+    */
+    @CsvBindByPosition(position = 124)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date daiyujbrq;
+    /**
+    * 级别档次；代码
+    */
+    @CsvBindByPosition(position = 125)
+    private String jibiedc;
+    /**
+    * 级别档次日期
+    */
+    @CsvBindByPosition(position = 126)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date jibiedcrq;
+    /**
+    * 套改标识；1-套改
+    */
+    @CsvBindByPosition(position = 127)
+    private Double taogaibz;
+    /**
+    * 审核单位代码
+    */
+    @CsvBindByPosition(position = 128)
+    private String shenhedwdm;
+    /**
+    * 审核结果
+    */
+    @CsvBindByPosition(position = 129)
+    private Double shenhejg;
+    /**
+    * 照片路径
+    */
+    @CsvBindByPosition(position = 130)
+    private String zhaopianlj;
+    /**
+    * 创建时间
+    */
+    @CsvBindByPosition(position = 131)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date createTime;
+    /**
+    * 最后修改时间
+    */
+    @CsvBindByPosition(position = 132)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date lastModifyTime;
+    /**
+    * 文职人员级别
+    */
+    @CsvBindByPosition(position = 133)
+    private String wenzhiryjb;
+    /**
+    * 文职人员级别日期
+    */
+    @CsvBindByPosition(position = 134)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date wenzhiryjbrq;
+    /**
+    * 社保卡号
+    */
+    @CsvBindByPosition(position = 135)
+    private String shebaokh;
+    /**
+    * 类型：军人/武警
+    */
+    @CsvBindByPosition(position = 136)
+    private Double leixing;
+    /**
+    * 固化注册码
+    */
+    @CsvBindByPosition(position = 137)
+    private String guhuazcm;
+    /**
+    * 婚姻日期
+    */
+    @CsvBindByPosition(position = 138)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date hunyinrq;
+    /**
+    * 政治面貌日期
+    */
+    @CsvBindByPosition(position = 139)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date zhengzhimmrq;
+    /**
+    * 银行公务卡账户
+    */
+    @CsvBindByPosition(position = 140)
+    private String yinhanggwkzh;
+    /**
+    * 组织关系机构名称
+    */
+    @CsvBindByPosition(position = 141)
+    private String zuzhigxjgmc;
+    /**
+    * 晋校日期
+    */
+    @CsvBindByPosition(position = 142)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date jinxiaorq;
+    /**
+    * 提将日期
+    */
+    @CsvBindByPosition(position = 143)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date tijiangrq;
+    /**
+    * 本档日期
+    */
+    @CsvBindByPosition(position = 144)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date bendangrq;
+    /**
+    * 干部编号
+    */
+    @CsvBindByPosition(position = 145)
+    private String ganbubh;
+    /**
+    * 国籍；字典
+    */
+    @CsvBindByPosition(position = 146)
+    private String guoji;
+    /**
+    * 职业；字典
+    */
+    @CsvBindByPosition(position = 147)
+    private String zhiye;
+    /**
+    * 现居住地址
+    */
+    @CsvBindByPosition(position = 148)
+    private String xianjuzdz;
+    /**
+    * 是否独生子女
+    */
+    @CsvBindByPosition(position = 149)
+    private String shifoudszn;
+    /**
+    * 是否双无人员；是/否，是双无人员经济状况自动为“无收入”
+    */
+    @CsvBindByPosition(position = 150)
+    private String shifouswry;
+    /**
+    * 是否双军人；是/否
+    */
+    @CsvBindByPosition(position = 151)
+    private String shifousjr;
+    /**
+    * 户口所在地
+    */
+    @CsvBindByPosition(position = 152)
+    private String hukouszd;
+    /**
+    * 是否城镇户口；是/否
+    */
+    @CsvBindByPosition(position = 153)
+    private String shifouczhk;
+    /**
+    * 是否已随军；是/否
+    */
+    @CsvBindByPosition(position = 154)
+    private String shifouysj;
+    /**
+    * 随军日期
+    */
+    @CsvBindByPosition(position = 155)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date suijunrq;
+    /**
+    * 身份证件起始日期
+    */
+    @CsvBindByPosition(position = 156)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date shenfenzjqsrq;
+    /**
+    * 身份证件终止日期
+    */
+    @CsvBindByPosition(position = 157)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date shenfenzjzzrq;
+    /**
+    * 给养关系所在单位代码
+    */
+    @CsvBindByPosition(position = 158)
+    private String jygxdwdm;
+    /**
+    * 给养关系所在单位名称
+    */
+    @CsvBindByPosition(position = 159)
+    private String jygxdwmc;
+    /**
+    * 给养关系调动序号
+    */
+    @CsvBindByPosition(position = 160)
+    private Double jygxddxh;
+    /**
+    * 对应财务单位代码
+    */
+    @CsvBindByPosition(position = 161)
+    private String dycwdwdm;
+    /**
+    * 对应被装单位代码
+    */
+    @CsvBindByPosition(position = 162)
+    private String dybzdwdm;
+    /**
+    * 对应医疗单位代码
+    */
+    @CsvBindByPosition(position = 163)
+    private String dyyldwdm;
+    /**
+    * 对应营房单位代码
+    */
+    @CsvBindByPosition(position = 164)
+    private String dyyfdwdm;
+    /**
+    * 对应给养单位代码
+    */
+    @CsvBindByPosition(position = 165)
+    private String dyjydwdm;
+    /**
+    * 随军状况；是/否
+    */
+    @CsvBindByPosition(position = 166)
+    private String suijunzk;
+    /**
+    * 姓名拼音
+    */
+    @CsvBindByPosition(position = 167)
+    private String xingmingpy;
+    /**
+    * 制牌标志。0=未制牌，1=制牌成功，3=制牌失败，4=导出制牌
+    */
+    @CsvBindByPosition(position = 168)
+    private Double zhipaibz;
+    /**
+    * 对应财务单位名称
+    */
+    @CsvBindByPosition(position = 169)
+    private String dycwdwmc;
+    /**
+    * 对应被装单位名称
+    */
+    @CsvBindByPosition(position = 170)
+    private String dybzdwmc;
+    /**
+    * 对应医疗单位名称
+    */
+    @CsvBindByPosition(position = 171)
+    private String dyyldwmc;
+    /**
+    * 对应营房单位名称
+    */
+    @CsvBindByPosition(position = 172)
+    private String dyyfdwmc;
+    /**
+    * 对应给养单位名称
+    */
+    @CsvBindByPosition(position = 173)
+    private String dyjydwmc;
+    /**
+    * 财务部门
+    */
+    @CsvBindByPosition(position = 174)
+    private String caiwubm;
+    /**
+    * 被装部门
+    */
+    @CsvBindByPosition(position = 175)
+    private String beizhuangbm;
+    /**
+    * 医疗部门
+    */
+    @CsvBindByPosition(position = 176)
+    private String yiliaobm;
+    /**
+    * 营房部门
+    */
+    @CsvBindByPosition(position = 177)
+    private String yingfangbm;
+    /**
+    * 给养部门
+    */
+    @CsvBindByPosition(position = 178)
+    private String jiyangbm;
+    /**
+    * 岗位职务层级；代码
+    */
+    @CsvBindByPosition(position = 179)
+    private String gangweizwcj;
+    /**
+    * 岗位职务层级日期
+    */
+    @CsvBindByPosition(position = 180)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date gangweizwcjrq;
+    /**
+    * 套改时间
+    */
+    @CsvBindByPosition(position = 181)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
+    private Date taogaisj;
+    /**
+    * 岗位类别；代码
+    */
+    @CsvBindByPosition(position = 182)
+    private String gangweilb;
 
 }

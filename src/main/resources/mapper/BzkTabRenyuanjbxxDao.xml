@@ -126,12 +126,72 @@
         <result property="zaizhiqk" column="ZAIZHIQK" jdbcType="VARCHAR"/>
         <result property="shifouzjdjy" column="SHIFOUZJDJY" jdbcType="VARCHAR"/>
         <result property="shifouxysjpobx" column="SHIFOUXYSJPOBX" jdbcType="VARCHAR"/>
+        <result property="daiyujb" column="DAIYUJB" jdbcType="VARCHAR"/>
+        <result property="daiyujbrq" column="DAIYUJBRQ" jdbcType="TIMESTAMP"/>
+        <result property="jibiedc" column="JIBIEDC" jdbcType="VARCHAR"/>
+        <result property="jibiedcrq" column="JIBIEDCRQ" jdbcType="TIMESTAMP"/>
+        <result property="taogaibz" column="TAOGAIBZ" jdbcType="NUMERIC"/>
+        <result property="shenhedwdm" column="SHENHEDWDM" jdbcType="VARCHAR"/>
+        <result property="shenhejg" column="SHENHEJG" jdbcType="NUMERIC"/>
+        <result property="zhaopianlj" column="ZHAOPIANLJ" jdbcType="VARCHAR"/>
+        <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+        <result property="lastModifyTime" column="LAST_MODIFY_TIME" jdbcType="TIMESTAMP"/>
+        <result property="wenzhiryjb" column="WENZHIRYJB" jdbcType="VARCHAR"/>
+        <result property="wenzhiryjbrq" column="WENZHIRYJBRQ" jdbcType="TIMESTAMP"/>
+        <result property="shebaokh" column="SHEBAOKH" jdbcType="VARCHAR"/>
+        <result property="leixing" column="LEIXING" jdbcType="NUMERIC"/>
+        <result property="guhuazcm" column="GUHUAZCM" jdbcType="VARCHAR"/>
+        <result property="hunyinrq" column="HUNYINRQ" jdbcType="TIMESTAMP"/>
+        <result property="zhengzhimmrq" column="ZHENGZHIMMRQ" jdbcType="TIMESTAMP"/>
+        <result property="yinhanggwkzh" column="YINHANGGWKZH" jdbcType="VARCHAR"/>
+        <result property="zuzhigxjgmc" column="ZUZHIGXJGMC" jdbcType="VARCHAR"/>
+        <result property="jinxiaorq" column="JINXIAORQ" jdbcType="TIMESTAMP"/>
+        <result property="tijiangrq" column="TIJIANGRQ" jdbcType="TIMESTAMP"/>
+        <result property="bendangrq" column="BENDANGRQ" jdbcType="TIMESTAMP"/>
+        <result property="ganbubh" column="GANBUBH" jdbcType="VARCHAR"/>
+        <result property="guoji" column="GUOJI" jdbcType="VARCHAR"/>
+        <result property="zhiye" column="ZHIYE" jdbcType="VARCHAR"/>
+        <result property="xianjuzdz" column="XIANJUZDZ" jdbcType="VARCHAR"/>
+        <result property="shifoudszn" column="SHIFOUDSZN" jdbcType="VARCHAR"/>
+        <result property="shifouswry" column="SHIFOUSWRY" jdbcType="VARCHAR"/>
+        <result property="shifousjr" column="SHIFOUSJR" jdbcType="VARCHAR"/>
+        <result property="hukouszd" column="HUKOUSZD" jdbcType="VARCHAR"/>
+        <result property="shifouczhk" column="SHIFOUCZHK" jdbcType="VARCHAR"/>
+        <result property="shifouysj" column="SHIFOUYSJ" jdbcType="VARCHAR"/>
+        <result property="suijunrq" column="SUIJUNRQ" jdbcType="TIMESTAMP"/>
+        <result property="shenfenzjqsrq" column="SHENFENZJQSRQ" jdbcType="TIMESTAMP"/>
+        <result property="shenfenzjzzrq" column="SHENFENZJZZRQ" jdbcType="TIMESTAMP"/>
+        <result property="jygxdwdm" column="JYGXDWDM" jdbcType="VARCHAR"/>
+        <result property="jygxdwmc" column="JYGXDWMC" jdbcType="VARCHAR"/>
+        <result property="jygxddxh" column="JYGXDDXH" jdbcType="NUMERIC"/>
+        <result property="dycwdwdm" column="DYCWDWDM" jdbcType="VARCHAR"/>
+        <result property="dybzdwdm" column="DYBZDWDM" jdbcType="VARCHAR"/>
+        <result property="dyyldwdm" column="DYYLDWDM" jdbcType="VARCHAR"/>
+        <result property="dyyfdwdm" column="DYYFDWDM" jdbcType="VARCHAR"/>
+        <result property="dyjydwdm" column="DYJYDWDM" jdbcType="VARCHAR"/>
+        <result property="suijunzk" column="SUIJUNZK" jdbcType="VARCHAR"/>
+        <result property="xingmingpy" column="XINGMINGPY" jdbcType="VARCHAR"/>
+        <result property="zhipaibz" column="ZHIPAIBZ" jdbcType="NUMERIC"/>
+        <result property="dycwdwmc" column="DYCWDWMC" jdbcType="VARCHAR"/>
+        <result property="dybzdwmc" column="DYBZDWMC" jdbcType="VARCHAR"/>
+        <result property="dyyldwmc" column="DYYLDWMC" jdbcType="VARCHAR"/>
+        <result property="dyyfdwmc" column="DYYFDWMC" jdbcType="VARCHAR"/>
+        <result property="dyjydwmc" column="DYJYDWMC" jdbcType="VARCHAR"/>
+        <result property="caiwubm" column="CAIWUBM" jdbcType="VARCHAR"/>
+        <result property="beizhuangbm" column="BEIZHUANGBM" jdbcType="VARCHAR"/>
+        <result property="yiliaobm" column="YILIAOBM" jdbcType="VARCHAR"/>
+        <result property="yingfangbm" column="YINGFANGBM" jdbcType="VARCHAR"/>
+        <result property="jiyangbm" column="JIYANGBM" jdbcType="VARCHAR"/>
+        <result property="gangweizwcj" column="GANGWEIZWCJ" jdbcType="VARCHAR"/>
+        <result property="gangweizwcjrq" column="GANGWEIZWCJRQ" jdbcType="TIMESTAMP"/>
+        <result property="taogaisj" column="TAOGAISJ" jdbcType="TIMESTAMP"/>
+        <result property="gangweilb" column="GANGWEILB" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          ID, JUNRENBZH, YILIAOKH, SHIBINGZCM, SHIBINGFZDJBHM, XINGMING, XINGBIE, MINZU, JIGUAN, CHUSHENGDI, CHUSHENGRQ, XUEXING, RUWURQ, GONGZUORQ, LITUIXRQ, GONGZUODWDM, GONGZUODWMC, BUBIE, BUMENID, ZHENGJIANBH, ZHENGJIANLX, RENYUANLB, ZHULEIBIE, JUNZHONG, ZHIGONGSFLB, JIASHUSFLB, YOUFOUZP, ZHAOPIAN, WENHUACD, BIYEYX, RUXUERQ, BIYERQ, BIYEZY, XUEWEI, ZHENGZHIMM, TIGANRQ, GAIXUANSGRQ, JUNXIANWZJ, XIANJUNXWZJRQ, XINGZHENGZW, XIANXINGZZWRQ, XINGZHENGZWDJ, XIANXINGZZWDJRQ, ZHUANYEJSZW, ZHUANYEJSZWRQ, ZHUANYEJSDJ, ZHUANYEJSDJRQ, HOUQINGBZYLB, JIGUANFDBS, JIASHUGZDW, HUNYINZK, PEIOUXM, PEIOUGZDW, SHIFOUYS, DUIYINGJRZGID, DUIYINGJRXM, DUIYINGJRCSRQ, DUIYINGJRZJBH, DUIYINGJRBZH, JICENGYLJGID, JICENGYLJGMC, SHIFOUFHYLJDYLJGTJ, JINGJIZK, LIANXIDH, GERENZT, YILEITGRYLB, ERLEITGRYLB, SANLEITGRYLB, SILEITGRYLB, WULEITGRYLB, GENGXINBZ, SHANGBAOBZ, FENFABZ, SHENHEBZ, SHUJUSZDW, SHIFOUXG, BEIZHU, SHUNXUM, RENYUANJBXXCJYJ, YINHANGDM, YUANID, YINHANGSZD, GANGWEIDJ, GANGWEIQK, CANJIAYLBXQK, ZHIGONGDJHM, XZGXDWDM, XZGXDWMC, XZGXDDXH, CWGXDWDM, CWGXDWMC, CWGXDDXH, YLGXDWDM, YLGXDWMC, YLGXDDXH, BZGXDWDM, BZGXDWMC, BZGXDDXH, YFGXDWDM, YFGXDWMC, YFGXDDXH, SUOZAIQHQ, SHENHEREN, XINGZHENGMLH, PIZHUNREN, PIZHUNRQ, SHIFOUZXXY, GONGQINJNDJRQ, ZHAOPIANSFXG, BAOZHANGKH, KALEIXING, SHIFOUYZK, BUMENSHZT, YILIAOZH, GONGZILZQD, SHIFOUJRJS, CAIJISBDW, XIAFABZ, YINHANGKH, ZAIZHIQK, SHIFOUZJDJY, SHIFOUXYSJPOBX
+          ID, JUNRENBZH, YILIAOKH, SHIBINGZCM, SHIBINGFZDJBHM, XINGMING, XINGBIE, MINZU, JIGUAN, CHUSHENGDI, CHUSHENGRQ, XUEXING, RUWURQ, GONGZUORQ, LITUIXRQ, GONGZUODWDM, GONGZUODWMC, BUBIE, BUMENID, ZHENGJIANBH, ZHENGJIANLX, RENYUANLB, ZHULEIBIE, JUNZHONG, ZHIGONGSFLB, JIASHUSFLB, YOUFOUZP, ZHAOPIAN, WENHUACD, BIYEYX, RUXUERQ, BIYERQ, BIYEZY, XUEWEI, ZHENGZHIMM, TIGANRQ, GAIXUANSGRQ, JUNXIANWZJ, XIANJUNXWZJRQ, XINGZHENGZW, XIANXINGZZWRQ, XINGZHENGZWDJ, XIANXINGZZWDJRQ, ZHUANYEJSZW, ZHUANYEJSZWRQ, ZHUANYEJSDJ, ZHUANYEJSDJRQ, HOUQINGBZYLB, JIGUANFDBS, JIASHUGZDW, HUNYINZK, PEIOUXM, PEIOUGZDW, SHIFOUYS, DUIYINGJRZGID, DUIYINGJRXM, DUIYINGJRCSRQ, DUIYINGJRZJBH, DUIYINGJRBZH, JICENGYLJGID, JICENGYLJGMC, SHIFOUFHYLJDYLJGTJ, JINGJIZK, LIANXIDH, GERENZT, YILEITGRYLB, ERLEITGRYLB, SANLEITGRYLB, SILEITGRYLB, WULEITGRYLB, GENGXINBZ, SHANGBAOBZ, FENFABZ, SHENHEBZ, SHUJUSZDW, SHIFOUXG, BEIZHU, SHUNXUM, RENYUANJBXXCJYJ, YINHANGDM, YUANID, YINHANGSZD, GANGWEIDJ, GANGWEIQK, CANJIAYLBXQK, ZHIGONGDJHM, XZGXDWDM, XZGXDWMC, XZGXDDXH, CWGXDWDM, CWGXDWMC, CWGXDDXH, YLGXDWDM, YLGXDWMC, YLGXDDXH, BZGXDWDM, BZGXDWMC, BZGXDDXH, YFGXDWDM, YFGXDWMC, YFGXDDXH, SUOZAIQHQ, SHENHEREN, XINGZHENGMLH, PIZHUNREN, PIZHUNRQ, SHIFOUZXXY, GONGQINJNDJRQ, ZHAOPIANSFXG, BAOZHANGKH, KALEIXING, SHIFOUYZK, BUMENSHZT, YILIAOZH, GONGZILZQD, SHIFOUJRJS, CAIJISBDW, XIAFABZ, YINHANGKH, ZAIZHIQK, SHIFOUZJDJY, SHIFOUXYSJPOBX, DAIYUJB, DAIYUJBRQ, JIBIEDC, JIBIEDCRQ, TAOGAIBZ, SHENHEDWDM, SHENHEJG, ZHAOPIANLJ, CREATE_TIME, LAST_MODIFY_TIME, WENZHIRYJB, WENZHIRYJBRQ, SHEBAOKH, LEIXING, GUHUAZCM, HUNYINRQ, ZHENGZHIMMRQ, YINHANGGWKZH, ZUZHIGXJGMC, JINXIAORQ, TIJIANGRQ, BENDANGRQ, GANBUBH, GUOJI, ZHIYE, XIANJUZDZ, SHIFOUDSZN, SHIFOUSWRY, SHIFOUSJR, HUKOUSZD, SHIFOUCZHK, SHIFOUYSJ, SUIJUNRQ, SHENFENZJQSRQ, SHENFENZJZZRQ, JYGXDWDM, JYGXDWMC, JYGXDDXH, DYCWDWDM, DYBZDWDM, DYYLDWDM, DYYFDWDM, DYJYDWDM, SUIJUNZK, XINGMINGPY, ZHIPAIBZ, DYCWDWMC, DYBZDWMC, DYYLDWMC, DYYFDWMC, DYJYDWMC, CAIWUBM, BEIZHUANGBM, YILIAOBM, YINGFANGBM, JIYANGBM, GANGWEIZWCJ, GANGWEIZWCJRQ, TAOGAISJ, GANGWEILB
         from bzfx.BZK_TAB_RENYUANJBXX
         where ID = #{id}
     </select>
@@ -139,7 +199,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          ID, JUNRENBZH, YILIAOKH, SHIBINGZCM, SHIBINGFZDJBHM, XINGMING, XINGBIE, MINZU, JIGUAN, CHUSHENGDI, CHUSHENGRQ, XUEXING, RUWURQ, GONGZUORQ, LITUIXRQ, GONGZUODWDM, GONGZUODWMC, BUBIE, BUMENID, ZHENGJIANBH, ZHENGJIANLX, RENYUANLB, ZHULEIBIE, JUNZHONG, ZHIGONGSFLB, JIASHUSFLB, YOUFOUZP, ZHAOPIAN, WENHUACD, BIYEYX, RUXUERQ, BIYERQ, BIYEZY, XUEWEI, ZHENGZHIMM, TIGANRQ, GAIXUANSGRQ, JUNXIANWZJ, XIANJUNXWZJRQ, XINGZHENGZW, XIANXINGZZWRQ, XINGZHENGZWDJ, XIANXINGZZWDJRQ, ZHUANYEJSZW, ZHUANYEJSZWRQ, ZHUANYEJSDJ, ZHUANYEJSDJRQ, HOUQINGBZYLB, JIGUANFDBS, JIASHUGZDW, HUNYINZK, PEIOUXM, PEIOUGZDW, SHIFOUYS, DUIYINGJRZGID, DUIYINGJRXM, DUIYINGJRCSRQ, DUIYINGJRZJBH, DUIYINGJRBZH, JICENGYLJGID, JICENGYLJGMC, SHIFOUFHYLJDYLJGTJ, JINGJIZK, LIANXIDH, GERENZT, YILEITGRYLB, ERLEITGRYLB, SANLEITGRYLB, SILEITGRYLB, WULEITGRYLB, GENGXINBZ, SHANGBAOBZ, FENFABZ, SHENHEBZ, SHUJUSZDW, SHIFOUXG, BEIZHU, SHUNXUM, RENYUANJBXXCJYJ, YINHANGDM, YUANID, YINHANGSZD, GANGWEIDJ, GANGWEIQK, CANJIAYLBXQK, ZHIGONGDJHM, XZGXDWDM, XZGXDWMC, XZGXDDXH, CWGXDWDM, CWGXDWMC, CWGXDDXH, YLGXDWDM, YLGXDWMC, YLGXDDXH, BZGXDWDM, BZGXDWMC, BZGXDDXH, YFGXDWDM, YFGXDWMC, YFGXDDXH, SUOZAIQHQ, SHENHEREN, XINGZHENGMLH, PIZHUNREN, PIZHUNRQ, SHIFOUZXXY, GONGQINJNDJRQ, ZHAOPIANSFXG, BAOZHANGKH, KALEIXING, SHIFOUYZK, BUMENSHZT, YILIAOZH, GONGZILZQD, SHIFOUJRJS, CAIJISBDW, XIAFABZ, YINHANGKH, ZAIZHIQK, SHIFOUZJDJY, SHIFOUXYSJPOBX
+          ID, JUNRENBZH, YILIAOKH, SHIBINGZCM, SHIBINGFZDJBHM, XINGMING, XINGBIE, MINZU, JIGUAN, CHUSHENGDI, CHUSHENGRQ, XUEXING, RUWURQ, GONGZUORQ, LITUIXRQ, GONGZUODWDM, GONGZUODWMC, BUBIE, BUMENID, ZHENGJIANBH, ZHENGJIANLX, RENYUANLB, ZHULEIBIE, JUNZHONG, ZHIGONGSFLB, JIASHUSFLB, YOUFOUZP, ZHAOPIAN, WENHUACD, BIYEYX, RUXUERQ, BIYERQ, BIYEZY, XUEWEI, ZHENGZHIMM, TIGANRQ, GAIXUANSGRQ, JUNXIANWZJ, XIANJUNXWZJRQ, XINGZHENGZW, XIANXINGZZWRQ, XINGZHENGZWDJ, XIANXINGZZWDJRQ, ZHUANYEJSZW, ZHUANYEJSZWRQ, ZHUANYEJSDJ, ZHUANYEJSDJRQ, HOUQINGBZYLB, JIGUANFDBS, JIASHUGZDW, HUNYINZK, PEIOUXM, PEIOUGZDW, SHIFOUYS, DUIYINGJRZGID, DUIYINGJRXM, DUIYINGJRCSRQ, DUIYINGJRZJBH, DUIYINGJRBZH, JICENGYLJGID, JICENGYLJGMC, SHIFOUFHYLJDYLJGTJ, JINGJIZK, LIANXIDH, GERENZT, YILEITGRYLB, ERLEITGRYLB, SANLEITGRYLB, SILEITGRYLB, WULEITGRYLB, GENGXINBZ, SHANGBAOBZ, FENFABZ, SHENHEBZ, SHUJUSZDW, SHIFOUXG, BEIZHU, SHUNXUM, RENYUANJBXXCJYJ, YINHANGDM, YUANID, YINHANGSZD, GANGWEIDJ, GANGWEIQK, CANJIAYLBXQK, ZHIGONGDJHM, XZGXDWDM, XZGXDWMC, XZGXDDXH, CWGXDWDM, CWGXDWMC, CWGXDDXH, YLGXDWDM, YLGXDWMC, YLGXDDXH, BZGXDWDM, BZGXDWMC, BZGXDDXH, YFGXDWDM, YFGXDWMC, YFGXDDXH, SUOZAIQHQ, SHENHEREN, XINGZHENGMLH, PIZHUNREN, PIZHUNRQ, SHIFOUZXXY, GONGQINJNDJRQ, ZHAOPIANSFXG, BAOZHANGKH, KALEIXING, SHIFOUYZK, BUMENSHZT, YILIAOZH, GONGZILZQD, SHIFOUJRJS, CAIJISBDW, XIAFABZ, YINHANGKH, ZAIZHIQK, SHIFOUZJDJY, SHIFOUXYSJPOBX, DAIYUJB, DAIYUJBRQ, JIBIEDC, JIBIEDCRQ, TAOGAIBZ, SHENHEDWDM, SHENHEJG, ZHAOPIANLJ, CREATE_TIME, LAST_MODIFY_TIME, WENZHIRYJB, WENZHIRYJBRQ, SHEBAOKH, LEIXING, GUHUAZCM, HUNYINRQ, ZHENGZHIMMRQ, YINHANGGWKZH, ZUZHIGXJGMC, JINXIAORQ, TIJIANGRQ, BENDANGRQ, GANBUBH, GUOJI, ZHIYE, XIANJUZDZ, SHIFOUDSZN, SHIFOUSWRY, SHIFOUSJR, HUKOUSZD, SHIFOUCZHK, SHIFOUYSJ, SUIJUNRQ, SHENFENZJQSRQ, SHENFENZJZZRQ, JYGXDWDM, JYGXDWMC, JYGXDDXH, DYCWDWDM, DYBZDWDM, DYYLDWDM, DYYFDWDM, DYJYDWDM, SUIJUNZK, XINGMINGPY, ZHIPAIBZ, DYCWDWMC, DYBZDWMC, DYYLDWMC, DYYFDWMC, DYJYDWMC, CAIWUBM, BEIZHUANGBM, YILIAOBM, YINGFANGBM, JIYANGBM, GANGWEIZWCJ, GANGWEIZWCJRQ, TAOGAISJ, GANGWEILB
         from bzfx.BZK_TAB_RENYUANJBXX
         limit #{offset}, #{limit}
     </select>
@@ -147,7 +207,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          ID, JUNRENBZH, YILIAOKH, SHIBINGZCM, SHIBINGFZDJBHM, XINGMING, XINGBIE, MINZU, JIGUAN, CHUSHENGDI, CHUSHENGRQ, XUEXING, RUWURQ, GONGZUORQ, LITUIXRQ, GONGZUODWDM, GONGZUODWMC, BUBIE, BUMENID, ZHENGJIANBH, ZHENGJIANLX, RENYUANLB, ZHULEIBIE, JUNZHONG, ZHIGONGSFLB, JIASHUSFLB, YOUFOUZP, ZHAOPIAN, WENHUACD, BIYEYX, RUXUERQ, BIYERQ, BIYEZY, XUEWEI, ZHENGZHIMM, TIGANRQ, GAIXUANSGRQ, JUNXIANWZJ, XIANJUNXWZJRQ, XINGZHENGZW, XIANXINGZZWRQ, XINGZHENGZWDJ, XIANXINGZZWDJRQ, ZHUANYEJSZW, ZHUANYEJSZWRQ, ZHUANYEJSDJ, ZHUANYEJSDJRQ, HOUQINGBZYLB, JIGUANFDBS, JIASHUGZDW, HUNYINZK, PEIOUXM, PEIOUGZDW, SHIFOUYS, DUIYINGJRZGID, DUIYINGJRXM, DUIYINGJRCSRQ, DUIYINGJRZJBH, DUIYINGJRBZH, JICENGYLJGID, JICENGYLJGMC, SHIFOUFHYLJDYLJGTJ, JINGJIZK, LIANXIDH, GERENZT, YILEITGRYLB, ERLEITGRYLB, SANLEITGRYLB, SILEITGRYLB, WULEITGRYLB, GENGXINBZ, SHANGBAOBZ, FENFABZ, SHENHEBZ, SHUJUSZDW, SHIFOUXG, BEIZHU, SHUNXUM, RENYUANJBXXCJYJ, YINHANGDM, YUANID, YINHANGSZD, GANGWEIDJ, GANGWEIQK, CANJIAYLBXQK, ZHIGONGDJHM, XZGXDWDM, XZGXDWMC, XZGXDDXH, CWGXDWDM, CWGXDWMC, CWGXDDXH, YLGXDWDM, YLGXDWMC, YLGXDDXH, BZGXDWDM, BZGXDWMC, BZGXDDXH, YFGXDWDM, YFGXDWMC, YFGXDDXH, SUOZAIQHQ, SHENHEREN, XINGZHENGMLH, PIZHUNREN, PIZHUNRQ, SHIFOUZXXY, GONGQINJNDJRQ, ZHAOPIANSFXG, BAOZHANGKH, KALEIXING, SHIFOUYZK, BUMENSHZT, YILIAOZH, GONGZILZQD, SHIFOUJRJS, CAIJISBDW, XIAFABZ, YINHANGKH, ZAIZHIQK, SHIFOUZJDJY, SHIFOUXYSJPOBX
+          ID, JUNRENBZH, YILIAOKH, SHIBINGZCM, SHIBINGFZDJBHM, XINGMING, XINGBIE, MINZU, JIGUAN, CHUSHENGDI, CHUSHENGRQ, XUEXING, RUWURQ, GONGZUORQ, LITUIXRQ, GONGZUODWDM, GONGZUODWMC, BUBIE, BUMENID, ZHENGJIANBH, ZHENGJIANLX, RENYUANLB, ZHULEIBIE, JUNZHONG, ZHIGONGSFLB, JIASHUSFLB, YOUFOUZP, ZHAOPIAN, WENHUACD, BIYEYX, RUXUERQ, BIYERQ, BIYEZY, XUEWEI, ZHENGZHIMM, TIGANRQ, GAIXUANSGRQ, JUNXIANWZJ, XIANJUNXWZJRQ, XINGZHENGZW, XIANXINGZZWRQ, XINGZHENGZWDJ, XIANXINGZZWDJRQ, ZHUANYEJSZW, ZHUANYEJSZWRQ, ZHUANYEJSDJ, ZHUANYEJSDJRQ, HOUQINGBZYLB, JIGUANFDBS, JIASHUGZDW, HUNYINZK, PEIOUXM, PEIOUGZDW, SHIFOUYS, DUIYINGJRZGID, DUIYINGJRXM, DUIYINGJRCSRQ, DUIYINGJRZJBH, DUIYINGJRBZH, JICENGYLJGID, JICENGYLJGMC, SHIFOUFHYLJDYLJGTJ, JINGJIZK, LIANXIDH, GERENZT, YILEITGRYLB, ERLEITGRYLB, SANLEITGRYLB, SILEITGRYLB, WULEITGRYLB, GENGXINBZ, SHANGBAOBZ, FENFABZ, SHENHEBZ, SHUJUSZDW, SHIFOUXG, BEIZHU, SHUNXUM, RENYUANJBXXCJYJ, YINHANGDM, YUANID, YINHANGSZD, GANGWEIDJ, GANGWEIQK, CANJIAYLBXQK, ZHIGONGDJHM, XZGXDWDM, XZGXDWMC, XZGXDDXH, CWGXDWDM, CWGXDWMC, CWGXDDXH, YLGXDWDM, YLGXDWMC, YLGXDDXH, BZGXDWDM, BZGXDWMC, BZGXDDXH, YFGXDWDM, YFGXDWMC, YFGXDDXH, SUOZAIQHQ, SHENHEREN, XINGZHENGMLH, PIZHUNREN, PIZHUNRQ, SHIFOUZXXY, GONGQINJNDJRQ, ZHAOPIANSFXG, BAOZHANGKH, KALEIXING, SHIFOUYZK, BUMENSHZT, YILIAOZH, GONGZILZQD, SHIFOUJRJS, CAIJISBDW, XIAFABZ, YINHANGKH, ZAIZHIQK, SHIFOUZJDJY, SHIFOUXYSJPOBX, DAIYUJB, DAIYUJBRQ, JIBIEDC, JIBIEDCRQ, TAOGAIBZ, SHENHEDWDM, SHENHEJG, ZHAOPIANLJ, CREATE_TIME, LAST_MODIFY_TIME, WENZHIRYJB, WENZHIRYJBRQ, SHEBAOKH, LEIXING, GUHUAZCM, HUNYINRQ, ZHENGZHIMMRQ, YINHANGGWKZH, ZUZHIGXJGMC, JINXIAORQ, TIJIANGRQ, BENDANGRQ, GANBUBH, GUOJI, ZHIYE, XIANJUZDZ, SHIFOUDSZN, SHIFOUSWRY, SHIFOUSJR, HUKOUSZD, SHIFOUCZHK, SHIFOUYSJ, SUIJUNRQ, SHENFENZJQSRQ, SHENFENZJZZRQ, JYGXDWDM, JYGXDWMC, JYGXDDXH, DYCWDWDM, DYBZDWDM, DYYLDWDM, DYYFDWDM, DYJYDWDM, SUIJUNZK, XINGMINGPY, ZHIPAIBZ, DYCWDWMC, DYBZDWMC, DYYLDWMC, DYYFDWMC, DYJYDWMC, CAIWUBM, BEIZHUANGBM, YILIAOBM, YINGFANGBM, JIYANGBM, GANGWEIZWCJ, GANGWEIZWCJRQ, TAOGAISJ, GANGWEILB
         from bzfx.BZK_TAB_RENYUANJBXX
         <where>
             <if test="id != null and id != ''">
@@ -515,6 +575,186 @@
             </if>
             <if test="shifouxysjpobx != null and shifouxysjpobx != ''">
                 and SHIFOUXYSJPOBX = #{shifouxysjpobx}
+            </if>
+            <if test="daiyujb != null and daiyujb != ''">
+                and DAIYUJB = #{daiyujb}
+            </if>
+            <if test="daiyujbrq != null">
+                and DAIYUJBRQ = #{daiyujbrq}
+            </if>
+            <if test="jibiedc != null and jibiedc != ''">
+                and JIBIEDC = #{jibiedc}
+            </if>
+            <if test="jibiedcrq != null">
+                and JIBIEDCRQ = #{jibiedcrq}
+            </if>
+            <if test="taogaibz != null">
+                and TAOGAIBZ = #{taogaibz}
+            </if>
+            <if test="shenhedwdm != null and shenhedwdm != ''">
+                and SHENHEDWDM = #{shenhedwdm}
+            </if>
+            <if test="shenhejg != null">
+                and SHENHEJG = #{shenhejg}
+            </if>
+            <if test="zhaopianlj != null and zhaopianlj != ''">
+                and ZHAOPIANLJ = #{zhaopianlj}
+            </if>
+            <if test="createTime != null">
+                and CREATE_TIME = #{createTime}
+            </if>
+            <if test="lastModifyTime != null">
+                and LAST_MODIFY_TIME = #{lastModifyTime}
+            </if>
+            <if test="wenzhiryjb != null and wenzhiryjb != ''">
+                and WENZHIRYJB = #{wenzhiryjb}
+            </if>
+            <if test="wenzhiryjbrq != null">
+                and WENZHIRYJBRQ = #{wenzhiryjbrq}
+            </if>
+            <if test="shebaokh != null and shebaokh != ''">
+                and SHEBAOKH = #{shebaokh}
+            </if>
+            <if test="leixing != null">
+                and LEIXING = #{leixing}
+            </if>
+            <if test="guhuazcm != null and guhuazcm != ''">
+                and GUHUAZCM = #{guhuazcm}
+            </if>
+            <if test="hunyinrq != null">
+                and HUNYINRQ = #{hunyinrq}
+            </if>
+            <if test="zhengzhimmrq != null">
+                and ZHENGZHIMMRQ = #{zhengzhimmrq}
+            </if>
+            <if test="yinhanggwkzh != null and yinhanggwkzh != ''">
+                and YINHANGGWKZH = #{yinhanggwkzh}
+            </if>
+            <if test="zuzhigxjgmc != null and zuzhigxjgmc != ''">
+                and ZUZHIGXJGMC = #{zuzhigxjgmc}
+            </if>
+            <if test="jinxiaorq != null">
+                and JINXIAORQ = #{jinxiaorq}
+            </if>
+            <if test="tijiangrq != null">
+                and TIJIANGRQ = #{tijiangrq}
+            </if>
+            <if test="bendangrq != null">
+                and BENDANGRQ = #{bendangrq}
+            </if>
+            <if test="ganbubh != null and ganbubh != ''">
+                and GANBUBH = #{ganbubh}
+            </if>
+            <if test="guoji != null and guoji != ''">
+                and GUOJI = #{guoji}
+            </if>
+            <if test="zhiye != null and zhiye != ''">
+                and ZHIYE = #{zhiye}
+            </if>
+            <if test="xianjuzdz != null and xianjuzdz != ''">
+                and XIANJUZDZ = #{xianjuzdz}
+            </if>
+            <if test="shifoudszn != null and shifoudszn != ''">
+                and SHIFOUDSZN = #{shifoudszn}
+            </if>
+            <if test="shifouswry != null and shifouswry != ''">
+                and SHIFOUSWRY = #{shifouswry}
+            </if>
+            <if test="shifousjr != null and shifousjr != ''">
+                and SHIFOUSJR = #{shifousjr}
+            </if>
+            <if test="hukouszd != null and hukouszd != ''">
+                and HUKOUSZD = #{hukouszd}
+            </if>
+            <if test="shifouczhk != null and shifouczhk != ''">
+                and SHIFOUCZHK = #{shifouczhk}
+            </if>
+            <if test="shifouysj != null and shifouysj != ''">
+                and SHIFOUYSJ = #{shifouysj}
+            </if>
+            <if test="suijunrq != null">
+                and SUIJUNRQ = #{suijunrq}
+            </if>
+            <if test="shenfenzjqsrq != null">
+                and SHENFENZJQSRQ = #{shenfenzjqsrq}
+            </if>
+            <if test="shenfenzjzzrq != null">
+                and SHENFENZJZZRQ = #{shenfenzjzzrq}
+            </if>
+            <if test="jygxdwdm != null and jygxdwdm != ''">
+                and JYGXDWDM = #{jygxdwdm}
+            </if>
+            <if test="jygxdwmc != null and jygxdwmc != ''">
+                and JYGXDWMC = #{jygxdwmc}
+            </if>
+            <if test="jygxddxh != null">
+                and JYGXDDXH = #{jygxddxh}
+            </if>
+            <if test="dycwdwdm != null and dycwdwdm != ''">
+                and DYCWDWDM = #{dycwdwdm}
+            </if>
+            <if test="dybzdwdm != null and dybzdwdm != ''">
+                and DYBZDWDM = #{dybzdwdm}
+            </if>
+            <if test="dyyldwdm != null and dyyldwdm != ''">
+                and DYYLDWDM = #{dyyldwdm}
+            </if>
+            <if test="dyyfdwdm != null and dyyfdwdm != ''">
+                and DYYFDWDM = #{dyyfdwdm}
+            </if>
+            <if test="dyjydwdm != null and dyjydwdm != ''">
+                and DYJYDWDM = #{dyjydwdm}
+            </if>
+            <if test="suijunzk != null and suijunzk != ''">
+                and SUIJUNZK = #{suijunzk}
+            </if>
+            <if test="xingmingpy != null and xingmingpy != ''">
+                and XINGMINGPY = #{xingmingpy}
+            </if>
+            <if test="zhipaibz != null">
+                and ZHIPAIBZ = #{zhipaibz}
+            </if>
+            <if test="dycwdwmc != null and dycwdwmc != ''">
+                and DYCWDWMC = #{dycwdwmc}
+            </if>
+            <if test="dybzdwmc != null and dybzdwmc != ''">
+                and DYBZDWMC = #{dybzdwmc}
+            </if>
+            <if test="dyyldwmc != null and dyyldwmc != ''">
+                and DYYLDWMC = #{dyyldwmc}
+            </if>
+            <if test="dyyfdwmc != null and dyyfdwmc != ''">
+                and DYYFDWMC = #{dyyfdwmc}
+            </if>
+            <if test="dyjydwmc != null and dyjydwmc != ''">
+                and DYJYDWMC = #{dyjydwmc}
+            </if>
+            <if test="caiwubm != null and caiwubm != ''">
+                and CAIWUBM = #{caiwubm}
+            </if>
+            <if test="beizhuangbm != null and beizhuangbm != ''">
+                and BEIZHUANGBM = #{beizhuangbm}
+            </if>
+            <if test="yiliaobm != null and yiliaobm != ''">
+                and YILIAOBM = #{yiliaobm}
+            </if>
+            <if test="yingfangbm != null and yingfangbm != ''">
+                and YINGFANGBM = #{yingfangbm}
+            </if>
+            <if test="jiyangbm != null and jiyangbm != ''">
+                and JIYANGBM = #{jiyangbm}
+            </if>
+            <if test="gangweizwcj != null and gangweizwcj != ''">
+                and GANGWEIZWCJ = #{gangweizwcj}
+            </if>
+            <if test="gangweizwcjrq != null">
+                and GANGWEIZWCJRQ = #{gangweizwcjrq}
+            </if>
+            <if test="taogaisj != null">
+                and TAOGAISJ = #{taogaisj}
+            </if>
+            <if test="gangweilb != null and gangweilb != ''">
+                and GANGWEILB = #{gangweilb}
             </if>
         </where>
     </select>
@@ -912,7 +1152,7 @@
     <!-- 分页查询 -->
     <select id="queryPageBzkTabRenyuanjbxxList" resultMap="BaseResultMap">
             select
-                ID, JUNRENBZH, YILIAOKH, SHIBINGZCM, SHIBINGFZDJBHM, XINGMING, XINGBIE, MINZU, JIGUAN, CHUSHENGDI, CHUSHENGRQ, XUEXING, RUWURQ, GONGZUORQ, LITUIXRQ, GONGZUODWDM, GONGZUODWMC, BUBIE, BUMENID, ZHENGJIANBH, ZHENGJIANLX, RENYUANLB, ZHULEIBIE, JUNZHONG, ZHIGONGSFLB, JIASHUSFLB, YOUFOUZP, ZHAOPIAN, WENHUACD, BIYEYX, RUXUERQ, BIYERQ, BIYEZY, XUEWEI, ZHENGZHIMM, TIGANRQ, GAIXUANSGRQ, JUNXIANWZJ, XIANJUNXWZJRQ, XINGZHENGZW, XIANXINGZZWRQ, XINGZHENGZWDJ, XIANXINGZZWDJRQ, ZHUANYEJSZW, ZHUANYEJSZWRQ, ZHUANYEJSDJ, ZHUANYEJSDJRQ, HOUQINGBZYLB, JIGUANFDBS, JIASHUGZDW, HUNYINZK, PEIOUXM, PEIOUGZDW, SHIFOUYS, DUIYINGJRZGID, DUIYINGJRXM, DUIYINGJRCSRQ, DUIYINGJRZJBH, DUIYINGJRBZH, JICENGYLJGID, JICENGYLJGMC, SHIFOUFHYLJDYLJGTJ, JINGJIZK, LIANXIDH, GERENZT, YILEITGRYLB, ERLEITGRYLB, SANLEITGRYLB, SILEITGRYLB, WULEITGRYLB, GENGXINBZ, SHANGBAOBZ, FENFABZ, SHENHEBZ, SHUJUSZDW, SHIFOUXG, BEIZHU, SHUNXUM, RENYUANJBXXCJYJ, YINHANGDM, YUANID, YINHANGSZD, GANGWEIDJ, GANGWEIQK, CANJIAYLBXQK, ZHIGONGDJHM, XZGXDWDM, XZGXDWMC, XZGXDDXH, CWGXDWDM, CWGXDWMC, CWGXDDXH, YLGXDWDM, YLGXDWMC, YLGXDDXH, BZGXDWDM, BZGXDWMC, BZGXDDXH, YFGXDWDM, YFGXDWMC, YFGXDDXH, SUOZAIQHQ, SHENHEREN, XINGZHENGMLH, PIZHUNREN, PIZHUNRQ, SHIFOUZXXY, GONGQINJNDJRQ, ZHAOPIANSFXG, BAOZHANGKH, KALEIXING, SHIFOUYZK, BUMENSHZT, YILIAOZH, GONGZILZQD, SHIFOUJRJS, CAIJISBDW, XIAFABZ, YINHANGKH, ZAIZHIQK, SHIFOUZJDJY, SHIFOUXYSJPOBX            
+                ID, JUNRENBZH, YILIAOKH, SHIBINGZCM, SHIBINGFZDJBHM, XINGMING, XINGBIE, MINZU, JIGUAN, CHUSHENGDI, CHUSHENGRQ, XUEXING, RUWURQ, GONGZUORQ, LITUIXRQ, GONGZUODWDM, GONGZUODWMC, BUBIE, BUMENID, ZHENGJIANBH, ZHENGJIANLX, RENYUANLB, ZHULEIBIE, JUNZHONG, ZHIGONGSFLB, JIASHUSFLB, YOUFOUZP, ZHAOPIAN, WENHUACD, BIYEYX, RUXUERQ, BIYERQ, BIYEZY, XUEWEI, ZHENGZHIMM, TIGANRQ, GAIXUANSGRQ, JUNXIANWZJ, XIANJUNXWZJRQ, XINGZHENGZW, XIANXINGZZWRQ, XINGZHENGZWDJ, XIANXINGZZWDJRQ, ZHUANYEJSZW, ZHUANYEJSZWRQ, ZHUANYEJSDJ, ZHUANYEJSDJRQ, HOUQINGBZYLB, JIGUANFDBS, JIASHUGZDW, HUNYINZK, PEIOUXM, PEIOUGZDW, SHIFOUYS, DUIYINGJRZGID, DUIYINGJRXM, DUIYINGJRCSRQ, DUIYINGJRZJBH, DUIYINGJRBZH, JICENGYLJGID, JICENGYLJGMC, SHIFOUFHYLJDYLJGTJ, JINGJIZK, LIANXIDH, GERENZT, YILEITGRYLB, ERLEITGRYLB, SANLEITGRYLB, SILEITGRYLB, WULEITGRYLB, GENGXINBZ, SHANGBAOBZ, FENFABZ, SHENHEBZ, SHUJUSZDW, SHIFOUXG, BEIZHU, SHUNXUM, RENYUANJBXXCJYJ, YINHANGDM, YUANID, YINHANGSZD, GANGWEIDJ, GANGWEIQK, CANJIAYLBXQK, ZHIGONGDJHM, XZGXDWDM, XZGXDWMC, XZGXDDXH, CWGXDWDM, CWGXDWMC, CWGXDDXH, YLGXDWDM, YLGXDWMC, YLGXDDXH, BZGXDWDM, BZGXDWMC, BZGXDDXH, YFGXDWDM, YFGXDWMC, YFGXDDXH, SUOZAIQHQ, SHENHEREN, XINGZHENGMLH, PIZHUNREN, PIZHUNRQ, SHIFOUZXXY, GONGQINJNDJRQ, ZHAOPIANSFXG, BAOZHANGKH, KALEIXING, SHIFOUYZK, BUMENSHZT, YILIAOZH, GONGZILZQD, SHIFOUJRJS, CAIJISBDW, XIAFABZ, YINHANGKH, ZAIZHIQK, SHIFOUZJDJY, SHIFOUXYSJPOBX, DAIYUJB, DAIYUJBRQ, JIBIEDC, JIBIEDCRQ, TAOGAIBZ, SHENHEDWDM, SHENHEJG, ZHAOPIANLJ, CREATE_TIME, LAST_MODIFY_TIME, WENZHIRYJB, WENZHIRYJBRQ, SHEBAOKH, LEIXING, GUHUAZCM, HUNYINRQ, ZHENGZHIMMRQ, YINHANGGWKZH, ZUZHIGXJGMC, JINXIAORQ, TIJIANGRQ, BENDANGRQ, GANBUBH, GUOJI, ZHIYE, XIANJUZDZ, SHIFOUDSZN, SHIFOUSWRY, SHIFOUSJR, HUKOUSZD, SHIFOUCZHK, SHIFOUYSJ, SUIJUNRQ, SHENFENZJQSRQ, SHENFENZJZZRQ, JYGXDWDM, JYGXDWMC, JYGXDDXH, DYCWDWDM, DYBZDWDM, DYYLDWDM, DYYFDWDM, DYJYDWDM, SUIJUNZK, XINGMINGPY, ZHIPAIBZ, DYCWDWMC, DYBZDWMC, DYYLDWMC, DYYFDWMC, DYJYDWMC, CAIWUBM, BEIZHUANGBM, YILIAOBM, YINGFANGBM, JIYANGBM, GANGWEIZWCJ, GANGWEIZWCJRQ, TAOGAISJ, GANGWEILB            
             from bzfx.BZK_TAB_RENYUANJBXX
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null and obj.id != ''">
@@ -1280,6 +1520,186 @@
                    </if>
                                <if test="obj.shifouxysjpobx != null and obj.shifouxysjpobx != ''">
                         and SHIFOUXYSJPOBX = #{obj.shifouxysjpobx}
+                   </if>
+                               <if test="obj.daiyujb != null and obj.daiyujb != ''">
+                        and DAIYUJB = #{obj.daiyujb}
+                   </if>
+                               <if test="obj.daiyujbrq != null">
+                        and DAIYUJBRQ = #{obj.daiyujbrq}
+                   </if>
+                               <if test="obj.jibiedc != null and obj.jibiedc != ''">
+                        and JIBIEDC = #{obj.jibiedc}
+                   </if>
+                               <if test="obj.jibiedcrq != null">
+                        and JIBIEDCRQ = #{obj.jibiedcrq}
+                   </if>
+                               <if test="obj.taogaibz != null">
+                        and TAOGAIBZ = #{obj.taogaibz}
+                   </if>
+                               <if test="obj.shenhedwdm != null and obj.shenhedwdm != ''">
+                        and SHENHEDWDM = #{obj.shenhedwdm}
+                   </if>
+                               <if test="obj.shenhejg != null">
+                        and SHENHEJG = #{obj.shenhejg}
+                   </if>
+                               <if test="obj.zhaopianlj != null and obj.zhaopianlj != ''">
+                        and ZHAOPIANLJ = #{obj.zhaopianlj}
+                   </if>
+                               <if test="obj.createTime != null">
+                        and CREATE_TIME = #{obj.createTime}
+                   </if>
+                               <if test="obj.lastModifyTime != null">
+                        and LAST_MODIFY_TIME = #{obj.lastModifyTime}
+                   </if>
+                               <if test="obj.wenzhiryjb != null and obj.wenzhiryjb != ''">
+                        and WENZHIRYJB = #{obj.wenzhiryjb}
+                   </if>
+                               <if test="obj.wenzhiryjbrq != null">
+                        and WENZHIRYJBRQ = #{obj.wenzhiryjbrq}
+                   </if>
+                               <if test="obj.shebaokh != null and obj.shebaokh != ''">
+                        and SHEBAOKH = #{obj.shebaokh}
+                   </if>
+                               <if test="obj.leixing != null">
+                        and LEIXING = #{obj.leixing}
+                   </if>
+                               <if test="obj.guhuazcm != null and obj.guhuazcm != ''">
+                        and GUHUAZCM = #{obj.guhuazcm}
+                   </if>
+                               <if test="obj.hunyinrq != null">
+                        and HUNYINRQ = #{obj.hunyinrq}
+                   </if>
+                               <if test="obj.zhengzhimmrq != null">
+                        and ZHENGZHIMMRQ = #{obj.zhengzhimmrq}
+                   </if>
+                               <if test="obj.yinhanggwkzh != null and obj.yinhanggwkzh != ''">
+                        and YINHANGGWKZH = #{obj.yinhanggwkzh}
+                   </if>
+                               <if test="obj.zuzhigxjgmc != null and obj.zuzhigxjgmc != ''">
+                        and ZUZHIGXJGMC = #{obj.zuzhigxjgmc}
+                   </if>
+                               <if test="obj.jinxiaorq != null">
+                        and JINXIAORQ = #{obj.jinxiaorq}
+                   </if>
+                               <if test="obj.tijiangrq != null">
+                        and TIJIANGRQ = #{obj.tijiangrq}
+                   </if>
+                               <if test="obj.bendangrq != null">
+                        and BENDANGRQ = #{obj.bendangrq}
+                   </if>
+                               <if test="obj.ganbubh != null and obj.ganbubh != ''">
+                        and GANBUBH = #{obj.ganbubh}
+                   </if>
+                               <if test="obj.guoji != null and obj.guoji != ''">
+                        and GUOJI = #{obj.guoji}
+                   </if>
+                               <if test="obj.zhiye != null and obj.zhiye != ''">
+                        and ZHIYE = #{obj.zhiye}
+                   </if>
+                               <if test="obj.xianjuzdz != null and obj.xianjuzdz != ''">
+                        and XIANJUZDZ = #{obj.xianjuzdz}
+                   </if>
+                               <if test="obj.shifoudszn != null and obj.shifoudszn != ''">
+                        and SHIFOUDSZN = #{obj.shifoudszn}
+                   </if>
+                               <if test="obj.shifouswry != null and obj.shifouswry != ''">
+                        and SHIFOUSWRY = #{obj.shifouswry}
+                   </if>
+                               <if test="obj.shifousjr != null and obj.shifousjr != ''">
+                        and SHIFOUSJR = #{obj.shifousjr}
+                   </if>
+                               <if test="obj.hukouszd != null and obj.hukouszd != ''">
+                        and HUKOUSZD = #{obj.hukouszd}
+                   </if>
+                               <if test="obj.shifouczhk != null and obj.shifouczhk != ''">
+                        and SHIFOUCZHK = #{obj.shifouczhk}
+                   </if>
+                               <if test="obj.shifouysj != null and obj.shifouysj != ''">
+                        and SHIFOUYSJ = #{obj.shifouysj}
+                   </if>
+                               <if test="obj.suijunrq != null">
+                        and SUIJUNRQ = #{obj.suijunrq}
+                   </if>
+                               <if test="obj.shenfenzjqsrq != null">
+                        and SHENFENZJQSRQ = #{obj.shenfenzjqsrq}
+                   </if>
+                               <if test="obj.shenfenzjzzrq != null">
+                        and SHENFENZJZZRQ = #{obj.shenfenzjzzrq}
+                   </if>
+                               <if test="obj.jygxdwdm != null and obj.jygxdwdm != ''">
+                        and JYGXDWDM = #{obj.jygxdwdm}
+                   </if>
+                               <if test="obj.jygxdwmc != null and obj.jygxdwmc != ''">
+                        and JYGXDWMC = #{obj.jygxdwmc}
+                   </if>
+                               <if test="obj.jygxddxh != null">
+                        and JYGXDDXH = #{obj.jygxddxh}
+                   </if>
+                               <if test="obj.dycwdwdm != null and obj.dycwdwdm != ''">
+                        and DYCWDWDM = #{obj.dycwdwdm}
+                   </if>
+                               <if test="obj.dybzdwdm != null and obj.dybzdwdm != ''">
+                        and DYBZDWDM = #{obj.dybzdwdm}
+                   </if>
+                               <if test="obj.dyyldwdm != null and obj.dyyldwdm != ''">
+                        and DYYLDWDM = #{obj.dyyldwdm}
+                   </if>
+                               <if test="obj.dyyfdwdm != null and obj.dyyfdwdm != ''">
+                        and DYYFDWDM = #{obj.dyyfdwdm}
+                   </if>
+                               <if test="obj.dyjydwdm != null and obj.dyjydwdm != ''">
+                        and DYJYDWDM = #{obj.dyjydwdm}
+                   </if>
+                               <if test="obj.suijunzk != null and obj.suijunzk != ''">
+                        and SUIJUNZK = #{obj.suijunzk}
+                   </if>
+                               <if test="obj.xingmingpy != null and obj.xingmingpy != ''">
+                        and XINGMINGPY = #{obj.xingmingpy}
+                   </if>
+                               <if test="obj.zhipaibz != null">
+                        and ZHIPAIBZ = #{obj.zhipaibz}
+                   </if>
+                               <if test="obj.dycwdwmc != null and obj.dycwdwmc != ''">
+                        and DYCWDWMC = #{obj.dycwdwmc}
+                   </if>
+                               <if test="obj.dybzdwmc != null and obj.dybzdwmc != ''">
+                        and DYBZDWMC = #{obj.dybzdwmc}
+                   </if>
+                               <if test="obj.dyyldwmc != null and obj.dyyldwmc != ''">
+                        and DYYLDWMC = #{obj.dyyldwmc}
+                   </if>
+                               <if test="obj.dyyfdwmc != null and obj.dyyfdwmc != ''">
+                        and DYYFDWMC = #{obj.dyyfdwmc}
+                   </if>
+                               <if test="obj.dyjydwmc != null and obj.dyjydwmc != ''">
+                        and DYJYDWMC = #{obj.dyjydwmc}
+                   </if>
+                               <if test="obj.caiwubm != null and obj.caiwubm != ''">
+                        and CAIWUBM = #{obj.caiwubm}
+                   </if>
+                               <if test="obj.beizhuangbm != null and obj.beizhuangbm != ''">
+                        and BEIZHUANGBM = #{obj.beizhuangbm}
+                   </if>
+                               <if test="obj.yiliaobm != null and obj.yiliaobm != ''">
+                        and YILIAOBM = #{obj.yiliaobm}
+                   </if>
+                               <if test="obj.yingfangbm != null and obj.yingfangbm != ''">
+                        and YINGFANGBM = #{obj.yingfangbm}
+                   </if>
+                               <if test="obj.jiyangbm != null and obj.jiyangbm != ''">
+                        and JIYANGBM = #{obj.jiyangbm}
+                   </if>
+                               <if test="obj.gangweizwcj != null and obj.gangweizwcj != ''">
+                        and GANGWEIZWCJ = #{obj.gangweizwcj}
+                   </if>
+                               <if test="obj.gangweizwcjrq != null">
+                        and GANGWEIZWCJRQ = #{obj.gangweizwcjrq}
+                   </if>
+                               <if test="obj.taogaisj != null">
+                        and TAOGAISJ = #{obj.taogaisj}
+                   </if>
+                               <if test="obj.gangweilb != null and obj.gangweilb != ''">
+                        and GANGWEILB = #{obj.gangweilb}
                    </if>
                         </trim>
     </select>
