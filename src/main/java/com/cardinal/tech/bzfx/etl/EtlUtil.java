@@ -37,9 +37,10 @@ public class EtlUtil {
     @Autowired
     private DataSource dataSource;
 
-    public long syncData(String host, String username, String password) throws Exception {
+    private final String oracleClassName = "oracle.jdbc.driver.OracleDriver";
+    public long syncData(String host, String dbName,String username, String password) throws Exception {
 
-        Connection oracleConnection = oracleConnection(host,username,password);
+        Connection oracleConnection = oracleConnection(host,dbName,username,password);
         Connection mysqlConnection = dataSource.getConnection();
         long count = 0;
         for (String tableName:coreTBNames){
@@ -51,23 +52,22 @@ public class EtlUtil {
         return count;
     }
 
-    public Connection oracleConnection(String dbHost, String username, String password) throws Exception {
-        String className="oracle.jdbc.driver.OracleDriver";
-        String url="jdbc:oracle:thin:@"+dbHost+":BZKGL";
-        Class.forName(className);
+    public Connection oracleConnection(String dbHost,String dbName, String username, String password) throws Exception {
+        String url="jdbc:oracle:thin:@"+dbHost+":"+dbName;
+        Class.forName(oracleClassName);
         Connection connection = DriverManager.getConnection(url, username, password);
         return connection;
     }
 
-    public Connection mysqlConnection() throws Exception {
-        String className="com.mysql.cj.jdbc.Driver";
-        String url="jdbc:mysql://59.110.172.20:33060/bzfx?characterEncoding=utf8";
-        String username="root";
-        String password="Bzfx@2021";
-        Class.forName(className);
-        Connection connection = DriverManager.getConnection(url, username, password);
-        return connection;
-    }
+//    public Connection mysqlConnection() throws Exception {
+//        String className="com.mysql.cj.jdbc.Driver";
+//        String url="jdbc:mysql://59.110.172.20:33060/bzfx?characterEncoding=utf8";
+//        String username="root";
+//        String password="Bzfx@2021";
+//        Class.forName(className);
+//        Connection connection = DriverManager.getConnection(url, username, password);
+//        return connection;
+//    }
 
     private String querySql(String tableName){
         if (tableName.equals("BZK_TAB_RENYUANJBXX")){

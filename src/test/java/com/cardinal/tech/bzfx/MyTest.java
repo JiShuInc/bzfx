@@ -34,7 +34,7 @@ public class MyTest {
     @Test
     public void testEtlUtil() {
         try {
-            etlUtil.syncData("457i338r70.qicp.vip:15918","BZKGL","BZKGL");
+            etlUtil.syncData("457i338r70.qicp.vip:15918","BZKGL","BZKGL","BZKGL");
         } catch (Exception e) {
             e.printStackTrace();
         }

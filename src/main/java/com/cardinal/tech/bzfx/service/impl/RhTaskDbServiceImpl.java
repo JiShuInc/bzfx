@@ -2,7 +2,9 @@ package com.cardinal.tech.bzfx.service.impl;
 
 import com.cardinal.tech.bzfx.bean.bo.*;
 import com.cardinal.tech.bzfx.bean.dbo.page.PageQuery;
+import com.cardinal.tech.bzfx.dao.RhTaskDao;
 import com.cardinal.tech.bzfx.dao.SlSyncLogsDao;
+import com.cardinal.tech.bzfx.entity.RhTask;
 import com.cardinal.tech.bzfx.entity.RhTaskDb;
 import com.cardinal.tech.bzfx.dao.RhTaskDbDao;
 import com.cardinal.tech.bzfx.entity.SlSyncLogs;
@@ -30,6 +32,7 @@ import java.util.Objects;
 public class RhTaskDbServiceImpl implements RhTaskDbService {
 
     private final RhTaskDbDao rhTaskDbDao;
+    private final RhTaskDao rhTaskDao;
     private final SlSyncLogsDao slSyncLogsDao;
     private final EtlUtil etlUtil;
 
@@ -125,17 +128,22 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
      */
     @Override
     public boolean syncData(Long taskId) {
+        RhTask rhTask = rhTaskDao.queryById(taskId);
+        if (Objects.nonNull(rhTask.getDbState()) && rhTask.getDbState().equals(SyncStateEnum.SYNC_PROGRESS.value())){
+            return false;
+        }
+        rhTask.setDbState(SyncStateEnum.SYNC_PROGRESS.value());
+        rhTaskDao.update(rhTask);
+
         RhTaskDb rhTaskDb = new RhTaskDb();
         rhTaskDb.setTaskId(taskId);
         List<RhTaskDb> rhTaskDbs = this.rhTaskDbDao.queryAll(rhTaskDb);
-        long cont = rhTaskDbs.stream().filter(e-> Objects.nonNull(e.getState()) && e.getState().equals(SyncStateEnum.SYNC_PROGRESS.value())).count();
-        if (cont>0){ return false; }
-        syncData(rhTaskDbs);
+        syncData(taskId,rhTaskDbs);
         return true;
     }
 
     @Async
-    void syncData(List<RhTaskDb> rhTaskDbs) {
+    void syncData(Long taskId, List<RhTaskDb> rhTaskDbs) {
         etlUtil.truncateTable();
         for (RhTaskDb db:rhTaskDbs){
             long count = 0;
@@ -147,7 +155,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
                 db.setState(SyncStateEnum.SYNC_PROGRESS.value());
                 db.setSyncAt(syncAt);
                 this.rhTaskDbDao.update(db);
-                count = etlUtil.syncData(db.getDbHost(),db.getDbName(),db.getDbPasswd());
+                count = etlUtil.syncData(db.getDbHost(),db.getDbSpace(),db.getDbName(),db.getDbPasswd());
                 db.setState(SyncStateEnum.SYNC_FINISHED.value());
                 db.setResult(result);
                 syncEnd = new Date();
@@ -176,5 +184,8 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
                 slSyncLogsDao.insert(slSyncLogs);
             }
         }
+        RhTask rhTask = rhTaskDao.queryById(taskId);
+        rhTask.setDbState(SyncStateEnum.SYNC_FINISHED.value());
+        rhTaskDao.update(rhTask);
     }
 }

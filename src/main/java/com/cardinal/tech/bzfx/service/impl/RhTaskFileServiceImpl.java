@@ -30,6 +30,7 @@ import java.util.*;
 public class RhTaskFileServiceImpl implements RhTaskFileService {
 
     private final RhTaskFileDao rhTaskFileDao;
+    private final RhTaskDao rhTaskDao;
 
     private final SlSyncLogsDao slSyncLogsDao;
 
@@ -128,17 +129,22 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
      */
     @Override
     public boolean syncData(Long taskId) {
+        RhTask rhTask = rhTaskDao.queryById(taskId);
+        if (Objects.nonNull(rhTask.getDbState()) && rhTask.getDbState().equals(SyncStateEnum.SYNC_PROGRESS.value())){
+            return false;
+        }
+        rhTask.setDbState(SyncStateEnum.SYNC_PROGRESS.value());
+        rhTaskDao.update(rhTask);
+
         RhTaskFile rhTaskFile = new RhTaskFile();
         rhTaskFile.setTaskId(taskId);
         List<RhTaskFile> rhTaskFiles = this.rhTaskFileDao.queryAll(rhTaskFile);
-        long cont = rhTaskFiles.stream().filter(e-> Objects.nonNull(e.getState()) && e.getState().equals(SyncStateEnum.SYNC_PROGRESS.value())).count();
-        if (cont>0){ return false; }
-        syncData(rhTaskFiles);
+        syncData(taskId,rhTaskFiles);
         return true;
     }
 
     @Async
-    void syncData(List<RhTaskFile> rhTaskFiles) {
+    void syncData(Long taskId, List<RhTaskFile> rhTaskFiles) {
         etlUtil.truncateTable();
         for (RhTaskFile file:rhTaskFiles){
             long count = 0;
@@ -150,7 +156,9 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
                 file.setState(SyncStateEnum.SYNC_PROGRESS.value());
                 file.setSyncAt(syncAt);
                 this.rhTaskFileDao.update(file);
-                count += this.batchProcessing(file);
+
+                count = this.batchProcessing(file);
+
                 file.setState(SyncStateEnum.SYNC_FINISHED.value());
                 file.setResult(result);
                 syncEnd = new Date();
@@ -179,6 +187,10 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
                 slSyncLogsDao.insert(slSyncLogs);
             }
         }
+
+        RhTask rhTask = rhTaskDao.queryById(taskId);
+        rhTask.setDbState(SyncStateEnum.SYNC_FINISHED.value());
+        rhTaskDao.update(rhTask);
     }
 
     private long batchProcessing(RhTaskFile file) throws FileNotFoundException {
