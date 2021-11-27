@@ -8,8 +8,8 @@ import java.util.Map;
 /**
  * 数据同步日志(SlSyncLogs)表服务接口
  *
- * @author cadinal.tech
- * @since 2021-11-13 20:00:37
+ * @author makejava
+ * @since 2021-11-27 17:41:54
  */
 public interface SlSyncLogsService {
 
