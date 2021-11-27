@@ -9,8 +9,8 @@ import java.util.Map;
 /**
  * 日志(GgLogs)表数据库访问层
  *
- * @author cadinal.tech
- * @since 2021-11-13 20:00:37
+ * @author makejava
+ * @since 2021-11-27 17:41:37
  */
 public interface GgLogsDao {
 

@@ -9,10 +9,10 @@ import lombok.Data;
  * 数据同步日志(SlSyncLogs)实体类
  *
  * @author makejava
- * @since 2021-11-17 19:31:56
+ * @since 2021-11-27 17:41:54
  */
 public class SlSyncLogs implements Serializable {
-    private static final long serialVersionUID = 302300437664835384L;
+    private static final long serialVersionUID = 269240619020916578L;
     /**
     * id
     */

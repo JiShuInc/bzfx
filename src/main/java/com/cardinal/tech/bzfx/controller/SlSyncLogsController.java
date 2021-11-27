@@ -8,8 +8,8 @@ import lombok.RequiredArgsConstructor;
 /**
  * 数据同步日志(SlSyncLogs)表控制层
  *
- * @author cadinal.tech
- * @since 2021-11-13 20:00:37
+ * @author makejava
+ * @since 2021-11-27 17:41:54
  */
 @RequiredArgsConstructor
 @RestController

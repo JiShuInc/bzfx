@@ -18,8 +18,8 @@ import java.util.Map;
 /**
  * 数据同步日志(SlSyncLogs)表服务api接口
  *
- * @author cadinal.tech
- * @since 2021-11-13 20:00:37
+ * @author makejava
+ * @since 2021-11-27 17:41:54
  */
 @Tag(name="数据同步日志")
 @RequestMapping("/slSyncLogs")
@@ -65,7 +65,7 @@ public interface SlSyncLogsApi {
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " group by field name")
         @GetMapping("/group")
-       default Response<List<Map<String,Integer>>> deleteById(@RequestParam String field){
+       default Response<List<Map<String,Integer>>> groupById(@RequestParam String field){
             return new Response(getService().groupBy(field));
         }
 
