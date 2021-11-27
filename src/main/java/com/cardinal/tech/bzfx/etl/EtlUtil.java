@@ -38,9 +38,9 @@ public class EtlUtil {
     private DataSource dataSource;
 
     private final String oracleClassName = "oracle.jdbc.driver.OracleDriver";
-    public long syncData(String host, Integer dbPort, String dbName, String username, String password) throws Exception {
+    public long syncData(String host, Integer dbPort, String dbService, String username, String password) throws Exception {
 
-        Connection oracleConnection = oracleConnection(host,dbPort,dbName,username,password);
+        Connection oracleConnection = oracleConnection(host,dbPort,dbService,username,password);
         log.info("获取oracle 连接--------------------");
         Connection mysqlConnection = dataSource.getConnection();
         log.info("获取mysql 连接--------------------");
@@ -55,8 +55,9 @@ public class EtlUtil {
         return count;
     }
 
-    public Connection oracleConnection(String dbHost, Integer dbPort, String dbName, String username, String password) throws Exception {
-        String url="jdbc:oracle:thin:@"+dbHost+":"+dbPort+":"+dbName;
+    public Connection oracleConnection(String dbHost, Integer dbPort, String dbService, String username, String password) throws Exception {
+        String url="jdbc:oracle:thin:@"+dbHost+":"+dbPort+":"+dbService;
+        log.info("获取oracle 连接: {}"+url);
         Class.forName(oracleClassName);
         Connection connection = DriverManager.getConnection(url, username, password);
         return connection;
@@ -358,11 +359,9 @@ public class EtlUtil {
     public static void main(String[] args) {
         EtlUtil etlUtil = new EtlUtil();
         try {
-            CsvToBean list = etlUtil.parseCsvToBean(BzkTabBaozhangkjbxx.class,"/Users/hua/BZK_TAB_BAOZHANGKJBXX.csv",',',1);
-            System.out.println(list.stream().count());
-        } catch (FileNotFoundException e) {
+            etlUtil.syncData("457i338r70.qicp.vip",15918, "ORCL","bzkgl","NCIHQBZK2013");
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
