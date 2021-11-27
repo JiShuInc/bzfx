@@ -2,6 +2,8 @@ package com.cardinal.tech.bzfx.api;
 
 import com.cardinal.tech.bzfx.bean.bo.*;
 import com.cardinal.tech.bzfx.entity.RhTaskDb;
+import com.cardinal.tech.bzfx.enums.ErrEnumInterface;
+import com.cardinal.tech.bzfx.enums.err.SysErrEnum;
 import com.cardinal.tech.bzfx.service.RhTaskDbService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -84,6 +86,10 @@ public interface RhTaskDbApi {
         @PostMapping("/task/sync")
         default Response<Boolean> syncData(@RequestBody HashMap<String,Long> body){
             Long taskId = body.get("id");
-            return new Response(getService().syncData(taskId));
+            Boolean flag = getService().syncData(taskId);
+            if (flag){
+                return new Response();
+            }
+            return new Response(SysErrEnum.SYNC_PROGRESS);
         }
 }

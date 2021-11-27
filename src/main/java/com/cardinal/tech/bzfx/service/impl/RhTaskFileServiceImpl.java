@@ -8,11 +8,14 @@ import com.cardinal.tech.bzfx.enums.biz.SyncResultEnum;
 import com.cardinal.tech.bzfx.enums.biz.SyncStateEnum;
 import com.cardinal.tech.bzfx.etl.EtlUtil;
 import com.cardinal.tech.bzfx.service.RhTaskFileService;
+import com.cardinal.tech.bzfx.util.GgLogsUtil;
 import com.opencsv.bean.CsvToBean;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +30,7 @@ import java.util.*;
  */
 @RequiredArgsConstructor
 @Service("rhTaskFileService")
+@Slf4j
 public class RhTaskFileServiceImpl implements RhTaskFileService {
 
     private final RhTaskFileDao rhTaskFileDao;
@@ -37,6 +41,8 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
     private final EtlUtil etlUtil;
 
     private SqlSessionTemplate sqlSessionTemplate;
+
+    private final GgLogsUtil ggLogsUtil;
     /**
      * 通过ID查询单条数据
      *
@@ -131,14 +137,17 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
     public boolean syncData(Long taskId) {
         RhTask rhTask = rhTaskDao.queryById(taskId);
         if (Objects.nonNull(rhTask.getDbState()) && rhTask.getDbState().equals(SyncStateEnum.SYNC_PROGRESS.value())){
+            log.info("rh_task state 状态为同步中");
             return false;
         }
+        ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task start");
         rhTask.setDbState(SyncStateEnum.SYNC_PROGRESS.value());
         rhTaskDao.update(rhTask);
-
+        ggLogsUtil.syncRecord("【taskId:"+taskId+"】task state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
         RhTaskFile rhTaskFile = new RhTaskFile();
         rhTaskFile.setTaskId(taskId);
         List<RhTaskFile> rhTaskFiles = this.rhTaskFileDao.queryAll(rhTaskFile);
+        ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file total ["+rhTaskFiles.size()+"]");
         syncData(taskId,rhTaskFiles);
         return true;
     }
@@ -147,6 +156,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
     void syncData(Long taskId, List<RhTaskFile> rhTaskFiles) {
         etlUtil.truncateTable();
         for (RhTaskFile file:rhTaskFiles){
+            ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task_file start["+file.getFilename()+"]");
             long count = 0;
             Date syncAt = new Date();
             Date syncEnd = null;
@@ -157,6 +167,8 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
                 file.setSyncAt(syncAt);
                 this.rhTaskFileDao.update(file);
 
+                ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file ["+file.getFilename()+"] task_file state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
+
                 count = this.batchProcessing(file);
 
                 file.setState(SyncStateEnum.SYNC_FINISHED.value());
@@ -164,6 +176,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
                 syncEnd = new Date();
                 file.setSyncEnd(syncEnd);
                 this.rhTaskFileDao.update(file);
+                ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file ["+file.getFilename()+"] task_file sync data total ["+count+"]");
             }catch (Exception e){
                 e.printStackTrace();
                 remark = e.getMessage();
@@ -173,6 +186,8 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
                 syncEnd = new Date();
                 file.setSyncEnd(syncEnd);
                 this.rhTaskFileDao.update(file);
+
+                ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file ["+file.getFilename()+"] update task_file state ["+SyncStateEnum.SYNC_FINISHED.desc()+"] [result "+SyncResultEnum.SYNC_FAIL.desc()+"]");
             }finally {
                 SlSyncLogs slSyncLogs = new SlSyncLogs();
                 slSyncLogs.setCreatAt(new Date());

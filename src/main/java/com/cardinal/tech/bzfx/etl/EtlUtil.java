@@ -1,25 +1,17 @@
 package com.cardinal.tech.bzfx.etl;
 
-import com.cardinal.tech.bzfx.entity.*;
-import com.opencsv.CSVParser;
-import com.opencsv.CSVParserBuilder;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
-import com.opencsv.bean.ColumnPositionMappingStrategy;
+import com.alibaba.fastjson.JSON;
+import com.cardinal.tech.bzfx.util.GgLogsUtil;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
-import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.io.*;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,9 +28,10 @@ public class EtlUtil {
     private List<String> coreTBNames = Arrays.asList("BZK_SLGX_BZ_BZDAXX", "BZK_SLGX_BZ_BZFFJL", "BZK_SLGX_CW_CWBZSJ", "BZK_SLGX_YF_RYZFQK", "BZK_TAB_DANWEIBCLRXX", "BZK_TAB_DANWEIJBXX", "BZK_TAB_RENYUANJBXX", "BZK_TAB_BAOZHANGKJBXX"); // 要同步的核心库表名
     @Autowired
     private DataSource dataSource;
-
+    @Autowired
+    private GgLogsUtil ggLogsUtil;
     private final String oracleClassName = "oracle.jdbc.driver.OracleDriver";
-    public long syncData(String host, Integer dbPort, String dbService, String username, String password) throws Exception {
+    public long syncData(Long taskId, String host, Integer dbPort, String dbService, String username, String password) throws Exception {
 
         Connection oracleConnection = oracleConnection(host,dbPort,dbService,username,password);
         log.info("获取oracle 连接--------------------");
@@ -47,7 +40,13 @@ public class EtlUtil {
         long count = 0;
         for (String tableName:coreTBNames){
             log.info("开始同步表-----------: {}",tableName);
-            count+=importTable(oracleConnection,mysqlConnection,tableName);
+
+            ggLogsUtil.syncRecord("taskId:【"+taskId+"】task_db ["+host+":"+dbPort+":"+dbService+"] sync table start ["+ tableName+"]");
+
+            long total =importTable(oracleConnection,mysqlConnection,tableName);
+            count+=total;
+            ggLogsUtil.syncRecord("taskId:【"+taskId+"】task_db ["+host+":"+dbPort+":"+dbService+"] sync table ["+ tableName+"] data total ["+total+"]");
+
         }
         if (Objects.nonNull(oracleConnection)){
             oracleConnection.close();
@@ -245,7 +244,7 @@ public class EtlUtil {
     }
 
     public void truncateTable()  {
-
+        ggLogsUtil.syncRecord(" truncate table "+ JSON.toJSONString(coreTBNames)+"");
         Statement truncateState = null;
         try {
             Connection connectMysql = dataSource.getConnection();
@@ -359,7 +358,7 @@ public class EtlUtil {
     public static void main(String[] args) {
         EtlUtil etlUtil = new EtlUtil();
         try {
-            etlUtil.syncData("457i338r70.qicp.vip",15918, "ORCL","bzkgl","NCIHQBZK2013");
+            etlUtil.syncData(1l, "457i338r70.qicp.vip",15918, "ORCL","bzkgl","NCIHQBZK2013");
         } catch (Exception e) {
             e.printStackTrace();
         }

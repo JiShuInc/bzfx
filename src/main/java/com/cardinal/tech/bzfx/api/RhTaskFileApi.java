@@ -2,6 +2,7 @@ package com.cardinal.tech.bzfx.api;
 
 import com.cardinal.tech.bzfx.bean.bo.*;
 import com.cardinal.tech.bzfx.entity.RhTaskFile;
+import com.cardinal.tech.bzfx.enums.err.SysErrEnum;
 import com.cardinal.tech.bzfx.service.RhTaskFileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -83,6 +84,10 @@ public interface RhTaskFileApi {
         @PostMapping("/task/sync")
         default Response<Boolean> syncData(@RequestBody HashMap<String,Long> body){
             Long taskId = body.get("id");
-            return new Response(getService().syncData(taskId));
+            Boolean flag = getService().syncData(taskId);
+            if (flag){
+                return new Response();
+            }
+            return new Response(SysErrEnum.SYNC_PROGRESS);
         }
 }

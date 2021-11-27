@@ -22,7 +22,8 @@ public enum SysErrEnum implements ErrEnumInterface {
     SHOCK_FILENAME_ERR(12, "震感文件命名错误,请按照yyyyMMdd_loc.csv 格式重新上传"),
     DAT_TAG_NAME_NULL(13, "tag 需要指定id或输入tag 名称"),
     DAT_DIR_NULL(14, "dat文件所在目录为空"),
-    DATTAG_NULL(15, "dat tag关联记录为空")
+    DATTAG_NULL(15, "dat tag关联记录为空"),
+    SYNC_PROGRESS(16, "数据同步中")
     ;
 
     int code;

@@ -1,7 +1,9 @@
 package com.cardinal.tech.bzfx.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.cardinal.tech.bzfx.bean.bo.*;
 import com.cardinal.tech.bzfx.bean.dbo.page.PageQuery;
+import com.cardinal.tech.bzfx.dao.GgLogsDao;
 import com.cardinal.tech.bzfx.dao.RhTaskDao;
 import com.cardinal.tech.bzfx.dao.SlSyncLogsDao;
 import com.cardinal.tech.bzfx.entity.RhTask;
@@ -12,6 +14,7 @@ import com.cardinal.tech.bzfx.enums.biz.SyncResultEnum;
 import com.cardinal.tech.bzfx.enums.biz.SyncStateEnum;
 import com.cardinal.tech.bzfx.etl.EtlUtil;
 import com.cardinal.tech.bzfx.service.RhTaskDbService;
+import com.cardinal.tech.bzfx.util.GgLogsUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -37,6 +40,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
     private final RhTaskDao rhTaskDao;
     private final SlSyncLogsDao slSyncLogsDao;
     private final EtlUtil etlUtil;
+    private final GgLogsUtil ggLogsUtil;
 
     /**
      * 通过ID查询单条数据
@@ -136,25 +140,23 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
             log.info("rh_task state 状态为同步中");
             return false;
         }
-
+        ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task start");
         rhTask.setDbState(SyncStateEnum.SYNC_PROGRESS.value());
         rhTaskDao.update(rhTask);
-        log.info("修改 rh_task state 状态为同步中");
+        ggLogsUtil.syncRecord("【taskId:"+taskId+"】task state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
         RhTaskDb rhTaskDb = new RhTaskDb();
         rhTaskDb.setTaskId(taskId);
         List<RhTaskDb> rhTaskDbs = this.rhTaskDbDao.queryAll(rhTaskDb);
-        log.info("获取的任务列表: {}",rhTaskDbs.size());
+        ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db total ["+rhTaskDbs.size()+"]");
         syncData(taskId,rhTaskDbs);
         return true;
     }
 
     @Async
     void syncData(Long taskId, List<RhTaskDb> rhTaskDbs) {
-        log.info("清空表数据------------");
         etlUtil.truncateTable();
-        log.info("开始同步数据-----------: {}",rhTaskDbs.size());
         for (RhTaskDb db:rhTaskDbs){
-            log.info("同步DB数据-----------: {}",db.getId());
+            ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task_db start["+db.getDbHost()+":"+db.getDbPort()+":"+db.getDbServe()+"]");
             long count = 0;
             Date syncAt = new Date();
             Date syncEnd = null;
@@ -164,12 +166,16 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
                 db.setState(SyncStateEnum.SYNC_PROGRESS.value());
                 db.setSyncAt(syncAt);
                 this.rhTaskDbDao.update(db);
-                count = etlUtil.syncData(db.getDbHost(),db.getDbPort(),db.getDbServe(),db.getDbName(),db.getDbPasswd());
+
+                ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db ["+db.getDbHost()+":"+db.getDbPort()+":"+db.getDbServe()+"] task_db state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
+
+                count = etlUtil.syncData(taskId,db.getDbHost(),db.getDbPort(),db.getDbServe(),db.getDbName(),db.getDbPasswd());
                 db.setState(SyncStateEnum.SYNC_FINISHED.value());
                 db.setResult(result);
                 syncEnd = new Date();
                 db.setSyncEnd(syncEnd);
                 this.rhTaskDbDao.update(db);
+                ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db ["+db.getDbHost()+":"+db.getDbPort()+":"+db.getDbServe()+"] task_db sync data total ["+count+"]");
             }catch (Exception e){
                 e.printStackTrace();
                 remark = e.getMessage();
@@ -179,6 +185,8 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
                 syncEnd = new Date();
                 db.setSyncEnd(syncEnd);
                 this.rhTaskDbDao.update(db);
+
+                ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db ["+db.getDbHost()+":"+db.getDbPort()+":"+db.getDbServe()+"] update task_db state ["+SyncStateEnum.SYNC_FINISHED.desc()+"] [result "+SyncResultEnum.SYNC_FAIL.desc()+"]");
             }finally {
                 SlSyncLogs slSyncLogs = new SlSyncLogs();
                 slSyncLogs.setCreatAt(new Date());
@@ -196,5 +204,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
         RhTask rhTask = rhTaskDao.queryById(taskId);
         rhTask.setDbState(SyncStateEnum.SYNC_FINISHED.value());
         rhTaskDao.update(rhTask);
+
+        ggLogsUtil.syncRecord("【taskId:"+taskId+" sync task state ["+SyncStateEnum.SYNC_FINISHED.desc()+"]");
     }
 }
