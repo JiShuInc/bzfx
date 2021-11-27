@@ -3,6 +3,7 @@ package com.cardinal.tech.bzfx.api;
 import com.cardinal.tech.bzfx.bean.bo.*;
 import com.cardinal.tech.bzfx.entity.JcSpecialRy;
 import com.cardinal.tech.bzfx.service.JcSpecialRyService;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,40 +29,42 @@ public interface JcSpecialRyApi {
         JcSpecialRyService getService();
 
         @PreAuthorize("hasRole('admin')")
-        @Operation(description = " get by id")
-        @GetMapping("/{id}")
-        default Response<JcSpecialRy> queryById(@PathVariable("id") Long id){
-            return new Response(getService().queryById(id));
+        @Operation(description = " get by sid")
+        @GetMapping("/{sid}")
+        default Response<JcSpecialRyBO> queryById(@PathVariable("sid") Long sid){
+            return new Response(getService().queryBySid(sid));
         }
 
+        @Hidden
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " get list")
         @GetMapping("/list")
-       default Response<List<JcSpecialRy>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit){
+       default Response<List<JcSpecialRyBO>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit){
             return new Response(getService().queryAllByLimit(offset,limit));
        }
 
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " add")
         @PostMapping("/add")
-        default Response<JcSpecialRy> insert(@RequestBody JcSpecialRy jcSpecialRy){
-            return new Response(getService().insert(jcSpecialRy));
+        default Response<JcSpecialRyBO> insert(@RequestBody JcSpecialRyForm jcSpecialRy){
+            return new Response(getService().addRy(jcSpecialRy));
         }
-
+        @Hidden
          @PreAuthorize("hasRole('admin')")
          @Operation(description = " update")
          @PostMapping("/update")
-        default Response<JcSpecialRy> update(@RequestBody JcSpecialRy jcSpecialRy){
+        default Response<JcSpecialRyBO> update(@RequestBody JcSpecialRy jcSpecialRy){
              return new Response(getService().update(jcSpecialRy));
         }
 
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " delete by pk")
         @GetMapping("/delete")
-       default Response<Boolean> deleteById(@RequestParam Long id){
-            return new Response(getService().deleteById(id));
+       default Response<Boolean> deleteById(@RequestParam Long sid,@RequestParam Long rid){
+            return new Response(getService().deleteBySId(sid,rid));
         }
 
+        @Hidden
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " group by field name")
         @GetMapping("/group")
@@ -69,10 +72,11 @@ public interface JcSpecialRyApi {
             return new Response(getService().groupBy(field));
         }
 
+        @Hidden
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " page list")
         @PostMapping("/page")
-        default Response<Page<JcSpecialRy>> page(@RequestBody PageForm<JcSpecialRy> userQueryForm) {
+        default Response<Page<JcSpecialRyBO>> page(@RequestBody PageForm<JcSpecialRy> userQueryForm) {
            return new Response(getService().page(userQueryForm));
         }
 }

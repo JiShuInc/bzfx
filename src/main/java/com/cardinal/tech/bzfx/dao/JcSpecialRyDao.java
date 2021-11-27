@@ -1,5 +1,7 @@
 package com.cardinal.tech.bzfx.dao;
 
+import com.cardinal.tech.bzfx.bean.bo.RYQuery;
+import com.cardinal.tech.bzfx.entity.BzkTabRenyuanjbxx;
 import com.cardinal.tech.bzfx.entity.JcSpecialRy;
 import com.cardinal.tech.bzfx.bean.dbo.page.*;
 import org.apache.ibatis.annotations.Param;
@@ -73,4 +75,10 @@ public interface JcSpecialRyDao {
     List<Map<String,Integer>> groupBy(String field);
 
      List<JcSpecialRy> queryPageJcSpecialRyList(PageQuery pq);
+
+    int addRyToRw(@Param("sid") Long sid,@Param("query") RYQuery query);
+
+    int deleteBySId(@Param("sid")Long sid, @Param("rid") Long rid);
+
+    List<BzkTabRenyuanjbxx> queryBySid(@Param("sid") Long sid);
 }

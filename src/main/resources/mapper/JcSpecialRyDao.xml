@@ -12,16 +12,20 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
-        select
-          id, sid, rid, creat_at
+        select id,
+               sid,
+               rid,
+               creat_at
         from bzfx.jc_special_ry
         where id = #{id}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
-        select
-          id, sid, rid, creat_at
+        select id,
+               sid,
+               rid,
+               creat_at
         from bzfx.jc_special_ry
         limit #{offset}, #{limit}
     </select>
@@ -29,7 +33,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, sid, rid, creat_at
+        id, sid, rid, creat_at
         from bzfx.jc_special_ry
         <where>
             <if test="id != null">
@@ -52,6 +56,40 @@
         insert into bzfx.jc_special_ry(sid, rid, creat_at)
         values (#{sid}, #{rid}, #{creatAt})
     </insert>
+    <insert id="addRyToRw">
+        insert into bzfx.jc_special_ry(sid,rid,creat_at) select #{sid,jdbcType=BIGINT}, ry.id,sysdate() from
+        bzfx.BZK_TAB_RENYUANJBXX ry
+        <if test="query != null">
+            <trim prefix="where" prefixOverrides="and|or">
+                <if test="query.junrenbzh!=null">
+                    and ry.junrenbzh=#{query.junrenbzh,jdbcType=VARCHAR}
+                </if>
+                <if test="query.xingbie!=null">
+                    and ry.xingbie=#{query.xingbie,jdbcType=VARCHAR}
+                </if>
+                <if test="query.minzu!=null">
+                    and ry.minzu=#{query.minzu,jdbcType=VARCHAR}
+                </if>
+                <if test="query.jiguan!=null">
+                    and ry.jiguan=#{query.jiguan,jdbcType=VARCHAR}
+                </if>
+                <if test="query.chushengrqStart!=null">
+                    and ry.chushengrq &gt; #{query.chushengrqStart,jdbcType=TIMESTAMP}
+                </if>
+                <if test="query.chushengrqEnd!=null">
+                    and ry.chushengrq &lt; #{query.chushengrqEnd,jdbcType=TIMESTAMP}
+                </if>
+                <if test="query.wenhuacd!=null">
+                    and ry.wenhuacd = #{query.wenhuacd,jdbcType=VARCHAR}
+                </if>
+
+                <if test="query.zhengzhimm!=null">
+                    and ry.zhengzhimm = #{query.zhengzhimm,jdbcType=VARCHAR}
+                </if>
+
+            </trim>
+        </if>
+    </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
@@ -72,36 +110,230 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from bzfx.jc_special_ry where id = #{id}
+        delete
+        from bzfx.jc_special_ry
+        where id = #{id}
+    </delete>
+    <delete id="deleteBySId">
+        delete
+        from bzfx.jc_special_ry
+        where sid = #{sid,jdbcType=BIGINT} and rid=#{rid,jdbcType=BIGINT}
     </delete>
 
     <!--查询指定行数据-->
     <select id="groupBy" resultType="map">
-           select
-              ${field},count(1) c
-            from bzfx.jc_special_ry
-            group by ${field}
+        select ${field},
+               count(1) c
+        from bzfx.jc_special_ry
+        group by ${field}
     </select>
 
     <!-- 分页查询 -->
     <select id="queryPageJcSpecialRyList" resultMap="BaseResultMap">
-            select
-                id, sid, rid, creat_at            
-            from bzfx.jc_special_ry
-            <trim prefix="where" prefixOverrides="and|or">
-                               <if test="obj.id != null">
-                        and id = #{obj.id}
-                   </if>
-                               <if test="obj.sid != null">
-                        and sid = #{obj.sid}
-                   </if>
-                               <if test="obj.rid != null and obj.rid != ''">
-                        and rid = #{obj.rid}
-                   </if>
-                               <if test="obj.creatAt != null">
-                        and creat_at = #{obj.creatAt}
-                   </if>
-                        </trim>
+        select
+        id, sid, rid, creat_at
+        from bzfx.jc_special_ry
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="obj.id != null">
+                and id = #{obj.id}
+            </if>
+            <if test="obj.sid != null">
+                and sid = #{obj.sid}
+            </if>
+            <if test="obj.rid != null and obj.rid != ''">
+                and rid = #{obj.rid}
+            </if>
+            <if test="obj.creatAt != null">
+                and creat_at = #{obj.creatAt}
+            </if>
+        </trim>
+    </select>
+    <select id="queryBySid" resultType="com.cardinal.tech.bzfx.entity.BzkTabRenyuanjbxx">
+        select ry.ID,
+               ry.JUNRENBZH,
+               ry.YILIAOKH,
+               ry.SHIBINGZCM,
+               ry.SHIBINGFZDJBHM,
+               ry.XINGMING,
+               ry.XINGBIE,
+               ry.MINZU,
+               ry.JIGUAN,
+               ry.CHUSHENGDI,
+               ry.CHUSHENGRQ,
+               ry.XUEXING,
+               ry.RUWURQ,
+               ry.GONGZUORQ,
+               ry.LITUIXRQ,
+               ry.GONGZUODWDM,
+               ry.GONGZUODWMC,
+               ry.BUBIE,
+               ry.BUMENID,
+               ry.ZHENGJIANBH,
+               ry.ZHENGJIANLX,
+               ry.RENYUANLB,
+               ry.ZHULEIBIE,
+               ry.JUNZHONG,
+               ry.ZHIGONGSFLB,
+               ry.JIASHUSFLB,
+               ry.YOUFOUZP,
+               ry.ZHAOPIAN,
+               ry.WENHUACD,
+               ry.BIYEYX,
+               ry.RUXUERQ,
+               ry.BIYERQ,
+               ry.BIYEZY,
+               ry.XUEWEI,
+               ry.ZHENGZHIMM,
+               ry.TIGANRQ,
+               ry.GAIXUANSGRQ,
+               ry.JUNXIANWZJ,
+               ry.XIANJUNXWZJRQ,
+               ry.XINGZHENGZW,
+               ry.XIANXINGZZWRQ,
+               ry.XINGZHENGZWDJ,
+               ry.XIANXINGZZWDJRQ,
+               ry.ZHUANYEJSZW,
+               ry.ZHUANYEJSZWRQ,
+               ry.ZHUANYEJSDJ,
+               ry.ZHUANYEJSDJRQ,
+               ry.HOUQINGBZYLB,
+               ry.JIGUANFDBS,
+               ry.JIASHUGZDW,
+               ry.HUNYINZK,
+               ry.PEIOUXM,
+               ry.PEIOUGZDW,
+               ry.SHIFOUYS,
+               ry.DUIYINGJRZGID,
+               ry.DUIYINGJRXM,
+               ry.DUIYINGJRCSRQ,
+               ry.DUIYINGJRZJBH,
+               ry.DUIYINGJRBZH,
+               ry.JICENGYLJGID,
+               ry.JICENGYLJGMC,
+               ry.SHIFOUFHYLJDYLJGTJ,
+               ry.JINGJIZK,
+               ry.LIANXIDH,
+               ry.GERENZT,
+               ry.YILEITGRYLB,
+               ry.ERLEITGRYLB,
+               ry.SANLEITGRYLB,
+               ry.SILEITGRYLB,
+               ry.WULEITGRYLB,
+               ry.GENGXINBZ,
+               ry.SHANGBAOBZ,
+               ry.FENFABZ,
+               ry.SHENHEBZ,
+               ry.SHUJUSZDW,
+               ry.SHIFOUXG,
+               ry.BEIZHU,
+               ry.SHUNXUM,
+               ry.RENYUANJBXXCJYJ,
+               ry.YINHANGDM,
+               ry.YUANID,
+               ry.YINHANGSZD,
+               ry.GANGWEIDJ,
+               ry.GANGWEIQK,
+               ry.CANJIAYLBXQK,
+               ry.ZHIGONGDJHM,
+               ry.XZGXDWDM,
+               ry.XZGXDWMC,
+               ry.XZGXDDXH,
+               ry.CWGXDWDM,
+               ry.CWGXDWMC,
+               ry.CWGXDDXH,
+               ry.YLGXDWDM,
+               ry.YLGXDWMC,
+               ry.YLGXDDXH,
+               ry.BZGXDWDM,
+               ry.BZGXDWMC,
+               ry.BZGXDDXH,
+               ry.YFGXDWDM,
+               ry.YFGXDWMC,
+               ry.YFGXDDXH,
+               ry.SUOZAIQHQ,
+               ry.SHENHEREN,
+               ry.XINGZHENGMLH,
+               ry.PIZHUNREN,
+               ry.PIZHUNRQ,
+               ry.SHIFOUZXXY,
+               ry.GONGQINJNDJRQ,
+               ry.ZHAOPIANSFXG,
+               ry.BAOZHANGKH,
+               ry.KALEIXING,
+               ry.SHIFOUYZK,
+               ry.BUMENSHZT,
+               ry.YILIAOZH,
+               ry.GONGZILZQD,
+               ry.SHIFOUJRJS,
+               ry.CAIJISBDW,
+               ry.XIAFABZ,
+               ry.YINHANGKH,
+               ry.ZAIZHIQK,
+               ry.SHIFOUZJDJY,
+               ry.SHIFOUXYSJPOBX,
+               ry.DAIYUJB,
+               ry.DAIYUJBRQ,
+               ry.JIBIEDC,
+               ry.JIBIEDCRQ,
+               ry.TAOGAIBZ,
+               ry.SHENHEDWDM,
+               ry.SHENHEJG,
+               ry.ZHAOPIANLJ,
+               ry.CREATE_TIME,
+               ry.LAST_MODIFY_TIME,
+               ry.WENZHIRYJB,
+               ry.WENZHIRYJBRQ,
+               ry.SHEBAOKH,
+               ry.LEIXING,
+               ry.GUHUAZCM,
+               ry.HUNYINRQ,
+               ry.ZHENGZHIMMRQ,
+               ry.YINHANGGWKZH,
+               ry.ZUZHIGXJGMC,
+               ry.JINXIAORQ,
+               ry.TIJIANGRQ,
+               ry.BENDANGRQ,
+               ry.GANBUBH,
+               ry.GUOJI,
+               ry.ZHIYE,
+               ry.XIANJUZDZ,
+               ry.SHIFOUDSZN,
+               ry.SHIFOUSWRY,
+               ry.SHIFOUSJR,
+               ry.HUKOUSZD,
+               ry.SHIFOUCZHK,
+               ry.SHIFOUYSJ,
+               ry.SUIJUNRQ,
+               ry.SHENFENZJQSRQ,
+               ry.SHENFENZJZZRQ,
+               ry.JYGXDWDM,
+               ry.JYGXDWMC,
+               ry.JYGXDDXH,
+               ry.DYCWDWDM,
+               ry.DYBZDWDM,
+               ry.DYYLDWDM,
+               ry.DYYFDWDM,
+               ry.DYJYDWDM,
+               ry.SUIJUNZK,
+               ry.XINGMINGPY,
+               ry.ZHIPAIBZ,
+               ry.DYCWDWMC,
+               ry.DYBZDWMC,
+               ry.DYYLDWMC,
+               ry.DYYFDWMC,
+               ry.DYJYDWMC,
+               ry.CAIWUBM,
+               ry.BEIZHUANGBM,
+               ry.YILIAOBM,
+               ry.YINGFANGBM,
+               ry.JIYANGBM,
+               ry.GANGWEIZWCJ,
+               ry.GANGWEIZWCJRQ,
+               ry.TAOGAISJ,
+               GANGWEILB
+        from bzfx.jc_special_ry jc
+                 left join bzfx.BZK_TAB_RENYUANJBXX ry on jc.rid = ry.ID
+        where jc.sid = #{sid,jdbcType=BIGINT}
     </select>
 
 </mapper>

@@ -8,7 +8,6 @@ import com.cardinal.tech.bzfx.service.JcSpecialRyService;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -27,12 +26,13 @@ public class JcSpecialRyServiceImpl implements JcSpecialRyService {
     /**
      * 通过ID查询单条数据
      *
-     * @param id 主键
+     * @param sid 任务id
      * @return 实例对象
      */
     @Override
-    public JcSpecialRy queryById(Long id) {
-        return this.jcSpecialRyDao.queryById(id);
+    public JcSpecialRyBO queryBySid(Long sid) {
+        final var list = this.jcSpecialRyDao.queryBySid(sid);
+        return new JcSpecialRyBO().setSid(sid).setRyxx(list);
     }
 
     /**
@@ -68,18 +68,19 @@ public class JcSpecialRyServiceImpl implements JcSpecialRyService {
     @Override
     public JcSpecialRy update(JcSpecialRy jcSpecialRy) {
         this.jcSpecialRyDao.update(jcSpecialRy);
-        return this.queryById(jcSpecialRy.getId());
+        return this.jcSpecialRyDao.queryById(jcSpecialRy.getId());
     }
 
     /**
      * 通过主键删除数据
      *
-     * @param id 主键
+     * @param sid 任务id
+     * @param sid 任务id
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Long id) {
-        return this.jcSpecialRyDao.deleteById(id) > 0;
+    public boolean deleteBySId(Long sid, Long rid) {
+        return this.jcSpecialRyDao.deleteBySId(sid,rid) > 0;
     }
 
     /**
@@ -106,5 +107,11 @@ public class JcSpecialRyServiceImpl implements JcSpecialRyService {
         Page<JcSpecialRy> p = new Page<>(pq.getTotalCount(), pq.getMax(), pq.getCurrentPage());
         p.setData(entityList);
         return p;
+    }
+
+    @Override
+    public JcSpecialRyBO addRy(JcSpecialRyForm jcSpecialRy) {
+         this.jcSpecialRyDao.addRyToRw(jcSpecialRy.getSid(), jcSpecialRy.getQuery());
+        return this.queryBySid(jcSpecialRy.getSid());
     }
 }
