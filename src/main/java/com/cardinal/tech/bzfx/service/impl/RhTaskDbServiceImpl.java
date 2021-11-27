@@ -155,7 +155,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
                 db.setState(SyncStateEnum.SYNC_PROGRESS.value());
                 db.setSyncAt(syncAt);
                 this.rhTaskDbDao.update(db);
-                count = etlUtil.syncData(db.getDbHost(),db.getDbSpace(),db.getDbName(),db.getDbPasswd());
+                count = etlUtil.syncData(db.getDbHost(),db.getDbPort(),db.getDbSpace(),db.getDbName(),db.getDbPasswd());
                 db.setState(SyncStateEnum.SYNC_FINISHED.value());
                 db.setResult(result);
                 syncEnd = new Date();

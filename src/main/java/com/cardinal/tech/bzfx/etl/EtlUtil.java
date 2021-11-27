@@ -38,9 +38,9 @@ public class EtlUtil {
     private DataSource dataSource;
 
     private final String oracleClassName = "oracle.jdbc.driver.OracleDriver";
-    public long syncData(String host, String dbName,String username, String password) throws Exception {
+    public long syncData(String host, Integer dbPort, String dbName, String username, String password) throws Exception {
 
-        Connection oracleConnection = oracleConnection(host,dbName,username,password);
+        Connection oracleConnection = oracleConnection(host,dbPort,dbName,username,password);
         Connection mysqlConnection = dataSource.getConnection();
         long count = 0;
         for (String tableName:coreTBNames){
@@ -52,8 +52,8 @@ public class EtlUtil {
         return count;
     }
 
-    public Connection oracleConnection(String dbHost,String dbName, String username, String password) throws Exception {
-        String url="jdbc:oracle:thin:@"+dbHost+":"+dbName;
+    public Connection oracleConnection(String dbHost, Integer dbPort, String dbName, String username, String password) throws Exception {
+        String url="jdbc:oracle:thin:@"+dbHost+":"+dbPort+":"+dbName;
         Class.forName(oracleClassName);
         Connection connection = DriverManager.getConnection(url, username, password);
         return connection;
