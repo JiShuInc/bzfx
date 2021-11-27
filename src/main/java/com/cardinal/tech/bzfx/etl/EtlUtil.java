@@ -243,8 +243,8 @@ public class EtlUtil {
         return insertSql.toString();
     }
 
-    public void truncateTable()  {
-        ggLogsUtil.syncRecord(" truncate table "+ JSON.toJSONString(coreTBNames)+"");
+    public void truncateTable(Long taskId)  {
+        ggLogsUtil.syncRecord("【taskId:"+taskId+"】 truncate table "+ JSON.toJSONString(coreTBNames)+"");
         Statement truncateState = null;
         try {
             Connection connectMysql = dataSource.getConnection();

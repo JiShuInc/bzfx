@@ -14,6 +14,7 @@ import com.cardinal.tech.bzfx.enums.biz.SyncResultEnum;
 import com.cardinal.tech.bzfx.enums.biz.SyncStateEnum;
 import com.cardinal.tech.bzfx.etl.EtlUtil;
 import com.cardinal.tech.bzfx.service.RhTaskDbService;
+import com.cardinal.tech.bzfx.service.RhTaskFileService;
 import com.cardinal.tech.bzfx.util.GgLogsUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
@@ -41,6 +42,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
     private final SlSyncLogsDao slSyncLogsDao;
     private final EtlUtil etlUtil;
     private final GgLogsUtil ggLogsUtil;
+    private final RhTaskFileService rhTaskFileService;
 
     /**
      * 通过ID查询单条数据
@@ -144,17 +146,25 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
         rhTask.setDbState(SyncStateEnum.SYNC_PROGRESS.value());
         rhTaskDao.update(rhTask);
         ggLogsUtil.syncRecord("【taskId:"+taskId+"】task state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
+
+        etlUtil.truncateTable(taskId);
         RhTaskDb rhTaskDb = new RhTaskDb();
         rhTaskDb.setTaskId(taskId);
         List<RhTaskDb> rhTaskDbs = this.rhTaskDbDao.queryAll(rhTaskDb);
-        ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db total ["+rhTaskDbs.size()+"]");
-        syncData(taskId,rhTaskDbs);
+        if (!rhTaskDbs.isEmpty()){
+            ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db total ["+rhTaskDbs.size()+"]");
+            syncData(taskId,rhTaskDbs);
+        }
+        rhTaskFileService.syncData(taskId);
+
+        rhTask.setDbState(SyncStateEnum.SYNC_FINISHED.value());
+        rhTaskDao.update(rhTask);
+        ggLogsUtil.syncRecord("【taskId:"+taskId+" sync task state ["+SyncStateEnum.SYNC_FINISHED.desc()+"]");
         return true;
     }
 
     @Async
     void syncData(Long taskId, List<RhTaskDb> rhTaskDbs) {
-        etlUtil.truncateTable();
         for (RhTaskDb db:rhTaskDbs){
             ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task_db start["+db.getDbHost()+":"+db.getDbPort()+":"+db.getDbServe()+"]");
             long count = 0;
@@ -201,10 +211,5 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
                 slSyncLogsDao.insert(slSyncLogs);
             }
         }
-        RhTask rhTask = rhTaskDao.queryById(taskId);
-        rhTask.setDbState(SyncStateEnum.SYNC_FINISHED.value());
-        rhTaskDao.update(rhTask);
-
-        ggLogsUtil.syncRecord("【taskId:"+taskId+" sync task state ["+SyncStateEnum.SYNC_FINISHED.desc()+"]");
     }
 }

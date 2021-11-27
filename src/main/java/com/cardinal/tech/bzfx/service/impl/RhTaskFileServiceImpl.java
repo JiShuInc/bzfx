@@ -135,26 +135,18 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
      */
     @Override
     public boolean syncData(Long taskId) {
-        RhTask rhTask = rhTaskDao.queryById(taskId);
-        if (Objects.nonNull(rhTask.getDbState()) && rhTask.getDbState().equals(SyncStateEnum.SYNC_PROGRESS.value())){
-            log.info("rh_task state 状态为同步中");
-            return false;
-        }
-        ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task start");
-        rhTask.setDbState(SyncStateEnum.SYNC_PROGRESS.value());
-        rhTaskDao.update(rhTask);
-        ggLogsUtil.syncRecord("【taskId:"+taskId+"】task state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
         RhTaskFile rhTaskFile = new RhTaskFile();
         rhTaskFile.setTaskId(taskId);
         List<RhTaskFile> rhTaskFiles = this.rhTaskFileDao.queryAll(rhTaskFile);
-        ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file total ["+rhTaskFiles.size()+"]");
-        syncData(taskId,rhTaskFiles);
+        if (!rhTaskFiles.isEmpty()){
+            ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file total ["+rhTaskFiles.size()+"]");
+            syncData(taskId,rhTaskFiles);
+        }
         return true;
     }
 
     @Async
     void syncData(Long taskId, List<RhTaskFile> rhTaskFiles) {
-        etlUtil.truncateTable();
         for (RhTaskFile file:rhTaskFiles){
             ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task_file start["+file.getFilename()+"]");
             long count = 0;
