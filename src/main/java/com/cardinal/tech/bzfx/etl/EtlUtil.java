@@ -157,12 +157,15 @@ public class EtlUtil {
             fs=fs > maxRow?fs: maxRow;
             stmt.setFetchSize(fs);
             stmt.setFetchDirection(ResultSet.FETCH_FORWARD);
+            log.info("执行查询-----------: {}",querySql(tableName));
             ResultSet rs = stmt.executeQuery(querySql(tableName));
+            log.info("查询完成-----------: {}",tableName);
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberOfColumns = rsmd.getColumnCount();
             // 设定多少条记录提交一次
             int batchCount = 10000;
             //执行清空表数据
+            log.info("插入数据-----------: {}",tableName);
             String insertSql = splicingSql(tableName,numberOfColumns,rsmd);
             pstmt = connectMysql.prepareStatement(insertSql);
 
