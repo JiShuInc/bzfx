@@ -211,7 +211,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
             BzkTabDanweijbxxDao bzkTabDanweijbxxDao = sqlSession.getMapper(BzkTabDanweijbxxDao.class);
             while (iterator.hasNext()){
                 BzkTabDanweijbxx bzkTabDanweijbxx = (BzkTabDanweijbxx) iterator.next();
-                bzkTabDanweijbxxDao.insert(bzkTabDanweijbxx);
+                bzkTabDanweijbxxDao.insertIgnore(bzkTabDanweijbxx);
                 if ((count % batchCount) == 0) {
                     sqlSession.commit();
                 }
@@ -223,7 +223,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
             BzkSlgxBzBzdaxxDao bzkSlgxBzBzdaxxDao = sqlSession.getMapper(BzkSlgxBzBzdaxxDao.class);
             while (iterator.hasNext()){
                 BzkSlgxBzBzdaxx bzkSlgxBzBzdaxx = (BzkSlgxBzBzdaxx) iterator.next();
-                bzkSlgxBzBzdaxxDao.insert(bzkSlgxBzBzdaxx);
+                bzkSlgxBzBzdaxxDao.insertIgnore(bzkSlgxBzBzdaxx);
                 if ((count % batchCount) == 0) {
                     sqlSession.commit();
                 }
@@ -235,7 +235,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
             BzkSlgxBzBzffjlDao bzkSlgxBzBzffjlDao = sqlSession.getMapper(BzkSlgxBzBzffjlDao.class);
             while (iterator.hasNext()){
                 BzkSlgxBzBzffjl bzkSlgxBzBzffjl = (BzkSlgxBzBzffjl) iterator.next();
-                bzkSlgxBzBzffjlDao.insert(bzkSlgxBzBzffjl);
+                bzkSlgxBzBzffjlDao.insertIgnore(bzkSlgxBzBzffjl);
                 if ((count % batchCount) == 0) {
                     sqlSession.commit();
                 }
@@ -247,7 +247,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
             BzkSlgxCwCwbzsjDao bzkSlgxCwCwbzsjDao = sqlSession.getMapper(BzkSlgxCwCwbzsjDao.class);
             while (iterator.hasNext()){
                 BzkSlgxCwCwbzsj bzkSlgxCwCwbzsj = (BzkSlgxCwCwbzsj) iterator.next();
-                bzkSlgxCwCwbzsjDao.insert(bzkSlgxCwCwbzsj);
+                bzkSlgxCwCwbzsjDao.insertIgnore(bzkSlgxCwCwbzsj);
                 if ((count % batchCount) == 0) {
                     sqlSession.commit();
                 }
@@ -259,7 +259,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
             BzkSlgxYfRyzfqkDao bzkSlgxYfRyzfqkDao = sqlSession.getMapper(BzkSlgxYfRyzfqkDao.class);
             while (iterator.hasNext()){
                 BzkSlgxYfRyzfqk bzkSlgxYfRyzfqk = (BzkSlgxYfRyzfqk) iterator.next();
-                bzkSlgxYfRyzfqkDao.insert(bzkSlgxYfRyzfqk);
+                bzkSlgxYfRyzfqkDao.insertIgnore(bzkSlgxYfRyzfqk);
                 if ((count % batchCount) == 0) {
                     sqlSession.commit();
                 }
@@ -271,7 +271,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
             BzkTabDanweibclrxxDao bzkTabDanweibclrxxDao = sqlSession.getMapper(BzkTabDanweibclrxxDao.class);
             while (iterator.hasNext()){
                 BzkTabDanweibclrxx bzkTabDanweibclrxx = (BzkTabDanweibclrxx) iterator.next();
-                bzkTabDanweibclrxxDao.insert(bzkTabDanweibclrxx);
+                bzkTabDanweibclrxxDao.insertIgnore(bzkTabDanweibclrxx);
                 if ((count % batchCount) == 0) {
                     sqlSession.commit();
                 }
@@ -283,7 +283,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
             BzkTabRenyuanjbxxDao bzkTabRenyuanjbxxDao = sqlSession.getMapper(BzkTabRenyuanjbxxDao.class);
             while (iterator.hasNext()){
                 BzkTabRenyuanjbxx bzkTabRenyuanjbxx = (BzkTabRenyuanjbxx) iterator.next();
-                bzkTabRenyuanjbxxDao.insert(bzkTabRenyuanjbxx);
+                bzkTabRenyuanjbxxDao.insertIgnore(bzkTabRenyuanjbxx);
                 if ((count % batchCount) == 0) {
                     sqlSession.commit();
                 }
@@ -295,7 +295,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
             BzkTabBaozhangkjbxxDao bzkTabBaozhangkjbxxDao = sqlSession.getMapper(BzkTabBaozhangkjbxxDao.class);
             while (iterator.hasNext()){
                 BzkTabBaozhangkjbxx bzkTabBaozhangkjbxx = (BzkTabBaozhangkjbxx) iterator.next();
-                bzkTabBaozhangkjbxxDao.insert(bzkTabBaozhangkjbxx);
+                bzkTabBaozhangkjbxxDao.insertIgnore(bzkTabBaozhangkjbxx);
                 if ((count % batchCount) == 0) {
                     sqlSession.commit();
                 }

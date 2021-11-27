@@ -121,6 +121,12 @@
         values (#{junrenid}, #{baozhangkh}, #{zhikalx}, #{zhikasj}, #{qiyongsj}, #{shixiaosj}, #{kazhuangtai}, #{gengxinbz}, #{shangbaobz}, #{fenfabz}, #{shenhebz}, #{shujuszdw}, #{yuanid}, #{shifoudqk}, #{heimdrq}, #{heimdyy}, #{kaleixing}, #{yinhangdm}, #{yinhangkh}, #{fakadwdm})
     </insert>
 
+    <!--新增所有列-->
+    <insert id="insertIgnore" keyProperty="id" useGeneratedKeys="true">
+        insert ignore into bzfx.BZK_TAB_BAOZHANGKJBXX(JUNRENID, BAOZHANGKH, ZHIKALX, ZHIKASJ, QIYONGSJ, SHIXIAOSJ, KAZHUANGTAI, GENGXINBZ, SHANGBAOBZ, FENFABZ, SHENHEBZ, SHUJUSZDW, YUANID, SHIFOUDQK, HEIMDRQ, HEIMDYY, KALEIXING, YINHANGDM, YINHANGKH, FAKADWDM)
+        values (#{junrenid}, #{baozhangkh}, #{zhikalx}, #{zhikasj}, #{qiyongsj}, #{shixiaosj}, #{kazhuangtai}, #{gengxinbz}, #{shangbaobz}, #{fenfabz}, #{shenhebz}, #{shujuszdw}, #{yuanid}, #{shifoudqk}, #{heimdrq}, #{heimdyy}, #{kaleixing}, #{yinhangdm}, #{yinhangkh}, #{fakadwdm})
+    </insert>
+
     <!--通过主键修改数据-->
     <update id="update">
         update bzfx.BZK_TAB_BAOZHANGKJBXX

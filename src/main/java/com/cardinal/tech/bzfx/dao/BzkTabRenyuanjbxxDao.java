@@ -49,6 +49,15 @@ public interface BzkTabRenyuanjbxxDao {
     int insert(BzkTabRenyuanjbxx bzkTabRenyuanjbxx);
 
     /**
+     * 新增数据
+     *
+     * @param bzkTabRenyuanjbxx 实例对象
+     * @return 影响行数
+     */
+    int insertIgnore(BzkTabRenyuanjbxx bzkTabRenyuanjbxx);
+
+
+    /**
      * 修改数据
      *
      * @param bzkTabRenyuanjbxx 实例对象

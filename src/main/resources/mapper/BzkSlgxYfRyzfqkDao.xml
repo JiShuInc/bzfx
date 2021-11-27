@@ -109,6 +109,12 @@
         values (#{xingming}, #{junrenbzh}, #{zhufangsx}, #{zhufangdz}, #{guanlidw}, #{jinzhusj}, #{zuoluoh}, #{donghao}, #{fanghao}, #{zhufangxzm}, #{huxingflm}, #{jianzhumj}, #{danweidm}, #{daorusj}, #{shangbaobz}, #{shujuszdw}, #{xuhao})
     </insert>
 
+    <!--新增所有列-->
+    <insert id="insertIgnore" keyProperty="id" useGeneratedKeys="true">
+        insert ignore into bzfx.BZK_SLGX_YF_RYZFQK(XINGMING, JUNRENBZH, ZHUFANGSX, ZHUFANGDZ, GUANLIDW, JINZHUSJ, ZUOLUOH, DONGHAO, FANGHAO, ZHUFANGXZM, HUXINGFLM, JIANZHUMJ, DANWEIDM, DAORUSJ, SHANGBAOBZ, SHUJUSZDW, XUHAO)
+        values (#{xingming}, #{junrenbzh}, #{zhufangsx}, #{zhufangdz}, #{guanlidw}, #{jinzhusj}, #{zuoluoh}, #{donghao}, #{fanghao}, #{zhufangxzm}, #{huxingflm}, #{jianzhumj}, #{danweidm}, #{daorusj}, #{shangbaobz}, #{shujuszdw}, #{xuhao})
+    </insert>
+
     <!--通过主键修改数据-->
     <update id="update">
         update bzfx.BZK_SLGX_YF_RYZFQK

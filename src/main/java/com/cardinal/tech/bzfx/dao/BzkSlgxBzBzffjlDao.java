@@ -49,6 +49,14 @@ public interface BzkSlgxBzBzffjlDao {
     int insert(BzkSlgxBzBzffjl bzkSlgxBzBzffjl);
 
     /**
+     * 新增数据
+     *
+     * @param bzkSlgxBzBzffjl 实例对象
+     * @return 影响行数
+     */
+    int insertIgnore(BzkSlgxBzBzffjl bzkSlgxBzBzffjl);
+
+    /**
      * 修改数据
      *
      * @param bzkSlgxBzBzffjl 实例对象

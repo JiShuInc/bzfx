@@ -61,6 +61,12 @@
         values (#{danweixzdm}, #{danweixz}, #{shifouxs}, #{shujuszdw}, #{zhuangtai})
     </insert>
 
+    <!--新增所有列-->
+    <insert id="insertIgnore" keyProperty="id" useGeneratedKeys="true">
+        insert ignore into bzfx.BZK_BZ_TAB_DANWEIXZ(DANWEIXZDM, DANWEIXZ, SHIFOUXS, SHUJUSZDW, ZHUANGTAI)
+        values (#{danweixzdm}, #{danweixz}, #{shifouxs}, #{shujuszdw}, #{zhuangtai})
+    </insert>
+
     <!--通过主键修改数据-->
     <update id="update">
         update bzfx.BZK_BZ_TAB_DANWEIXZ
