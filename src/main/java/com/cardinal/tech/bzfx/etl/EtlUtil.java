@@ -41,9 +41,12 @@ public class EtlUtil {
     public long syncData(String host, Integer dbPort, String dbName, String username, String password) throws Exception {
 
         Connection oracleConnection = oracleConnection(host,dbPort,dbName,username,password);
+        log.info("获取oracle 连接--------------------");
         Connection mysqlConnection = dataSource.getConnection();
+        log.info("获取mysql 连接--------------------");
         long count = 0;
         for (String tableName:coreTBNames){
+            log.info("开始同步表-----------: {}",tableName);
             count+=importTable(oracleConnection,mysqlConnection,tableName);
         }
         if (Objects.nonNull(oracleConnection)){
