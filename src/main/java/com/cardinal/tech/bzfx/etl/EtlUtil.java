@@ -189,7 +189,7 @@ public class EtlUtil {
             e.printStackTrace();
             // 如果失败事务回滚
             connectMysql.rollback();
-            throw new Exception();
+            throw e;
         } finally {
             if (stmt != null) {
                 stmt.close();
@@ -237,7 +237,7 @@ public class EtlUtil {
         return insertSql.toString();
     }
 
-    public void truncateTable() {
+    public void truncateTable()  {
 
         Statement truncateState = null;
         try {
