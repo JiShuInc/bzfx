@@ -7,179 +7,40 @@ import java.util.Date;
 @Data
 public class RYQuery {
     /**
-     * id
+     * 军人保障号
      */
-    private Long id;
+    private String junrenbzh;
     /**
-     * 原始数据id
+     * 性别；代码
      */
-    private String did;
+    private String xingbie;
     /**
-     * 所属单位
+     * 民族；代码
      */
-    private Long dwid;
+    private String minzu;
     /**
-     * 单位名称
+     * 籍贯；代码
      */
-    private String dwmc;
+    private String jiguan;
     /**
-     * 保障卡号
+     * 出生日期开始
      */
-    private String baozhangkh;
+    private Date chushengrqStart;
     /**
-     * 证件id
+     * 出生日期结束
      */
-    private String shenfenzheng;
+    private Date chushengrqEnd;
     /**
-     * 性别
+     * 血型；代码
      */
-    private Integer xingbie;
+    
+    private String xuexing;
     /**
-     * 状态
+     * 文化程度；代码
      */
-    private Integer zhuangtai;
+    
+    private String wenhuacd;
     /**
-     * 类别
+     * 政治面貌；代码
      */
-    private Integer leibie;
-    /**
-     * 民族
-     */
-    private Integer minzu;
-    /**
-     * 出生地
-     */
-    private String chushengdi;
-    /**
-     * 姓名
-     */
-    private String xingming;
-    /**
-     * 出生日期
-     */
-    private Date chushengriqi;
-    /**
-     * 文化程度
-     */
-    private Integer wenhua;
-    /**
-     * 学位
-     */
-    private Integer xuewei;
-    /**
-     * 政治面貌
-     */
-    private Integer zhengzhimm;
-    /**
-     * 婚姻情况（已婚/未婚）
-     */
-    private Integer hunyin;
-    /**
-     * 干部军衔级别（少尉到上将）
-     */
-    private Integer ganbujxjb;
-    /**
-     * 士兵军衔级别
-     */
-    private Integer shibingjxjb;
-    /**
-     * 文职人员级别
-     */
-    private Integer wenzhijb;
-    /**
-     * 家属信息（家属数量）
-     */
-    private Integer jiashusl;
-    /**
-     * 训练演习情况（有无）
-     */
-    private Integer yanxiyw;
-    /**
-     * 滞留部队人员（按一级单位）
-     */
-    private Integer zhiliury;
-    /**
-     * 在职情况（字典）
-     */
-    private Integer zaizhiqk;
-    /**
-     * 家属类别（字典表）
-     */
-    private Integer jiashulb;
-    /**
-     * 入伍时间
-     */
-    private Date ruwushijian;
-    /**
-     * 离开时间
-     */
-    private Date likaishijian;
-    /**
-     * 调入时间
-     */
-    private Date diaorushijian;
-    /**
-     * 调出时间
-     */
-    private Date diaochushijian;
-    /**
-     * 家属随军情况
-     */
-    private Integer jiashusj;
-    /**
-     * 籍贯
-     */
-    private Integer jiguan;
-    /**
-     * 调动情况
-     */
-    private Integer diaodongqk;
-    /**
-     * 专业技能等级
-     */
-    private Integer zhuanyejndj;
-    /**
-     * 职工身份类别
-     */
-    private Integer zhigongsflb;
-    /**
-     * 职工岗位等级
-     */
-    private Integer zhigonggwdj;
-    /**
-     * 职工年限
-     */
-    private Integer zhigongnx;
-    /**
-     * 是否是特殊人员
-     */
-    private Integer teshury;
-    /**
-     * 是否待移交转业干部
-     */
-    private Integer zhuanyegb;
-    /**
-     * 是否待移交复员干部
-     */
-    private Integer fuyuangb;
-    /**
-     * 是否待移交退休干部
-     */
-    private Integer tuixiugb;
-    /**
-     * 是否待移交转业士官
-     */
-    private Integer zhuanyesg;
-    /**
-     * 是否不享受军队优惠医疗的人员
-     */
-    private Integer buxiangshouyl;
-    /**
-     * 是否劳改服刑人员
-     */
-    private Integer laogaifuxing;
-    /**
-     * 是否滞留部队人员
-     */
-    private Integer zhiliubudui;
 }
