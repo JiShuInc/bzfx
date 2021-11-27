@@ -51,6 +51,7 @@
         <result property="bgwhriqi" column="BGWHRIQI" jdbcType="TIMESTAMP"/>
         <result property="shifoungbk" column="SHIFOUNGBK" jdbcType="VARCHAR"/>
         <result property="danweilx" column="DANWEILX" jdbcType="VARCHAR"/>
+        <result property="aLishucc" column="A_LISHUCC" jdbcType="INTEGER"/>
         <result property="lishuccm" column="LISHUCCM" jdbcType="VARCHAR"/>
         <result property="xiafabz" column="XIAFABZ" jdbcType="VARCHAR"/>
         <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
@@ -78,7 +79,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          ID, DANWEINM, DANWEIZT, DANWEIGYDM, DANWEILSDM, DANWEIMC, BUDUIDH, BUDUILB, JIANZHILB, HOUQINBDLB, DANWEIJB, HOUQINJGJB, LISHUGX, ZHIHUIGX, GONGYINGXZDM, ZHUDI, ZHUDIXCZ, YOUZHENGBM, TONGXINDZ, DIANHUAHM, CHUANZHENHM, ZHANQU, BAOZHANGQU, JUNZHONG, BINGZHONG, QIHOUQU, LEIXING, SHUJUSZDW, SHANGBAOBZ, GENGXINBZ, FENFABZ, SHENHEBZ, BEIZHU, HOUQINGYGX, LIANQINBZGX, CAIWUGY, BEIZHUANGGY, YOULIAOGY, JUNJIAOYSBZ, JIJIANYFBZ, YINHANGSZD, YINHANGDM, JINGBANREN, LIANXIDIANHUA, BGWHRIQI, SHIFOUNGBK, DANWEILX, LISHUCCM, XIAFABZ, CREATE_TIME, LAST_MODIFY_TIME, DANWEIXZ, SHIFOUYYDXSBM, JIANKUDQFL, QUNUANLQ, JIGOUFH, JIGOUJC, JIANZHIMC, RENWULX, TESHUDQ, JIYAODZ, DIFANGHM, JIYANGGYGX, TONGYISHXYDM, JICENGYLJGID, JICENGYLJGMC, JUNSHISSBZ, SHIFOUJKBYDQ, SHIFOULXZD
+          ID, DANWEINM, DANWEIZT, DANWEIGYDM, DANWEILSDM, DANWEIMC, BUDUIDH, BUDUILB, JIANZHILB, HOUQINBDLB, DANWEIJB, HOUQINJGJB, LISHUGX, ZHIHUIGX, GONGYINGXZDM, ZHUDI, ZHUDIXCZ, YOUZHENGBM, TONGXINDZ, DIANHUAHM, CHUANZHENHM, ZHANQU, BAOZHANGQU, JUNZHONG, BINGZHONG, QIHOUQU, LEIXING, SHUJUSZDW, SHANGBAOBZ, GENGXINBZ, FENFABZ, SHENHEBZ, BEIZHU, HOUQINGYGX, LIANQINBZGX, CAIWUGY, BEIZHUANGGY, YOULIAOGY, JUNJIAOYSBZ, JIJIANYFBZ, YINHANGSZD, YINHANGDM, JINGBANREN, LIANXIDIANHUA, BGWHRIQI, SHIFOUNGBK, DANWEILX, A_LISHUCC, LISHUCCM, XIAFABZ, CREATE_TIME, LAST_MODIFY_TIME, DANWEIXZ, SHIFOUYYDXSBM, JIANKUDQFL, QUNUANLQ, JIGOUFH, JIGOUJC, JIANZHIMC, RENWULX, TESHUDQ, JIYAODZ, DIFANGHM, JIYANGGYGX, TONGYISHXYDM, JICENGYLJGID, JICENGYLJGMC, JUNSHISSBZ, SHIFOUJKBYDQ, SHIFOULXZD
         from bzfx.BZK_TAB_DANWEIJBXX
         where ID = #{id}
     </select>
@@ -86,7 +87,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          ID, DANWEINM, DANWEIZT, DANWEIGYDM, DANWEILSDM, DANWEIMC, BUDUIDH, BUDUILB, JIANZHILB, HOUQINBDLB, DANWEIJB, HOUQINJGJB, LISHUGX, ZHIHUIGX, GONGYINGXZDM, ZHUDI, ZHUDIXCZ, YOUZHENGBM, TONGXINDZ, DIANHUAHM, CHUANZHENHM, ZHANQU, BAOZHANGQU, JUNZHONG, BINGZHONG, QIHOUQU, LEIXING, SHUJUSZDW, SHANGBAOBZ, GENGXINBZ, FENFABZ, SHENHEBZ, BEIZHU, HOUQINGYGX, LIANQINBZGX, CAIWUGY, BEIZHUANGGY, YOULIAOGY, JUNJIAOYSBZ, JIJIANYFBZ, YINHANGSZD, YINHANGDM, JINGBANREN, LIANXIDIANHUA, BGWHRIQI, SHIFOUNGBK, DANWEILX, LISHUCCM, XIAFABZ, CREATE_TIME, LAST_MODIFY_TIME, DANWEIXZ, SHIFOUYYDXSBM, JIANKUDQFL, QUNUANLQ, JIGOUFH, JIGOUJC, JIANZHIMC, RENWULX, TESHUDQ, JIYAODZ, DIFANGHM, JIYANGGYGX, TONGYISHXYDM, JICENGYLJGID, JICENGYLJGMC, JUNSHISSBZ, SHIFOUJKBYDQ, SHIFOULXZD
+          ID, DANWEINM, DANWEIZT, DANWEIGYDM, DANWEILSDM, DANWEIMC, BUDUIDH, BUDUILB, JIANZHILB, HOUQINBDLB, DANWEIJB, HOUQINJGJB, LISHUGX, ZHIHUIGX, GONGYINGXZDM, ZHUDI, ZHUDIXCZ, YOUZHENGBM, TONGXINDZ, DIANHUAHM, CHUANZHENHM, ZHANQU, BAOZHANGQU, JUNZHONG, BINGZHONG, QIHOUQU, LEIXING, SHUJUSZDW, SHANGBAOBZ, GENGXINBZ, FENFABZ, SHENHEBZ, BEIZHU, HOUQINGYGX, LIANQINBZGX, CAIWUGY, BEIZHUANGGY, YOULIAOGY, JUNJIAOYSBZ, JIJIANYFBZ, YINHANGSZD, YINHANGDM, JINGBANREN, LIANXIDIANHUA, BGWHRIQI, SHIFOUNGBK, DANWEILX, A_LISHUCC, LISHUCCM, XIAFABZ, CREATE_TIME, LAST_MODIFY_TIME, DANWEIXZ, SHIFOUYYDXSBM, JIANKUDQFL, QUNUANLQ, JIGOUFH, JIGOUJC, JIANZHIMC, RENWULX, TESHUDQ, JIYAODZ, DIFANGHM, JIYANGGYGX, TONGYISHXYDM, JICENGYLJGID, JICENGYLJGMC, JUNSHISSBZ, SHIFOUJKBYDQ, SHIFOULXZD
         from bzfx.BZK_TAB_DANWEIJBXX
         limit #{offset}, #{limit}
     </select>
@@ -94,7 +95,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          ID, DANWEINM, DANWEIZT, DANWEIGYDM, DANWEILSDM, DANWEIMC, BUDUIDH, BUDUILB, JIANZHILB, HOUQINBDLB, DANWEIJB, HOUQINJGJB, LISHUGX, ZHIHUIGX, GONGYINGXZDM, ZHUDI, ZHUDIXCZ, YOUZHENGBM, TONGXINDZ, DIANHUAHM, CHUANZHENHM, ZHANQU, BAOZHANGQU, JUNZHONG, BINGZHONG, QIHOUQU, LEIXING, SHUJUSZDW, SHANGBAOBZ, GENGXINBZ, FENFABZ, SHENHEBZ, BEIZHU, HOUQINGYGX, LIANQINBZGX, CAIWUGY, BEIZHUANGGY, YOULIAOGY, JUNJIAOYSBZ, JIJIANYFBZ, YINHANGSZD, YINHANGDM, JINGBANREN, LIANXIDIANHUA, BGWHRIQI, SHIFOUNGBK, DANWEILX, LISHUCCM, XIAFABZ, CREATE_TIME, LAST_MODIFY_TIME, DANWEIXZ, SHIFOUYYDXSBM, JIANKUDQFL, QUNUANLQ, JIGOUFH, JIGOUJC, JIANZHIMC, RENWULX, TESHUDQ, JIYAODZ, DIFANGHM, JIYANGGYGX, TONGYISHXYDM, JICENGYLJGID, JICENGYLJGMC, JUNSHISSBZ, SHIFOUJKBYDQ, SHIFOULXZD
+          ID, DANWEINM, DANWEIZT, DANWEIGYDM, DANWEILSDM, DANWEIMC, BUDUIDH, BUDUILB, JIANZHILB, HOUQINBDLB, DANWEIJB, HOUQINJGJB, LISHUGX, ZHIHUIGX, GONGYINGXZDM, ZHUDI, ZHUDIXCZ, YOUZHENGBM, TONGXINDZ, DIANHUAHM, CHUANZHENHM, ZHANQU, BAOZHANGQU, JUNZHONG, BINGZHONG, QIHOUQU, LEIXING, SHUJUSZDW, SHANGBAOBZ, GENGXINBZ, FENFABZ, SHENHEBZ, BEIZHU, HOUQINGYGX, LIANQINBZGX, CAIWUGY, BEIZHUANGGY, YOULIAOGY, JUNJIAOYSBZ, JIJIANYFBZ, YINHANGSZD, YINHANGDM, JINGBANREN, LIANXIDIANHUA, BGWHRIQI, SHIFOUNGBK, DANWEILX, A_LISHUCC, LISHUCCM, XIAFABZ, CREATE_TIME, LAST_MODIFY_TIME, DANWEIXZ, SHIFOUYYDXSBM, JIANKUDQFL, QUNUANLQ, JIGOUFH, JIGOUJC, JIANZHIMC, RENWULX, TESHUDQ, JIYAODZ, DIFANGHM, JIYANGGYGX, TONGYISHXYDM, JICENGYLJGID, JICENGYLJGMC, JUNSHISSBZ, SHIFOUJKBYDQ, SHIFOULXZD
         from bzfx.BZK_TAB_DANWEIJBXX
         <where>
             <if test="id != null and id != ''">
@@ -238,6 +239,9 @@
             <if test="danweilx != null and danweilx != ''">
                 and DANWEILX = #{danweilx}
             </if>
+            <if test="aLishucc != null">
+                and A_LISHUCC = #{aLishucc}
+            </if>
             <if test="lishuccm != null and lishuccm != ''">
                 and LISHUCCM = #{lishuccm}
             </if>
@@ -309,8 +313,14 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into bzfx.BZK_TAB_DANWEIJBXX(DANWEINM, DANWEIZT, DANWEIGYDM, DANWEILSDM, DANWEIMC, BUDUIDH, BUDUILB, JIANZHILB, HOUQINBDLB, DANWEIJB, HOUQINJGJB, LISHUGX, ZHIHUIGX, GONGYINGXZDM, ZHUDI, ZHUDIXCZ, YOUZHENGBM, TONGXINDZ, DIANHUAHM, CHUANZHENHM, ZHANQU, BAOZHANGQU, JUNZHONG, BINGZHONG, QIHOUQU, LEIXING, SHUJUSZDW, SHANGBAOBZ, GENGXINBZ, FENFABZ, SHENHEBZ, BEIZHU, HOUQINGYGX, LIANQINBZGX, CAIWUGY, BEIZHUANGGY, YOULIAOGY, JUNJIAOYSBZ, JIJIANYFBZ, YINHANGSZD, YINHANGDM, JINGBANREN, LIANXIDIANHUA, BGWHRIQI, SHIFOUNGBK, DANWEILX, LISHUCCM, XIAFABZ)
-        values (#{danweinm}, #{danweizt}, #{danweigydm}, #{danweilsdm}, #{danweimc}, #{buduidh}, #{buduilb}, #{jianzhilb}, #{houqinbdlb}, #{danweijb}, #{houqinjgjb}, #{lishugx}, #{zhihuigx}, #{gongyingxzdm}, #{zhudi}, #{zhudixcz}, #{youzhengbm}, #{tongxindz}, #{dianhuahm}, #{chuanzhenhm}, #{zhanqu}, #{baozhangqu}, #{junzhong}, #{bingzhong}, #{qihouqu}, #{leixing}, #{shujuszdw}, #{shangbaobz}, #{gengxinbz}, #{fenfabz}, #{shenhebz}, #{beizhu}, #{houqingygx}, #{lianqinbzgx}, #{caiwugy}, #{beizhuanggy}, #{youliaogy}, #{junjiaoysbz}, #{jijianyfbz}, #{yinhangszd}, #{yinhangdm}, #{jingbanren}, #{lianxidianhua}, #{bgwhriqi}, #{shifoungbk}, #{danweilx}, #{lishuccm}, #{xiafabz})
+        insert into bzfx.BZK_TAB_DANWEIJBXX(DANWEINM, DANWEIZT, DANWEIGYDM, DANWEILSDM, DANWEIMC, BUDUIDH, BUDUILB, JIANZHILB, HOUQINBDLB, DANWEIJB, HOUQINJGJB, LISHUGX, ZHIHUIGX, GONGYINGXZDM, ZHUDI, ZHUDIXCZ, YOUZHENGBM, TONGXINDZ, DIANHUAHM, CHUANZHENHM, ZHANQU, BAOZHANGQU, JUNZHONG, BINGZHONG, QIHOUQU, LEIXING, SHUJUSZDW, SHANGBAOBZ, GENGXINBZ, FENFABZ, SHENHEBZ, BEIZHU, HOUQINGYGX, LIANQINBZGX, CAIWUGY, BEIZHUANGGY, YOULIAOGY, JUNJIAOYSBZ, JIJIANYFBZ, YINHANGSZD, YINHANGDM, JINGBANREN, LIANXIDIANHUA, BGWHRIQI, SHIFOUNGBK, DANWEILX, A_LISHUCC, LISHUCCM, XIAFABZ, CREATE_TIME, LAST_MODIFY_TIME, DANWEIXZ, SHIFOUYYDXSBM, JIANKUDQFL, QUNUANLQ, JIGOUFH, JIGOUJC, JIANZHIMC, RENWULX, TESHUDQ, JIYAODZ, DIFANGHM, JIYANGGYGX, TONGYISHXYDM, JICENGYLJGID, JICENGYLJGMC, JUNSHISSBZ, SHIFOUJKBYDQ, SHIFOULXZD)
+        values (#{danweinm}, #{danweizt}, #{danweigydm}, #{danweilsdm}, #{danweimc}, #{buduidh}, #{buduilb}, #{jianzhilb}, #{houqinbdlb}, #{danweijb}, #{houqinjgjb}, #{lishugx}, #{zhihuigx}, #{gongyingxzdm}, #{zhudi}, #{zhudixcz}, #{youzhengbm}, #{tongxindz}, #{dianhuahm}, #{chuanzhenhm}, #{zhanqu}, #{baozhangqu}, #{junzhong}, #{bingzhong}, #{qihouqu}, #{leixing}, #{shujuszdw}, #{shangbaobz}, #{gengxinbz}, #{fenfabz}, #{shenhebz}, #{beizhu}, #{houqingygx}, #{lianqinbzgx}, #{caiwugy}, #{beizhuanggy}, #{youliaogy}, #{junjiaoysbz}, #{jijianyfbz}, #{yinhangszd}, #{yinhangdm}, #{jingbanren}, #{lianxidianhua}, #{bgwhriqi}, #{shifoungbk}, #{danweilx}, #{aLishucc}, #{lishuccm}, #{xiafabz}, #{createTime}, #{lastModifyTime}, #{danweixz}, #{shifouyydxsbm}, #{jiankudqfl}, #{qunuanlq}, #{jigoufh}, #{jigoujc}, #{jianzhimc}, #{renwulx}, #{teshudq}, #{jiyaodz}, #{difanghm}, #{jiyanggygx}, #{tongyishxydm}, #{jicengyljgid}, #{jicengyljgmc}, #{junshissbz}, #{shifoujkbydq}, #{shifoulxzd})
+    </insert>
+
+    <!--新增所有列-->
+    <insert id="insertIgnore" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.BZK_TAB_DANWEIJBXX(DANWEINM, DANWEIZT, DANWEIGYDM, DANWEILSDM, DANWEIMC, BUDUIDH, BUDUILB, JIANZHILB, HOUQINBDLB, DANWEIJB, HOUQINJGJB, LISHUGX, ZHIHUIGX, GONGYINGXZDM, ZHUDI, ZHUDIXCZ, YOUZHENGBM, TONGXINDZ, DIANHUAHM, CHUANZHENHM, ZHANQU, BAOZHANGQU, JUNZHONG, BINGZHONG, QIHOUQU, LEIXING, SHUJUSZDW, SHANGBAOBZ, GENGXINBZ, FENFABZ, SHENHEBZ, BEIZHU, HOUQINGYGX, LIANQINBZGX, CAIWUGY, BEIZHUANGGY, YOULIAOGY, JUNJIAOYSBZ, JIJIANYFBZ, YINHANGSZD, YINHANGDM, JINGBANREN, LIANXIDIANHUA, BGWHRIQI, SHIFOUNGBK, DANWEILX, A_LISHUCC, LISHUCCM, XIAFABZ, CREATE_TIME, LAST_MODIFY_TIME, DANWEIXZ, SHIFOUYYDXSBM, JIANKUDQFL, QUNUANLQ, JIGOUFH, JIGOUJC, JIANZHIMC, RENWULX, TESHUDQ, JIYAODZ, DIFANGHM, JIYANGGYGX, TONGYISHXYDM, JICENGYLJGID, JICENGYLJGMC, JUNSHISSBZ, SHIFOUJKBYDQ, SHIFOULXZD)
+        values (#{danweinm}, #{danweizt}, #{danweigydm}, #{danweilsdm}, #{danweimc}, #{buduidh}, #{buduilb}, #{jianzhilb}, #{houqinbdlb}, #{danweijb}, #{houqinjgjb}, #{lishugx}, #{zhihuigx}, #{gongyingxzdm}, #{zhudi}, #{zhudixcz}, #{youzhengbm}, #{tongxindz}, #{dianhuahm}, #{chuanzhenhm}, #{zhanqu}, #{baozhangqu}, #{junzhong}, #{bingzhong}, #{qihouqu}, #{leixing}, #{shujuszdw}, #{shangbaobz}, #{gengxinbz}, #{fenfabz}, #{shenhebz}, #{beizhu}, #{houqingygx}, #{lianqinbzgx}, #{caiwugy}, #{beizhuanggy}, #{youliaogy}, #{junjiaoysbz}, #{jijianyfbz}, #{yinhangszd}, #{yinhangdm}, #{jingbanren}, #{lianxidianhua}, #{bgwhriqi}, #{shifoungbk}, #{danweilx}, #{aLishucc}, #{lishuccm}, #{xiafabz}, #{createTime}, #{lastModifyTime}, #{danweixz}, #{shifouyydxsbm}, #{jiankudqfl}, #{qunuanlq}, #{jigoufh}, #{jigoujc}, #{jianzhimc}, #{renwulx}, #{teshudq}, #{jiyaodz}, #{difanghm}, #{jiyanggygx}, #{tongyishxydm}, #{jicengyljgid}, #{jicengyljgmc}, #{junshissbz}, #{shifoujkbydq}, #{shifoulxzd})
     </insert>
 
     <!--通过主键修改数据-->
@@ -455,11 +465,74 @@
             <if test="danweilx != null and danweilx != ''">
                 DANWEILX = #{danweilx},
             </if>
+            <if test="aLishucc != null">
+                A_LISHUCC = #{aLishucc},
+            </if>
             <if test="lishuccm != null and lishuccm != ''">
                 LISHUCCM = #{lishuccm},
             </if>
             <if test="xiafabz != null and xiafabz != ''">
                 XIAFABZ = #{xiafabz},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime},
+            </if>
+            <if test="lastModifyTime != null">
+                LAST_MODIFY_TIME = #{lastModifyTime},
+            </if>
+            <if test="danweixz != null and danweixz != ''">
+                DANWEIXZ = #{danweixz},
+            </if>
+            <if test="shifouyydxsbm != null and shifouyydxsbm != ''">
+                SHIFOUYYDXSBM = #{shifouyydxsbm},
+            </if>
+            <if test="jiankudqfl != null and jiankudqfl != ''">
+                JIANKUDQFL = #{jiankudqfl},
+            </if>
+            <if test="qunuanlq != null and qunuanlq != ''">
+                QUNUANLQ = #{qunuanlq},
+            </if>
+            <if test="jigoufh != null and jigoufh != ''">
+                JIGOUFH = #{jigoufh},
+            </if>
+            <if test="jigoujc != null and jigoujc != ''">
+                JIGOUJC = #{jigoujc},
+            </if>
+            <if test="jianzhimc != null and jianzhimc != ''">
+                JIANZHIMC = #{jianzhimc},
+            </if>
+            <if test="renwulx != null and renwulx != ''">
+                RENWULX = #{renwulx},
+            </if>
+            <if test="teshudq != null and teshudq != ''">
+                TESHUDQ = #{teshudq},
+            </if>
+            <if test="jiyaodz != null and jiyaodz != ''">
+                JIYAODZ = #{jiyaodz},
+            </if>
+            <if test="difanghm != null and difanghm != ''">
+                DIFANGHM = #{difanghm},
+            </if>
+            <if test="jiyanggygx != null and jiyanggygx != ''">
+                JIYANGGYGX = #{jiyanggygx},
+            </if>
+            <if test="tongyishxydm != null and tongyishxydm != ''">
+                TONGYISHXYDM = #{tongyishxydm},
+            </if>
+            <if test="jicengyljgid != null and jicengyljgid != ''">
+                JICENGYLJGID = #{jicengyljgid},
+            </if>
+            <if test="jicengyljgmc != null and jicengyljgmc != ''">
+                JICENGYLJGMC = #{jicengyljgmc},
+            </if>
+            <if test="junshissbz != null and junshissbz != ''">
+                JUNSHISSBZ = #{junshissbz},
+            </if>
+            <if test="shifoujkbydq != null and shifoujkbydq != ''">
+                SHIFOUJKBYDQ = #{shifoujkbydq},
+            </if>
+            <if test="shifoulxzd != null and shifoulxzd != ''">
+                SHIFOULXZD = #{shifoulxzd},
             </if>
         </set>
         where ID = #{id}
@@ -481,7 +554,7 @@
     <!-- 分页查询 -->
     <select id="queryPageBzkTabDanweijbxxList" resultMap="BaseResultMap">
             select
-                ID, DANWEINM, DANWEIZT, DANWEIGYDM, DANWEILSDM, DANWEIMC, BUDUIDH, BUDUILB, JIANZHILB, HOUQINBDLB, DANWEIJB, HOUQINJGJB, LISHUGX, ZHIHUIGX, GONGYINGXZDM, ZHUDI, ZHUDIXCZ, YOUZHENGBM, TONGXINDZ, DIANHUAHM, CHUANZHENHM, ZHANQU, BAOZHANGQU, JUNZHONG, BINGZHONG, QIHOUQU, LEIXING, SHUJUSZDW, SHANGBAOBZ, GENGXINBZ, FENFABZ, SHENHEBZ, BEIZHU, HOUQINGYGX, LIANQINBZGX, CAIWUGY, BEIZHUANGGY, YOULIAOGY, JUNJIAOYSBZ, JIJIANYFBZ, YINHANGSZD, YINHANGDM, JINGBANREN, LIANXIDIANHUA, BGWHRIQI, SHIFOUNGBK, DANWEILX, LISHUCCM, XIAFABZ, CREATE_TIME, LAST_MODIFY_TIME, DANWEIXZ, SHIFOUYYDXSBM, JIANKUDQFL, QUNUANLQ, JIGOUFH, JIGOUJC, JIANZHIMC, RENWULX, TESHUDQ, JIYAODZ, DIFANGHM, JIYANGGYGX, TONGYISHXYDM, JICENGYLJGID, JICENGYLJGMC, JUNSHISSBZ, SHIFOUJKBYDQ, SHIFOULXZD            
+                ID, DANWEINM, DANWEIZT, DANWEIGYDM, DANWEILSDM, DANWEIMC, BUDUIDH, BUDUILB, JIANZHILB, HOUQINBDLB, DANWEIJB, HOUQINJGJB, LISHUGX, ZHIHUIGX, GONGYINGXZDM, ZHUDI, ZHUDIXCZ, YOUZHENGBM, TONGXINDZ, DIANHUAHM, CHUANZHENHM, ZHANQU, BAOZHANGQU, JUNZHONG, BINGZHONG, QIHOUQU, LEIXING, SHUJUSZDW, SHANGBAOBZ, GENGXINBZ, FENFABZ, SHENHEBZ, BEIZHU, HOUQINGYGX, LIANQINBZGX, CAIWUGY, BEIZHUANGGY, YOULIAOGY, JUNJIAOYSBZ, JIJIANYFBZ, YINHANGSZD, YINHANGDM, JINGBANREN, LIANXIDIANHUA, BGWHRIQI, SHIFOUNGBK, DANWEILX, A_LISHUCC, LISHUCCM, XIAFABZ, CREATE_TIME, LAST_MODIFY_TIME, DANWEIXZ, SHIFOUYYDXSBM, JIANKUDQFL, QUNUANLQ, JIGOUFH, JIGOUJC, JIANZHIMC, RENWULX, TESHUDQ, JIYAODZ, DIFANGHM, JIYANGGYGX, TONGYISHXYDM, JICENGYLJGID, JICENGYLJGMC, JUNSHISSBZ, SHIFOUJKBYDQ, SHIFOULXZD            
             from bzfx.BZK_TAB_DANWEIJBXX
             <trim prefix="where" prefixOverrides="and|or">
                                <if test="obj.id != null and obj.id != ''">
@@ -624,6 +697,9 @@
                    </if>
                                <if test="obj.danweilx != null and obj.danweilx != ''">
                         and DANWEILX = #{obj.danweilx}
+                   </if>
+                               <if test="obj.aLishucc != null">
+                        and A_LISHUCC = #{obj.aLishucc}
                    </if>
                                <if test="obj.lishuccm != null and obj.lishuccm != ''">
                         and LISHUCCM = #{obj.lishuccm}

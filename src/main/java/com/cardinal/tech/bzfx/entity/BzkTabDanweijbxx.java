@@ -253,7 +253,11 @@ public class BzkTabDanweijbxx implements Serializable {
     @CsvBindByPosition(position = 46)
     private String danweilx;
     /**
-    * 隶属层次码
+    * 隶属层次，(隶属层次码长度-1)/2+1
+    */
+    private Integer aLishucc;
+    /**
+    * 添加_隶属层次码
     */
     @CsvBindByPosition(position = 47)
     private String lishuccm;
