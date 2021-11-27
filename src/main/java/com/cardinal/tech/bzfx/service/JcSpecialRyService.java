@@ -50,10 +50,12 @@ public interface JcSpecialRyService {
     /**
      * 通过主键删除数据
      *
-     * @param id 主键
+     *
+     * @param sid
+     * @param rid 主键
      * @return 是否成功
      */
-    boolean deleteBySId(Long id);
+    boolean deleteBySId(Long sid, Long rid);
 
     /**
      * 通过字段统计

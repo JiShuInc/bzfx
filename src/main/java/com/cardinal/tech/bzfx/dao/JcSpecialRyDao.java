@@ -1,6 +1,5 @@
 package com.cardinal.tech.bzfx.dao;
 
-import com.cardinal.tech.bzfx.bean.bo.JcSpecialRyBO;
 import com.cardinal.tech.bzfx.bean.bo.RYQuery;
 import com.cardinal.tech.bzfx.entity.BzkTabRenyuanjbxx;
 import com.cardinal.tech.bzfx.entity.JcSpecialRy;
@@ -79,7 +78,7 @@ public interface JcSpecialRyDao {
 
     int addRyToRw(@Param("sid") Long sid,@Param("query") RYQuery query);
 
-    int deleteBySId(@Param("sid") Long sid);
+    int deleteBySId(@Param("sid")Long sid, @Param("rid") Long rid);
 
     List<BzkTabRenyuanjbxx> queryBySid(@Param("sid") Long sid);
 }

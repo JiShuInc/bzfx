@@ -60,8 +60,8 @@ public interface JcSpecialRyApi {
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " delete by pk")
         @GetMapping("/delete")
-       default Response<Boolean> deleteById(@RequestParam Long sid){
-            return new Response(getService().deleteBySId(sid));
+       default Response<Boolean> deleteById(@RequestParam Long sid,@RequestParam Long rid){
+            return new Response(getService().deleteBySId(sid,rid));
         }
 
         @Hidden

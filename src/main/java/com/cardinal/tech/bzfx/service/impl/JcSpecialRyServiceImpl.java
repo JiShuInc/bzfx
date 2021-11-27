@@ -2,7 +2,6 @@ package com.cardinal.tech.bzfx.service.impl;
 
 import com.cardinal.tech.bzfx.bean.bo.*;
 import com.cardinal.tech.bzfx.bean.dbo.page.PageQuery;
-import com.cardinal.tech.bzfx.entity.BzkTabRenyuanjbxx;
 import com.cardinal.tech.bzfx.entity.JcSpecialRy;
 import com.cardinal.tech.bzfx.dao.JcSpecialRyDao;
 import com.cardinal.tech.bzfx.service.JcSpecialRyService;
@@ -76,11 +75,12 @@ public class JcSpecialRyServiceImpl implements JcSpecialRyService {
      * 通过主键删除数据
      *
      * @param sid 任务id
+     * @param sid 任务id
      * @return 是否成功
      */
     @Override
-    public boolean deleteBySId(Long sid) {
-        return this.jcSpecialRyDao.deleteBySId(sid) > 0;
+    public boolean deleteBySId(Long sid, Long rid) {
+        return this.jcSpecialRyDao.deleteBySId(sid,rid) > 0;
     }
 
     /**
