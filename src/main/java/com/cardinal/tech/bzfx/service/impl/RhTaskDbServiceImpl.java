@@ -12,6 +12,7 @@ import com.cardinal.tech.bzfx.enums.biz.SyncResultEnum;
 import com.cardinal.tech.bzfx.enums.biz.SyncStateEnum;
 import com.cardinal.tech.bzfx.etl.EtlUtil;
 import com.cardinal.tech.bzfx.service.RhTaskDbService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ import java.util.Objects;
  */
 @RequiredArgsConstructor
 @Service("rhTaskDbService")
+@Slf4j
 public class RhTaskDbServiceImpl implements RhTaskDbService {
 
     private final RhTaskDbDao rhTaskDbDao;
@@ -130,11 +132,13 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
     public boolean syncData(Long taskId) {
         RhTask rhTask = rhTaskDao.queryById(taskId);
         if (Objects.nonNull(rhTask.getDbState()) && rhTask.getDbState().equals(SyncStateEnum.SYNC_PROGRESS.value())){
+            log.info("rh_task state 状态为同步中");
             return false;
         }
+
         rhTask.setDbState(SyncStateEnum.SYNC_PROGRESS.value());
         rhTaskDao.update(rhTask);
-
+        log.info("修改 rh_task state 状态为同步中");
         RhTaskDb rhTaskDb = new RhTaskDb();
         rhTaskDb.setTaskId(taskId);
         List<RhTaskDb> rhTaskDbs = this.rhTaskDbDao.queryAll(rhTaskDb);
@@ -144,7 +148,9 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
 
     @Async
     void syncData(Long taskId, List<RhTaskDb> rhTaskDbs) {
+        log.info("清空表数据------------");
         etlUtil.truncateTable();
+        log.info("开始同步数据-----------");
         for (RhTaskDb db:rhTaskDbs){
             long count = 0;
             Date syncAt = new Date();
