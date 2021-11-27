@@ -130,6 +130,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
      */
     @Override
     public boolean syncData(Long taskId) {
+        log.info("taskId id: {}",taskId);
         RhTask rhTask = rhTaskDao.queryById(taskId);
         if (Objects.nonNull(rhTask.getDbState()) && rhTask.getDbState().equals(SyncStateEnum.SYNC_PROGRESS.value())){
             log.info("rh_task state 状态为同步中");
@@ -142,6 +143,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
         RhTaskDb rhTaskDb = new RhTaskDb();
         rhTaskDb.setTaskId(taskId);
         List<RhTaskDb> rhTaskDbs = this.rhTaskDbDao.queryAll(rhTaskDb);
+        log.info("获取的任务列表: {}",rhTaskDbs.size());
         syncData(taskId,rhTaskDbs);
         return true;
     }
@@ -150,8 +152,9 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
     void syncData(Long taskId, List<RhTaskDb> rhTaskDbs) {
         log.info("清空表数据------------");
         etlUtil.truncateTable();
-        log.info("开始同步数据-----------");
+        log.info("开始同步数据-----------: {}",rhTaskDbs.size());
         for (RhTaskDb db:rhTaskDbs){
+            log.info("同步DB数据-----------: {}",db.getId());
             long count = 0;
             Date syncAt = new Date();
             Date syncEnd = null;
