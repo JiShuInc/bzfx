@@ -78,7 +78,7 @@ public interface RhTaskFileApi {
 
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " sync data")
-        @PostMapping("/task/sync")
+        @GetMapping("/task/sync")
         default Response<Boolean> syncData(@RequestParam("id") Long taskId){
             return new Response(getService().syncData(taskId));
         }
