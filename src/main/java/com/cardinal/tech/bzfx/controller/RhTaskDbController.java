@@ -23,9 +23,4 @@ public class RhTaskDbController implements RhTaskDbApi{
         return rhTaskDbService;
      }
 
-
-    @Override
-    public Response<Boolean> syncData(Long taskId) {
-        return new Response<>(rhTaskDbService.syncData(taskId));
-    }
 }

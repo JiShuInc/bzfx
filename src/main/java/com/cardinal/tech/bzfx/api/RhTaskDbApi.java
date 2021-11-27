@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,8 +81,9 @@ public interface RhTaskDbApi {
 
         @PreAuthorize("hasRole('admin')")
         @Operation(description = "sync data")
-        @GetMapping("/task/sync")
-        default Response<Boolean> syncData(@RequestParam("id") Long taskId){
+        @PostMapping("/task/sync")
+        default Response<Boolean> syncData(@RequestBody HashMap<String,Long> body){
+            Long taskId = body.get("id");
             return new Response(getService().syncData(taskId));
         }
 }

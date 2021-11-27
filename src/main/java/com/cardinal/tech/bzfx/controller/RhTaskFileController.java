@@ -23,8 +23,4 @@ public class RhTaskFileController implements RhTaskFileApi{
         return rhTaskFileService;
      }
 
-    @Override
-    public Response<Boolean> syncData(Long taskId) {
-        return new Response<>(rhTaskFileService.syncData(taskId));
-    }
 }
