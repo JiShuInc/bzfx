@@ -35,7 +35,7 @@ public class EtlUtil {
     private GgLogsUtil ggLogsUtil;
     private final String oracleClassName = "oracle.jdbc.driver.OracleDriver";
     public long syncData(Long taskId, String host, Integer dbPort, String dbService, String username, String password) throws Exception {
-        boolean master = taskId.equals(1);
+        boolean master = (taskId.intValue() == 1);
         Connection oracleConnection = oracleConnection(host,dbPort,dbService,username,password);
         log.info("获取oracle 连接--------------------");
         Connection mysqlConnection = dataSource.getConnection();
@@ -45,7 +45,7 @@ public class EtlUtil {
             log.info("开始同步表-----------: {}",tableName);
 
             ggLogsUtil.syncRecord("taskId:【"+taskId+"】task_db ["+host+":"+dbPort+":"+dbService+"] sync table start ["+ tableName+"]");
-            String insertTableName = master?targetTBNames.get(coreTBNames.indexOf(tableName)):tableName;
+            String insertTableName = master?tableName:targetTBNames.get(coreTBNames.indexOf(tableName));
             long total =importTable(taskId,oracleConnection,mysqlConnection,tableName,insertTableName);
             count+=total;
             ggLogsUtil.syncRecord("taskId:【"+taskId+"】task_db ["+host+":"+dbPort+":"+dbService+"] sync table ["+ insertTableName+"] data total ["+total+"]");
@@ -76,7 +76,7 @@ public class EtlUtil {
 //    }
 
     private String querySql(Long taskId, String tableName){
-        String taskIdSql = (taskId.equals(1)?"":taskId+" as TASKID,");
+        String taskIdSql = (taskId.intValue() ==1?"":taskId+" as TASKID,");
         if (tableName.equals("BZK_TAB_RENYUANJBXX")){
             return " select "+taskIdSql+" ID,JUNRENBZH,YILIAOKH,SHIBINGZCM,SHIBINGFZDJBHM,XINGMING,XINGBIE," +
                     " MINZU,JIGUAN,CHUSHENGDI,CHUSHENGRQ,XUEXING,RUWURQ,GONGZUORQ,LITUIXRQ," +
@@ -248,11 +248,11 @@ public class EtlUtil {
     }
 
     public void truncateTable(Long taskId)  {
-        boolean master = taskId.equals(1);
+        boolean master = (taskId.intValue() == 1);
         ggLogsUtil.syncRecord("【taskId:"+taskId+"】 truncate table "+ (master?JSON.toJSONString(coreTBNames):JSON.toJSONString(targetTBNames)));
         Statement truncateState = null;
         try {
-            List<String> tables = (master?coreTBNames:targetTBNames);
+            List<String> tables = master?coreTBNames:targetTBNames;
             Connection connectMysql = dataSource.getConnection();
             truncateState = connectMysql.createStatement();
             for (int i = 0; i < tables.size(); i++) {
