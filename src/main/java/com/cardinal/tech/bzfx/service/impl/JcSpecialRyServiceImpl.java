@@ -7,6 +7,7 @@ import com.cardinal.tech.bzfx.dao.JcSpecialRyDao;
 import com.cardinal.tech.bzfx.service.JcSpecialRyService;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -109,6 +110,7 @@ public class JcSpecialRyServiceImpl implements JcSpecialRyService {
         return p;
     }
 
+    @Transactional
     @Override
     public JcSpecialRyBO addRy(JcSpecialRyForm jcSpecialRy) {
          this.jcSpecialRyDao.addRyToRw(jcSpecialRy.getSid(), jcSpecialRy.getQuery());

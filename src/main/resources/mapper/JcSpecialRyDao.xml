@@ -26,8 +26,7 @@
                sid,
                rid,
                creat_at
-        from bzfx.jc_special_ry
-        limit #{offset}, #{limit}
+        from bzfx.jc_special_ry limit #{offset}, #{limit}
     </select>
 
     <!--通过实体作为筛选条件查询-->
@@ -88,6 +87,7 @@
                 </if>
 
             </trim>
+            limit #{query.num,jdbcType=INTEGER}
         </if>
     </insert>
 
@@ -117,7 +117,8 @@
     <delete id="deleteBySId">
         delete
         from bzfx.jc_special_ry
-        where sid = #{sid,jdbcType=BIGINT} and rid=#{rid,jdbcType=BIGINT}
+        where sid = #{sid,jdbcType=BIGINT}
+          and rid = #{rid,jdbcType=BIGINT}
     </delete>
 
     <!--查询指定行数据-->
