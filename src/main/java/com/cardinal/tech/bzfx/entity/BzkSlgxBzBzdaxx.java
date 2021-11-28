@@ -1,10 +1,9 @@
 package com.cardinal.tech.bzfx.entity;
 
-import java.io.Serializable;
-
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvBindByPosition;
 import lombok.Data;
+
+import java.io.Serializable;
 
 @Data
 /**
