@@ -148,17 +148,15 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
 
     @Override
     @Async
-    public boolean syncData(String tableName, String url) {
+    public void syncData(String tableName, String url) {
         try {
             ggLogsUtil.syncRecord("【tableName:"+tableName+"】filePatch ["+url+"]",0);
             this.batchProcessing(tableName,url,null);
             etlUtil.callTongjifenxi();
-            return true;
         }catch (Exception e){
             e.printStackTrace();
             ggLogsUtil.syncRecord("【tableName:"+tableName+"】sync data fail",0);
         }
-        return false;
     }
 
     @Async

@@ -83,5 +83,5 @@ public interface RhTaskFileService {
          * @param url
          * @return
          */
-        boolean syncData(String tableName, String url);
+        void syncData(String tableName, String url);
 }
