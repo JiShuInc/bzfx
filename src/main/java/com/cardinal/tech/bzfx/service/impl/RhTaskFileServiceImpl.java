@@ -10,6 +10,7 @@ import com.cardinal.tech.bzfx.etl.EtlUtil;
 import com.cardinal.tech.bzfx.service.RhTaskFileService;
 import com.cardinal.tech.bzfx.util.GgLogsUtil;
 import com.opencsv.bean.CsvToBean;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -175,7 +176,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
 
                 ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file ["+file.getFilename()+"] task_file state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
 
-                count = this.batchProcessing(file);
+                count = batchProcessing(file.getTableName(),file.getUrl(),file.getTaskId());
 
                 file.setState(SyncStateEnum.SYNC_FINISHED.value());
                 file.setResult(result);
@@ -211,12 +212,9 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
         etlUtil.callTongjifenxi();
     }
 
-    private long batchProcessing(RhTaskFile file) throws FileNotFoundException {
 
-        return batchProcessing(file.getTableName(),file.getUrl(),file.getTaskId());
-    }
 
-    private long batchProcessing(String tableName, String filePath, Long taskId) throws FileNotFoundException {
+    private long batchProcessing(String tableName, String filePath, Long taskId) throws Exception {
         long count = 0;
         int batchCount = 10000;
         SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH,false);

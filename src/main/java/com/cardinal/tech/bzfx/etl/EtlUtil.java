@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.List;
@@ -300,20 +301,20 @@ public class EtlUtil {
         }
     }
 
-    public <T> CsvToBean parseCsvToBean(Class<T> clazz, String fileName, char csvSeparator, int skipLineNum) throws FileNotFoundException {
+    public <T> CsvToBean parseCsvToBean(Class<T> clazz, String fileName, char csvSeparator, int skipLineNum) throws Exception {
         //获取列位置数组
         //HeaderColumnNameMappingStrategy<T> mapper = new HeaderColumnNameMappingStrategy<>();
         //mapper.setType(clazz);
        // List<T> parse;
         try {
-            CsvToBean csvToBean = new CsvToBeanBuilder(new FileReader(fileName))
+            CsvToBean csvToBean = new CsvToBeanBuilder(new FileReader(fileName, StandardCharsets.UTF_8))
                     .withType(clazz)
                     .withSeparator(csvSeparator)
                     .withSkipLines(skipLineNum)
                     .build();
             return csvToBean;
-        } catch (FileNotFoundException e) {
-            log.error("【fileName：{}地址异常！】", fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
             throw e;
         }
     }
