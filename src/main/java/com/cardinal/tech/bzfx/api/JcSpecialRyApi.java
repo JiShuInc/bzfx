@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +48,7 @@ public interface JcSpecialRyApi {
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " add")
         @PostMapping("/add")
-        default Response<JcSpecialRyBO> insert(@RequestBody JcSpecialRyForm jcSpecialRy){
+        default Response<JcSpecialRyBO> insert(@RequestBody @Valid JcSpecialRyForm jcSpecialRy){
             return new Response(getService().addRy(jcSpecialRy));
         }
         @Hidden

@@ -1,7 +1,9 @@
 package com.cardinal.tech.bzfx.bean.bo;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -43,4 +45,9 @@ public class RYQuery {
     /**
      * 政治面貌；代码
      */
+    private String zhengzhimm;
+
+    @NotNull(message = "必须输入人员数量")
+    @Range(min=1,message = "人数必须大于等于1")
+    private Integer num;
 }
