@@ -217,7 +217,6 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
     }
 
     private long batchProcessing(String tableName, String filePath, Long taskId) throws FileNotFoundException {
-        tableName = tableName.toUpperCase();
         long count = 0;
         int batchCount = 10000;
         SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH,false);
@@ -225,6 +224,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
         Iterator iterator = null;
         String message = (Objects.nonNull(taskId)?"【taskId:"+taskId+"】":"")+"【tableName:"+tableName+"】sync data total ["+count+"]";
         Integer module = Objects.nonNull(taskId)?1:0;
+        tableName = tableName.toUpperCase();
         switch (tableName){
             case "BZK_TAB_DANWEIJBXX":
                 csvToBean = etlUtil.parseCsvToBean(BzkTabDanweijbxx.class,filePath,',',1);
