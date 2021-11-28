@@ -155,8 +155,8 @@
     
     <!--新增所有列-->
     <insert id="insertIgnore" keyProperty="taskid" useGeneratedKeys="true">
-        insert ignore into bzfx.TASK_BZK_SLGX_CW_CWBZSJ(FAFANGSJ, XINGMING, JUNRENBZH, ZHIWUGZ, JUNXIANGZ, JUNLINGGZ, ZHIWUBT, QITAGZ, YINGFAGZ, SHIFAGZ, SHANGWANGBXYE, TUIYIYLBXYE, ZHUFANGBTYE, ZHUFANGGJJYE, SHUJUSZDW, SHANGBAOBZ, DANWEIDM, DAORUSJ, GONGZUOJT, SHENGHUOJT, KOUYB, KOUSB, QITAKF, DYZHUFANGBT, DYZHUFANGGJJ, KOUFAXJ, HUOBIBCLJYE)
-        values (#{fafangsj}, #{xingming}, #{junrenbzh}, #{zhiwugz}, #{junxiangz}, #{junlinggz}, #{zhiwubt}, #{qitagz}, #{yingfagz}, #{shifagz}, #{shangwangbxye}, #{tuiyiylbxye}, #{zhufangbtye}, #{zhufanggjjye}, #{shujuszdw}, #{shangbaobz}, #{danweidm}, #{daorusj}, #{gongzuojt}, #{shenghuojt}, #{kouyb}, #{kousb}, #{qitakf}, #{dyzhufangbt}, #{dyzhufanggjj}, #{koufaxj}, #{huobibcljye})
+        insert ignore into bzfx.TASK_BZK_SLGX_CW_CWBZSJ(ID, FAFANGSJ, XINGMING, JUNRENBZH, ZHIWUGZ, JUNXIANGZ, JUNLINGGZ, ZHIWUBT, QITAGZ, YINGFAGZ, SHIFAGZ, SHANGWANGBXYE, TUIYIYLBXYE, ZHUFANGBTYE, ZHUFANGGJJYE, SHUJUSZDW, SHANGBAOBZ, DANWEIDM, DAORUSJ, GONGZUOJT, SHENGHUOJT, KOUYB, KOUSB, QITAKF, DYZHUFANGBT, DYZHUFANGGJJ, KOUFAXJ, HUOBIBCLJYE)
+        values (#{id}, #{fafangsj}, #{xingming}, #{junrenbzh}, #{zhiwugz}, #{junxiangz}, #{junlinggz}, #{zhiwubt}, #{qitagz}, #{yingfagz}, #{shifagz}, #{shangwangbxye}, #{tuiyiylbxye}, #{zhufangbtye}, #{zhufanggjjye}, #{shujuszdw}, #{shangbaobz}, #{danweidm}, #{daorusj}, #{gongzuojt}, #{shenghuojt}, #{kouyb}, #{kousb}, #{qitakf}, #{dyzhufangbt}, #{dyzhufanggjj}, #{koufaxj}, #{huobibcljye})
     </insert>
 
     <!--通过主键修改数据-->

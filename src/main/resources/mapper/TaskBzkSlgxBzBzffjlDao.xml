@@ -99,8 +99,8 @@
     
     <!--新增所有列-->
     <insert id="insertIgnore" keyProperty="taskid" useGeneratedKeys="true">
-        insert ignore into bzfx.TASK_BZK_SLGX_BZ_BZFFJL(FAFANGSJ, XINGMING, JUNRENBZH, PINZHONGM, ZHUOZHUANGHXM, JILIANGDW, SHULIANG, QISUANND, SHUJUSZDW, SHANGBAOBZ, DANWEIDM, DAORUSJ, PINZHONG)
-        values (#{fafangsj}, #{xingming}, #{junrenbzh}, #{pinzhongm}, #{zhuozhuanghxm}, #{jiliangdw}, #{shuliang}, #{qisuannd}, #{shujuszdw}, #{shangbaobz}, #{danweidm}, #{daorusj}, #{pinzhong})
+        insert ignore into bzfx.TASK_BZK_SLGX_BZ_BZFFJL(ID, FAFANGSJ, XINGMING, JUNRENBZH, PINZHONGM, ZHUOZHUANGHXM, JILIANGDW, SHULIANG, QISUANND, SHUJUSZDW, SHANGBAOBZ, DANWEIDM, DAORUSJ, PINZHONG)
+        values (#{id}, #{fafangsj}, #{xingming}, #{junrenbzh}, #{pinzhongm}, #{zhuozhuanghxm}, #{jiliangdw}, #{shuliang}, #{qisuannd}, #{shujuszdw}, #{shangbaobz}, #{danweidm}, #{daorusj}, #{pinzhong})
     </insert>
 
     <!--通过主键修改数据-->
