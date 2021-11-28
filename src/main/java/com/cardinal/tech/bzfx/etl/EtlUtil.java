@@ -310,7 +310,7 @@ public class EtlUtil {
         //mapper.setType(clazz);
        // List<T> parse;
         try {
-            CsvToBean csvToBean = new CsvToBeanBuilder(new FileReader(fileName))
+            CsvToBean csvToBean = new CsvToBeanBuilder(new FileReader(fileName, StandardCharsets.UTF_8))
                     .withType(clazz)
                     .withSeparator(csvSeparator)
                     //.withSkipLines(skipLineNum)
