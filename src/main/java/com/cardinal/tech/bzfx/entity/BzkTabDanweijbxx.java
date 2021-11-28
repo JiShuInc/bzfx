@@ -266,6 +266,7 @@ public class BzkTabDanweijbxx implements Serializable {
     * 创建时间
     */
     @CsvBindByPosition(position = 49)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
     private Date createTime;
     /**
     * 最后修改时间

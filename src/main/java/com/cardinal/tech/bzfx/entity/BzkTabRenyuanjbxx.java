@@ -70,6 +70,7 @@ public class BzkTabRenyuanjbxx implements Serializable {
     * 出生日期
     */
     @CsvBindByPosition(position = 11)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
     private Date chushengrq;
     /**
     * 血型；代码
@@ -312,6 +313,7 @@ public class BzkTabRenyuanjbxx implements Serializable {
     * 对应军人出生日期
     */
     @CsvBindByPosition(position = 57)
+    @CsvDate("dd/MM/yyyy HH:mm:ss")
     private Date duiyingjrcsrq;
     /**
     * 对应军人证件编号
