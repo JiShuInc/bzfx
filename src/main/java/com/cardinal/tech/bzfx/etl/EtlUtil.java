@@ -1,6 +1,7 @@
 package com.cardinal.tech.bzfx.etl;
 
 import com.alibaba.fastjson.JSON;
+import com.cardinal.tech.bzfx.entity.BzkSlgxBzBzdaxx;
 import com.cardinal.tech.bzfx.entity.BzkTabDanweijbxx;
 import com.cardinal.tech.bzfx.util.GgLogsUtil;
 import com.opencsv.bean.CsvToBean;
@@ -14,6 +15,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -308,10 +310,10 @@ public class EtlUtil {
         //mapper.setType(clazz);
        // List<T> parse;
         try {
-            CsvToBean csvToBean = new CsvToBeanBuilder(new FileReader(fileName, StandardCharsets.UTF_8))
+            CsvToBean csvToBean = new CsvToBeanBuilder(new FileReader(fileName))
                     .withType(clazz)
                     .withSeparator(csvSeparator)
-                    .withSkipLines(skipLineNum)
+                    //.withSkipLines(skipLineNum)
                     .build();
             return csvToBean;
         } catch (Exception e) {
@@ -394,8 +396,12 @@ public class EtlUtil {
         EtlUtil etlUtil = new EtlUtil();
         try {
             CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkTabDanweijbxx.class,"/Users/hua/BZK_TAB_DANWEIJBXX.csv",',',1);
-            long c = csvToBean.stream().count();
-            System.out.println(c);
+            Iterator iterator = csvToBean.iterator();
+            while (iterator.hasNext()){
+                Object o = iterator.next();
+                BzkTabDanweijbxx bzkSlgxBzBzdaxx = (BzkTabDanweijbxx) iterator.next();
+                System.out.println(bzkSlgxBzBzdaxx.getId());
+            };
         } catch (Exception e) {
             e.printStackTrace();
         }
