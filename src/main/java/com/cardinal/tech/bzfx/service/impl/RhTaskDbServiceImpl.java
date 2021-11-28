@@ -188,6 +188,8 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
                 ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db ["+db.getDbHost()+":"+db.getDbPort()+":"+db.getDbServe()+"] task_db sync data total ["+count+"]");
             }catch (Exception e){
                 e.printStackTrace();
+
+
                 remark = e.getMessage();
                 db.setState(SyncStateEnum.SYNC_FINISHED.value());
                 result = SyncResultEnum.SYNC_FAIL.value();

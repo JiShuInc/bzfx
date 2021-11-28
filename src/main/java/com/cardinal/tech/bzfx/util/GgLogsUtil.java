@@ -23,10 +23,14 @@ public class GgLogsUtil {
 
     @Async
     public void syncRecord(String message){
+        syncRecord(message,1);
+    };
 
+    @Async
+    public void syncRecord(String message,Integer module){
         GgLogs ggLogs = new GgLogs();
         ggLogs.setCreatAt(new Date());
-        ggLogs.setModule(1);
+        ggLogs.setModule(module);
         ggLogs.setType(0);
         ggLogs.setContent(message);
         ggLogsDao.insert(ggLogs);

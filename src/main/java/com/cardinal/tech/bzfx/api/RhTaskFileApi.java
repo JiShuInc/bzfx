@@ -79,15 +79,13 @@ public interface RhTaskFileApi {
            return new Response(getService().page(userQueryForm));
         }
 
-//        @PreAuthorize("hasRole('admin')")
-//        @Operation(description = " sync data")
-//        @PostMapping("/task/sync")
-//        default Response<Boolean> syncData(@RequestBody HashMap<String,Long> body){
-//            Long taskId = body.get("id");
-//            Boolean flag = getService().syncData(taskId);
-//            if (flag){
-//                return new Response();
-//            }
-//            return new Response(SysErrEnum.SYNC_PROGRESS);
-//        }
+        @PreAuthorize("hasRole('admin')")
+        @Operation(description = " sync data")
+        @PostMapping("/task/sync")
+        default Response<Boolean> syncData(@RequestBody HashMap<String,String> body){
+            String url = body.get("url");
+            String tableName = body.get("tableName");
+            getService().syncData(tableName,url);
+            return new Response();
+        }
 }

@@ -76,4 +76,12 @@ public interface RhTaskFileService {
          * @return
          */
         boolean syncData(Long taskId);
+
+        /**
+         * 同步数据
+         * @param tableName
+         * @param url
+         * @return
+         */
+        boolean syncData(String tableName, String url);
 }

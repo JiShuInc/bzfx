@@ -26,13 +26,15 @@ import java.util.Objects;
 public class EtlUtil {
 
     private List<String> coreTBNames = Arrays.asList("BZK_SLGX_BZ_BZDAXX", "BZK_SLGX_BZ_BZFFJL", "BZK_SLGX_CW_CWBZSJ", "BZK_SLGX_YF_RYZFQK", "BZK_TAB_DANWEIBCLRXX", "BZK_TAB_DANWEIJBXX", "BZK_TAB_RENYUANJBXX", "BZK_TAB_BAOZHANGKJBXX"); // 要同步的核心库表名
+
+    private List<String> targetTBNames = Arrays.asList("TASK_BZK_SLGX_BZ_BZDAXX", "TASK_BZK_SLGX_BZ_BZFFJL", "TASK_BZK_SLGX_CW_CWBZSJ", "TASK_BZK_SLGX_YF_RYZFQK", "TASK_BZK_TAB_DANWEIBCLRXX", "TASK_BZK_TAB_DANWEIJBXX", "TASK_BZK_TAB_RENYUANJBXX", "TASK_BZK_TAB_BAOZHANGKJBXX"); // 要同步的核心库表名
     @Autowired
     private DataSource dataSource;
     @Autowired
     private GgLogsUtil ggLogsUtil;
     private final String oracleClassName = "oracle.jdbc.driver.OracleDriver";
     public long syncData(Long taskId, String host, Integer dbPort, String dbService, String username, String password) throws Exception {
-
+        boolean master = taskId.equals(1);
         Connection oracleConnection = oracleConnection(host,dbPort,dbService,username,password);
         log.info("获取oracle 连接--------------------");
         Connection mysqlConnection = dataSource.getConnection();
@@ -42,10 +44,10 @@ public class EtlUtil {
             log.info("开始同步表-----------: {}",tableName);
 
             ggLogsUtil.syncRecord("taskId:【"+taskId+"】task_db ["+host+":"+dbPort+":"+dbService+"] sync table start ["+ tableName+"]");
-
-            long total =importTable(oracleConnection,mysqlConnection,tableName);
+            String insertTableName = master?targetTBNames.get(coreTBNames.indexOf(tableName)):tableName;
+            long total =importTable(taskId,oracleConnection,mysqlConnection,tableName,insertTableName);
             count+=total;
-            ggLogsUtil.syncRecord("taskId:【"+taskId+"】task_db ["+host+":"+dbPort+":"+dbService+"] sync table ["+ tableName+"] data total ["+total+"]");
+            ggLogsUtil.syncRecord("taskId:【"+taskId+"】task_db ["+host+":"+dbPort+":"+dbService+"] sync table ["+ insertTableName+"] data total ["+total+"]");
 
         }
         if (Objects.nonNull(oracleConnection)){
@@ -72,9 +74,10 @@ public class EtlUtil {
 //        return connection;
 //    }
 
-    private String querySql(String tableName){
+    private String querySql(Long taskId, String tableName){
+        String taskIdSql = (taskId.equals(1)?"":taskId+" as TASKID,");
         if (tableName.equals("BZK_TAB_RENYUANJBXX")){
-            return " select ID,JUNRENBZH,YILIAOKH,SHIBINGZCM,SHIBINGFZDJBHM,XINGMING,XINGBIE," +
+            return " select "+taskIdSql+" ID,JUNRENBZH,YILIAOKH,SHIBINGZCM,SHIBINGFZDJBHM,XINGMING,XINGBIE," +
                     " MINZU,JIGUAN,CHUSHENGDI,CHUSHENGRQ,XUEXING,RUWURQ,GONGZUORQ,LITUIXRQ," +
                     " GONGZUODWDM,GONGZUODWMC,BUBIE,BUMENID,ZHENGJIANBH,ZHENGJIANLX,RENYUANLB," +
                     " ZHULEIBIE,JUNZHONG,ZHIGONGSFLB,JIASHUSFLB,YOUFOUZP,ZHAOPIAN,WENHUACD,BIYEYX," +
@@ -92,27 +95,27 @@ public class EtlUtil {
                     " YILIAOZH,GONGZILZQD,SHIFOUJRJS,CAIJISBDW,XIAFABZ,YINHANGKH,ZAIZHIQK,SHIFOUZJDJY,SHIFOUXYSJPOBX " +
                     " from BZK_TAB_RENYUANJBXX ";
         }else if(tableName.equals("BZK_SLGX_BZ_BZDAXX")){
-            return " select ID,XINGMING,JUNRENBZH,RENYUANLBM,ZHIWUDJM,JUNXIANDJM,JUNBINGZMC,SHENGAO," +
+            return " select "+taskIdSql+" ID,XINGMING,JUNRENBZH,RENYUANLBM,ZHIWUDJM,JUNXIANDJM,JUNBINGZMC,SHENGAO," +
                     " XIONGWEI,YAOWEI,TOUWEI,JIAOCHANG,ZHIWEI,QIHOUQ,SHUJUSZDW,SHANGBAOBZ,DANWEIDM," +
                     " DAORUSJ,SUOSUDWDM,BUMENMC " +
                     " from BZK_SLGX_BZ_BZDAXX";
         }else if (tableName.equals("BZK_SLGX_BZ_BZFFJL")){
-            return " select ID,FAFANGSJ,XINGMING,JUNRENBZH,PINZHONGM,ZHUOZHUANGHXM,JILIANGDW,SHULIANG," +
+            return " select "+taskIdSql+" ID,FAFANGSJ,XINGMING,JUNRENBZH,PINZHONGM,ZHUOZHUANGHXM,JILIANGDW,SHULIANG," +
                     " QISUANND,SHUJUSZDW,SHANGBAOBZ,DANWEIDM,DAORUSJ,PINZHONG " +
                     " from BZK_SLGX_BZ_BZFFJL";
         }else if (tableName.equals("BZK_SLGX_CW_CWBZSJ")){
-            return " select ID,FAFANGSJ,XINGMING,JUNRENBZH,ZHIWUGZ,JUNXIANGZ,JUNLINGGZ," +
+            return " select "+taskIdSql+" ID,FAFANGSJ,XINGMING,JUNRENBZH,ZHIWUGZ,JUNXIANGZ,JUNLINGGZ," +
                     " ZHIWUBT,QITAGZ,YINGFAGZ,SHIFAGZ,SHANGWANGBXYE,TUIYIYLBXYE,ZHUFANGBTYE," +
                     " ZHUFANGGJJYE,SHUJUSZDW,SHANGBAOBZ,DANWEIDM,DAORUSJ,GONGZUOJT," +
                     " SHENGHUOJT,KOUYB,KOUSB,QITAKF,DYZHUFANGBT,DYZHUFANGGJJ,KOUFAXJ,HUOBIBCLJYE " +
                     " from BZK_SLGX_CW_CWBZSJ";
         }else if(tableName.equals("BZK_SLGX_YF_RYZFQK")){
-            return " select ID,XINGMING,JUNRENBZH,ZHUFANGSX,ZHUFANGDZ,GUANLIDW,JINZHUSJ," +
+            return " select "+taskIdSql+" ID,XINGMING,JUNRENBZH,ZHUFANGSX,ZHUFANGDZ,GUANLIDW,JINZHUSJ," +
                     " ZUOLUOH,DONGHAO,FANGHAO,ZHUFANGXZM,HUXINGFLM,JIANZHUMJ,DANWEIDM," +
                     " DAORUSJ,SHANGBAOBZ,SHUJUSZDW,XUHAO " +
                     " from BZK_SLGX_YF_RYZFQK";
         }else if(tableName.equals("BZK_TAB_DANWEIBCLRXX")){
-            return " select ID,DANWEIID,JUNGUANBZYE,WENZHIGBBZYE,BINGBZYE,ZHIGONGBZYE,FEIXIANYWZBZYE," +
+            return " select "+taskIdSql+" ID,DANWEIID,JUNGUANBZYE,WENZHIGBBZYE,BINGBZYE,ZHIGONGBZYE,FEIXIANYWZBZYE," +
                     " JIEFANGJZYYGBCS,JIEFANGJZYYPTCS,ZONGYIYGBCS,ZONGYIYPTCS,ZHONGXINYYGBCS,ZHONGXINYYPTCS," +
                     " DUISHUYYGBCS,DUISHUYYPTCS,FUSHUYYGBCS,FUSHUYYPTCS,MENZHENBYLCWS,SHILVYYYLCWS,LVTUANWSDYLCWS," +
                     " LIAOYANGYTQCWS,LIAOYANGYPTCWS,YILIAOSSTS,LIEBIANFQYHZDSCWS,GAOYUANBZZDCWS,BIANWAIZGS," +
@@ -125,7 +128,7 @@ public class EtlUtil {
                     " XUEYUANBZYE,XUEYUANBZYEJG,XUEYUANBZYEZF " +
                     " from BZK_TAB_DANWEIBCLRXX";
         }else if(tableName.equals("BZK_TAB_DANWEIJBXX")){
-            return " select ID,DANWEINM,DANWEIZT,DANWEIGYDM,DANWEILSDM,DANWEIMC,BUDUIDH,BUDUILB," +
+            return " select "+taskIdSql+" ID,DANWEINM,DANWEIZT,DANWEIGYDM,DANWEILSDM,DANWEIMC,BUDUIDH,BUDUILB," +
                     " JIANZHILB,HOUQINBDLB,DANWEIJB,HOUQINJGJB,LISHUGX,ZHIHUIGX,GONGYINGXZDM," +
                     " ZHUDI,ZHUDIXCZ,YOUZHENGBM,TONGXINDZ,DIANHUAHM,CHUANZHENHM,ZHANQU,BAOZHANGQU," +
                     " JUNZHONG,BINGZHONG,QIHOUQU,LEIXING,SHUJUSZDW,SHANGBAOBZ,GENGXINBZ,FENFABZ," +
@@ -134,15 +137,15 @@ public class EtlUtil {
                     " DANWEILX,LISHUCCM, XIAFABZ " +
                     " from BZK_TAB_DANWEIJBXX";
         }else if (tableName.equals("BZK_TAB_BAOZHANGKJBXX")){
-            return " select ID,JUNRENID,BAOZHANGKH,ZHIKALX,ZHIKASJ,QIYONGSJ,SHIXIAOSJ,KAZHUANGTAI," +
+            return " select "+taskIdSql+" ID,JUNRENID,BAOZHANGKH,ZHIKALX,ZHIKASJ,QIYONGSJ,SHIXIAOSJ,KAZHUANGTAI," +
                     " GENGXINBZ,SHANGBAOBZ,FENFABZ,SHENHEBZ,SHUJUSZDW,YUANID,SHIFOUDQK,HEIMDRQ," +
                     " HEIMDYY,KALEIXING,YINHANGDM,YINHANGKH,FAKADWDM " +
                     " from BZK_TAB_BAOZHANGKJBXX";
         }
         return null;
     }
-    private long importTable(Connection connectOracle, Connection connectMysql,
-                             String tableName) throws Exception {
+    private long importTable(Long taskId, Connection connectOracle, Connection connectMysql,
+                             String tableName, String insertTableName) throws Exception {
 
         connectMysql.setAutoCommit(false);
         Statement stmt = null;
@@ -157,16 +160,16 @@ public class EtlUtil {
             fs=fs > maxRow?fs: maxRow;
             stmt.setFetchSize(fs);
             stmt.setFetchDirection(ResultSet.FETCH_FORWARD);
-            log.info("执行查询-----------: {}",querySql(tableName));
-            ResultSet rs = stmt.executeQuery(querySql(tableName));
+            log.info("执行查询-----------: {}",querySql(taskId,tableName));
+            ResultSet rs = stmt.executeQuery(querySql(taskId,tableName));
             log.info("查询完成-----------: {}",tableName);
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberOfColumns = rsmd.getColumnCount();
             // 设定多少条记录提交一次
             int batchCount = 10000;
             //执行清空表数据
-            log.info("插入数据-----------: {}",tableName);
-            String insertSql = splicingSql(tableName,numberOfColumns,rsmd);
+            log.info("插入数据-----------: {}",insertTableName);
+            String insertSql = splicingSql(insertTableName,numberOfColumns,rsmd);
             pstmt = connectMysql.prepareStatement(insertSql);
 
             while (rs.next()) {
@@ -244,14 +247,23 @@ public class EtlUtil {
     }
 
     public void truncateTable(Long taskId)  {
-        ggLogsUtil.syncRecord("【taskId:"+taskId+"】 truncate table "+ JSON.toJSONString(coreTBNames)+"");
+        boolean master = taskId.equals(1);
+        ggLogsUtil.syncRecord("【taskId:"+taskId+"】 truncate table "+ (master?JSON.toJSONString(coreTBNames):JSON.toJSONString(targetTBNames)));
         Statement truncateState = null;
         try {
+            List<String> tables = (master?coreTBNames:targetTBNames);
             Connection connectMysql = dataSource.getConnection();
             truncateState = connectMysql.createStatement();
-            for (int i = 0; i < coreTBNames.size(); i++) {
+            for (int i = 0; i < tables.size(); i++) {
                 StringBuilder truncateSql = new StringBuilder();
-                truncateSql.append("TRUNCATE TABLE ").append(coreTBNames.get(i));
+                if (master){
+                    truncateSql.append("TRUNCATE TABLE ").append(tables.get(i));
+                }else{
+                    truncateSql.append("delete from ")
+                            .append(tables.get(i))
+                            .append(" where TASKID = ")
+                            .append(taskId);
+                }
                 truncateState.execute(truncateSql.toString());
             }
         } catch (SQLException e) {

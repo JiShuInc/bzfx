@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.BeanUtils;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
 
     private final EtlUtil etlUtil;
 
-    private SqlSessionTemplate sqlSessionTemplate;
+    private final SqlSessionTemplate sqlSessionTemplate;
 
     private final GgLogsUtil ggLogsUtil;
     /**
@@ -145,6 +146,19 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
         return true;
     }
 
+    @Override
+    @Async
+    public boolean syncData(String tableName, String url) {
+        try {
+            ggLogsUtil.syncRecord("【tableName:"+tableName+"】filePatch ["+url+"]",0);
+            this.batchProcessing(tableName,url,null);
+        }catch (Exception e){
+            e.printStackTrace();
+            ggLogsUtil.syncRecord("【tableName:"+tableName+"】sync data fail",0);
+        }
+        return false;
+    }
+
     @Async
     void syncData(Long taskId, List<RhTaskFile> rhTaskFiles) {
         for (RhTaskFile file:rhTaskFiles){
@@ -194,114 +208,261 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
                 slSyncLogsDao.insert(slSyncLogs);
             }
         }
-
-        RhTask rhTask = rhTaskDao.queryById(taskId);
-        rhTask.setDbState(SyncStateEnum.SYNC_FINISHED.value());
-        rhTaskDao.update(rhTask);
     }
 
     private long batchProcessing(RhTaskFile file) throws FileNotFoundException {
-        String filePath = String.format("%s%s%s",file.getUrl(),"/",file.getFilename());
+
+        return batchProcessing(file.getTableName(),file.getUrl(),file.getTaskId());
+    }
+
+    private long batchProcessing(String tableName, String filePath, Long taskId) throws FileNotFoundException {
         long count = 0;
         int batchCount = 10000;
         SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH,false);
-        if (file.getTableName().equals("BZK_TAB_DANWEIJBXX")){
-            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkTabDanweijbxx.class,filePath,',',1);
-            Iterator iterator = csvToBean.iterator();
-            BzkTabDanweijbxxDao bzkTabDanweijbxxDao = sqlSession.getMapper(BzkTabDanweijbxxDao.class);
-            while (iterator.hasNext()){
-                BzkTabDanweijbxx bzkTabDanweijbxx = (BzkTabDanweijbxx) iterator.next();
-                bzkTabDanweijbxxDao.insertIgnore(bzkTabDanweijbxx);
-                if ((count % batchCount) == 0) {
-                    sqlSession.commit();
+        CsvToBean csvToBean = null;
+        Iterator iterator = null;
+        String message = (Objects.nonNull(taskId)?"【taskId:"+taskId+"】":"")+"【tableName:"+tableName+"】sync data total ["+count+"]";
+        Integer module = Objects.nonNull(taskId)?1:0;
+        switch (tableName){
+            case "BZK_TAB_DANWEIJBXX":
+                csvToBean = etlUtil.parseCsvToBean(BzkTabDanweijbxx.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                BzkTabDanweijbxxDao bzkTabDanweijbxxDao = sqlSession.getMapper(BzkTabDanweijbxxDao.class);
+                while (iterator.hasNext()){
+                    BzkTabDanweijbxx bzkTabDanweijbxx = (BzkTabDanweijbxx) iterator.next();
+                    bzkTabDanweijbxxDao.insertIgnore(bzkTabDanweijbxx);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
                 }
-                count++;
-            }
-        }else if (file.getTableName().equals("BZK_SLGX_BZ_BZDAXX")){
-            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkSlgxBzBzdaxx.class,filePath,',',1);
-            Iterator iterator = csvToBean.iterator();
-            BzkSlgxBzBzdaxxDao bzkSlgxBzBzdaxxDao = sqlSession.getMapper(BzkSlgxBzBzdaxxDao.class);
-            while (iterator.hasNext()){
-                BzkSlgxBzBzdaxx bzkSlgxBzBzdaxx = (BzkSlgxBzBzdaxx) iterator.next();
-                bzkSlgxBzBzdaxxDao.insertIgnore(bzkSlgxBzBzdaxx);
-                if ((count % batchCount) == 0) {
-                    sqlSession.commit();
+                break;
+            case "BZK_SLGX_BZ_BZDAXX":
+                csvToBean = etlUtil.parseCsvToBean(BzkSlgxBzBzdaxx.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                BzkSlgxBzBzdaxxDao bzkSlgxBzBzdaxxDao = sqlSession.getMapper(BzkSlgxBzBzdaxxDao.class);
+                while (iterator.hasNext()){
+                    BzkSlgxBzBzdaxx bzkSlgxBzBzdaxx = (BzkSlgxBzBzdaxx) iterator.next();
+                    bzkSlgxBzBzdaxxDao.insertIgnore(bzkSlgxBzBzdaxx);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
+                };
+                break;
+            case "BZK_SLGX_BZ_BZFFJL":
+                csvToBean = etlUtil.parseCsvToBean(BzkSlgxBzBzffjl.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                BzkSlgxBzBzffjlDao bzkSlgxBzBzffjlDao = sqlSession.getMapper(BzkSlgxBzBzffjlDao.class);
+                while (iterator.hasNext()){
+                    BzkSlgxBzBzffjl bzkSlgxBzBzffjl = (BzkSlgxBzBzffjl) iterator.next();
+                    bzkSlgxBzBzffjlDao.insertIgnore(bzkSlgxBzBzffjl);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
+                };
+                break;
+            case "BZK_SLGX_CW_CWBZSJ":
+                csvToBean = etlUtil.parseCsvToBean(BzkSlgxCwCwbzsj.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                BzkSlgxCwCwbzsjDao bzkSlgxCwCwbzsjDao = sqlSession.getMapper(BzkSlgxCwCwbzsjDao.class);
+                while (iterator.hasNext()){
+                    BzkSlgxCwCwbzsj bzkSlgxCwCwbzsj = (BzkSlgxCwCwbzsj) iterator.next();
+                    bzkSlgxCwCwbzsjDao.insertIgnore(bzkSlgxCwCwbzsj);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
+                };
+                break;
+            case "BZK_SLGX_YF_RYZFQK":
+                csvToBean = etlUtil.parseCsvToBean(BzkSlgxYfRyzfqk.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                BzkSlgxYfRyzfqkDao bzkSlgxYfRyzfqkDao = sqlSession.getMapper(BzkSlgxYfRyzfqkDao.class);
+                while (iterator.hasNext()){
+                    BzkSlgxYfRyzfqk bzkSlgxYfRyzfqk = (BzkSlgxYfRyzfqk) iterator.next();
+                    bzkSlgxYfRyzfqkDao.insertIgnore(bzkSlgxYfRyzfqk);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
+                };
+                break;
+            case "BZK_TAB_DANWEIBCLRXX":
+                csvToBean = etlUtil.parseCsvToBean(BzkTabDanweibclrxx.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                BzkTabDanweibclrxxDao bzkTabDanweibclrxxDao = sqlSession.getMapper(BzkTabDanweibclrxxDao.class);
+                while (iterator.hasNext()){
+                    BzkTabDanweibclrxx bzkTabDanweibclrxx = (BzkTabDanweibclrxx) iterator.next();
+                    bzkTabDanweibclrxxDao.insertIgnore(bzkTabDanweibclrxx);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
+                };
+                break;
+            case "BZK_TAB_RENYUANJBXX":
+                csvToBean = etlUtil.parseCsvToBean(BzkTabRenyuanjbxx.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                BzkTabRenyuanjbxxDao bzkTabRenyuanjbxxDao = sqlSession.getMapper(BzkTabRenyuanjbxxDao.class);
+                while (iterator.hasNext()){
+                    BzkTabRenyuanjbxx bzkTabRenyuanjbxx = (BzkTabRenyuanjbxx) iterator.next();
+                    bzkTabRenyuanjbxxDao.insertIgnore(bzkTabRenyuanjbxx);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
+                };
+                break;
+            case "BZK_TAB_BAOZHANGKJBXX":
+                csvToBean = etlUtil.parseCsvToBean(BzkTabBaozhangkjbxx.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                BzkTabBaozhangkjbxxDao bzkTabBaozhangkjbxxDao = sqlSession.getMapper(BzkTabBaozhangkjbxxDao.class);
+                while (iterator.hasNext()){
+                    BzkTabBaozhangkjbxx bzkTabBaozhangkjbxx = (BzkTabBaozhangkjbxx) iterator.next();
+                    bzkTabBaozhangkjbxxDao.insertIgnore(bzkTabBaozhangkjbxx);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
+                };
+                break;
+            case "TASK_BZK_TAB_DANWEIJBXX":
+                csvToBean = etlUtil.parseCsvToBean(BzkTabDanweijbxx.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                TaskBzkTabDanweijbxxDao taskBzkTabDanweijbxxDao = sqlSession.getMapper(TaskBzkTabDanweijbxxDao.class);
+                while (iterator.hasNext()){
+                    BzkTabDanweijbxx bzkTabDanweijbxx = (BzkTabDanweijbxx) iterator.next();
+                    TaskBzkTabDanweijbxx taskBzkTabDanweijbxx = new TaskBzkTabDanweijbxx();
+                    BeanUtils.copyProperties(bzkTabDanweijbxx,taskBzkTabDanweijbxx);
+                    taskBzkTabDanweijbxx.setTaskid(taskId);
+                    taskBzkTabDanweijbxxDao.insertIgnore(taskBzkTabDanweijbxx);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
                 }
-                count++;
-            };
-        }else if (file.getTableName().equals("BZK_SLGX_BZ_BZFFJL")){
-            CsvToBean csvToBean  = etlUtil.parseCsvToBean(BzkSlgxBzBzffjl.class,filePath,',',1);
-            Iterator iterator = csvToBean.iterator();
-            BzkSlgxBzBzffjlDao bzkSlgxBzBzffjlDao = sqlSession.getMapper(BzkSlgxBzBzffjlDao.class);
-            while (iterator.hasNext()){
-                BzkSlgxBzBzffjl bzkSlgxBzBzffjl = (BzkSlgxBzBzffjl) iterator.next();
-                bzkSlgxBzBzffjlDao.insertIgnore(bzkSlgxBzBzffjl);
-                if ((count % batchCount) == 0) {
-                    sqlSession.commit();
-                }
-                count++;
-            };
-        }else if (file.getTableName().equals("BZK_SLGX_CW_CWBZSJ")){
-            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkSlgxCwCwbzsj.class,filePath,',',1);
-            Iterator iterator = csvToBean.iterator();
-            BzkSlgxCwCwbzsjDao bzkSlgxCwCwbzsjDao = sqlSession.getMapper(BzkSlgxCwCwbzsjDao.class);
-            while (iterator.hasNext()){
-                BzkSlgxCwCwbzsj bzkSlgxCwCwbzsj = (BzkSlgxCwCwbzsj) iterator.next();
-                bzkSlgxCwCwbzsjDao.insertIgnore(bzkSlgxCwCwbzsj);
-                if ((count % batchCount) == 0) {
-                    sqlSession.commit();
-                }
-                count++;
-            };
-        }else if (file.getTableName().equals("BZK_SLGX_YF_RYZFQK")){
-            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkSlgxYfRyzfqk.class,filePath,',',1);
-            Iterator iterator = csvToBean.iterator();
-            BzkSlgxYfRyzfqkDao bzkSlgxYfRyzfqkDao = sqlSession.getMapper(BzkSlgxYfRyzfqkDao.class);
-            while (iterator.hasNext()){
-                BzkSlgxYfRyzfqk bzkSlgxYfRyzfqk = (BzkSlgxYfRyzfqk) iterator.next();
-                bzkSlgxYfRyzfqkDao.insertIgnore(bzkSlgxYfRyzfqk);
-                if ((count % batchCount) == 0) {
-                    sqlSession.commit();
-                }
-                count++;
-            };
-        }else if (file.getTableName().equals("BZK_TAB_DANWEIBCLRXX")){
-            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkTabDanweibclrxx.class,filePath,',',1);
-            Iterator iterator = csvToBean.iterator();
-            BzkTabDanweibclrxxDao bzkTabDanweibclrxxDao = sqlSession.getMapper(BzkTabDanweibclrxxDao.class);
-            while (iterator.hasNext()){
-                BzkTabDanweibclrxx bzkTabDanweibclrxx = (BzkTabDanweibclrxx) iterator.next();
-                bzkTabDanweibclrxxDao.insertIgnore(bzkTabDanweibclrxx);
-                if ((count % batchCount) == 0) {
-                    sqlSession.commit();
-                }
-                count++;
-            };
-        }else if (file.getTableName().equals("BZK_TAB_RENYUANJBXX")){
-            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkTabRenyuanjbxx.class,filePath,',',1);
-            Iterator iterator = csvToBean.iterator();
-            BzkTabRenyuanjbxxDao bzkTabRenyuanjbxxDao = sqlSession.getMapper(BzkTabRenyuanjbxxDao.class);
-            while (iterator.hasNext()){
-                BzkTabRenyuanjbxx bzkTabRenyuanjbxx = (BzkTabRenyuanjbxx) iterator.next();
-                bzkTabRenyuanjbxxDao.insertIgnore(bzkTabRenyuanjbxx);
-                if ((count % batchCount) == 0) {
-                    sqlSession.commit();
-                }
-                count++;
-            };
-        }else if (file.getTableName().equals("BZK_TAB_BAOZHANGKJBXX")){
-            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkTabBaozhangkjbxx.class,filePath,',',1);
-            Iterator iterator = csvToBean.iterator();
-            BzkTabBaozhangkjbxxDao bzkTabBaozhangkjbxxDao = sqlSession.getMapper(BzkTabBaozhangkjbxxDao.class);
-            while (iterator.hasNext()){
-                BzkTabBaozhangkjbxx bzkTabBaozhangkjbxx = (BzkTabBaozhangkjbxx) iterator.next();
-                bzkTabBaozhangkjbxxDao.insertIgnore(bzkTabBaozhangkjbxx);
-                if ((count % batchCount) == 0) {
-                    sqlSession.commit();
-                }
-                count++;
-            };
+                break;
+            case "TASK_BZK_SLGX_BZ_BZDAXX":
+                csvToBean = etlUtil.parseCsvToBean(TaskBzkSlgxBzBzdaxx.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                TaskBzkSlgxBzBzdaxxDao taskBzkSlgxBzBzdaxxDao = sqlSession.getMapper(TaskBzkSlgxBzBzdaxxDao.class);
+                while (iterator.hasNext()){
+                    BzkSlgxBzBzdaxx bzkSlgxBzBzdaxx = (BzkSlgxBzBzdaxx) iterator.next();
+                    TaskBzkSlgxBzBzdaxx taskBzkSlgxBzBzdaxx = new TaskBzkSlgxBzBzdaxx();
+                    BeanUtils.copyProperties(bzkSlgxBzBzdaxx,taskBzkSlgxBzBzdaxx);
+                    taskBzkSlgxBzBzdaxx.setTaskid(taskId);
+                    taskBzkSlgxBzBzdaxxDao.insertIgnore(taskBzkSlgxBzBzdaxx);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
+                };
+                break;
+            case "TASK_BZK_SLGX_BZ_BZFFJL":
+                csvToBean = etlUtil.parseCsvToBean(BzkSlgxBzBzffjl.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                TaskBzkSlgxBzBzffjlDao taskBzkSlgxBzBzffjlDao = sqlSession.getMapper(TaskBzkSlgxBzBzffjlDao.class);
+                while (iterator.hasNext()){
+                    BzkSlgxBzBzffjl bzkSlgxBzBzffjl = (BzkSlgxBzBzffjl) iterator.next();
+                    TaskBzkSlgxBzBzffjl taskBzkSlgxBzBzffjl = new TaskBzkSlgxBzBzffjl();
+                    BeanUtils.copyProperties(bzkSlgxBzBzffjl,taskBzkSlgxBzBzffjl);
+                    taskBzkSlgxBzBzffjl.setTaskid(taskId);
+                    taskBzkSlgxBzBzffjlDao.insertIgnore(taskBzkSlgxBzBzffjl);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
+                };
+                break;
+            case "TASK_BZK_SLGX_CW_CWBZSJ":
+                csvToBean = etlUtil.parseCsvToBean(BzkSlgxCwCwbzsj.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                TaskBzkSlgxCwCwbzsjDao taskBzkSlgxCwCwbzsjDao = sqlSession.getMapper(TaskBzkSlgxCwCwbzsjDao.class);
+                while (iterator.hasNext()){
+                    BzkSlgxCwCwbzsj bzkSlgxCwCwbzsj = (BzkSlgxCwCwbzsj) iterator.next();
+                    TaskBzkSlgxCwCwbzsj taskBzkSlgxCwCwbzsj = new TaskBzkSlgxCwCwbzsj();
+                    BeanUtils.copyProperties(bzkSlgxCwCwbzsj,taskBzkSlgxCwCwbzsj);
+                    taskBzkSlgxCwCwbzsj.setTaskid(taskId);
+                    taskBzkSlgxCwCwbzsjDao.insertIgnore(taskBzkSlgxCwCwbzsj);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
+                };
+                break;
+            case "TASK_BZK_SLGX_YF_RYZFQK":
+                csvToBean = etlUtil.parseCsvToBean(BzkSlgxYfRyzfqk.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                TaskBzkSlgxYfRyzfqkDao taskBzkSlgxYfRyzfqkDao = sqlSession.getMapper(TaskBzkSlgxYfRyzfqkDao.class);
+                while (iterator.hasNext()){
+                    BzkSlgxYfRyzfqk bzkSlgxYfRyzfqk = (BzkSlgxYfRyzfqk) iterator.next();
+                    TaskBzkSlgxYfRyzfqk taskBzkSlgxYfRyzfqk = new TaskBzkSlgxYfRyzfqk();
+                    BeanUtils.copyProperties(bzkSlgxYfRyzfqk,taskBzkSlgxYfRyzfqk);
+                    taskBzkSlgxYfRyzfqk.setTaskid(taskId);
+                    taskBzkSlgxYfRyzfqkDao.insertIgnore(taskBzkSlgxYfRyzfqk);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
+                };
+                break;
+            case "TASK_BZK_TAB_DANWEIBCLRXX":
+                csvToBean = etlUtil.parseCsvToBean(BzkTabDanweibclrxx.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                TaskBzkTabDanweibclrxxDao taskBzkTabDanweibclrxxDao = sqlSession.getMapper(TaskBzkTabDanweibclrxxDao.class);
+                while (iterator.hasNext()){
+                    BzkTabDanweibclrxx bzkTabDanweibclrxx = (BzkTabDanweibclrxx) iterator.next();
+                    TaskBzkTabDanweibclrxx taskBzkTabDanweibclrxx = new TaskBzkTabDanweibclrxx();
+                    BeanUtils.copyProperties(bzkTabDanweibclrxx,taskBzkTabDanweibclrxx);
+                    taskBzkTabDanweibclrxx.setTaskid(taskId);
+                    taskBzkTabDanweibclrxxDao.insertIgnore(taskBzkTabDanweibclrxx);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
+                };
+                break;
+            case "TASK_BZK_TAB_RENYUANJBXX":
+                csvToBean = etlUtil.parseCsvToBean(BzkTabRenyuanjbxx.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                TaskBzkTabRenyuanjbxxDao taskBzkTabRenyuanjbxxDao = sqlSession.getMapper(TaskBzkTabRenyuanjbxxDao.class);
+                while (iterator.hasNext()){
+                    BzkTabRenyuanjbxx bzkTabRenyuanjbxx = (BzkTabRenyuanjbxx) iterator.next();
+                    TaskBzkTabRenyuanjbxx taskBzkTabRenyuanjbxx = new TaskBzkTabRenyuanjbxx();
+                    BeanUtils.copyProperties(bzkTabRenyuanjbxx,taskBzkTabRenyuanjbxx);
+                    taskBzkTabRenyuanjbxx.setTaskid(taskId);
+                    taskBzkTabRenyuanjbxxDao.insertIgnore(taskBzkTabRenyuanjbxx);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
+                };
+                break;
+            case "TASK_BZK_TAB_BAOZHANGKJBXX":
+                csvToBean = etlUtil.parseCsvToBean(BzkTabBaozhangkjbxx.class,filePath,',',1);
+                iterator = csvToBean.iterator();
+                TaskBzkTabBaozhangkjbxxDao taskBzkTabBaozhangkjbxxDao = sqlSession.getMapper(TaskBzkTabBaozhangkjbxxDao.class);
+                while (iterator.hasNext()){
+                    BzkTabBaozhangkjbxx bzkTabBaozhangkjbxx = (BzkTabBaozhangkjbxx) iterator.next();
+                    TaskBzkTabBaozhangkjbxx taskBzkTabBaozhangkjbxx = new TaskBzkTabBaozhangkjbxx();
+                    BeanUtils.copyProperties(bzkTabBaozhangkjbxx,taskBzkTabBaozhangkjbxx);
+                    taskBzkTabBaozhangkjbxx.setTaskid(taskId);
+                    taskBzkTabBaozhangkjbxxDao.insertIgnore(taskBzkTabBaozhangkjbxx);
+                    if ((count % batchCount) == 0) {
+                        sqlSession.commit();
+                    }
+                    count++;
+                };
+                break;
+            default:
+                break;
         }
+        if ((count % batchCount) != 0) {
+            sqlSession.commit();
+        }
+        ggLogsUtil.syncRecord(message,module);
         return count;
     }
 }
