@@ -153,6 +153,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
             ggLogsUtil.syncRecord("【tableName:"+tableName+"】filePatch ["+url+"]",0);
             this.batchProcessing(tableName,url,null);
             etlUtil.callTongjifenxi();
+            return true;
         }catch (Exception e){
             e.printStackTrace();
             ggLogsUtil.syncRecord("【tableName:"+tableName+"】sync data fail",0);
