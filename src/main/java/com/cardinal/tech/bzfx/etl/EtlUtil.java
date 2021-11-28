@@ -391,7 +391,7 @@ public class EtlUtil {
     public static void main(String[] args) {
         EtlUtil etlUtil = new EtlUtil();
         try {
-            etlUtil.syncData(1l, "457i338r70.qicp.vip",15918, "ORCL","bzkgl","NCIHQBZK2013");
+            etlUtil.callTongjifenxi();
         } catch (Exception e) {
             e.printStackTrace();
         }
