@@ -1,6 +1,7 @@
 package com.cardinal.tech.bzfx.etl;
 
 import com.alibaba.fastjson.JSON;
+import com.cardinal.tech.bzfx.entity.BzkTabDanweijbxx;
 import com.cardinal.tech.bzfx.util.GgLogsUtil;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -392,7 +393,9 @@ public class EtlUtil {
     public static void main(String[] args) {
         EtlUtil etlUtil = new EtlUtil();
         try {
-            etlUtil.callTongjifenxi();
+            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkTabDanweijbxx.class,"/Users/hua/BZK_TAB_DANWEIJBXX.csv",',',1);
+            long c = csvToBean.stream().count();
+            System.out.println(c);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -220,7 +220,6 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
         SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH,false);
         CsvToBean csvToBean = null;
         Iterator iterator = null;
-        String message = (Objects.nonNull(taskId)?"【taskId:"+taskId+"】":"")+"【tableName:"+tableName+"】sync data total ["+count+"]";
         Integer module = Objects.nonNull(taskId)?1:0;
         tableName = tableName.toUpperCase();
         switch (tableName){
@@ -462,6 +461,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
         if ((count % batchCount) != 0) {
             sqlSession.commit();
         }
+        String message = (Objects.nonNull(taskId)?"【taskId:"+taskId+"】":"")+"【tableName:"+tableName+"】sync data total ["+count+"]";
         ggLogsUtil.syncRecord(message,module);
         return count;
     }
