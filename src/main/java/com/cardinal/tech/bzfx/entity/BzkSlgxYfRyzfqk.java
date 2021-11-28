@@ -3,6 +3,7 @@ package com.cardinal.tech.bzfx.entity;
 import java.util.Date;
 import java.io.Serializable;
 
+import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
 import com.opencsv.bean.CsvDate;
 import lombok.Data;
@@ -19,93 +20,93 @@ public class BzkSlgxYfRyzfqk implements Serializable {
     /**
     * id
     */
-    @CsvBindByPosition(position = 0)
+    @CsvBindByName(column = "ID")
     private String id;
     /**
     * 姓名
     */
-    @CsvBindByPosition(position = 1)
+    @CsvBindByName(column = "XINGMING")
     private String xingming;
     /**
     * 公民身份号码
     */
-    @CsvBindByPosition(position = 2)
+    @CsvBindByName(column = "JUNRENBZH")
     private String junrenbzh;
     /**
     * 住房属性
     */
-    @CsvBindByPosition(position = 3)
+    @CsvBindByName(column = "ZHUFANGSX")
     private String zhufangsx;
     /**
     * 住房地址
     */
-    @CsvBindByPosition(position = 4)
+    @CsvBindByName(column = "ZHUFANGDZ")
     private String zhufangdz;
     /**
     * 住房管理（售房）单位
     */
-    @CsvBindByPosition(position = 5)
+    @CsvBindByName(column = "GUANLIDW")
     private String guanlidw;
     /**
     * 进住时间
     */
-    @CsvBindByPosition(position = 6)
+    @CsvBindByName(column = "JINZHUSJ")
     @CsvDate("dd/MM/yyyy HH:mm:ss")
     private Date jinzhusj;
     /**
     * 坐落号或土地证号
     */
-    @CsvBindByPosition(position = 7)
+    @CsvBindByName(column = "ZUOLUOH")
     private String zuoluoh;
     /**
     * 栋号
     */
-    @CsvBindByPosition(position = 8)
+    @CsvBindByName(column = "DONGHAO")
     private String donghao;
     /**
     * 房号
     */
-    @CsvBindByPosition(position = 9)
+    @CsvBindByName(column = "FANGHAO")
     private String fanghao;
     /**
     * 住房性质名称
     */
-    @CsvBindByPosition(position = 10)
+    @CsvBindByName(column = "ZHUFANGXZM")
     private String zhufangxzm;
     /**
     * 户型分类名称
     */
-    @CsvBindByPosition(position = 11)
+    @CsvBindByName(column = "HUXINGFLM")
     private String huxingflm;
     /**
     * 建筑面积
     */
-    @CsvBindByPosition(position = 12)
+    @CsvBindByName(column = "JIANZHUMJ")
     private Double jianzhumj;
     /**
     * 单位代码
     */
-    @CsvBindByPosition(position = 13)
+    @CsvBindByName(column = "DANWEIDM")
     private String danweidm;
     /**
     * 导入时间
     */
-    @CsvBindByPosition(position = 14)
+    @CsvBindByName(column = "DAORUSJ")
     private String daorusj;
     /**
     * 上报标志
     */
-    @CsvBindByPosition(position = 15)
+    @CsvBindByName(column = "SHANGBAOBZ")
     private Double shangbaobz;
     /**
     * 数据所在单位
     */
-    @CsvBindByPosition(position = 16)
+    @CsvBindByName(column = "SHUJUSZDW")
     private String shujuszdw;
     /**
     * 序号
     */
-    @CsvBindByPosition(position = 17)
+    @CsvBindByName(column = "XUHAO")
     private Double xuhao;
 
 }

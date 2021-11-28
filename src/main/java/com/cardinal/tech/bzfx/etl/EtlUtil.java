@@ -279,6 +279,27 @@ public class EtlUtil {
         }
     }
 
+
+    public void callTongjifenxi()  {
+        Statement truncateState = null;
+        try {
+            Connection connectMysql = dataSource.getConnection();
+            connectMysql.setAutoCommit(false);
+            connectMysql.prepareCall("{call proc_tongjifenxi_insert()}");
+            connectMysql.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            if (Objects.nonNull(truncateState)){
+                try {
+                    truncateState.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+
     public <T> CsvToBean parseCsvToBean(Class<T> clazz, String fileName, char csvSeparator, int skipLineNum) throws FileNotFoundException {
         //获取列位置数组
         //HeaderColumnNameMappingStrategy<T> mapper = new HeaderColumnNameMappingStrategy<>();

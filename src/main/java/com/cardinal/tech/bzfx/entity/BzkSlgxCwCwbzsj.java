@@ -3,6 +3,7 @@ package com.cardinal.tech.bzfx.entity;
 import java.util.Date;
 import java.io.Serializable;
 
+import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
 import com.opencsv.bean.CsvDate;
 import lombok.Data;
@@ -19,143 +20,143 @@ public class BzkSlgxCwCwbzsj implements Serializable {
     /**
     * id
     */
-    @CsvBindByPosition(position = 0)
+    @CsvBindByName(column = "ID")
     private String id;
     /**
     * 发放时间
     */
-    @CsvBindByPosition(position = 1)
+    @CsvBindByName(column = "FAFANGSJ")
     @CsvDate("dd/MM/yyyy HH:mm:ss")
     private Date fafangsj;
     /**
     * 姓名
     */
-    @CsvBindByPosition(position = 2)
+    @CsvBindByName(column = "XINGMING")
     private String xingming;
     /**
     * 公民身份号
     */
-    @CsvBindByPosition(position = 3)
+    @CsvBindByName(column = "JUNRENBZH")
     private String junrenbzh;
     /**
     * 职务等级工资
     */
-    @CsvBindByPosition(position = 4)
+    @CsvBindByName(column = "ZHIWUGZ")
     private Double zhiwugz;
     /**
     * 军衔级别工资
     */
-    @CsvBindByPosition(position = 5)
+    @CsvBindByName(column = "JUNXIANGZ")
     private Double junxiangz;
     /**
     * 军龄工资
     */
-    @CsvBindByPosition(position = 6)
+    @CsvBindByName(column = "JUNLINGGZ")
     private Double junlinggz;
     /**
     * 军人职业津贴
     */
-    @CsvBindByPosition(position = 7)
+    @CsvBindByName(column = "ZHIWUBT")
     private Double zhiwubt;
     /**
     * 其他
     */
-    @CsvBindByPosition(position = 8)
+    @CsvBindByName(column = "QITAGZ")
     private Double qitagz;
     /**
     * 应发小计
     */
-    @CsvBindByPosition(position = 9)
+    @CsvBindByName(column = "YINGFAGZ")
     private Double yingfagz;
     /**
     * 实发
     */
-    @CsvBindByPosition(position = 10)
+    @CsvBindByName(column = "SHIFAGZ")
     private Double shifagz;
     /**
     * 伤亡保险余额
     */
-    @CsvBindByPosition(position = 11)
+    @CsvBindByName(column = "SHANGWANGBXYE")
     private Double shangwangbxye;
     /**
     * 退役医疗保险余额
     */
-    @CsvBindByPosition(position = 12)
+    @CsvBindByName(column = "TUIYIYLBXYE")
     private Double tuiyiylbxye;
     /**
     * 住房补贴余额
     */
-    @CsvBindByPosition(position = 13)
+    @CsvBindByName(column = "ZHUFANGBTYE")
     private Double zhufangbtye;
     /**
     * 住房公积金余额
     */
-    @CsvBindByPosition(position = 14)
+    @CsvBindByName(column = "ZHUFANGGJJYE")
     private Double zhufanggjjye;
     /**
     * 数据所在单位
     */
-    @CsvBindByPosition(position = 15)
+    @CsvBindByName(column = "SHUJUSZDW")
     private String shujuszdw;
     /**
     * 上报标志
     */
-    @CsvBindByPosition(position = 16)
+    @CsvBindByName(column = "SHANGBAOBZ")
     private Double shangbaobz;
     /**
     * 单位代码
     */
-    @CsvBindByPosition(position = 17)
+    @CsvBindByName(column = "DANWEIDM")
     private String danweidm;
     /**
     * 导入时间
     */
-    @CsvBindByPosition(position = 18)
+    @CsvBindByName(column = "DAORUSJ")
     private String daorusj;
     /**
     * 工作性津贴
     */
-    @CsvBindByPosition(position = 19)
+    @CsvBindByName(column = "GONGZUOJT")
     private Double gongzuojt;
     /**
     * 生活性补贴
     */
-    @CsvBindByPosition(position = 20)
+    @CsvBindByName(column = "SHENGHUOJT")
     private Double shenghuojt;
     /**
     * 扣医保
     */
-    @CsvBindByPosition(position = 21)
+    @CsvBindByName(column = "KOUYB")
     private Double kouyb;
     /**
     * 扣伤保
     */
-    @CsvBindByPosition(position = 22)
+    @CsvBindByName(column = "KOUSB")
     private Double kousb;
     /**
     * 其他扣发
     */
-    @CsvBindByPosition(position = 23)
+    @CsvBindByName(column = "QITAKF")
     private Double qitakf;
     /**
     * 当月计算基本住房补贴额
     */
-    @CsvBindByPosition(position = 24)
+    @CsvBindByName(column = "DYZHUFANGBT")
     private Double dyzhufangbt;
     /**
     * 当月归集体住房公积金额
     */
-    @CsvBindByPosition(position = 25)
+    @CsvBindByName(column = "DYZHUFANGGJJ")
     private Double dyzhufanggjj;
     /**
     * 扣发小计
     */
-    @CsvBindByPosition(position = 26)
+    @CsvBindByName(column = "KOUFAXJ")
     private Double koufaxj;
     /**
     * 货币补差累计余额
     */
-    @CsvBindByPosition(position = 27)
+    @CsvBindByName(column = "HUOBIBCLJYE")
     private Double huobibcljye;
 
 }

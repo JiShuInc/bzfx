@@ -160,6 +160,11 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
         rhTask.setDbState(SyncStateEnum.SYNC_FINISHED.value());
         rhTaskDao.update(rhTask);
         ggLogsUtil.syncRecord("【taskId:"+taskId+" sync task state ["+SyncStateEnum.SYNC_FINISHED.desc()+"]");
+
+        ggLogsUtil.syncRecord("【taskId:"+taskId+" call proc_tongjifenxi_insert()");
+
+        etlUtil.callTongjifenxi();
+
         return true;
     }
 

@@ -3,6 +3,7 @@ package com.cardinal.tech.bzfx.entity;
 import java.util.Date;
 import java.io.Serializable;
 
+import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
 import com.opencsv.bean.CsvDate;
 import lombok.Data;
@@ -19,111 +20,111 @@ public class BzkTabBaozhangkjbxx implements Serializable {
     /**
     * 主键ID
     */
-    @CsvBindByPosition(position = 0)
+    @CsvBindByName(column = "ID")
     private String id;
     /**
     * 军人ID
     */
-    @CsvBindByPosition(position = 1)
+    @CsvBindByName(column = "JUNRENID")
     private String junrenid;
     /**
     * 保障卡号
     */
-    @CsvBindByPosition(position = 2)
+    @CsvBindByName(column = "BAOZHANGKH")
     private String baozhangkh;
     /**
     * 制卡原因：新制卡、补卡
     */
-    @CsvBindByPosition(position = 3)
+    @CsvBindByName(column = "ZHIKALX")
     private String zhikalx;
     /**
     * 制卡时间
     */
-    @CsvBindByPosition(position = 4)
+    @CsvBindByName(column = "ZHIKASJ")
     @CsvDate("dd/MM/yyyy HH:mm:ss")
     private Date zhikasj;
     /**
     * 启用时间
     */
-    @CsvBindByPosition(position = 5)
+    @CsvBindByName(column = "QIYONGSJ")
     @CsvDate("dd/MM/yyyy HH:mm:ss")
     private Date qiyongsj;
     /**
     * 失效时间
     */
-    @CsvBindByPosition(position = 6)
+    @CsvBindByName(column = "SHIXIAOSJ")
     @CsvDate("dd/MM/yyyy HH:mm:ss")
     private Date shixiaosj;
     /**
     * 卡状态；代码
     */
-    @CsvBindByPosition(position = 7)
+    @CsvBindByName(column = "KAZHUANGTAI")
     private String kazhuangtai;
     /**
     * 更新标志；1:新增，2：修改，3：删除
     */
-    @CsvBindByPosition(position = 8)
+    @CsvBindByName(column = "GENGXINBZ")
     private Double gengxinbz;
     /**
     * 上报标志；0：未上报，1：已上报
     */
-    @CsvBindByPosition(position = 9)
+    @CsvBindByName(column = "SHANGBAOBZ")
     private Double shangbaobz;
     /**
     * 分发标志；0：未分发，1：已分发 ，3：转供/合并未下发
     */
-    @CsvBindByPosition(position = 10)
+    @CsvBindByName(column = "FENFABZ")
     private Double fenfabz;
     /**
     * 审核标志；0：未审核，1：已审核
     */
-    @CsvBindByPosition(position = 11)
+    @CsvBindByName(column = "SHENHEBZ")
     private Double shenhebz;
     /**
     * 数据所在单位
     */
-    @CsvBindByPosition(position = 12)
+    @CsvBindByName(column = "SHUJUSZDW")
     private String shujuszdw;
     /**
     * 原军人ID
     */
-    @CsvBindByPosition(position = 13)
+    @CsvBindByName(column = "YUANID")
     private String yuanid;
     /**
     * 是否当前卡；否：0，是：1
     */
-    @CsvBindByPosition(position = 14)
+    @CsvBindByName(column = "SHIFOUDQK")
     private Double shifoudqk;
     /**
     * 黑名单日期
     */
-    @CsvBindByPosition(position = 15)
+    @CsvBindByName(column = "HEIMDRQ")
     @CsvDate("dd/MM/yyyy HH:mm:ss")
     private Date heimdrq;
     /**
     * 黑名单原因，"补换卡"、"人员注销"
     */
-    @CsvBindByPosition(position = 16)
+    @CsvBindByName(column = "HEIMDYY")
     private String heimdyy;
     /**
     * 卡类型，'1','2','3'
     */
-    @CsvBindByPosition(position = 17)
+    @CsvBindByName(column = "KALEIXING")
     private String kaleixing;
     /**
     * 银行代码
     */
-    @CsvBindByPosition(position = 18)
+    @CsvBindByName(column = "YINHANGDM")
     private String yinhangdm;
     /**
     * 银行卡号
     */
-    @CsvBindByPosition(position = 19)
+    @CsvBindByName(column = "YINHANGKH")
     private String yinhangkh;
     /**
     * 发卡单位代码
     */
-    @CsvBindByPosition(position = 20)
+    @CsvBindByName(column = "FAKADWDM")
     private String fakadwdm;
 
 }

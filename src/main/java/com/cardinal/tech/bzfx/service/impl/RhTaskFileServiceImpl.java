@@ -152,6 +152,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
         try {
             ggLogsUtil.syncRecord("【tableName:"+tableName+"】filePatch ["+url+"]",0);
             this.batchProcessing(tableName,url,null);
+            etlUtil.callTongjifenxi();
         }catch (Exception e){
             e.printStackTrace();
             ggLogsUtil.syncRecord("【tableName:"+tableName+"】sync data fail",0);
@@ -208,6 +209,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
                 slSyncLogsDao.insert(slSyncLogs);
             }
         }
+        etlUtil.callTongjifenxi();
     }
 
     private long batchProcessing(RhTaskFile file) throws FileNotFoundException {
