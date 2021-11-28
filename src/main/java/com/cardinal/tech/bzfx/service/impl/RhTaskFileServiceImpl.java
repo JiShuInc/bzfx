@@ -217,6 +217,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
     }
 
     private long batchProcessing(String tableName, String filePath, Long taskId) throws FileNotFoundException {
+        tableName = tableName.toUpperCase();
         long count = 0;
         int batchCount = 10000;
         SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH,false);
