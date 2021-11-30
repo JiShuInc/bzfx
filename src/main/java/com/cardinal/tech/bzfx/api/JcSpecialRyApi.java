@@ -33,7 +33,7 @@ public interface JcSpecialRyApi {
 
     @PreAuthorize("hasRole('admin')")
     @Operation(description = " get by sid")
-    @GetMapping("/{sid}")
+    @PostMapping("/{sid}")
     default Response<Page<BzkTabRenyuanjbxx>> queryById(@PathVariable("sid") Long sid, @RequestBody PageForm<JcSpecialRyPageForm> queryForm) {
         if (null == queryForm.getT()) {
             queryForm.setT(new JcSpecialRyPageForm());
