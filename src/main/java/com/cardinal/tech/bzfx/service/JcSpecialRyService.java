@@ -1,6 +1,7 @@
 package com.cardinal.tech.bzfx.service;
 
 import com.cardinal.tech.bzfx.bean.bo.*;
+import com.cardinal.tech.bzfx.entity.BzkTabRenyuanjbxx;
 import com.cardinal.tech.bzfx.entity.JcSpecialRy;
 
 import java.util.List;
@@ -17,10 +18,10 @@ public interface JcSpecialRyService {
     /**
      * 通过ID查询单条数据
      *
-     * @param id 主键
+     * @param queryForm 主键
      * @return 实例对象
      */
-    JcSpecialRyBO queryBySid(Long id);
+    Page<BzkTabRenyuanjbxx> queryBySid(PageForm<JcSpecialRyPageForm> queryForm);
 
     /**
      * 查询多条数据
@@ -55,7 +56,7 @@ public interface JcSpecialRyService {
      * @param rid 主键
      * @return 是否成功
      */
-    boolean deleteBySId(Long sid, Long rid);
+    boolean deleteBySId(Long sid, String rid);
 
     /**
      * 通过字段统计
@@ -78,5 +79,5 @@ public interface JcSpecialRyService {
      * @param jcSpecialRy
      * @return
      */
-    JcSpecialRyBO addRy(JcSpecialRyForm jcSpecialRy);
+    void addRy(JcSpecialRyForm jcSpecialRy);
 }
