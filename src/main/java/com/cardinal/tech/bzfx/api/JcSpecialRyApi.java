@@ -34,7 +34,11 @@ public interface JcSpecialRyApi {
     @PreAuthorize("hasRole('admin')")
     @Operation(description = " get by sid")
     @GetMapping("/{sid}")
-    default Response<Page<BzkTabRenyuanjbxx>> queryById(@RequestBody PageForm<JcSpecialRyPageForm> queryForm) {
+    default Response<Page<BzkTabRenyuanjbxx>> queryById(@PathVariable("sid") Long sid, @RequestBody PageForm<JcSpecialRyPageForm> queryForm) {
+        if (null == queryForm.getT()) {
+            queryForm.setT(new JcSpecialRyPageForm());
+        }
+        queryForm.getT().setSid(sid);
         return new Response(getService().queryBySid(queryForm));
     }
 
