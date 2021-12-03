@@ -18,11 +18,11 @@ public enum SysErrEnum implements ErrEnumInterface {
     MAX_MUST_BEYOND_MIN_ERR(8, "最大数应该大于最小数"),
     END_MUST_BEYOND_START_ERR(9, "结束道必须大于开始道"),
     WAVEJPG_CREATE_ERR(10, "生成jpg出错"),
-    DAT_FILE_NOT_EXIST(11, "dat数据文件不存在"),
-    SHOCK_FILENAME_ERR(12, "震感文件命名错误,请按照yyyyMMdd_loc.csv 格式重新上传"),
+    DAT_FILE_NOT_EXIST(11, "数据不存在"),
+    SHOCK_FILENAME_ERR(12, "文件命名错误,请按照yyyyMMdd_loc.csv 格式重新上传"),
     DAT_TAG_NAME_NULL(13, "tag 需要指定id或输入tag 名称"),
-    DAT_DIR_NULL(14, "dat文件所在目录为空"),
-    DATTAG_NULL(15, "dat tag关联记录为空"),
+    DAT_DIR_NULL(14, "文件所在目录为空"),
+    DATTAG_NULL(15, "tag关联记录为空"),
     SYNC_PROGRESS(16, "数据同步中")
     ;
 

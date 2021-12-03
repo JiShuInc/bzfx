@@ -2,6 +2,7 @@ package com.cardinal.tech.bzfx.dao;
 
 import com.cardinal.tech.bzfx.entity.JcSpecial;
 import com.cardinal.tech.bzfx.bean.dbo.page.*;
+import com.cardinal.tech.bzfx.enums.ErrEnumInterface;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Map;
@@ -73,4 +74,6 @@ public interface JcSpecialDao {
     List<Map<String,Integer>> groupBy(String field);
 
      List<JcSpecial> queryPageJcSpecialList(PageQuery pq);
+
+    int callStatistics(@Param("id")Long id);
 }

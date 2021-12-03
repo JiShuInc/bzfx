@@ -129,5 +129,8 @@
                    </if>
                         </trim>
     </select>
+    <select id="callStatistics" resultType="java.lang.Integer" statementType="CALLABLE">
+        {call bzfx.proc_tongjifenxi_insert(#{id,jdbcType=BIGINT})}
+    </select>
 
 </mapper>

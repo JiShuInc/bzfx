@@ -68,6 +68,12 @@ public interface JcSpecialApi {
        default Response<List<Map<String,Integer>>> groupById(@RequestParam String field){
             return new Response(getService().groupBy(field));
         }
+        @PreAuthorize("hasRole('admin')")
+        @Operation(description = " statistics jc special")
+        @GetMapping("/statistics")
+       default Response<Void> statistics(@RequestParam Long id){
+            return new Response(getService().statistics(id));
+        }
 
         @PreAuthorize("hasRole('admin')")
         @Operation(description = " page list")
