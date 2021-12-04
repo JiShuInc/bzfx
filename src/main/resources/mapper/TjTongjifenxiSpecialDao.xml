@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.TjTongjifenxiSpecialDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.TjTongjifenxiSpecial">
+        <!--@Table tj_tongjifenxi_special-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="sid" column="sid" jdbcType="INTEGER"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="parameter1" column="parameter1" jdbcType="VARCHAR"/>
+        <result property="parameter2" column="parameter2" jdbcType="VARCHAR"/>
+        <result property="parameter3" column="parameter3" jdbcType="VARCHAR"/>
+        <result property="parameter4" column="parameter4" jdbcType="VARCHAR"/>
+        <result property="parameter5" column="parameter5" jdbcType="VARCHAR"/>
+        <result property="num" column="num" jdbcType="VARCHAR"/>
+        <result property="creatAt" column="creat_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, sid, type, parameter1, parameter2, parameter3, parameter4, parameter5, num, creat_at
+        from bzfx.tj_tongjifenxi_special
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, sid, type, parameter1, parameter2, parameter3, parameter4, parameter5, num, creat_at
+        from bzfx.tj_tongjifenxi_special
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, sid, type, parameter1, parameter2, parameter3, parameter4, parameter5, num, creat_at
+        from bzfx.tj_tongjifenxi_special
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="sid != null">
+                and sid = #{sid}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="parameter1 != null and parameter1 != ''">
+                and parameter1 = #{parameter1}
+            </if>
+            <if test="parameter2 != null and parameter2 != ''">
+                and parameter2 = #{parameter2}
+            </if>
+            <if test="parameter3 != null and parameter3 != ''">
+                and parameter3 = #{parameter3}
+            </if>
+            <if test="parameter4 != null and parameter4 != ''">
+                and parameter4 = #{parameter4}
+            </if>
+            <if test="parameter5 != null and parameter5 != ''">
+                and parameter5 = #{parameter5}
+            </if>
+            <if test="num != null and num != ''">
+                and num = #{num}
+            </if>
+            <if test="creatAt != null">
+                and creat_at = #{creatAt}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.tj_tongjifenxi_special(sid, type, parameter1, parameter2, parameter3, parameter4, parameter5, num, creat_at)
+        values (#{sid}, #{type}, #{parameter1}, #{parameter2}, #{parameter3}, #{parameter4}, #{parameter5}, #{num}, #{creatAt})
+    </insert>
+    
+    <!--新增所有列-->
+    <insert id="insertIgnore" keyProperty="id" useGeneratedKeys="true">
+        insert ignore into bzfx.tj_tongjifenxi_special(sid, type, parameter1, parameter2, parameter3, parameter4, parameter5, num, creat_at)
+        values (#{sid}, #{type}, #{parameter1}, #{parameter2}, #{parameter3}, #{parameter4}, #{parameter5}, #{num}, #{creatAt})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.tj_tongjifenxi_special
+        <set>
+            <if test="sid != null">
+                sid = #{sid},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="parameter1 != null and parameter1 != ''">
+                parameter1 = #{parameter1},
+            </if>
+            <if test="parameter2 != null and parameter2 != ''">
+                parameter2 = #{parameter2},
+            </if>
+            <if test="parameter3 != null and parameter3 != ''">
+                parameter3 = #{parameter3},
+            </if>
+            <if test="parameter4 != null and parameter4 != ''">
+                parameter4 = #{parameter4},
+            </if>
+            <if test="parameter5 != null and parameter5 != ''">
+                parameter5 = #{parameter5},
+            </if>
+            <if test="num != null and num != ''">
+                num = #{num},
+            </if>
+            <if test="creatAt != null">
+                creat_at = #{creatAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.tj_tongjifenxi_special where id = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.tj_tongjifenxi_special
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageTjTongjifenxiSpecialList" resultMap="BaseResultMap">
+            select
+                id, sid, type, parameter1, parameter2, parameter3, parameter4, parameter5, num, creat_at            
+            from bzfx.tj_tongjifenxi_special
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null">
+                        and id = #{obj.id}
+                   </if>
+                               <if test="obj.sid != null">
+                        and sid = #{obj.sid}
+                   </if>
+                               <if test="obj.type != null">
+                        and type = #{obj.type}
+                   </if>
+                               <if test="obj.parameter1 != null and obj.parameter1 != ''">
+                        and parameter1 = #{obj.parameter1}
+                   </if>
+                               <if test="obj.parameter2 != null and obj.parameter2 != ''">
+                        and parameter2 = #{obj.parameter2}
+                   </if>
+                               <if test="obj.parameter3 != null and obj.parameter3 != ''">
+                        and parameter3 = #{obj.parameter3}
+                   </if>
+                               <if test="obj.parameter4 != null and obj.parameter4 != ''">
+                        and parameter4 = #{obj.parameter4}
+                   </if>
+                               <if test="obj.parameter5 != null and obj.parameter5 != ''">
+                        and parameter5 = #{obj.parameter5}
+                   </if>
+                               <if test="obj.num != null and obj.num != ''">
+                        and num = #{obj.num}
+                   </if>
+                               <if test="obj.creatAt != null">
+                        and creat_at = #{obj.creatAt}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>
