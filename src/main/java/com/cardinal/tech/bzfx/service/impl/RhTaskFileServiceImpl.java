@@ -143,13 +143,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
         List<RhTaskFile> rhTaskFiles = this.rhTaskFileDao.queryAll(rhTaskFile);
         if (!rhTaskFiles.isEmpty()){
             ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file total ["+rhTaskFiles.size()+"]");
-            if (taskId.intValue() != 1){
-                rhTaskFiles = rhTaskFiles.stream().map(e->{
-                    String tableName = "TASK_"+e.getTableName();
-                    e.setTableName(tableName);
-                    return e;
-                }).collect(Collectors.toList());
-            }
+
             syncData(taskId,rhTaskFiles);
         }
         return true;
@@ -183,8 +177,11 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
                 this.rhTaskFileDao.update(file);
 
                 ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file ["+file.getFilename()+"] task_file state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
-
-                count = batchProcessing(file.getTableName(),file.getUrl(),file.getTaskId());
+                String tableName = file.getTableName();
+                if (taskId.intValue() != 1){
+                    tableName = "TASK_"+tableName;
+                }
+                count = batchProcessing(tableName,file.getUrl(),file.getTaskId());
 
                 file.setState(SyncStateEnum.SYNC_FINISHED.value());
                 file.setResult(result);
