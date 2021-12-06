@@ -23,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 任务数据-文件(RhTaskFile)表服务实现类
@@ -142,6 +143,13 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
         List<RhTaskFile> rhTaskFiles = this.rhTaskFileDao.queryAll(rhTaskFile);
         if (!rhTaskFiles.isEmpty()){
             ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file total ["+rhTaskFiles.size()+"]");
+            if (taskId.intValue() != 1){
+                rhTaskFiles = rhTaskFiles.stream().map(e->{
+                    String tableName = "TASK_"+e.getTableName();
+                    e.setTableName(tableName);
+                    return e;
+                }).collect(Collectors.toList());
+            }
             syncData(taskId,rhTaskFiles);
         }
         return true;
@@ -218,6 +226,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
         long count = 0;
         int batchCount = 10000;
         SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH,false);
+
         CsvToBean csvToBean = null;
         Iterator iterator = null;
         Integer module = Objects.nonNull(taskId)?1:0;
