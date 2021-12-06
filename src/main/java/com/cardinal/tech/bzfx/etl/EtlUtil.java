@@ -40,9 +40,9 @@ public class EtlUtil {
     public long syncData(Long taskId, String host, Integer dbPort, String dbService, String username, String password) throws Exception {
         boolean master = (taskId.intValue() == 1);
         Connection oracleConnection = oracleConnection(host,dbPort,dbService,username,password);
-        log.info("获取oracle 连接--------------------");
+        //log.info("获取oracle 连接--------------------");
         Connection mysqlConnection = dataSource.getConnection();
-        log.info("获取mysql 连接--------------------");
+        //log.info("获取mysql 连接--------------------");
         long count = 0;
         for (String tableName:coreTBNames){
             log.info("开始同步表-----------: {}",tableName);
@@ -151,7 +151,7 @@ public class EtlUtil {
     private long importTable(Long taskId, Connection connectOracle, Connection connectMysql,
                              String tableName, String insertTableName) throws Exception {
 
-        connectMysql.setAutoCommit(false);
+        //connectMysql.setAutoCommit(false);
         Statement stmt = null;
         PreparedStatement pstmt = null;
         int fs = 20000;
@@ -185,23 +185,21 @@ public class EtlUtil {
                 if ((count % batchCount) == 0) {
                     log.info("---------------正在更新数据库--------------------");
                     pstmt.executeBatch();
-                    log.info(String.valueOf(count));
+                    connectMysql.commit();
+                    ggLogsUtil.syncRecord(String.format("【taskId:"+taskId+"】【tableName:"+tableName+"】sync data progress ["+count+"]"));
                 }
             }
             if ((count % batchCount) != 0) {
                 // 最后一次提交
                 log.info("---------------最后一次更新数据库--------------------");
                 pstmt.executeBatch();
-                log.info("插入".concat(String.valueOf(count)).concat("条数据"));
+                connectMysql.commit();
+                ggLogsUtil.syncRecord(String.format("【taskId:"+taskId+"】【tableName:"+tableName+"】sync data progress ["+count+"]"));
+                //log.info("插入".concat(String.valueOf(count)).concat("条数据"));
             }
-            // 提交事务，设置事务默认值
-            connectMysql.commit();
-            connectMysql.setAutoCommit(true);
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            // 如果失败事务回滚
-            connectMysql.rollback();
             throw e;
         } finally {
             if (stmt != null) {
