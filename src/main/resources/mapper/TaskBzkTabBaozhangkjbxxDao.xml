@@ -121,14 +121,14 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="taskid" useGeneratedKeys="true">
-        insert into bzfx.TASK_BZK_TAB_BAOZHANGKJBXX(JUNRENID, BAOZHANGKH, ZHIKALX, ZHIKASJ, QIYONGSJ, SHIXIAOSJ, KAZHUANGTAI, GENGXINBZ, SHANGBAOBZ, FENFABZ, SHENHEBZ, SHUJUSZDW, YUANID, SHIFOUDQK, HEIMDRQ, HEIMDYY, KALEIXING, YINHANGDM, YINHANGKH, FAKADWDM)
-        values (#{junrenid}, #{baozhangkh}, #{zhikalx}, #{zhikasj}, #{qiyongsj}, #{shixiaosj}, #{kazhuangtai}, #{gengxinbz}, #{shangbaobz}, #{fenfabz}, #{shenhebz}, #{shujuszdw}, #{yuanid}, #{shifoudqk}, #{heimdrq}, #{heimdyy}, #{kaleixing}, #{yinhangdm}, #{yinhangkh}, #{fakadwdm})
+        insert into bzfx.TASK_BZK_TAB_BAOZHANGKJBXX(TASKID, ID, JUNRENID, BAOZHANGKH, ZHIKALX, ZHIKASJ, QIYONGSJ, SHIXIAOSJ, KAZHUANGTAI, GENGXINBZ, SHANGBAOBZ, FENFABZ, SHENHEBZ, SHUJUSZDW, YUANID, SHIFOUDQK, HEIMDRQ, HEIMDYY, KALEIXING, YINHANGDM, YINHANGKH, FAKADWDM)
+        values (#{taskid}, #{id}, #{junrenid}, #{baozhangkh}, #{zhikalx}, #{zhikasj}, #{qiyongsj}, #{shixiaosj}, #{kazhuangtai}, #{gengxinbz}, #{shangbaobz}, #{fenfabz}, #{shenhebz}, #{shujuszdw}, #{yuanid}, #{shifoudqk}, #{heimdrq}, #{heimdyy}, #{kaleixing}, #{yinhangdm}, #{yinhangkh}, #{fakadwdm})
     </insert>
     
     <!--新增所有列-->
     <insert id="insertIgnore" keyProperty="taskid" useGeneratedKeys="true">
-        insert ignore into bzfx.TASK_BZK_TAB_BAOZHANGKJBXX(ID, JUNRENID, BAOZHANGKH, ZHIKALX, ZHIKASJ, QIYONGSJ, SHIXIAOSJ, KAZHUANGTAI, GENGXINBZ, SHANGBAOBZ, FENFABZ, SHENHEBZ, SHUJUSZDW, YUANID, SHIFOUDQK, HEIMDRQ, HEIMDYY, KALEIXING, YINHANGDM, YINHANGKH, FAKADWDM)
-        values (#{id}, #{junrenid}, #{baozhangkh}, #{zhikalx}, #{zhikasj}, #{qiyongsj}, #{shixiaosj}, #{kazhuangtai}, #{gengxinbz}, #{shangbaobz}, #{fenfabz}, #{shenhebz}, #{shujuszdw}, #{yuanid}, #{shifoudqk}, #{heimdrq}, #{heimdyy}, #{kaleixing}, #{yinhangdm}, #{yinhangkh}, #{fakadwdm})
+        insert ignore into bzfx.TASK_BZK_TAB_BAOZHANGKJBXX(TASKID, ID, JUNRENID, BAOZHANGKH, ZHIKALX, ZHIKASJ, QIYONGSJ, SHIXIAOSJ, KAZHUANGTAI, GENGXINBZ, SHANGBAOBZ, FENFABZ, SHENHEBZ, SHUJUSZDW, YUANID, SHIFOUDQK, HEIMDRQ, HEIMDYY, KALEIXING, YINHANGDM, YINHANGKH, FAKADWDM)
+        values (#{taskid}, #{id}, #{junrenid}, #{baozhangkh}, #{zhikalx}, #{zhikasj}, #{qiyongsj}, #{shixiaosj}, #{kazhuangtai}, #{gengxinbz}, #{shangbaobz}, #{fenfabz}, #{shenhebz}, #{shujuszdw}, #{yuanid}, #{shifoudqk}, #{heimdrq}, #{heimdyy}, #{kaleixing}, #{yinhangdm}, #{yinhangkh}, #{fakadwdm})
     </insert>
 
     <!--通过主键修改数据-->
