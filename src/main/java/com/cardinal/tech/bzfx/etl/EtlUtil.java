@@ -404,4 +404,25 @@ public class EtlUtil {
             e.printStackTrace();
         }
     }
+
+    public Boolean testConnection(String dbHost, Integer dbPort, String dbServe, String username, String password) {
+        Connection oracleConnection = null;
+        try {
+            oracleConnection = oracleConnection(dbHost,dbPort,dbServe,username,password);
+            if (!oracleConnection.isClosed()){
+                return true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (Objects.nonNull(oracleConnection)){
+                try {
+                    oracleConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return false;
+    }
 }

@@ -168,6 +168,20 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
         return true;
     }
 
+    @Override
+    public void statistics() {
+        etlUtil.callTongjifenxi();
+    }
+
+    @Override
+    public Boolean isConnection(Long id) {
+        RhTaskDb rhTaskDb = rhTaskDbDao.queryById(id);
+        if (Objects.isNull(rhTaskDb)){
+            return false;
+        }
+        return etlUtil.testConnection(rhTaskDb.getDbHost(),rhTaskDb.getDbPort(),rhTaskDb.getDbServe(),rhTaskDb.getDbName(),rhTaskDb.getDbPasswd());
+    }
+
     @Async
     void syncData(Long taskId, List<RhTaskDb> rhTaskDbs) {
         for (RhTaskDb db:rhTaskDbs){

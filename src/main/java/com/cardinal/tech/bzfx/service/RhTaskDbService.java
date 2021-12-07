@@ -77,4 +77,11 @@ public interface RhTaskDbService {
          * @return
          */
         boolean syncData(Long taskId);
+
+        /**
+         * 统计函数
+         */
+        void statistics();
+
+        Boolean isConnection(Long id);
 }

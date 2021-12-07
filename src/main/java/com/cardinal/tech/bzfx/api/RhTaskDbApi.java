@@ -92,4 +92,25 @@ public interface RhTaskDbApi {
             }
             return new Response(SysErrEnum.SYNC_PROGRESS);
         }
+
+
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = "statistics data")
+    @GetMapping("/statistics")
+    default Response<Boolean> statistics(){
+        getService().statistics();
+
+        return new Response(SysErrEnum.SUCCESS);
+    }
+
+    @PreAuthorize("hasRole('admin')")
+    @Operation(description = "CONNECTION TEST")
+    @GetMapping("/isConnection")
+    default Response<Boolean> isConnection(@RequestParam Long id){
+        Boolean flag = getService().isConnection(id);
+        if (flag){
+            return new Response(SysErrEnum.SUCCESS);
+        }
+        return new Response(SysErrEnum.DB_CONNECTION_FAIL);
+    }
 }
