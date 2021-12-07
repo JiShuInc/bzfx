@@ -23,7 +23,8 @@ public enum SysErrEnum implements ErrEnumInterface {
     DAT_TAG_NAME_NULL(13, "tag 需要指定id或输入tag 名称"),
     DAT_DIR_NULL(14, "文件所在目录为空"),
     DATTAG_NULL(15, "tag关联记录为空"),
-    SYNC_PROGRESS(16, "数据同步中")
+    SYNC_PROGRESS(16, "数据同步中"),
+    DB_CONNECTION_FAIL(17, "数据库连接失败")
     ;
 
     int code;
