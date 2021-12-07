@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cardinal.tech.bzfx.dao.TjDapingshezhiDao">
+
+    <resultMap id="BaseResultMap" type="com.cardinal.tech.bzfx.entity.TjDapingshezhi">
+        <!--@Table tj_dapingshezhi-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="module" column="module" jdbcType="INTEGER"/>
+        <result property="area1" column="area1" jdbcType="INTEGER"/>
+        <result property="area2" column="area2" jdbcType="INTEGER"/>
+        <result property="area3" column="area3" jdbcType="INTEGER"/>
+        <result property="area4" column="area4" jdbcType="INTEGER"/>
+        <result property="area5" column="area5" jdbcType="INTEGER"/>
+        <result property="area6" column="area6" jdbcType="INTEGER"/>
+        <result property="area7" column="area7" jdbcType="INTEGER"/>
+        <result property="area8" column="area8" jdbcType="INTEGER"/>
+        <result property="area9" column="area9" jdbcType="INTEGER"/>
+        <result property="area10" column="area10" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, module, area1, area2, area3, area4, area5, area6, area7, area8, area9, area10
+        from bzfx.tj_dapingshezhi
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, module, area1, area2, area3, area4, area5, area6, area7, area8, area9, area10
+        from bzfx.tj_dapingshezhi
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, module, area1, area2, area3, area4, area5, area6, area7, area8, area9, area10
+        from bzfx.tj_dapingshezhi
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="module != null">
+                and module = #{module}
+            </if>
+            <if test="area1 != null">
+                and area1 = #{area1}
+            </if>
+            <if test="area2 != null">
+                and area2 = #{area2}
+            </if>
+            <if test="area3 != null">
+                and area3 = #{area3}
+            </if>
+            <if test="area4 != null">
+                and area4 = #{area4}
+            </if>
+            <if test="area5 != null">
+                and area5 = #{area5}
+            </if>
+            <if test="area6 != null">
+                and area6 = #{area6}
+            </if>
+            <if test="area7 != null">
+                and area7 = #{area7}
+            </if>
+            <if test="area8 != null">
+                and area8 = #{area8}
+            </if>
+            <if test="area9 != null">
+                and area9 = #{area9}
+            </if>
+            <if test="area10 != null">
+                and area10 = #{area10}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into bzfx.tj_dapingshezhi(module, area1, area2, area3, area4, area5, area6, area7, area8, area9, area10)
+        values (#{module}, #{area1}, #{area2}, #{area3}, #{area4}, #{area5}, #{area6}, #{area7}, #{area8}, #{area9}, #{area10})
+    </insert>
+    
+    <!--新增所有列-->
+    <insert id="insertIgnore" keyProperty="id" useGeneratedKeys="true">
+        insert ignore into bzfx.tj_dapingshezhi(module, area1, area2, area3, area4, area5, area6, area7, area8, area9, area10)
+        values (#{module}, #{area1}, #{area2}, #{area3}, #{area4}, #{area5}, #{area6}, #{area7}, #{area8}, #{area9}, #{area10})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bzfx.tj_dapingshezhi
+        <set>
+            <if test="module != null">
+                module = #{module},
+            </if>
+            <if test="area1 != null">
+                area1 = #{area1},
+            </if>
+            <if test="area2 != null">
+                area2 = #{area2},
+            </if>
+            <if test="area3 != null">
+                area3 = #{area3},
+            </if>
+            <if test="area4 != null">
+                area4 = #{area4},
+            </if>
+            <if test="area5 != null">
+                area5 = #{area5},
+            </if>
+            <if test="area6 != null">
+                area6 = #{area6},
+            </if>
+            <if test="area7 != null">
+                area7 = #{area7},
+            </if>
+            <if test="area8 != null">
+                area8 = #{area8},
+            </if>
+            <if test="area9 != null">
+                area9 = #{area9},
+            </if>
+            <if test="area10 != null">
+                area10 = #{area10},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from bzfx.tj_dapingshezhi where id = #{id}
+    </delete>
+
+    <!--查询指定行数据-->
+    <select id="groupBy" resultType="map">
+           select
+              ${field},count(1) c
+            from bzfx.tj_dapingshezhi
+            group by ${field}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="queryPageTjDapingshezhiList" resultMap="BaseResultMap">
+            select
+                id, module, area1, area2, area3, area4, area5, area6, area7, area8, area9, area10            
+            from bzfx.tj_dapingshezhi
+            <trim prefix="where" prefixOverrides="and|or">
+                               <if test="obj.id != null">
+                        and id = #{obj.id}
+                   </if>
+                               <if test="obj.module != null">
+                        and module = #{obj.module}
+                   </if>
+                               <if test="obj.area1 != null">
+                        and area1 = #{obj.area1}
+                   </if>
+                               <if test="obj.area2 != null">
+                        and area2 = #{obj.area2}
+                   </if>
+                               <if test="obj.area3 != null">
+                        and area3 = #{obj.area3}
+                   </if>
+                               <if test="obj.area4 != null">
+                        and area4 = #{obj.area4}
+                   </if>
+                               <if test="obj.area5 != null">
+                        and area5 = #{obj.area5}
+                   </if>
+                               <if test="obj.area6 != null">
+                        and area6 = #{obj.area6}
+                   </if>
+                               <if test="obj.area7 != null">
+                        and area7 = #{obj.area7}
+                   </if>
+                               <if test="obj.area8 != null">
+                        and area8 = #{obj.area8}
+                   </if>
+                               <if test="obj.area9 != null">
+                        and area9 = #{obj.area9}
+                   </if>
+                               <if test="obj.area10 != null">
+                        and area10 = #{obj.area10}
+                   </if>
+                        </trim>
+    </select>
+
+</mapper>
