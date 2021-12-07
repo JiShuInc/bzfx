@@ -31,14 +31,14 @@ public interface TjWenjianApi {
     TjWenjianService getService();
 
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " get list")
     @GetMapping("/list")
     default Response<List<TjWenjian>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit) {
         return new Response(getService().queryAllByLimit(offset, limit));
     }
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " delete by pk")
     @GetMapping("/delete")
     default Response<Boolean> deleteById(@RequestParam Long id) {
@@ -46,7 +46,7 @@ public interface TjWenjianApi {
     }
 
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " page list")
     @PostMapping("/page")
     default Response<Page<TjWenjian>> page(@RequestBody PageForm<TjWenjian> userQueryForm) {
@@ -55,14 +55,14 @@ public interface TjWenjianApi {
 
 
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " upload file")
     @PostMapping("/upload")
     default Response<TjWenjian> upload(@RequestParam MultipartFile file) {
         return new Response(getService().upload(file));
     }
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = "download file")
     @GetMapping("/{id}")
     default void download(@PathVariable("id") Long id, HttpServletResponse response) {

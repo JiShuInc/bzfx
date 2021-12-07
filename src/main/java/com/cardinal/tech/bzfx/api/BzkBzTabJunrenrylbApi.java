@@ -27,49 +27,49 @@ public interface BzkBzTabJunrenrylbApi {
 
         BzkBzTabJunrenrylbService getService();
 
-        @PreAuthorize("hasRole('admin')")
+        @PreAuthorize("permitAll()")
         @Operation(description = " get by id")
         @GetMapping("/{id}")
         default Response<BzkBzTabJunrenrylb> queryById(@PathVariable("id") String id){
             return new Response(getService().queryById(id));
         }
 
-        @PreAuthorize("hasRole('admin')")
+        @PreAuthorize("permitAll()")
         @Operation(description = " get list")
         @GetMapping("/list")
        default Response<List<BzkBzTabJunrenrylb>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit){
             return new Response(getService().queryAllByLimit(offset,limit));
        }
 
-        @PreAuthorize("hasRole('admin')")
+        @PreAuthorize("permitAll()")
         @Operation(description = " add")
         @PostMapping("/add")
         default Response<BzkBzTabJunrenrylb> insert(@RequestBody BzkBzTabJunrenrylb bzkBzTabJunrenrylb){
             return new Response(getService().insert(bzkBzTabJunrenrylb));
         }
 
-         @PreAuthorize("hasRole('admin')")
+         @PreAuthorize("permitAll()")
          @Operation(description = " update")
          @PostMapping("/update")
         default Response<BzkBzTabJunrenrylb> update(@RequestBody BzkBzTabJunrenrylb bzkBzTabJunrenrylb){
              return new Response(getService().update(bzkBzTabJunrenrylb));
         }
 
-        @PreAuthorize("hasRole('admin')")
+        @PreAuthorize("permitAll()")
         @Operation(description = " delete by pk")
         @GetMapping("/delete")
        default Response<Boolean> deleteById(@RequestParam String id){
             return new Response(getService().deleteById(id));
         }
 
-        @PreAuthorize("hasRole('admin')")
+        @PreAuthorize("permitAll()")
         @Operation(description = " group by field name")
         @GetMapping("/group")
        default Response<List<Map<String,Integer>>> groupById(@RequestParam String field){
             return new Response(getService().groupBy(field));
         }
 
-        @PreAuthorize("hasRole('admin')")
+        @PreAuthorize("permitAll()")
         @Operation(description = " page list")
         @PostMapping("/page")
         default Response<Page<BzkBzTabJunrenrylb>> page(@RequestBody PageForm<BzkBzTabJunrenrylb> userQueryForm) {

@@ -31,56 +31,56 @@ public interface BzkSlgxYfRyzfqkApi extends BaseApi {
 
     int API_ID = 4;
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " get by id")
     @GetMapping("/{id}")
     default Response<BzkSlgxYfRyzfqk> queryById(@PathVariable("id") String id) {
         return new Response(getService().queryById(id));
     }
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " get list")
     @GetMapping("/list")
     default Response<List<BzkSlgxYfRyzfqk>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit) {
         return new Response(getService().queryAllByLimit(offset, limit));
     }
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " add")
     @PostMapping("/add")
     default Response<BzkSlgxYfRyzfqk> insert(@RequestBody BzkSlgxYfRyzfqk bzkSlgxYfRyzfqk) {
         return new Response(getService().insert(bzkSlgxYfRyzfqk));
     }
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " update")
     @PostMapping("/update")
     default Response<BzkSlgxYfRyzfqk> update(@RequestBody BzkSlgxYfRyzfqk bzkSlgxYfRyzfqk) {
         return new Response(getService().update(bzkSlgxYfRyzfqk));
     }
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " delete by pk")
     @GetMapping("/delete")
     default Response<Boolean> deleteById(@RequestParam String id) {
         return new Response(getService().deleteById(id));
     }
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " group by field name")
     @GetMapping("/group")
     default Response<List<Map<String, Integer>>> groupById(@RequestParam String field) {
         return new Response(getService().groupBy(field));
     }
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " page list")
     @PostMapping("/page")
     default Response<Page<BzkSlgxYfRyzfqk>> page(@RequestBody PageForm<BzkSlgxYfRyzfqk> userQueryForm) {
         return new Response(getService().page(userQueryForm));
     }
 
-    @PreAuthorize("hasRole('api_access')")
+    @PreAuthorize("hasRole('access_api')")
     @Operation(description = " page list")
     @PostMapping("/pageList")
     default Response<Page<BzkSlgxYfRyzfqk>> pageList(@RequestBody PageForm<BzkSlgxYfRyzfqk> userQueryForm) {

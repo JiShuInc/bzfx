@@ -31,7 +31,7 @@ public interface JcSpecialRyApi {
 
     JcSpecialRyService getService();
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " get by sid")
     @PostMapping("/{sid}")
     default Response<Page<BzkTabRenyuanjbxx>> queryById(@PathVariable("sid") Long sid, @RequestBody PageForm<JcSpecialRyPageForm> queryForm) {
@@ -43,14 +43,14 @@ public interface JcSpecialRyApi {
     }
 
     @Hidden
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " get list")
     @GetMapping("/list")
     default Response<List<JcSpecialRyBO>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit) {
         return new Response(getService().queryAllByLimit(offset, limit));
     }
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " add")
     @PostMapping("/add")
     default Response<Void> insert(@RequestBody @Valid JcSpecialRyForm jcSpecialRy) {
@@ -59,14 +59,14 @@ public interface JcSpecialRyApi {
     }
 
     @Hidden
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " update")
     @PostMapping("/update")
     default Response<JcSpecialRyBO> update(@RequestBody JcSpecialRy jcSpecialRy) {
         return new Response(getService().update(jcSpecialRy));
     }
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " delete by pk")
     @GetMapping("/delete")
     default Response<Boolean> deleteById(@RequestParam Long sid, @RequestParam String rid) {
@@ -74,7 +74,7 @@ public interface JcSpecialRyApi {
     }
 
     @Hidden
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " group by field name")
     @GetMapping("/group")
     default Response<List<Map<String, Integer>>> groupById(@RequestParam String field) {
@@ -82,7 +82,7 @@ public interface JcSpecialRyApi {
     }
 
     @Hidden
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @Operation(description = " page list")
     @PostMapping("/page")
     default Response<Page<JcSpecialRyBO>> page(@RequestBody PageForm<JcSpecialRy> userQueryForm) {
