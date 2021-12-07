@@ -390,26 +390,12 @@ public class EtlUtil {
 //        return null;
 //    }
 
-    public static void main(String[] args) {
-        EtlUtil etlUtil = new EtlUtil();
-        try {
-            CsvToBean csvToBean = etlUtil.parseCsvToBean(BzkTabDanweijbxx.class,"/Users/hua/BZK_TAB_DANWEIJBXX.csv",',',1);
-            Iterator iterator = csvToBean.iterator();
-            while (iterator.hasNext()){
-                Object o = iterator.next();
-                BzkTabDanweijbxx bzkSlgxBzBzdaxx = (BzkTabDanweijbxx) iterator.next();
-                System.out.println(bzkSlgxBzBzdaxx.getId());
-            };
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public Boolean testConnection(String dbHost, Integer dbPort, String dbServe, String username, String password) {
         Connection oracleConnection = null;
         try {
             oracleConnection = oracleConnection(dbHost,dbPort,dbServe,username,password);
-            if (!oracleConnection.isClosed()){
+            if (!oracleConnection.isValid(3)){
                 return true;
             }
         }catch (Exception e){
@@ -425,4 +411,6 @@ public class EtlUtil {
         }
         return false;
     }
+
+
 }
