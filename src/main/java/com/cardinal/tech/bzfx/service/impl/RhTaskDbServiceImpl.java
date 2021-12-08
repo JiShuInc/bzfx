@@ -151,11 +151,8 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
         RhTaskDb rhTaskDb = new RhTaskDb();
         rhTaskDb.setTaskId(taskId);
         List<RhTaskDb> rhTaskDbs = this.rhTaskDbDao.queryAll(rhTaskDb);
-        if (!rhTaskDbs.isEmpty()){
-            ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db total ["+rhTaskDbs.size()+"]");
-            syncData(taskId,rhTaskDbs);
-        }
-        rhTaskFileService.syncData(taskId);
+        ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db total ["+rhTaskDbs.size()+"]");
+        syncData(taskId,rhTaskDbs);
 
         rhTask.setDbState(SyncStateEnum.SYNC_FINISHED.value());
         rhTaskDao.update(rhTask);
@@ -208,7 +205,6 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
             }catch (Exception e){
                 e.printStackTrace();
 
-
                 remark = e.getMessage();
                 db.setState(SyncStateEnum.SYNC_FINISHED.value());
                 result = SyncResultEnum.SYNC_FAIL.value();
@@ -232,5 +228,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
                 slSyncLogsDao.insert(slSyncLogs);
             }
         }
+
+        rhTaskFileService.syncData(taskId);
     }
 }
