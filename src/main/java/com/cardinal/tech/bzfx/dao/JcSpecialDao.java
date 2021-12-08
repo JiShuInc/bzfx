@@ -4,6 +4,7 @@ import com.cardinal.tech.bzfx.entity.JcSpecial;
 import com.cardinal.tech.bzfx.bean.dbo.page.*;
 import com.cardinal.tech.bzfx.enums.ErrEnumInterface;
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public interface JcSpecialDao {
      * 查询指定行数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     List<JcSpecial> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
@@ -71,9 +72,9 @@ public interface JcSpecialDao {
      * @param field 主键
      * @return 统计详情
      */
-    List<Map<String,Integer>> groupBy(String field);
+    List<Map<String, Integer>> groupBy(String field);
 
-     List<JcSpecial> queryPageJcSpecialList(PageQuery pq);
+    List<JcSpecial> queryPageJcSpecialList(PageQuery pq);
 
-    int callStatistics(@Param("id")Long id);
+    void callStatistics(@Param("id") Long id);
 }
