@@ -109,14 +109,14 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="taskid" useGeneratedKeys="true">
-        insert into bzfx.TASK_BZK_SLGX_YF_RYZFQK(XINGMING, JUNRENBZH, ZHUFANGSX, ZHUFANGDZ, GUANLIDW, JINZHUSJ, ZUOLUOH, DONGHAO, FANGHAO, ZHUFANGXZM, HUXINGFLM, JIANZHUMJ, DANWEIDM, DAORUSJ, SHANGBAOBZ, SHUJUSZDW, XUHAO)
-        values (#{xingming}, #{junrenbzh}, #{zhufangsx}, #{zhufangdz}, #{guanlidw}, #{jinzhusj}, #{zuoluoh}, #{donghao}, #{fanghao}, #{zhufangxzm}, #{huxingflm}, #{jianzhumj}, #{danweidm}, #{daorusj}, #{shangbaobz}, #{shujuszdw}, #{xuhao})
+        insert into bzfx.TASK_BZK_SLGX_YF_RYZFQK(TASKID, ID, XINGMING, JUNRENBZH, ZHUFANGSX, ZHUFANGDZ, GUANLIDW, JINZHUSJ, ZUOLUOH, DONGHAO, FANGHAO, ZHUFANGXZM, HUXINGFLM, JIANZHUMJ, DANWEIDM, DAORUSJ, SHANGBAOBZ, SHUJUSZDW, XUHAO)
+        values (#{taskid}, #{id}, #{xingming}, #{junrenbzh}, #{zhufangsx}, #{zhufangdz}, #{guanlidw}, #{jinzhusj}, #{zuoluoh}, #{donghao}, #{fanghao}, #{zhufangxzm}, #{huxingflm}, #{jianzhumj}, #{danweidm}, #{daorusj}, #{shangbaobz}, #{shujuszdw}, #{xuhao})
     </insert>
     
     <!--新增所有列-->
     <insert id="insertIgnore" keyProperty="taskid" useGeneratedKeys="true">
-        insert ignore into bzfx.TASK_BZK_SLGX_YF_RYZFQK(ID, XINGMING, JUNRENBZH, ZHUFANGSX, ZHUFANGDZ, GUANLIDW, JINZHUSJ, ZUOLUOH, DONGHAO, FANGHAO, ZHUFANGXZM, HUXINGFLM, JIANZHUMJ, DANWEIDM, DAORUSJ, SHANGBAOBZ, SHUJUSZDW, XUHAO)
-        values (#{id}, #{xingming}, #{junrenbzh}, #{zhufangsx}, #{zhufangdz}, #{guanlidw}, #{jinzhusj}, #{zuoluoh}, #{donghao}, #{fanghao}, #{zhufangxzm}, #{huxingflm}, #{jianzhumj}, #{danweidm}, #{daorusj}, #{shangbaobz}, #{shujuszdw}, #{xuhao})
+        insert ignore into bzfx.TASK_BZK_SLGX_YF_RYZFQK(TASKID, ID, XINGMING, JUNRENBZH, ZHUFANGSX, ZHUFANGDZ, GUANLIDW, JINZHUSJ, ZUOLUOH, DONGHAO, FANGHAO, ZHUFANGXZM, HUXINGFLM, JIANZHUMJ, DANWEIDM, DAORUSJ, SHANGBAOBZ, SHUJUSZDW, XUHAO)
+        values (#{taskid}, #{id}, #{xingming}, #{junrenbzh}, #{zhufangsx}, #{zhufangdz}, #{guanlidw}, #{jinzhusj}, #{zuoluoh}, #{donghao}, #{fanghao}, #{zhufangxzm}, #{huxingflm}, #{jianzhumj}, #{danweidm}, #{daorusj}, #{shangbaobz}, #{shujuszdw}, #{xuhao})
     </insert>
 
     <!--通过主键修改数据-->

@@ -27,49 +27,49 @@ public interface TjTongjifenxiApi {
 
         TjTongjifenxiService getService();
 
-        @PreAuthorize("hasRole('admin')")
+        @PreAuthorize("permitAll()")
         @Operation(description = " get by id")
         @GetMapping("/{id}")
         default Response<TjTongjifenxi> queryById(@PathVariable("id") Long id){
             return new Response(getService().queryById(id));
         }
 
-        @PreAuthorize("hasRole('admin')")
+        @PreAuthorize("permitAll()")
         @Operation(description = " get list")
         @GetMapping("/list")
        default Response<List<TjTongjifenxi>> queryAllByLimit(@RequestParam(required = false) Integer offset, @RequestParam(required = false) Integer limit){
             return new Response(getService().queryAllByLimit(offset,limit));
        }
 
-        @PreAuthorize("hasRole('admin')")
+        @PreAuthorize("permitAll()")
         @Operation(description = " add")
         @PostMapping("/add")
         default Response<TjTongjifenxi> insert(@RequestBody TjTongjifenxi tjTongjifenxi){
             return new Response(getService().insert(tjTongjifenxi));
         }
 
-         @PreAuthorize("hasRole('admin')")
+         @PreAuthorize("permitAll()")
          @Operation(description = " update")
          @PostMapping("/update")
         default Response<TjTongjifenxi> update(@RequestBody TjTongjifenxi tjTongjifenxi){
              return new Response(getService().update(tjTongjifenxi));
         }
 
-        @PreAuthorize("hasRole('admin')")
+        @PreAuthorize("permitAll()")
         @Operation(description = " delete by pk")
         @GetMapping("/delete")
        default Response<Boolean> deleteById(@RequestParam Long id){
             return new Response(getService().deleteById(id));
         }
 
-        @PreAuthorize("hasRole('admin')")
+        @PreAuthorize("permitAll()")
         @Operation(description = " group by field name")
         @GetMapping("/group")
        default Response<List<Map<String,Integer>>> deleteById(@RequestParam String field){
             return new Response(getService().groupBy(field));
         }
 
-        @PreAuthorize("hasRole('admin')")
+        @PreAuthorize("permitAll()")
         @Operation(description = " page list")
         @PostMapping("/page")
         default Response<Page<TjTongjifenxi>> page(@RequestBody PageForm<TjTongjifenxi> userQueryForm) {
