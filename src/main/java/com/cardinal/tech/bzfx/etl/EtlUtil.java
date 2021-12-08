@@ -393,7 +393,7 @@ public class EtlUtil {
         Connection oracleConnection = null;
         try {
             oracleConnection = oracleConnection(dbHost,dbPort,dbServe,username,password);
-            if (!oracleConnection.isValid(3)){
+            if (!oracleConnection.isClosed()){
                 return true;
             }
         }catch (Exception e){
