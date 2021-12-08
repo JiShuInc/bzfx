@@ -40,9 +40,7 @@ public class EtlUtil {
     public long syncData(Long taskId, String host, Integer dbPort, String dbService, String username, String password) throws Exception {
         boolean master = (taskId.intValue() == 1);
         Connection oracleConnection = oracleConnection(host,dbPort,dbService,username,password);
-        //log.info("获取oracle 连接--------------------");
         Connection mysqlConnection = dataSource.getConnection();
-        //log.info("获取mysql 连接--------------------");
         long count = 0;
         for (String tableName:coreTBNames){
             log.info("开始同步表-----------: {}",tableName);
@@ -151,7 +149,7 @@ public class EtlUtil {
     private long importTable(Long taskId, Connection connectOracle, Connection connectMysql,
                              String tableName, String insertTableName) throws Exception {
 
-        //connectMysql.setAutoCommit(false);
+        connectMysql.setAutoCommit(false);
         Statement stmt = null;
         PreparedStatement pstmt = null;
         int fs = 20000;
