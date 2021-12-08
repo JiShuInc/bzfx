@@ -348,7 +348,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
                 }
                 break;
             case "TASK_BZK_SLGX_BZ_BZDAXX":
-                csvToBean = etlUtil.parseCsvToBean(TaskBzkSlgxBzBzdaxx.class,filePath,',',1);
+                csvToBean = etlUtil.parseCsvToBean(BzkSlgxBzBzdaxx.class,filePath,',',1);
                 iterator = csvToBean.iterator();
                 TaskBzkSlgxBzBzdaxxDao taskBzkSlgxBzBzdaxxDao = sqlSession.getMapper(TaskBzkSlgxBzBzdaxxDao.class);
                 while (iterator.hasNext()){
