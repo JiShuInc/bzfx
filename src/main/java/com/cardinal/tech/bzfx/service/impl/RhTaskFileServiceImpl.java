@@ -144,7 +144,56 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
         if (!rhTaskFiles.isEmpty()){
             ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file total ["+rhTaskFiles.size()+"]");
 
-            syncData(taskId,rhTaskFiles);
+            for (RhTaskFile file:rhTaskFiles){
+                ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task_file start["+file.getFilename()+"]");
+                long count = 0;
+                Date syncAt = new Date();
+                Date syncEnd = null;
+                Integer result = SyncResultEnum.SYNC_SUCCESS.value();
+                String remark = SyncResultEnum.SYNC_SUCCESS.desc();
+                try {
+                    file.setState(SyncStateEnum.SYNC_PROGRESS.value());
+                    file.setSyncAt(syncAt);
+                    this.rhTaskFileDao.update(file);
+
+                    ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file ["+file.getFilename()+"] task_file state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
+                    String tableName = file.getTableName();
+                    if (taskId.intValue() != 1){
+                        tableName = "TASK_"+tableName;
+                    }
+                    count = batchProcessing(tableName,file.getUrl(),file.getTaskId());
+
+                    file.setState(SyncStateEnum.SYNC_FINISHED.value());
+                    file.setResult(result);
+                    syncEnd = new Date();
+                    file.setSyncEnd(syncEnd);
+                    this.rhTaskFileDao.update(file);
+                    ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file ["+file.getFilename()+"] task_file sync data total ["+count+"]");
+                }catch (Exception e){
+                    e.printStackTrace();
+                    remark = e.getMessage();
+                    file.setState(SyncStateEnum.SYNC_FINISHED.value());
+                    result = SyncResultEnum.SYNC_FAIL.value();
+                    file.setResult(result);
+                    syncEnd = new Date();
+                    file.setSyncEnd(syncEnd);
+                    this.rhTaskFileDao.update(file);
+
+                    ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file ["+file.getFilename()+"] update task_file state ["+SyncStateEnum.SYNC_FINISHED.desc()+"] [result "+SyncResultEnum.SYNC_FAIL.desc()+"]");
+                }finally {
+                    SlSyncLogs slSyncLogs = new SlSyncLogs();
+                    slSyncLogs.setCreatAt(new Date());
+                    slSyncLogs.setTaskDbId(file.getId().intValue());
+                    slSyncLogs.setDataTotal(count);
+                    slSyncLogs.setDbHost(file.getTableName());
+                    slSyncLogs.setSyncAt(syncAt);
+                    slSyncLogs.setSyncEnd(syncEnd);
+                    slSyncLogs.setResult(result);
+                    slSyncLogs.setRemark(remark);
+                    slSyncLogs.setCreatAt(new Date());
+                    slSyncLogsDao.insert(slSyncLogs);
+                }
+            }
         }
         return true;
     }
@@ -161,59 +210,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
         }
     }
 
-    @Async
-    void syncData(Long taskId, List<RhTaskFile> rhTaskFiles) {
-        for (RhTaskFile file:rhTaskFiles){
-            ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task_file start["+file.getFilename()+"]");
-            long count = 0;
-            Date syncAt = new Date();
-            Date syncEnd = null;
-            Integer result = SyncResultEnum.SYNC_SUCCESS.value();
-            String remark = SyncResultEnum.SYNC_SUCCESS.desc();
-            try {
-                file.setState(SyncStateEnum.SYNC_PROGRESS.value());
-                file.setSyncAt(syncAt);
-                this.rhTaskFileDao.update(file);
 
-                ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file ["+file.getFilename()+"] task_file state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
-                String tableName = file.getTableName();
-                if (taskId.intValue() != 1){
-                    tableName = "TASK_"+tableName;
-                }
-                count = batchProcessing(tableName,file.getUrl(),file.getTaskId());
-
-                file.setState(SyncStateEnum.SYNC_FINISHED.value());
-                file.setResult(result);
-                syncEnd = new Date();
-                file.setSyncEnd(syncEnd);
-                this.rhTaskFileDao.update(file);
-                ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file ["+file.getFilename()+"] task_file sync data total ["+count+"]");
-            }catch (Exception e){
-                e.printStackTrace();
-                remark = e.getMessage();
-                file.setState(SyncStateEnum.SYNC_FINISHED.value());
-                result = SyncResultEnum.SYNC_FAIL.value();
-                file.setResult(result);
-                syncEnd = new Date();
-                file.setSyncEnd(syncEnd);
-                this.rhTaskFileDao.update(file);
-
-                ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file ["+file.getFilename()+"] update task_file state ["+SyncStateEnum.SYNC_FINISHED.desc()+"] [result "+SyncResultEnum.SYNC_FAIL.desc()+"]");
-            }finally {
-                SlSyncLogs slSyncLogs = new SlSyncLogs();
-                slSyncLogs.setCreatAt(new Date());
-                slSyncLogs.setTaskDbId(file.getId().intValue());
-                slSyncLogs.setDataTotal(count);
-                slSyncLogs.setDbHost(file.getTableName());
-                slSyncLogs.setSyncAt(syncAt);
-                slSyncLogs.setSyncEnd(syncEnd);
-                slSyncLogs.setResult(result);
-                slSyncLogs.setRemark(remark);
-                slSyncLogs.setCreatAt(new Date());
-                slSyncLogsDao.insert(slSyncLogs);
-            }
-        }
-    }
 
 
 

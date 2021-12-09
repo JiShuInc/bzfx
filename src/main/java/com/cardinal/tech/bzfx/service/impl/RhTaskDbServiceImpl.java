@@ -158,10 +158,6 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
         rhTaskDao.update(rhTask);
         ggLogsUtil.syncRecord("【taskId:"+taskId+" sync task state ["+SyncStateEnum.SYNC_FINISHED.desc()+"]");
 
-        if (taskId.intValue() == 1){
-            ggLogsUtil.syncRecord("【taskId:"+taskId+" call proc_tongjifenxi_insert()");
-            this.statistics();
-        }
         return true;
     }
 
@@ -230,5 +226,10 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
         }
 
         rhTaskFileService.syncData(taskId);
+
+        if (taskId.intValue() == 1){
+            ggLogsUtil.syncRecord("【taskId:"+taskId+" call proc_tongjifenxi_insert()");
+            this.statistics();
+        }
     }
 }
