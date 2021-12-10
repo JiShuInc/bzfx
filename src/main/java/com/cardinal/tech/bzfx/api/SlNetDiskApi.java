@@ -65,7 +65,7 @@ public interface SlNetDiskApi {
         @PreAuthorize("permitAll()")
         @Operation(description = " group by field name")
         @GetMapping("/group")
-       default Response<List<Map<String,Integer>>> deleteById(@RequestParam String field){
+       default Response<List<Map<String,Integer>>> groupById(@RequestParam String field){
             return new Response(getService().groupBy(field));
         }
 
