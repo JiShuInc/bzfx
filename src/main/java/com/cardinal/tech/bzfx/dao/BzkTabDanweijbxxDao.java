@@ -81,4 +81,7 @@ public interface BzkTabDanweijbxxDao {
     List<Map<String,Integer>> groupBy(String field);
 
      List<BzkTabDanweijbxx> queryPageBzkTabDanweijbxxList(PageQuery pq);
+
+    List<BzkTabDanweijbxx> queryPageBzkTabDanweijbxxDictList(PageQuery pq);
+
 }
