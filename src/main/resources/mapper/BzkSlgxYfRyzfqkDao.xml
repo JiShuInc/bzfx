@@ -197,7 +197,7 @@
                         and ID = #{obj.id}
                    </if>
                                <if test="obj.xingming != null and obj.xingming != ''">
-                        and XINGMING = #{obj.xingming}
+                        and XINGMING like concat('%',#{obj.xingming},'%')
                    </if>
                                <if test="obj.junrenbzh != null and obj.junrenbzh != ''">
                         and JUNRENBZH = #{obj.junrenbzh}

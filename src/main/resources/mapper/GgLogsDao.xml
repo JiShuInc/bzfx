@@ -53,8 +53,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into bzfx.gg_logs(module, type, content, creat_at)
-        values (#{module}, #{type}, #{content}, #{creatAt})
+        insert into bzfx.gg_logs(module, type, content)
+        values (#{module}, #{type}, #{content})
     </insert>
 
     <!--通过主键修改数据-->

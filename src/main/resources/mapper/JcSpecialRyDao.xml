@@ -52,8 +52,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into bzfx.jc_special_ry(sid, rid, creat_at)
-        values (#{sid}, #{rid}, #{creatAt})
+        insert into bzfx.jc_special_ry(sid, rid)
+        values (#{sid}, #{rid})
     </insert>
     <insert id="addRyToRw">
         insert ignore into bzfx.jc_special_ry(sid,rid,creat_at) select #{sid,jdbcType=BIGINT}, ry.id,sysdate() from

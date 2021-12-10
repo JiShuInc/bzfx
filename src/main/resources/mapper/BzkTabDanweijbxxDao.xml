@@ -566,7 +566,7 @@
                         and DANWEILSDM = #{obj.danweilsdm}
                    </if>
                                <if test="obj.danweimc != null and obj.danweimc != ''">
-                        and DANWEIMC = #{obj.danweimc}
+                        and DANWEIMC like concat('%',#{obj.danweimc},'%')
                    </if>
                                <if test="obj.buduidh != null and obj.buduidh != ''">
                         and BUDUIDH = #{obj.buduidh}
