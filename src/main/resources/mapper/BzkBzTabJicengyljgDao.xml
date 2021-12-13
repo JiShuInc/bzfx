@@ -156,7 +156,7 @@
                         and JICENGYLJGDM = #{obj.jicengyljgdm}
                    </if>
                                <if test="obj.jicengyljgmc != null and obj.jicengyljgmc != ''">
-                        and JICENGYLJGMC = #{obj.jicengyljgmc}
+                        and JICENGYLJGMC like concat('%',#{obj.jicengyljgmc},'%')
                    </if>
                                <if test="obj.weiqindm != null and obj.weiqindm != ''">
                         and WEIQINDM = #{obj.weiqindm}

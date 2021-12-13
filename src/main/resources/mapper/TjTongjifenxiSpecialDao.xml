@@ -73,14 +73,14 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into bzfx.tj_tongjifenxi_special(sid, type, parameter1, parameter2, parameter3, parameter4, parameter5, num, creat_at)
-        values (#{sid}, #{type}, #{parameter1}, #{parameter2}, #{parameter3}, #{parameter4}, #{parameter5}, #{num}, #{creatAt})
+        insert into bzfx.tj_tongjifenxi_special(sid, type, parameter1, parameter2, parameter3, parameter4, parameter5, num)
+        values (#{sid}, #{type}, #{parameter1}, #{parameter2}, #{parameter3}, #{parameter4}, #{parameter5}, #{num})
     </insert>
     
     <!--新增所有列-->
     <insert id="insertIgnore" keyProperty="id" useGeneratedKeys="true">
-        insert ignore into bzfx.tj_tongjifenxi_special(sid, type, parameter1, parameter2, parameter3, parameter4, parameter5, num, creat_at)
-        values (#{sid}, #{type}, #{parameter1}, #{parameter2}, #{parameter3}, #{parameter4}, #{parameter5}, #{num}, #{creatAt})
+        insert ignore into bzfx.tj_tongjifenxi_special(sid, type, parameter1, parameter2, parameter3, parameter4, parameter5, num)
+        values (#{sid}, #{type}, #{parameter1}, #{parameter2}, #{parameter3}, #{parameter4}, #{parameter5}, #{num})
     </insert>
 
     <!--通过主键修改数据-->

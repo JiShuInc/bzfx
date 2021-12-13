@@ -9,8 +9,8 @@ import java.util.Map;
 /**
  * 任务(RhTask)表数据库访问层
  *
- * @author cadinal.tech
- * @since 2021-11-13 20:00:37
+ * @author makejava
+ * @since 2021-12-12 21:58:08
  */
 public interface RhTaskDao {
 
@@ -47,6 +47,14 @@ public interface RhTaskDao {
      * @return 影响行数
      */
     int insert(RhTask rhTask);
+
+    /**
+     * 新增数据
+     *
+     * @param rhTask 实例对象
+     * @return 影响行数
+     */
+    int insertIgnore(RhTask rhTask);
 
     /**
      * 修改数据

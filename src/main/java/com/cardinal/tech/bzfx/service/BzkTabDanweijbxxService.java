@@ -70,4 +70,11 @@ public interface BzkTabDanweijbxxService {
          */
         Page<BzkTabDanweijbxx> page(PageForm<BzkTabDanweijbxx> userQueryForm);
 
+        /**
+         *  分页查询（字典）
+         *
+         * @param userQueryForm 查询对象
+         * @return 分页结果
+         */
+        Page<BzkTabDanweijbxx> pageDict(PageForm<BzkTabDanweijbxx> userQueryForm);
 }

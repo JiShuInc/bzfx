@@ -49,8 +49,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into bzfx.tj_wenjian(name, path, creat_at)
-        values (#{name}, #{path}, #{creatAt})
+        insert into bzfx.tj_wenjian(name, path)
+        values (#{name}, #{path})
     </insert>
 
     <!--通过主键修改数据-->

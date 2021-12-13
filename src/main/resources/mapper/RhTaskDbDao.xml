@@ -85,8 +85,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into bzfx.rh_task_db(task_id, db_host, db_port, db_serve, db_space, db_name, db_passwd, state, result, sync_at, sync_end, creat_at)
-        values (#{taskId}, #{dbHost}, #{dbPort}, #{dbServe}, #{dbSpace}, #{dbName}, #{dbPasswd}, #{state}, #{result}, #{syncAt}, #{syncEnd}, #{creatAt})
+        insert into bzfx.rh_task_db(task_id, db_host, db_port, db_serve, db_space, db_name, db_passwd, state, result, sync_at, sync_end)
+        values (#{taskId}, #{dbHost}, #{dbPort}, #{dbServe}, #{dbSpace}, #{dbName}, #{dbPasswd}, #{state}, #{result}, #{syncAt}, #{syncEnd})
     </insert>
 
     <!--通过主键修改数据-->

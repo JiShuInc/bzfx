@@ -107,4 +107,19 @@ public class BzkTabDanweijbxxServiceImpl implements BzkTabDanweijbxxService {
         p.setData(entityList);
         return p;
     }
+
+    /**
+     *  分页查询(获取字典)
+     *
+     * @param userQueryForm 查询对象
+     * @return 分页结果
+     */
+    @Override
+    public Page<BzkTabDanweijbxx> pageDict(PageForm<BzkTabDanweijbxx> userQueryForm){
+        var pq = new PageQuery<>(userQueryForm);
+        List<BzkTabDanweijbxx> entityList = this.bzkTabDanweijbxxDao.queryPageBzkTabDanweijbxxDictList(pq);
+        Page<BzkTabDanweijbxx> p = new Page<>(pq.getTotalCount(), pq.getMax(), pq.getCurrentPage());
+        p.setData(entityList);
+        return p;
+    }
 }
