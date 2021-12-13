@@ -16,6 +16,7 @@ import com.cardinal.tech.bzfx.etl.EtlUtil;
 import com.cardinal.tech.bzfx.service.RhTaskDbService;
 import com.cardinal.tech.bzfx.service.RhTaskFileService;
 import com.cardinal.tech.bzfx.util.GgLogsUtil;
+import com.cardinal.tech.bzfx.util.SpringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -153,7 +154,8 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
         List<RhTaskDb> rhTaskDbs = this.rhTaskDbDao.queryAll(rhTaskDb);
         ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db total ["+rhTaskDbs.size()+"]");
 
-        syncData(taskId,rhTaskDbs);
+        RhTaskDbServiceImpl bean = SpringUtils.getBean(RhTaskDbServiceImpl.class);
+        bean.syncData(taskId,rhTaskDbs);
         return true;
     }
 

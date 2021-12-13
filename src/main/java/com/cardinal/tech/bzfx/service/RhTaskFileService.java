@@ -2,6 +2,8 @@ package com.cardinal.tech.bzfx.service;
 
 import com.cardinal.tech.bzfx.bean.bo.*;
 import com.cardinal.tech.bzfx.entity.RhTaskFile;
+import org.springframework.scheduling.annotation.Async;
+
 import java.util.List;
 import java.util.Map;
 
@@ -83,5 +85,6 @@ public interface RhTaskFileService {
          * @param url
          * @return
          */
+        @Async
         void syncData(String tableName, String url);
 }

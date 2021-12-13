@@ -2,6 +2,8 @@ package com.cardinal.tech.bzfx.service;
 
 import com.cardinal.tech.bzfx.bean.bo.*;
 import com.cardinal.tech.bzfx.entity.RhTaskDb;
+import org.springframework.scheduling.annotation.Async;
+
 import java.util.List;
 import java.util.Map;
 
@@ -81,6 +83,7 @@ public interface RhTaskDbService {
         /**
          * 统计函数
          */
+        @Async
         void statistics();
 
         Boolean isConnection(Long id);
