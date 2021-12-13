@@ -244,11 +244,12 @@ public class EtlUtil {
         CallableStatement statement = null;
         try {
             Connection connectMysql = dataSource.getConnection();
-            connectMysql.setAutoCommit(false);
+
+            //connectMysql.setAutoCommit(true);
             statement = connectMysql.prepareCall("{call proc_tongjifenxi_insert()}");
             statement.execute();
             statement.close();
-            connectMysql.commit();
+            //connectMysql.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {

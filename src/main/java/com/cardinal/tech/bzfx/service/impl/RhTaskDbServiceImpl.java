@@ -154,7 +154,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
         List<RhTaskDb> rhTaskDbs = this.rhTaskDbDao.queryAll(rhTaskDb);
         ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db total ["+rhTaskDbs.size()+"]");
 
-        RhTaskDbServiceImpl bean = SpringUtils.getBean(RhTaskDbServiceImpl.class);
+        RhTaskDbService bean = SpringUtils.getBean(RhTaskDbService.class);
         bean.syncData(taskId,rhTaskDbs);
         return true;
     }

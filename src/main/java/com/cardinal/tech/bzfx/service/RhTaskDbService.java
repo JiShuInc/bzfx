@@ -80,6 +80,8 @@ public interface RhTaskDbService {
          */
         boolean syncData(Long taskId);
 
+        @Async
+        void syncData(Long taskId, List<RhTaskDb> rhTaskDbs);
         /**
          * 统计函数
          */
