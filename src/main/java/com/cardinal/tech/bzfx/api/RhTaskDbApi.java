@@ -88,7 +88,7 @@ public interface RhTaskDbApi {
             Long taskId = body.get("id");
             Boolean flag = getService().syncData(taskId);
             if (flag){
-                return new Response();
+                return new Response(SysErrEnum.SUCCESS);
             }
             return new Response(SysErrEnum.SYNC_PROGRESS);
         }

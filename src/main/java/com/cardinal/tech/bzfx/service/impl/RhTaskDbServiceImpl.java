@@ -147,7 +147,6 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
         rhTaskDao.update(rhTask);
         ggLogsUtil.syncRecord("【taskId:"+taskId+"】task state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
 
-        etlUtil.truncateTable(taskId);
         RhTaskDb rhTaskDb = new RhTaskDb();
         rhTaskDb.setTaskId(taskId);
         List<RhTaskDb> rhTaskDbs = this.rhTaskDbDao.queryAll(rhTaskDb);
@@ -173,6 +172,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
 
     @Async
     void syncData(Long taskId, List<RhTaskDb> rhTaskDbs) {
+        etlUtil.truncateTable(taskId);
         for (RhTaskDb db:rhTaskDbs){
             ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task_db start["+db.getDbHost()+":"+db.getDbPort()+":"+db.getDbServe()+"]");
             long count = 0;
