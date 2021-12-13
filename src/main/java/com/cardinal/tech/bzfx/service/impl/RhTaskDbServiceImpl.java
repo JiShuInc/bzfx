@@ -142,6 +142,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
             log.info("rh_task state 状态为同步中");
             return false;
         }
+
         ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task start");
         rhTask.setDbState(SyncStateEnum.SYNC_PROGRESS.value());
         rhTaskDao.update(rhTask);
@@ -151,6 +152,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
         rhTaskDb.setTaskId(taskId);
         List<RhTaskDb> rhTaskDbs = this.rhTaskDbDao.queryAll(rhTaskDb);
         ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db total ["+rhTaskDbs.size()+"]");
+
         syncData(taskId,rhTaskDbs);
         return true;
     }
@@ -171,7 +173,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
     }
 
     @Async
-    void syncData(Long taskId, List<RhTaskDb> rhTaskDbs) {
+    public void syncData(Long taskId, List<RhTaskDb> rhTaskDbs) {
         etlUtil.truncateTable(taskId);
         for (RhTaskDb db:rhTaskDbs){
             ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task_db start["+db.getDbHost()+":"+db.getDbPort()+":"+db.getDbServe()+"]");
