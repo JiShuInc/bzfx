@@ -144,15 +144,15 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
             return false;
         }
 
-        ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task start");
+        ggLogsUtil.syncRecord("[sync_db] taskId:"+taskId+", sync task start");
         rhTask.setDbState(SyncStateEnum.SYNC_PROGRESS.value());
         rhTaskDao.update(rhTask);
-        ggLogsUtil.syncRecord("【taskId:"+taskId+"】task state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
+        ggLogsUtil.syncRecord("[sync_db] taskId:"+taskId+", task state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
 
         RhTaskDb rhTaskDb = new RhTaskDb();
         rhTaskDb.setTaskId(taskId);
         List<RhTaskDb> rhTaskDbs = this.rhTaskDbDao.queryAll(rhTaskDb);
-        ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db total ["+rhTaskDbs.size()+"]");
+        ggLogsUtil.syncRecord("[sync_db] taskId:"+taskId+", task db total:"+rhTaskDbs.size());
 
         RhTaskDbService bean = SpringUtils.getBean(RhTaskDbService.class);
         bean.syncData(taskId,rhTaskDbs);
@@ -178,7 +178,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
     public void syncData(Long taskId, List<RhTaskDb> rhTaskDbs) {
         etlUtil.truncateTable(taskId);
         for (RhTaskDb db:rhTaskDbs){
-            ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task_db start["+db.getDbHost()+":"+db.getDbPort()+":"+db.getDbServe()+"]");
+            ggLogsUtil.syncRecord("[sync_db] taskId:"+taskId+", task_db:"+db.getDbHost()+"."+db.getDbPort()+"."+db.getDbServe()+", sync task_db start");
             long count = 0;
             Date syncAt = new Date();
             Date syncEnd = null;
@@ -189,7 +189,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
                 db.setSyncAt(syncAt);
                 this.rhTaskDbDao.update(db);
 
-                ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db ["+db.getDbHost()+":"+db.getDbPort()+":"+db.getDbServe()+"] task_db state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
+                ggLogsUtil.syncRecord("[sync_db] taskId:"+taskId+", task_db:"+db.getDbHost()+"."+db.getDbPort()+"."+db.getDbServe()+", task_db state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
 
                 count = etlUtil.syncData(taskId,db.getDbHost(),db.getDbPort(),db.getDbServe(),db.getDbName(),db.getDbPasswd());
                 db.setState(SyncStateEnum.SYNC_FINISHED.value());
@@ -197,7 +197,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
                 syncEnd = new Date();
                 db.setSyncEnd(syncEnd);
                 this.rhTaskDbDao.update(db);
-                ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db ["+db.getDbHost()+":"+db.getDbPort()+":"+db.getDbServe()+"] task_db sync data total ["+count+"]");
+                ggLogsUtil.syncRecord("[sync_db] taskId:"+taskId+", task_db:"+db.getDbHost()+"."+db.getDbPort()+"."+db.getDbServe()+", task_db sync data total:"+count);
             }catch (Exception e){
                 e.printStackTrace();
 
@@ -209,7 +209,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
                 db.setSyncEnd(syncEnd);
                 this.rhTaskDbDao.update(db);
 
-                ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db ["+db.getDbHost()+":"+db.getDbPort()+":"+db.getDbServe()+"] update task_db state ["+SyncStateEnum.SYNC_FINISHED.desc()+"] [result "+SyncResultEnum.SYNC_FAIL.desc()+"]");
+                ggLogsUtil.syncRecord("[sync_db] taskId:"+taskId+", task_db:"+db.getDbHost()+"."+db.getDbPort()+"."+db.getDbServe()+", update task_db state ["+SyncStateEnum.SYNC_FINISHED.desc()+"] result ["+SyncResultEnum.SYNC_FAIL.desc()+"]");
             }finally {
                 SlSyncLogs slSyncLogs = new SlSyncLogs();
                 slSyncLogs.setCreatAt(new Date());
@@ -228,13 +228,13 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
         rhTaskFileService.syncData(taskId);
 
         if (taskId.intValue() == 1){
-            ggLogsUtil.syncRecord("【taskId:"+taskId+" call proc_tongjifenxi_insert()");
+            ggLogsUtil.syncRecord("[sync_db] taskId:"+taskId+", call:analysis");
             this.statistics();
         }
         RhTask rhTask = rhTaskDao.queryById(taskId);
         rhTask.setDbState(SyncStateEnum.SYNC_FINISHED.value());
         rhTaskDao.update(rhTask);
-        ggLogsUtil.syncRecord("【taskId:"+taskId+" sync task state ["+SyncStateEnum.SYNC_FINISHED.desc()+"]");
+        ggLogsUtil.syncRecord("[sync_db] taskId:"+taskId+", sync task state ["+SyncStateEnum.SYNC_FINISHED.desc()+"]");
 
     }
 }

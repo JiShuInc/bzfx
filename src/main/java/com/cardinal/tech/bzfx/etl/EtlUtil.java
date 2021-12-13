@@ -45,11 +45,11 @@ public class EtlUtil {
         for (String tableName:coreTBNames){
             log.info("开始同步表-----------: {}",tableName);
 
-            ggLogsUtil.syncRecord("taskId:【"+taskId+"】task_db ["+host+":"+dbPort+":"+dbService+"] sync table start ["+ tableName+"]");
+            ggLogsUtil.syncRecord("[sync_db] taskId:"+taskId+", task_db:"+host+"."+dbPort+"."+dbService+", table:"+ tableName+", sync table start");
             String insertTableName = master?tableName:targetTBNames.get(coreTBNames.indexOf(tableName));
             long total =importTable(taskId,oracleConnection,mysqlConnection,tableName,insertTableName);
             count+=total;
-            ggLogsUtil.syncRecord("taskId:【"+taskId+"】task_db ["+host+":"+dbPort+":"+dbService+"] sync table ["+ insertTableName+"] data total ["+total+"]");
+            ggLogsUtil.syncRecord("[sync_db] taskId:"+taskId+", task_db:"+host+":"+dbPort+":"+dbService+", table:"+ insertTableName+", table data total:"+total);
 
         }
         if (Objects.nonNull(oracleConnection)){
@@ -143,7 +143,7 @@ public class EtlUtil {
                     log.info("---------------正在更新数据库--------------------");
                     pstmt.executeBatch();
                     connectMysql.commit();
-                    ggLogsUtil.syncRecord(String.format("【taskId:"+taskId+"】【tableName:"+tableName+"】sync data progress ["+count+"]"));
+                    ggLogsUtil.syncRecord(String.format("[sync_db] taskId:"+taskId+", table:"+tableName+", sync data progress:"+count));
                 }
             }
             if ((count % batchCount) != 0) {
@@ -151,7 +151,7 @@ public class EtlUtil {
                 log.info("---------------最后一次更新数据库--------------------");
                 pstmt.executeBatch();
                 connectMysql.commit();
-                ggLogsUtil.syncRecord(String.format("【taskId:"+taskId+"】【tableName:"+tableName+"】sync data progress ["+count+"]"));
+                ggLogsUtil.syncRecord(String.format("[sync_db] taskId:"+taskId+", table:"+tableName+", sync data progress:"+count));
                 //log.info("插入".concat(String.valueOf(count)).concat("条数据"));
             }
             rs.close();
@@ -207,7 +207,6 @@ public class EtlUtil {
 
     public void truncateTable(Long taskId)  {
         boolean master = (taskId.intValue() == 1);
-        ggLogsUtil.syncRecord("【taskId:"+taskId+"】 truncate table "+ (master?JSON.toJSONString(coreTBNames):JSON.toJSONString(targetTBNames)));
         Statement truncateState = null;
         try {
             List<String> tables = master?coreTBNames:targetTBNames;
@@ -216,8 +215,10 @@ public class EtlUtil {
             for (int i = 0; i < tables.size(); i++) {
                 StringBuilder truncateSql = new StringBuilder();
                 if (master){
+                    ggLogsUtil.syncRecord("[sync_db] taskId:"+taskId+", table:"+tables.get(i)+", truncate table");
                     truncateSql.append("TRUNCATE TABLE ").append(tables.get(i));
                 }else{
+                    ggLogsUtil.syncRecord("[sync_db] taskId:"+taskId+", table:"+tables.get(i)+", delete data");
                     truncateSql.append("delete from ")
                             .append(tables.get(i))
                             .append(" where TASKID = ")

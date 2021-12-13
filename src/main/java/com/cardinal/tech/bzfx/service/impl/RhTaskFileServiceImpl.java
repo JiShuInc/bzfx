@@ -142,10 +142,10 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
         rhTaskFile.setTaskId(taskId);
         List<RhTaskFile> rhTaskFiles = this.rhTaskFileDao.queryAll(rhTaskFile);
         if (!rhTaskFiles.isEmpty()){
-            ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file total ["+rhTaskFiles.size()+"]");
+            ggLogsUtil.syncRecord("[sync_file] taskId:"+taskId+", task_file total:"+rhTaskFiles.size());
 
             for (RhTaskFile file:rhTaskFiles){
-                ggLogsUtil.syncRecord("【taskId:"+taskId+"】sync task_file start["+file.getFilename()+"]");
+                ggLogsUtil.syncRecord("[sync_file] taskId:"+taskId+", task_file:"+file.getFilename()+", sync task_file start");
                 long count = 0;
                 Date syncAt = new Date();
                 Date syncEnd = null;
@@ -156,7 +156,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
                     file.setSyncAt(syncAt);
                     this.rhTaskFileDao.update(file);
 
-                    ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file ["+file.getFilename()+"] task_file state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
+                    ggLogsUtil.syncRecord("[sync_file] taskId:"+taskId+", task_file:"+file.getFilename()+", task_file state ["+SyncStateEnum.SYNC_PROGRESS.desc()+"]");
                     String tableName = file.getTableName();
                     if (taskId.intValue() != 1){
                         tableName = "TASK_"+tableName;
@@ -168,7 +168,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
                     syncEnd = new Date();
                     file.setSyncEnd(syncEnd);
                     this.rhTaskFileDao.update(file);
-                    ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file ["+file.getFilename()+"] task_file sync data total ["+count+"]");
+                    ggLogsUtil.syncRecord("[sync_file] taskId:"+taskId+", task_file:"+file.getFilename()+", task_file sync data total:"+count);
                 }catch (Exception e){
                     e.printStackTrace();
                     remark = e.getMessage();
@@ -179,7 +179,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
                     file.setSyncEnd(syncEnd);
                     this.rhTaskFileDao.update(file);
 
-                    ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_file ["+file.getFilename()+"] update task_file state ["+SyncStateEnum.SYNC_FINISHED.desc()+"] [result "+SyncResultEnum.SYNC_FAIL.desc()+"]");
+                    ggLogsUtil.syncRecord("[sync_file] taskId:"+taskId+", task_file:"+file.getFilename()+", update task_file state ["+SyncStateEnum.SYNC_FINISHED.desc()+"] result ["+SyncResultEnum.SYNC_FAIL.desc()+"]");
                 }finally {
                     SlSyncLogs slSyncLogs = new SlSyncLogs();
                     slSyncLogs.setCreatAt(new Date());
@@ -202,11 +202,11 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
     @Async
     public void syncData(String tableName, String url) {
         try {
-            ggLogsUtil.syncRecord("【tableName:"+tableName+"】filePatch ["+url+"]",0);
+            ggLogsUtil.syncRecord("[sync_file] tableName:"+tableName+", filePatch:"+url,0);
             this.batchProcessing(tableName,url,null);
         }catch (Exception e){
             e.printStackTrace();
-            ggLogsUtil.syncRecord("【tableName:"+tableName+"】sync data fail",0);
+            ggLogsUtil.syncRecord("[sync_file] tableName:"+tableName+", filePatch:"+url+", sync data fail [失败]",0);
         }
     }
 
@@ -462,7 +462,7 @@ public class RhTaskFileServiceImpl implements RhTaskFileService {
         if ((count % batchCount) != 0) {
             sqlSession.commit();
         }
-        String message = (Objects.nonNull(taskId)?"【taskId:"+taskId+"】":"")+"【tableName:"+tableName+"】sync data total ["+count+"]";
+        String message = "[sync_file] "+(Objects.nonNull(taskId)?"taskId:"+taskId+", ":"")+"table:"+tableName+", sync data total:"+count;
         ggLogsUtil.syncRecord(message,module);
         return count;
     }
