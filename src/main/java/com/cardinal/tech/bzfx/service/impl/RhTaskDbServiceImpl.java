@@ -153,11 +153,6 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
         List<RhTaskDb> rhTaskDbs = this.rhTaskDbDao.queryAll(rhTaskDb);
         ggLogsUtil.syncRecord("【taskId:"+taskId+"】task_db total ["+rhTaskDbs.size()+"]");
         syncData(taskId,rhTaskDbs);
-
-        rhTask.setDbState(SyncStateEnum.SYNC_FINISHED.value());
-        rhTaskDao.update(rhTask);
-        ggLogsUtil.syncRecord("【taskId:"+taskId+" sync task state ["+SyncStateEnum.SYNC_FINISHED.desc()+"]");
-
         return true;
     }
 
@@ -232,5 +227,10 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
             ggLogsUtil.syncRecord("【taskId:"+taskId+" call proc_tongjifenxi_insert()");
             this.statistics();
         }
+        RhTask rhTask = rhTaskDao.queryById(taskId);
+        rhTask.setDbState(SyncStateEnum.SYNC_FINISHED.value());
+        rhTaskDao.update(rhTask);
+        ggLogsUtil.syncRecord("【taskId:"+taskId+" sync task state ["+SyncStateEnum.SYNC_FINISHED.desc()+"]");
+
     }
 }
