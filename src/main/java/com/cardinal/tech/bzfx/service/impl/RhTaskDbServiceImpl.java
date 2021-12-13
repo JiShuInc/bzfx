@@ -162,6 +162,7 @@ public class RhTaskDbServiceImpl implements RhTaskDbService {
     }
 
     @Override
+    @Async
     public void statistics() {
         etlUtil.callTongjifenxi();
     }
